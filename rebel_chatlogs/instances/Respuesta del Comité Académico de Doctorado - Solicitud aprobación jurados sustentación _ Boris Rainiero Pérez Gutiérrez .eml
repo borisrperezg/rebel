@@ -1,0 +1,291 @@
+Received: from BN7PR08MB4050.namprd08.prod.outlook.com (2603:10b6:406:86::23)
+ by DM5PR08MB2763.namprd08.prod.outlook.com with HTTPS; Thu, 4 Mar 2021
+ 17:18:44 +0000
+Authentication-Results: uniandes.edu.co; dkim=none (message not signed)
+ header.d=none;uniandes.edu.co; dmarc=none action=none
+ header.from=uniandes.edu.co;
+Received: from BN7PR08MB4227.namprd08.prod.outlook.com (2603:10b6:406:f6::29)
+ by BN7PR08MB4050.namprd08.prod.outlook.com (2603:10b6:406:86::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.19; Thu, 4 Mar
+ 2021 17:18:44 +0000
+Received: from BN7PR08MB4227.namprd08.prod.outlook.com
+ ([fe80::24cb:fce2:88cb:51c0]) by BN7PR08MB4227.namprd08.prod.outlook.com
+ ([fe80::24cb:fce2:88cb:51c0%4]) with mapi id 15.20.3912.022; Thu, 4 Mar 2021
+ 17:18:44 +0000
+From: =?iso-8859-1?Q?Posgrados_Ingenier=EDa?= <comiteip@uniandes.edu.co>
+To: Dario Ernesto Correal Torres <dcorreal@uniandes.edu.co>
+CC: Boris Rainiero Perez Gutierrez <br.perez41@uniandes.edu.co>, Doctorado
+ Ingenieria De Sistemas <doctoradoisis@uniandes.edu.co>
+Subject:
+ =?iso-8859-1?Q?Respuesta_del_Comit=E9_Acad=E9mico_de_Doctorado_-_Solicitu?=
+ =?iso-8859-1?Q?d_aprobaci=F3n_jurados_sustentaci=F3n_=5F_Boris_Rainiero_P?=
+ =?iso-8859-1?Q?=E9rez_Guti=E9rrez_?=
+Thread-Topic:
+ =?iso-8859-1?Q?Respuesta_del_Comit=E9_Acad=E9mico_de_Doctorado_-_Solicitu?=
+ =?iso-8859-1?Q?d_aprobaci=F3n_jurados_sustentaci=F3n_=5F_Boris_Rainiero_P?=
+ =?iso-8859-1?Q?=E9rez_Guti=E9rrez_?=
+Thread-Index: AdcRGWsOQz6nawKlSTG236JG3k9Tbw==
+Date: Thu, 4 Mar 2021 17:18:44 +0000
+Message-ID:
+ <BN7PR08MB422746185BF7C3E182081CC98D979@BN7PR08MB4227.namprd08.prod.outlook.com>
+Accept-Language: es-CO, en-US
+Content-Language: es-ES
+X-MS-Has-Attach:
+X-MS-Exchange-Organization-SCL: -1
+X-MS-TNEF-Correlator:
+ <BN7PR08MB422746185BF7C3E182081CC98D979@BN7PR08MB4227.namprd08.prod.outlook.com>
+MIME-Version: 1.0
+X-MS-Exchange-Organization-MessageDirectionality: Originating
+X-MS-Exchange-Organization-AuthSource: BN7PR08MB4227.namprd08.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-Originating-IP: [186.145.89.216]
+X-MS-Exchange-Organization-Network-Message-Id:
+ 4f8908e7-d319-492d-0d9f-08d8df319082
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+Return-Path: comiteip@uniandes.edu.co
+X-MS-Exchange-Organization-ExpirationStartTime: 04 Mar 2021 17:18:44.4554
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Office365-Filtering-Correlation-Id: 4f8908e7-d319-492d-0d9f-08d8df319082
+X-MS-TrafficTypeDiagnostic: BN7PR08MB4050:
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Oob-TLC-OOBClassifiers: OLM:1728;
+X-Microsoft-Antispam: BCL:0;
+X-Forefront-Antispam-Report:
+ CIP:255.255.255.255;CTRY:;LANG:es;SCL:-1;SRV:;IPV:NLI;SFV:SKI;H:BN7PR08MB4227.namprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:;DIR:INB;
+X-MS-Exchange-AntiSpam-MessageData:
+ =?us-ascii?Q?Oa3C/VIJ9tto8U1xttqA4m21Bko9mipkwBLb4dbUH3QS+wyXnpH0HjkreWYu?=
+ =?us-ascii?Q?jKTYt4Tj8QOGcuDKJUPGfKA0pyHWiN5rK6rUQUHh/uYzC5MffV6XBIh/ju+v?=
+ =?us-ascii?Q?NZVD6I2qGkQghk9Uplw2YC+WzrinzmpQ3Z5HsNoahfuwC0GBYBs79hrKgRoV?=
+ =?us-ascii?Q?aReQ/krwDEiWXqBoJFUopg2/LFxNrsBmz0xy63Kb8cHzAmh3t9LWs+ZGntd8?=
+ =?us-ascii?Q?mySlX7Iqqvkh6IWrYEzqmNBM685u5v/KAki0xr/ced+iepDDbOik7NFOC8kF?=
+ =?us-ascii?Q?CsZDMCeQCsBs44ryW1fb2jlhGHvypoyWTPcxbC8UD7MHZM5+y3/53RI07OYu?=
+ =?us-ascii?Q?eh2Ij0iM+U8uJwKhK3E8HxCZrKMZBBUa75sV0sbd/IvplAV2w0ATL+03BZEr?=
+ =?us-ascii?Q?ntwL1WWZt420Znes5GzECX7zo88v6ZAZu7XEPanqxZR0d1tRyxs55weaZK1M?=
+ =?us-ascii?Q?8XvM6HmXLLDjxvhG4LQuJmaJWyCzo5t13YRd5s6zfafH3tX0W+nRLm7Og0bB?=
+ =?us-ascii?Q?Xg19M1Qn35v3TwrVXCNPDkLNlVNMClja4Zr1vtRM81ZQggbfrxO6mrKPA9XR?=
+ =?us-ascii?Q?M8F7ZXfMVaZU7tAewDdSKThPsBKpbVngr+SNnGaX9ApQjmss44RFkSoIbE6x?=
+ =?us-ascii?Q?MrJ3Zgs7wNYsYoeXX2nK+2dHkZAHo+Fnp5eri9qi5As95aP/mbyPvkoz5LjL?=
+ =?us-ascii?Q?BNrfiwxOH+hC2Y7f3iEZlK0COmjGFt6m9vE24w02qt1FNsEpX3vGv6sT9kmH?=
+ =?us-ascii?Q?H26f92snvBvHG02MTzdQMD3AdDNU7oN8jNUXYxFU0YXNAz98ez0W8sl0+z+a?=
+ =?us-ascii?Q?axJiQU75yQFihSUUtWiyIMdONk0F+sb48aXhOerIXW0wqBQoDWbhdYGDN9QE?=
+ =?us-ascii?Q?TGKmJDGKJJKY3lTWhdf/hOwXvtPyoaYDtQu100igGJYnxhxB4mYedQoUwSOy?=
+ =?us-ascii?Q?vkZekrGgHR+7tyjVfS/pGjnz/90ppLiGGnrfqoeYGmTJN2xhCQANzTgCNBRu?=
+ =?us-ascii?Q?izTr9tY88n84uRGwYklmQwNdvHiccEFpPWYL5yi4vqxQMkz11OgAjcF4dwr3?=
+ =?us-ascii?Q?HsGSYKU+B6s1quQqxPsV9Dha1QY3zLjwgfBxzTVF+/MS0nxRw7FY+2wJVwOY?=
+ =?us-ascii?Q?k9GwrHms4TgfNsdLRtcza/6mqCMErp1GUa1U2RR9MwYhPCIF2CmSwd2jcIP/?=
+ =?us-ascii?Q?HWj1o1b+2wxwDvJRpLiPvS4cHuRHFtIu+AXv5FntW6of0prDIeUfB9iMChiF?=
+ =?us-ascii?Q?soicbWDs7fC9HyT6RxJXRpdbh49dgtiRdZQGzVXCIQtN5HSqI5lPD4bs/Sd0?=
+ =?us-ascii?Q?gYHhs90yG4IsTHmlIKvTh/5u?=
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2021 17:18:44.1890
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fabd047c-ff48-492a-8bbb-8f98b9fb9cca
+X-MS-Exchange-CrossTenant-AuthSource: BN7PR08MB4227.namprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4f8908e7-d319-492d-0d9f-08d8df319082
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vGm2kB3IExwWm4pGwAW5T9iCtmiC8F85d1m2WST06F7AiQVRp5hkzFnC+2AmsxpKeO2P9n/lhsDV5B6wJdgIOvgXf3wB7wwnOpY5KoTR1iE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PR08MB4050
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:00.6674418
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.3912.017
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(750129)(520011016)(706158)(944506458)(944626604);
+X-Microsoft-Antispam-Message-Info:
+	wcQgbqnv1696AZmVxkjpMCpILJNSBO2Zh1g8aqJ96ffp+HvrU5vF5heycnHF1lEO4TI/K6gTHk1mM93h33AlAx4mFZ3WJosVkShiVXoCxAH+h2w9Xu/BCnFDDQjWpEha9zD2bS8+3qJcxVf26isAi/4guNQa9iTdVABfIsahsS2snnskADW310/7FxMe/+NnqEDzmdrFYRxXMtAFol8udl6daWv0+LDrHWBrsOnMnoWiRwMnzsUMbyZEd6yj8UeuLKaLWG+dAwpNedZxl5c5iFckVSo23p8oEOWNVh/4X18IU2a60umd175b6hD5gUJBxjvU6BPN1PFeTCKcoRl+357Pk1fIutC9VzET7W0eJJSaBRfI5m4JWQcSBPRsa8V5BZhUIYpsS0nzumIlxA08cBpbsKfoKEMd5E6J4SsplkmQtI1bT8ozlqPYWhev0TawORxTVAXZO+xFE9Yl0mB2nvSqj+jKnRca+NUpoSSDBC7JhoJ7mImKibZRQC5BOr2WFF1USEkx/T7x68d/ellZ6pPxE28GXsxU4Fs8NDHiHyc=
+Content-type: multipart/alternative;
+	boundary="B_3698140438_218603893"
+
+> This message is in MIME format. Since your mail reader does not understand
+this format, some or all of this message may not be legible.
+
+--B_3698140438_218603893
+Content-type: text/plain;
+	charset="UTF-8"
+Content-transfer-encoding: quoted-printable
+
+Estimado Dar=C3=ADo,
+
+=20
+
+El Comit=C3=A9 Acad=C3=A9mico de Doctorado, en su sesi=C3=B3n No. 03 del 03 de marzo de=
+l presente a=C3=B1o, estudi=C3=B3 la solicitud de aprobaci=C3=B3n de la conformaci=C3=B3n de=
+ jurados para la sustentaci=C3=B3n de tesis (IDOC 6990) del estudiante del progr=
+ama de Doctorado en Ingenier=C3=ADa, Boris Rainiero P=C3=A9rez Guti=C3=A9rrez (c=C3=B3digo 2=
+00717640).=20
+
+=20
+
+Me permito informarle que su solicitud fue aprobada.=20
+
+=20
+
+Le recordamos solicitar la autorizaci=C3=B3n para realizar la sustentaci=C3=B3n, un=
+a vez Boris Rainiero cumpla con los requisitos establecidos en el reglamento=
+ del Doctorado en Ingenier=C3=ADa y se hayan definido las fechas para el evento.
+
+=20
+
+Por el Comit=C3=A9 Acad=C3=A9mico de Doctorado de la Facultad de Ingenier=C3=ADa.
+
+=20
+
+Cordialmente,
+
+=20
+
+=20
+
+Alejandra N=C3=BA=C3=B1ez=20
+Secretaria del Comit=C3=A9
+
+=20
+
+_____________________________________________________________
+Comit=C3=A9 Acad=C3=A9mico de Doctorado de Ingenier=C3=ADa, Universidad de los Andes
+
+=20
+
+C.C.                 Respuestas Comit=C3=A9 Acad=C3=A9mico de Doctorado
+
+  Departamento de Ingenier=C3=ADa de Sistemas y Computaci=C3=B3n=20
+
+=20
+
+
+--B_3698140438_218603893
+Content-type: text/html;
+	charset="UTF-8"
+Content-transfer-encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-microsof=
+t-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" xmlns:m=
+=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http://www.w3.org=
+/TR/REC-html40"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><meta na=
+me=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)"><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	mso-fareast-language:EN-US;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+span.EstiloCorreo17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+p.xmsonormal, li.xmsonormal, div.xmsonormal
+	{mso-style-name:xmsonormal;
+	mso-style-priority:99;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri",sans-serif;
+	mso-fareast-language:EN-US;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:70.85pt 3.0cm 70.85pt 3.0cm;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]--></head><body lang=3D"ES-CO" link=3D"#0563C1" =
+vlink=3D"#954F72"><div class=3D"WordSection1"><p class=3D"xmsonormal" style=3D"backg=
+round:white"><span lang=3D"ES" style=3D"font-size:10.0pt;font-family:&quot;Calib=
+ri&quot;,sans-serif">Estimado Dar=C3=ADo,<o:p></o:p></span></p><p class=3D"xmsonor=
+mal" style=3D"background:white"><span lang=3D"ES" style=3D"font-size:10.0pt;font-f=
+amily:&quot;Calibri&quot;,sans-serif"><o:p>&nbsp;</o:p></span></p><p class=3D"=
+xmsonormal" style=3D"background:white"><span lang=3D"ES" style=3D"font-size:10.0pt=
+;font-family:&quot;Calibri&quot;,sans-serif">El Comit=C3=A9 Acad=C3=A9mico de Doctor=
+ado, en su sesi=C3=B3n No. 03 del 03 de marzo del presente a=C3=B1o, estudi=C3=B3 la sol=
+icitud de aprobaci=C3=B3n de la conformaci=C3=B3n de jurados para la sustentaci=C3=B3n d=
+e tesis (IDOC 6990) del estudiante del programa de Doctorado en Ingenier=C3=ADa,=
+ Boris Rainiero P=C3=A9rez Guti=C3=A9rrez (c=C3=B3digo 200717640).&nbsp;<o:p></o:p></spa=
+n></p><p class=3D"xmsonormal" style=3D"background:white"><span lang=3D"ES" style=3D"=
+font-size:10.0pt;font-family:&quot;Calibri&quot;,sans-serif"><o:p>&nbsp;</o:=
+p></span></p><p class=3D"MsoNormal"><span lang=3D"ES" style=3D"font-size:10.0pt;co=
+lor:black">Me permito informarle que su solicitud fue aprobada. <o:p></o:p><=
+/span></p><p class=3D"MsoNormal"><span lang=3D"ES" style=3D"font-size:10.0pt;color=
+:black"><o:p>&nbsp;</o:p></span></p><p class=3D"MsoNormal"><span lang=3D"ES" sty=
+le=3D"font-size:10.0pt;color:black">Le recordamos solicitar la autorizaci=C3=B3n p=
+ara realizar la sustentaci=C3=B3n, una vez </span><span lang=3D"ES" style=3D"font-si=
+ze:10.0pt">Boris Rainiero<span style=3D"color:black"> cumpla con los requisito=
+s establecidos en el reglamento del Doctorado en Ingenier=C3=ADa y se hayan defi=
+nido las fechas para el evento.<o:p></o:p></span></span></p><p class=3D"MsoNor=
+mal"><span lang=3D"ES" style=3D"font-size:10.0pt"><o:p>&nbsp;</o:p></span></p><p=
+ class=3D"xmsonormal" style=3D"background:white"><span style=3D"font-size:10.0pt;f=
+ont-family:&quot;Calibri&quot;,sans-serif;color:#212121">Por el Comit=C3=A9&nbsp=
+;</span><span lang=3D"ES" style=3D"font-size:10.0pt;font-family:&quot;Calibri&qu=
+ot;,sans-serif;color:#212121">Acad=C3=A9mico de Doctorado&nbsp;</span><span styl=
+e=3D"font-size:10.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:#212121=
+">de la Facultad de Ingenier=C3=ADa.</span><span style=3D"font-size:10.0pt;font-fa=
+mily:&quot;Calibri&quot;,sans-serif;color:black"><o:p></o:p></span></p><p cl=
+ass=3D"xmsonormal" style=3D"background:white"><span style=3D"font-size:10.0pt;font=
+-family:&quot;Calibri&quot;,sans-serif;color:#212121">&nbsp;</span><span sty=
+le=3D"font-size:10.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black"=
+><o:p></o:p></span></p><p class=3D"xmsonormal" style=3D"background:white"><span =
+style=3D"font-size:10.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:#21=
+2121">Cordialmente,</span><span style=3D"font-size:10.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:black"><o:p></o:p></span></p><p class=3D"xmsonorm=
+al" style=3D"background:white"><span style=3D"font-size:10.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif;color:#212121">&nbsp;</span><span style=3D"font-size=
+:10.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black"><o:p></o:p><=
+/span></p><p class=3D"xmsonormal" align=3D"center" style=3D"text-align:center;back=
+ground:white"><span style=3D"font-size:10.0pt;font-family:&quot;Calibri&quot;,=
+sans-serif;color:#212121">&nbsp;</span><span style=3D"font-size:10.0pt;font-fa=
+mily:&quot;Calibri&quot;,sans-serif;color:black"><o:p></o:p></span></p><p cl=
+ass=3D"xmsonormal" style=3D"background:white"><b><span style=3D"font-size:10.0pt;f=
+ont-family:&quot;Calibri&quot;,sans-serif;color:black">Alejandra N=C3=BA=C3=B1ez</sp=
+an></b><span style=3D"font-size:10.0pt;font-family:&quot;Calibri&quot;,sans-se=
+rif;color:black">&nbsp;<br>Secretaria del Comit=C3=A9<o:p></o:p></span></p><p cl=
+ass=3D"xmsonormal" style=3D"background:white"><span style=3D"font-family:&quot;Cal=
+ibri&quot;,sans-serif;color:black"><o:p>&nbsp;</o:p></span></p><p class=3D"xms=
+onormal" style=3D"background:white"><span style=3D"font-size:10.0pt;font-family:=
+&quot;Calibri&quot;,sans-serif;color:#212121">______________________________=
+_______________________________<br><b>Comit=C3=A9 Acad=C3=A9mico de Doctorado de Ing=
+enier=C3=ADa, Universidad de los Andes</b></span><span style=3D"font-family:&quot;=
+Calibri&quot;,sans-serif;color:black"><o:p></o:p></span></p><p class=3D"xmsono=
+rmal" style=3D"background:white"><span style=3D"font-family:&quot;Calibri&quot;,=
+sans-serif;color:black"><o:p>&nbsp;</o:p></span></p><p class=3D"xmsonormal" st=
+yle=3D"background:white"><span lang=3D"ES" style=3D"font-size:7.0pt;font-family:&q=
+uot;Calibri&quot;,sans-serif;color:black">C.C</span><span lang=3D"ES" style=3D"f=
+ont-size:7.0pt;font-family:&quot;Calibri&quot;,sans-serif">.&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp; <span style=3D"color:black">Respuestas Comit=C3=A9&nbsp;</span><span style=3D"c=
+olor:#212121">Acad=C3=A9mico de Doctorado</span></span><span style=3D"font-family:=
+&quot;Calibri&quot;,sans-serif;color:black"><o:p></o:p></span></p><p class=3D"=
+xmsonormal" style=3D"text-indent:35.4pt;background:white"><span lang=3D"ES" styl=
+e=3D"font-size:7.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black">&=
+nbsp; Departamento de Ingenier=C3=ADa de Sistemas y Computaci=C3=B3n </span><span st=
+yle=3D"font-family:&quot;Calibri&quot;,sans-serif;color:black"><o:p></o:p></sp=
+an></p><p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p></div></body></html>
+
+--B_3698140438_218603893--
+

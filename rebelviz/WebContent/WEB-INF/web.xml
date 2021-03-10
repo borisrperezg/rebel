@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>rebelviz</display-name>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<!-- SERVLET FOR FILE UPLOAD -->
+	<servlet>
+		<servlet-name>file_upload</servlet-name>
+		<servlet-class>com.df.angularfileupload.FileUpload</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>file_upload</servlet-name>
+		<url-pattern>/upload</url-pattern>
+	</servlet-mapping>
+	
+	<!-- SERVLET FOR SOMETHING OF GOOGLE -->
+	<servlet>
+		<servlet-name>SystemServiceServlet</servlet-name>
+		<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+		<init-param>
+			<param-name>services</param-name>
+			<param-value />
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SystemServiceServlet</servlet-name>
+		<url-pattern>/_ah/spi/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- SERVLET FOR FORM PARAMETERS HANDLER -->
+	<servlet>
+		<servlet-name>ATDRationalServlet</servlet-name>
+		<servlet-class>uniandes.servlet.datahandlers.ATDRationalServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ATDRationalServlet</servlet-name>
+		<url-pattern>/atdrationale</url-pattern>
+	</servlet-mapping>
+
+</web-app>

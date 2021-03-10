@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: rebel_chatlogs;singleton:=true
+Automatic-Module-Name: rebel_chatlogs
+Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: rebel_chatlogs,
+ rebel_chatlogs.impl,
+ rebel_chatlogs.util
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rebel_core:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rebel_core="http://www.example.org/rebel_core">
+  <blockofinterest name="Second BoI">
+    <fact date="2020-04-20T00:00:00.000-0500" observations="First appearance of component in charge of manage all material loans." functionalview="//@functionalviews.0" elementName="MaterialLoan"/>
+    <fact date="2020-04-20T00:00:00.000-0500" observations="First appearance of component in charge on handle recovery of material" functionalview="//@functionalviews.0" elementName="MaterialReturn"/>
+    <fact date="2020-04-20T00:00:00.000-0500" observations="First appearance of connector of type ProcedureCall " functionalview="//@functionalviews.0" elementName="connLtoR" elementType="CONNECTOR"/>
+    <fact date="2020-04-23T00:00:00.000-0500" action="UPDATE" observations="Change of connector type to Event" functionalview="//@functionalviews.1" elementName="connLtoR" elementType="CONNECTOR"/>
+    <fact date="2020-04-29T00:00:00.000-0500" observations="Creation of component in charge of make payments by debit card" functionalview="//@functionalviews.2" elementName="PSE"/>
+    <fact date="2020-04-29T00:00:00.000-0500" observations="Connector used to link MaterialReturn and PSE, it is type ProcedureCall" functionalview="//@functionalviews.2" elementName="connRtoP" elementType="CONNECTOR"/>
+    <fact date="2020-04-29T00:00:00.000-0500" action="UPDATE" observations="New property added to the connector." functionalview="//@functionalviews.2" elementName="connLtoR" elementType="CONNECTOR"/>
+    <fact date="2020-05-01T00:00:00.000-0500" observations="Component created to deliver material to users" functionalview="//@functionalviews.3" elementName="Delivery"/>
+    <fact date="2020-05-01T00:00:00.000-0500" observations="Connector created to link loan to delivery. It is Event type" functionalview="//@functionalviews.3" elementName="connLtoD" elementType="CONNECTOR"/>
+  </blockofinterest>
+  <functionalviews name="BibliotecaV1.xml" date="2020-04-20T00:00:00.000-0500">
+    <components name="MaterialReturn" id="jxPyhxedDIrEgVc5iX8Y-1" posX="10" posY="210" width="150" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1" type="PROVIDED" id="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1"/>
+    </components>
+    <components name="MaterialLoan" id="jxPyhxedDIrEgVc5iX8Y-2" posX="10" posY="10" width="130" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1" id="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1"/>
+    </components>
+    <connectors xsi:type="rebel_core:ProcedureCall" name="connLtoR" sync="SYNC" protocol="" id="jxPyhxedDIrEgVc5iX8Y-3" posX="10" posY="110">
+      <roles port="//@functionalviews.0/@components.1/@ports.0"/>
+      <roles type="IN" port="//@functionalviews.0/@components.0/@ports.0"/>
+    </connectors>
+  </functionalviews>
+  <functionalviews name="BibliotecaV2.xml" date="2020-04-23T00:00:00.000-0500">
+    <components name="MaterialReturn" id="jxPyhxedDIrEgVc5iX8Y-1" posX="10" posY="210" width="150" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1" type="PROVIDED" id="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1"/>
+    </components>
+    <components name="MaterialLoan" id="jxPyhxedDIrEgVc5iX8Y-2" posX="10" posY="10" width="130" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1" id="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1"/>
+    </components>
+    <connectors xsi:type="rebel_core:Event" name="connLtoR" protocol="" id="jxPyhxedDIrEgVc5iX8Y-3" posX="10" posY="110">
+      <roles port="//@functionalviews.1/@components.1/@ports.0"/>
+      <roles type="IN" port="//@functionalviews.1/@components.0/@ports.0"/>
+    </connectors>
+  </functionalviews>
+  <functionalviews name="BibliotecaV3.xml" date="2020-04-29T00:00:00.000-0500">
+    <components name="MaterialReturn" id="jxPyhxedDIrEgVc5iX8Y-1" posX="10" posY="210" width="150" height="50">
+      <ports name="MRP1" id="MRP1"/>
+      <ports name="MRP2" type="PROVIDED" id="MRP2"/>
+    </components>
+    <components name="MaterialLoan" id="jxPyhxedDIrEgVc5iX8Y-2" posX="10" posY="10" width="130" height="50">
+      <ports name="MLP1" id="MLP1"/>
+    </components>
+    <components name="PSE" id="jxPyhxedDIrEgVc5iX8Y-5" posX="360" posY="210" width="100" height="50">
+      <ports name="PP1" type="PROVIDED" id="PP1"/>
+    </components>
+    <connectors xsi:type="rebel_core:ProcedureCall" name="connRtoP" id="jxPyhxedDIrEgVc5iX8Y-6" posX="190" posY="210">  
+      <roles port="//@functionalviews.2/@components.0/@ports.0"/>
+      <roles type="IN" port="//@functionalviews.2/@components.2/@ports.0"/>
+    </connectors>
+    <connectors xsi:type="rebel_core:Event" name="connLtoR" delivery="EXACTLY_ONE" protocol="" id="jxPyhxedDIrEgVc5iX8Y-3" posX="10" posY="110">
+      <roles port="//@functionalviews.2/@components.1/@ports.0"/>
+      <roles type="IN" port="//@functionalviews.2/@components.0/@ports.1"/>
+    </connectors>
+  </functionalviews>
+  <functionalviews name="BibliotecaV4.xml" date="2020-05-01T00:00:00.000-0500">
+    <components name="MaterialReturn" id="jxPyhxedDIrEgVc5iX8Y-1" posX="10" posY="210" width="150" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-5" id="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-5"/>
+      <ports name="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1" type="PROVIDED" id="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1"/>
+    </components>
+    <components name="MaterialLoan" id="jxPyhxedDIrEgVc5iX8Y-2" posX="10" posY="10" width="140" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1" id="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1"/>
+      <ports name="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-7" id="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-7"/>
+    </components>
+    <components name="PSE" id="jxPyhxedDIrEgVc5iX8Y-5" posX="360" posY="210" width="100" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-5_jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-5" type="PROVIDED" id="jxPyhxedDIrEgVc5iX8Y-5_jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-5"/>
+    </components>
+    <components name="Delivery" id="jxPyhxedDIrEgVc5iX8Y-7" posX="360" posY="102" width="100" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-7_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-7" type="PROVIDED" id="jxPyhxedDIrEgVc5iX8Y-7_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-7"/>
+    </components>
+    <connectors xsi:type="rebel_core:ProcedureCall" name="connRtoP" protocol="" id="jxPyhxedDIrEgVc5iX8Y-6" posX="190" posY="210">
+      <roles port="//@functionalviews.3/@components.0/@ports.0"/>
+      <roles type="IN" port="//@functionalviews.3/@components.2/@ports.0"/>
+    </connectors>
+    <connectors xsi:type="rebel_core:Event" name="connLtoR" delivery="EXACTLY_ONE" protocol="" id="jxPyhxedDIrEgVc5iX8Y-3" posX="10" posY="110">
+      <roles port="//@functionalviews.3/@components.1/@ports.0"/>
+      <roles type="IN" port="//@functionalviews.3/@components.0/@ports.1"/>
+    </connectors>
+    <connectors xsi:type="rebel_core:Event" name="connLtoD" protocol="" id="jxPyhxedDIrEgVc5iX8Y-8" posX="340" posY="10">
+      <roles port="//@functionalviews.3/@components.1/@ports.1"/>
+      <roles type="IN" port="//@functionalviews.3/@components.3/@ports.0"/>
+    </connectors>
+  </functionalviews>
+</rebel_core:Project>

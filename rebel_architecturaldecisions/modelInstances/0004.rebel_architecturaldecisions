@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rebel_architecturaldecisions:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rebel_architecturaldecisions="http://uniandes/rebel_architecturaldecisions" name="CHIPER">
+  <decisions number="0004" title="Use Rust for performance" state="SUPERCEDES" date="2020-03-25T12:10:54.931-0500" description="Chosen option: &quot;use rust&quot;&#xD;&#xA;&#xD;" phase="Sprint 3">
+    <alternatives description="use rust"/>
+    <alternatives description="no use rust"/>
+    <motivatedBy description="The issue motivating this decision, and any context that influences or constrains the decision."/>
+    <deciders name="Boris Perez"/>
+    <userStories id="US003"/>
+    <userStories id="US002"/>
+  </decisions>
+</rebel_architecturaldecisions:Project>

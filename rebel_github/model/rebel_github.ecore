@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="rebel_github" nsURI="http://uniandes/rebel_github" nsPrefix="rebel_github">
+  <eClassifiers xsi:type="ecore:EClass" name="Project">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="#//Person" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="messages" upperBound="-1"
+        eType="#//Message" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelingDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Message">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="footer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scope" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//OPERATIONTYPE"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="#//ACTIONTYPE"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="person" eType="#//Person"
+        eOpposite="#//Person/messages"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="messages" upperBound="-1"
+        eType="#//Message" eOpposite="#//Message/person"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OPERATIONTYPE">
+    <eLiterals name="FEAT"/>
+    <eLiterals name="FIX" value="1"/>
+    <eLiterals name="REFACTOR" value="2"/>
+    <eLiterals name="MODELS" value="3"/>
+    <eLiterals name="DOCS" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ACTIONTYPE">
+    <eLiterals name="COMMIT"/>
+  </eClassifiers>
+</ecore:EPackage>

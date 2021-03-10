@@ -1,0 +1,40 @@
+<html>
+<title>Draw.io Embedded</title>
+<head>
+    
+    <title>Models</title>
+    
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+	
+	<script src="https://laingsimon.github.io/render-diagram/drawio-renderer.js"></script>
+</head>
+<body>
+
+	<div id="main">
+
+		<!-- <button type="submit" ng-click="ctr.showArchiModel()" class="pure-button pure-button-primary">Load</button> -->
+		
+		<!-- <p><button onclick="loadArchiModel()">Load page in iframe</button></p> -->
+		
+		<div id="viz" class="drawio-diagram">
+		    <!-- See this working here: <a href="https://laingsimon.github.io/render-diagram/">https://laingsimon.github.io/render-diagram/</a> -->
+		</div>
+	</div>
+</body>
+<script>
+
+	const queryString = window.location.search;
+	
+	console.log("query " + queryString);
+	
+	const urlParams = new URLSearchParams(queryString);
+	// mn = name of the model
+	const model_name = urlParams.get('mn')
+	document.getElementById('viz').setAttribute('data-diagram-url', 'archimatemodels/'+model_name);
+	console.log("modelname "+model_name);
+
+	
+</script>
+</html>

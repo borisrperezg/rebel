@@ -1,0 +1,18 @@
+- Crear archivo de datos
+- Realizar pagos de obligaciones
+- Incluir el gasto de mercado y TC
+- Considerar posible paper para CLEI
+    * Análisis de pago, monitore y prevención para Colombia y Chile
+- Rebel
+    + Diseñar 4 modelos en secuencia histórica
+    + Crear la instancia a mano con los hechos de las 4 versiones del modelo
+    + Implementar enlace con llamado a JS de cargar modelo
+    + Cambiar el metamodelo de Rebel
+        - Los elementos a vincular al BOI se usarán para buscarlos en todos los modelos
+        - Crear meta clase Relation, para asociar un componente a un connector
+    * Actualizar visualizaciones del BOI
+        + Actualizar el modelo
+        + Actualizar el timeline
+        - Actualizar los artefactos
+    + Listar BOI
+    * Crear BOI

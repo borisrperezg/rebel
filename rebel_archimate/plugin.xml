@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated rebel_archimate -->
+      <package
+            uri="http://www.example.org/rebel_archimate"
+            class="rebel_archimate.Rebel_archimatePackage"
+            genModel="model/rebel_archimate.genmodel"/>
+   </extension>
+
+</plugin>

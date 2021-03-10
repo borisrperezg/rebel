@@ -1,0 +1,484 @@
+Received: from DM6PR08MB4523.namprd08.prod.outlook.com (2603:10b6:5:12::12) by
+ DM5PR08MB2763.namprd08.prod.outlook.com with HTTPS; Thu, 4 Mar 2021 19:32:10
+ +0000
+Received: from DM5PR07CA0083.namprd07.prod.outlook.com (2603:10b6:4:ad::48) by
+ DM6PR08MB4523.namprd08.prod.outlook.com (2603:10b6:5:12::12) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3912.17; Thu, 4 Mar 2021 19:32:06 +0000
+Received: from DM6NAM10FT029.eop-nam10.prod.protection.outlook.com
+ (2603:10b6:4:ad:cafe::6c) by DM5PR07CA0083.outlook.office365.com
+ (2603:10b6:4:ad::48) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.17 via Frontend
+ Transport; Thu, 4 Mar 2021 19:32:06 +0000
+Authentication-Results: spf=pass (sender IP is 209.85.221.44)
+ smtp.mailfrom=gmail.com; uniandes.edu.co; dkim=pass (signature was verified)
+ header.d=gmail.com;uniandes.edu.co; dmarc=pass action=none
+ header.from=gmail.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of gmail.com designates
+ 209.85.221.44 as permitted sender) receiver=protection.outlook.com;
+ client-ip=209.85.221.44; helo=mail-wr1-f44.google.com;
+Received: from mail-wr1-f44.google.com (209.85.221.44) by
+ DM6NAM10FT029.mail.protection.outlook.com (10.13.152.62) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3890.19 via Frontend Transport; Thu, 4 Mar 2021 19:32:06 +0000
+Received: by mail-wr1-f44.google.com with SMTP id j2so16081409wrx.9
+        for <br.perez41@uniandes.edu.co>; Thu, 04 Mar 2021 11:32:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=XvzxODPSc/jVJyHNWzQfjIPehmW7BLu1Jms8gkhSV1Y=;
+        b=CVTbGDHdweaYWi6IKo2f0Ybbs1rfKkI6Tgn0WHJ2Oo+5/bxEHyr1iqqsDo5TZmmAzL
+         1x/a4Dhet0Zi1TmCLxaC/6F2FjkLhTKvX2HI8UQE4P7NY7keusUAQkso10EURh4HJ/HD
+         mAI7QG67MZ+AlDhiUPIyyKvBwk1SnmBa2puckgbjvyaEQSZkMxTi/mJ91B9dXA4ExzjV
+         zz1g8ACCLsEaQQUItG2sp/GCh1dfCTTg3xRgvpbaOF61R8dvIRAr4+D0owZWHkyLFVhB
+         d++jac550f66XutFnJ1i9Lg3AiHeUwPdWluif0cJL+sd51Ke5Kvv9FHJdKjnte528Daj
+         eYpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=XvzxODPSc/jVJyHNWzQfjIPehmW7BLu1Jms8gkhSV1Y=;
+        b=KkxNy6cZQ1ZCY697yhCgzeViOuOsq8CDiGjrVYANkzVYArBrDKzeqb54EBDomapsfP
+         atpD660kP+NNpdozgDmG5I2dLz06osHJa6aeqq4ZrYeMc1yR4YVUkZ9CuMPOZUhpZIlv
+         F4T06GZ2drfyw6xNuJJ5n2zYfQMc1VZ2f2ycmnl5E5y5Ma1s2s3CdicbQLhTM3KiXAq4
+         E87HVdGp2nfIepm64hEzL+O9HGenHqxEaa2y/9PyFqKOWvH+eM3fxbBf6eRfKbXpgRuf
+         ESYWZV1i0JL99nMjIr5DXc8sRtQqO3KMTy8rQ98+KAlKepgqbbWsrzmRB5AQmMxdjiAe
+         kDuw==
+X-Gm-Message-State: AOAM531mmVq5bkZgz6xV+AZa4RsQqM31KfwUcFRkJUgGdKrlsDvDfkya
+	jAAT6RG49Fug8HMgOYZeiH2DaXPZJ8xxc9LyXZTH+z35eb7KADtL
+X-Google-Smtp-Source: ABdhPJzMPPlqA9RWcNQy2yVJqXtl+fV6K+OFKuiLjpCr+lzTabD8envboTeLw72/Foxb52GRwnXAPE0FUGlNFfX5g+g=
+X-Received: by 2002:adf:a418:: with SMTP id d24mr5513466wra.187.1614886325400;
+ Thu, 04 Mar 2021 11:32:05 -0800 (PST)
+MIME-Version: 1.0
+From: Cristian Castellanos <kmilo.castellanos@gmail.com>
+Date: Thu, 4 Mar 2021 14:31:54 -0500
+Message-ID: <CA+0bsz1ZQSpGXk_hj4sr_5tCt7tBd0TExe96MhpSMi2y8uR-7w@mail.gmail.com>
+Subject: Survey Comments
+To: Boris Perez - Uniandes <br.perez41@uniandes.edu.co>
+Return-Path: kmilo.castellanos@gmail.com
+X-MS-Exchange-Organization-ExpirationStartTime: 04 Mar 2021 19:32:06.8431
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id:
+ 6b25626d-0d09-4b70-a5d1-08d8df443259
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: fabd047c-ff48-492a-8bbb-8f98b9fb9cca:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-PublicTrafficType: Email
+X-MS-Exchange-Organization-AuthSource:
+ DM6NAM10FT029.eop-nam10.prod.protection.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: 6b25626d-0d09-4b70-a5d1-08d8df443259
+X-MS-TrafficTypeDiagnostic: DM6PR08MB4523:
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Oob-TLC-OOBClassifiers: OLM:241;
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:0;
+X-Forefront-Antispam-Report:
+ CIP:209.85.221.44;CTRY:US;LANG:es;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail-wr1-f44.google.com;PTR:mail-wr1-f44.google.com;CAT:NONE;SFS:(4636009)(84050400001)(6666004)(73392003)(7116003)(356005)(3480700007)(7596003)(7636003)(336012)(34756004)(33964004)(76482006)(26005)(1096003)(42186006)(5660300002)(55446002)(6916009)(86362001)(8676002)(82202003);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2021 19:32:06.8411
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6b25626d-0d09-4b70-a5d1-08d8df443259
+X-MS-Exchange-CrossTenant-Id: fabd047c-ff48-492a-8bbb-8f98b9fb9cca
+X-MS-Exchange-CrossTenant-AuthSource:
+ DM6NAM10FT029.eop-nam10.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR08MB4523
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.4216685
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.3912.017
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(20160514016)(750129)(520011016)(944506458)(944626604);
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?1FZJorgmJc8q1Qpc0XTQOBNo0B2qcvJe323um+PZG8z4BB4DA3y4i6oZQfvW?=
+ =?us-ascii?Q?w6EI2u1rlR1H62CgmSlZHmiXBhEGjLktAHDNwrbHrjbEor56PVDPDGYKrK5J?=
+ =?us-ascii?Q?rwmMbDHIPH/xUdeSQTBRXgoe+SDExuM2+lwfXATmywxbMqAEbMO+iNS1LnFE?=
+ =?us-ascii?Q?l7O7b4QPaeQRJ4tZMLuWfJOva/CGEjNxWds9lt4sdBOpU36NNcE/qLZlMW1S?=
+ =?us-ascii?Q?WHQWZDiKW3VXu6Wz3/KsJB+EmPn1V+fTX6mGVyMTVo5XnhiUU1ZbVfcxtJz7?=
+ =?us-ascii?Q?3HH/qhFOH012Qt8rC5YJ0JfJIdwrNYH5nDUPJtZsx/25AfKjv2WhJe/Ub8zq?=
+ =?us-ascii?Q?nDcWacOBjcDwxHosVVHLREFpOFnz0fKZ9NmAPRzE5LfICKHD3qIAJoofkjcn?=
+ =?us-ascii?Q?m1RxoJPo05kMcsN54wAlwUjtSI04IedrZe3YB9aWawyXsEq81Zcwg/R3d7b+?=
+ =?us-ascii?Q?azhyGwEh43yWY4VrQfeJtYB2Q9YEm3rCV9lSa2ULh/wztA/4JoPDq2o4RZcu?=
+ =?us-ascii?Q?yj7iMYekGW3juCb7qXnFSDlESWHP1PR01Ft9R/jBJOA2cCNc8LMEh37qR0Az?=
+ =?us-ascii?Q?4Lvgo9j+HtNc0bQkZ9HtTN0AWaQOfQat/g44hGxLpFTqu5HiXa5MTs+zJ3px?=
+ =?us-ascii?Q?pQMJPwuRUA/ROVGRxm4CjTnL3XV1mX3vbGeJ0Q7Fmz1RE8gkVTIAJnZTByG8?=
+ =?us-ascii?Q?S/xwmBHn16ieN3k5f0A10DsSgkj2e6/mB9ZyVQoxJWiCKmo7kMfesxeTl3JL?=
+ =?us-ascii?Q?tpdpTrrbcRfZSxnr+J05Ia+2u3iKo/xV+lBNOB8Fu9NaE3381/g6srlQsE1D?=
+ =?us-ascii?Q?4h4dL06jgsEmARyaIetig7SDnRdCrySdLf67iiKyHKIestHreXwxfhdoR7/e?=
+ =?us-ascii?Q?3pn5+NNUZJPb0FAWL7Q+48txAh59OSAZzdIxOSI5iJVF+RUvHJAMYhGFihbv?=
+ =?us-ascii?Q?roeXJanGqg9oNHMOBF45qoG3LW3nFMEPw2LnijPaKGnxJV0gRPnOYScZtYmw?=
+ =?us-ascii?Q?o0x4n6HCK0Za2kAH4kAEUX9rNxGUQtST5AjY38XEq53i0EgcxCbXj76izdOX?=
+ =?us-ascii?Q?kulTtxI3/3EqS4v7JEidzodK7IJSQqZWSwqK8LIn5DmLPLUrQQM+bKw2ETad?=
+ =?us-ascii?Q?XKsT9xhWELiJQ7ghr5l/UQa3o8o8//WcfNlJB+5BdaBEIDeNL9K6eWLvcgiP?=
+ =?us-ascii?Q?AnzadqojVaIpcjhbtMfg889zNACcu1jhoyHoFHIeV2y2TWTkYJJvRDtYeMyn?=
+ =?us-ascii?Q?y+G+7uChWdH9nBnjTzuineITcDw3pq/aO5B7In2YbORV1K1R5skhja4/wXN4?=
+ =?us-ascii?Q?hwR9SrxcwbiShUAtH9PO4DM7Ww05O51MP1pzgI1IRAYDXVeQb9ULU1ESMBXg?=
+ =?us-ascii?Q?AHg/lYVQ/TaMYcRlzZW8gfvpxPsw6GUC9F+/oh+hsYQm/NTc6m7rC/1cObe2?=
+ =?us-ascii?Q?FpFkFvM2qz/UBt0SR2+/7yYaXi8GGqJZdzfsAjUa8h3M+NdpHwMIIJxP6/o1?=
+ =?us-ascii?Q?fqCKXLRTiPY3VuzSOfua5NHXCNet1jl/nyyjjZNWtpUu5PcifYPhqg6YCdc9?=
+ =?us-ascii?Q?JjP0JeuD+K8f7qjkHl8=3D?=
+Content-type: multipart/alternative;
+	boundary="B_3698140006_1665139566"
+
+> This message is in MIME format. Since your mail reader does not understand
+this format, some or all of this message may not be legible.
+
+--B_3698140006_1665139566
+Content-type: text/plain;
+	charset="UTF-8"
+Content-transfer-encoding: quoted-printable
+
+Como vas a preguntar por algunas pr=C3=A1cticas en la empresa o si podr=C3=ADan apl=
+icar Rebel en esa empresa, creo que valdr=C3=ADa la pena incluir unas preguntas =
+que ayuden a caracterizar el tama=C3=B1o de la compan=C3=ADa o del =C3=A1rea de sistemas=
+, por ejemplo n=C3=BAmero de empleados.
+
+5- =C2=BFQu=C3=A9 tan familiarizado est=C3=A1 con ArchiMate, un lenguaje de modelado de=
+ arquitectura empresarial?
+Si, ...
+Si,=20
+No..
+-> Las respuestas me parece que no est=C3=A1 alineada con la pregunta, Si pregu=
+ntas qu=C3=A9 tanto, deber=C3=ADa ser alto, medio bajo, mucho o poco o algo as=C3=AD, o =
+dejar las respuestas pero la pregunta ser=C3=ADa como =C2=BFEst=C3=A1 familiarizado ...
+
+6-=20
+He participado en proyectos donde hemos reconocido TD, pero el proyecto no =
+lo manejaba de forma expl=C3=ADcita
+He participado en proyectos que abordan la TD de forma activa
+. Me parece rara la inclusi=C3=B3n de la Definici=C3=B3n de Deuda T=C3=A9cnica as=C3=AD sin=
+ m=C3=A1s entre preguntas, sin previo aviso o sin decir el para que,=20
+
+7. No s=C3=A9 que quieres validar all=C3=AD, pero al preguntar "para ud", sonar=C3=ADa =
+m=C3=A1s como a su gusto, no tanto como su importancia en el proceso de Des de S=
+W o en el =C3=A1rea de Ing de SW,=20
+
+8 y 10. En esas preguntas, si reponde SI, parece que no tiene importancia e=
+l porqu=C3=A9 y podr=C3=ADa perderse info valiosa, es decir, =C2=BFPor qu=C3=A9 interesa par=
+ticularmente el "Por qu=C3=A9 No?"
+
+En la secci=C3=B3n de ATD, al inicio ser=C3=ADa bueno introducir de nuevo el signif=
+icado de la sigla, porque en las preguntas previas se refer=C3=ADan completo a D=
+euda t=C3=A9cnica de Arch, y ahora solo dicen ATD.
+
+12. Si respondi=C3=B3 S=C3=AD a la pregunta anterior, =C2=BFde qu=C3=A9 manera identific=C3=B3 =
+la ATD (herramientas, estrategias, etc). La pregunta es requerida a pesar de=
+ que puede ser opcional.
+
+15 y 16. Puede no ser claro para el encuestado como y porque un atributo de=
+ calidad puede promover la inyecci=C3=B3n de deuda t=C3=A9cnica. En la intro del tal=
+ler, o de la secci=C3=B3n del survey ejemplificar esto para aterrizarlo. Por otr=
+o lado, no s=C3=A9 sino es de t=C3=BA inter=C3=A9s otras causas de inyecci=C3=B3n de deuda t=
+=C3=A9cnica como deadlines del proyecto, desconocimiento, costos, que creo seg=C3=BA=
+n los resultados de insightTD son las m=C3=A1s com=C3=BAnes. C=C3=B3mo piensas usar esta=
+s preguntas de cara al objetivo del survey?
+
+En la secci=C3=B3n de evaluaci=C3=B3n de rebel, est=C3=A1s usando una escala likert de =
+3, en la anterior de 4, creo que es mejor unificar, como total/ de acuerdo, =
+de acuerdo, en desacuerdo, total/ en desacuerdo
+
+17. Yo modificar=C3=ADa la redacci=C3=B3n de la pregunta a: Considera que el tiempo=
+ requerido para entrenar el modelo de identificaci=C3=B3n de ATD es el adecuado =
+(carga de modelos, identificaci=C3=B3n manual, justificaci=C3=B3n): ...
+
+18 - El tiempo requerido para identificar la ATD en los modelos es el adecu=
+ado? Tambi=C3=A9n revisar=C3=ADa que la pregunta anterior, que habla tambi=C3=A9n de tie=
+mpo de identificaci=C3=B3n, no se solape con esta pregunta, aclarar la identific=
+aci=C3=B3n en una y otra a que se refiere concretamente. En el taller o en la pr=
+egunta deber=C3=ADa introducirse la sigla en "Modelos C&C".
+
+24- [Completitud] Califique de mayor a menor, qu=C3=A9 tan de acuerdo est=C3=A1 con=
+ los artefactos empleados por la herramienta.=20
+Esta pregunta no me queda clara, =C2=BFde acuerdo con que los incluye?, o de ac=
+uerdo con que los usa correctamente?, o de acuerdo con que deber=C3=ADa incluirl=
+os? Deber=C3=ADa ser m=C3=A1s especifico como: En que grado la herramienta permite i=
+ncluir / especificar/ aprovechar / analizar/etc los siguientes artefactos: T=
+otalmente, parcialmente, ligeramente, No los incluye/especifica / etc
+
+25- [Completitud] =C2=BFQu=C3=A9 otros artefactos incluir=C3=ADa para apoyar la identif=
+icaci=C3=B3n de la ATD? Ac=C3=A1 importante en la intro del taller, explicar que se =
+refiere como artefactos y que entra en ese conjunto.=20
+
+27- [Visualizaci=C3=B3n] =C2=BFLa herramienta permite visualizar adecuadamente los =
+modelos cargados? -> De nuevo recomendar=C3=ADa escala likert de 4 o 5, para ten=
+er el grado, no solo un si o no. Por otro lado, no veo el valor de "visualiz=
+ar adecuadamente", es decir, que quiero lograr con la visualizaci=C3=B3n, como e=
+ntender X, Y, o comparar X y Y, o explorar Z, porque la visualizaci=C3=B3n por s=
+i sola sonar=C3=ADa como algo est=C3=A9tico, no de valor real para el usuario.
+
+Pregunta 27 est=C3=A1 repetida 3 veces, pero estas si me suenan mejor desde el =
+punto de vista de visualizaci=C3=B3n con un prop=C3=B3sito.
+
+28- [Preferencia] =C2=BFCon qu=C3=A9 facilidad podr=C3=ADa incluirse esta herramienta e=
+n su organizaci=C3=B3n o entorno de trabajo? -> Creo que ac=C3=A1 y en las siguiente=
+s. el t=C3=A9rmino no es "preferencia", sino aplicabilidad o implementaci=C3=B3n, o =
+algo as=C3=AD.
+
+30- [Conclusiones] =C2=BFQu=C3=A9 beneficios o usos adicionales considera que se pu=
+eden obtener con esta herramienta-> Est=C3=A1 obligator=C3=ADa, =C2=BFy sino no hay bene=
+ficios adicionales? Poner N/A o dejarla opcional
+
+=C2=BFTiene comentarios u observaciones adicionales? -> No tiene n=C3=BAmero de pre=
+gunta, solo por si falt=C3=B3, y est=C3=A1 como obligatoria a pesar de ser "adiciona=
+les"
+qie entiendo podr=C3=ADa no haberlos.
+
+
+
+--B_3698140006_1665139566
+Content-type: text/html;
+	charset="UTF-8"
+Content-transfer-encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"></head><=
+body><div dir=3D"ltr"><div><span style=3D"color:rgb(32,33,36);font-family:&quot;=
+Google Sans&quot;,Roboto,Helvetica,Arial,sans-serif;font-size:16px;letter-sp=
+acing:0.1px">Como vas a preguntar por algunas pr=C3=A1cticas en la empresa o si =
+podr=C3=ADan aplicar Rebel en esa empresa, creo que valdr=C3=ADa la pena incluir una=
+s preguntas que ayuden a caracterizar el tama=C3=B1o de la compan=C3=ADa&nbsp;o del =
+=C3=A1rea de sistemas, por ejemplo n=C3=BAmero de empleados.</span></div><span style=
+=3D"color:rgb(32,33,36);font-family:&quot;Google Sans&quot;,Roboto,Helvetica,A=
+rial,sans-serif;font-size:16px;letter-spacing:0.1px"><div><span style=3D"color=
+:rgb(32,33,36);font-family:&quot;Google Sans&quot;,Roboto,Helvetica,Arial,sa=
+ns-serif;font-size:16px;letter-spacing:0.1px"><br></span></div>5- =C2=BFQu=C3=A9 tan=
+ familiarizado est=C3=A1 con ArchiMate, un lenguaje de modelado de arquitectura =
+empresarial?</span><br><div><span style=3D"color:rgb(32,33,36);font-family:&qu=
+ot;Google Sans&quot;,Roboto,Helvetica,Arial,sans-serif;font-size:16px;letter=
+-spacing:0.1px">Si, ...</span></div><div><span style=3D"color:rgb(32,33,36);fo=
+nt-family:&quot;Google Sans&quot;,Roboto,Helvetica,Arial,sans-serif;font-siz=
+e:16px;letter-spacing:0.1px">Si,&nbsp;</span></div><div><span style=3D"color:r=
+gb(32,33,36);font-family:&quot;Google Sans&quot;,Roboto,Helvetica,Arial,sans=
+-serif;font-size:16px;letter-spacing:0.1px">No..</span></div><div>-&gt; Las =
+respuestas me parece que no est=C3=A1 alineada con la pregunta, Si preguntas qu=C3=
+=A9 tanto, deber=C3=ADa ser alto, medio bajo, mucho o poco o algo as=C3=AD, o dejar la=
+s respuestas pero la pregunta ser=C3=ADa como&nbsp;=C2=BFEst=C3=A1 familiarizado ...</di=
+v><div><br></div><div>6-&nbsp;</div><div><ul><li><span style=3D"color:rgb(32,3=
+3,36);font-family:Roboto,Arial,sans-serif;font-size:14px;letter-spacing:0.2p=
+x">He participado en proyectos donde he</span><span style=3D"font-family:Robot=
+o,Arial,sans-serif;font-size:14px;letter-spacing:0.2px"><font color=3D"#ff0000=
+">mos</font></span><span style=3D"color:rgb(32,33,36);font-family:Roboto,Arial=
+,sans-serif;font-size:14px;letter-spacing:0.2px"> reconocido TD</span><span =
+style=3D"font-family:Roboto,Arial,sans-serif;font-size:14px;letter-spacing:0.2=
+px"><font color=3D"#ff0000">,</font></span><span style=3D"color:rgb(32,33,36);fo=
+nt-family:Roboto,Arial,sans-serif;font-size:14px;letter-spacing:0.2px"> pero=
+ el proyecto no lo manejaba de forma expl=C3=ADcita</span></li><li><span style=3D"=
+color:rgb(32,33,36);font-family:Roboto,Arial,sans-serif;font-size:14px;lette=
+r-spacing:0.2px">He participado en proyectos que abordan la TD de forma acti=
+va</span></li></ul><div><font color=3D"#202124" face=3D"Roboto, Arial, sans-seri=
+f"><span style=3D"font-size:14px;letter-spacing:0.2px">.&nbsp;</span></font>Me=
+ parece rara la inclusi=C3=B3n de la Definici=C3=B3n de Deuda T=C3=A9cnica as=C3=AD sin m=C3=A1s=
+ entre preguntas, sin previo aviso o sin decir el para que, </div><div><br><=
+/div><div>7. No s=C3=A9 que&nbsp;quieres validar all=C3=AD, pero al preguntar &quot;=
+para ud&quot;, sonar=C3=ADa m=C3=A1s como a su gusto, no tanto como su importancia e=
+n el proceso de Des de SW o en el =C3=A1rea de Ing de SW,&nbsp;</div><br></div><=
+div>8 y 10. En esas preguntas, si reponde&nbsp;SI, parece que no tiene impor=
+tancia el porqu=C3=A9 y podr=C3=ADa perderse info valiosa, es decir, =C2=BFPor qu=C3=A9 inte=
+resa particularmente el &quot;Por qu=C3=A9 No?&quot;</div><div><br></div><div>En=
+ la secci=C3=B3n de ATD, al inicio ser=C3=ADa bueno introducir de nuevo el significa=
+do de la sigla, porque en las preguntas previas se refer=C3=ADan completo a Deud=
+a t=C3=A9cnica de Arch, y ahora solo dicen ATD.</div><div><br></div><div><span s=
+tyle=3D"font-family:&quot;Google Sans&quot;,Roboto,Helvetica,Arial,sans-serif;=
+font-size:16px;letter-spacing:0.1px"><font color=3D"#202124">12. Si respondi=C3=B3=
+ S=C3=AD a la pregunta anterior, =C2=BFde qu=C3=A9 manera </font><font color=3D"#202124">i=
+dentific=C3=B3 la </font><font color=3D"#ff0000">ATD</font><font color=3D"#202124"> =
+(herramientas, estrategias, etc). La pregunta es requerida a pesar de que pu=
+ede ser opcional.</font></span><br></div><div><br></div><div>15 y 16. Puede =
+no ser claro para el encuestado como y porque un atributo de calidad puede p=
+romover la inyecci=C3=B3n de deuda t=C3=A9cnica. En la intro del taller, o de la sec=
+ci=C3=B3n del survey ejemplificar esto para aterrizarlo. Por otro lado, no s=C3=A9 s=
+ino es de t=C3=BA inter=C3=A9s otras causas de inyecci=C3=B3n de deuda t=C3=A9cnica como dea=
+dlines del proyecto, desconocimiento, costos, que creo seg=C3=BAn los resultados=
+ de insightTD&nbsp;son las m=C3=A1s com=C3=BAnes. C=C3=B3mo piensas usar estas preguntas=
+ de cara al objetivo del survey?</div><div><br></div><div>En la secci=C3=B3n de =
+evaluaci=C3=B3n de rebel, est=C3=A1s usando una escala likert de 3, en la anterior d=
+e 4, creo que es mejor unificar, como total/ de acuerdo, de acuerdo, en desa=
+cuerdo, total/ en desacuerdo<br></div><div><br></div><div><div class=3D"gmail-=
+freebirdFormviewerComponentsQuestionBaseHeader" style=3D"display:flex;margin-b=
+ottom:16px"><div class=3D"gmail-freebirdFormviewerComponentsQuestionBaseTitleD=
+escContainer" style=3D"box-sizing:border-box;display:flex;max-width:100%;min-w=
+idth:0%"><div id=3D"gmail-i1" class=3D"gmail-freebirdFormviewerComponentsQuestio=
+nBaseTitle exportItemTitle gmail-freebirdCustomFont" style=3D"font-family:&quo=
+t;Google Sans&quot;,Roboto,Helvetica,Arial,sans-serif;font-size:16px;letter-=
+spacing:0.1px;line-height:24px;color:rgb(32,33,36);width:590px;word-break:br=
+eak-word">17.&nbsp;<span style=3D"font-family:Arial,Helvetica,sans-serif;font-=
+size:small;letter-spacing:normal;color:rgb(34,34,34)">Yo modificar=C3=ADa la red=
+acci=C3=B3n de la pregunta a: Considera que el tiempo requerido para entrenar el=
+ modelo de identificaci=C3=B3n de ATD es el adecuado (carga de modelos, identifi=
+caci=C3=B3n manual, justificaci=C3=B3n): ...</span></div><div id=3D"gmail-i1" class=3D"g=
+mail-freebirdFormviewerComponentsQuestionBaseTitle exportItemTitle gmail-fre=
+ebirdCustomFont" style=3D"font-family:&quot;Google Sans&quot;,Roboto,Helvetica=
+,Arial,sans-serif;font-size:16px;letter-spacing:0.1px;line-height:24px;color=
+:rgb(32,33,36);width:590px;word-break:break-word"><span style=3D"font-family:A=
+rial,Helvetica,sans-serif;font-size:small;letter-spacing:normal;color:rgb(34=
+,34,34)"><br></span></div><div id=3D"gmail-i1" class=3D"gmail-freebirdFormviewer=
+ComponentsQuestionBaseTitle exportItemTitle gmail-freebirdCustomFont" style=3D=
+"font-family:&quot;Google Sans&quot;,Roboto,Helvetica,Arial,sans-serif;font-=
+size:16px;letter-spacing:0.1px;line-height:24px;color:rgb(32,33,36);width:59=
+0px;word-break:break-word"><span style=3D"font-family:Arial,Helvetica,sans-ser=
+if;font-size:small;letter-spacing:normal;color:rgb(34,34,34)">18 -&nbsp;</sp=
+an><span style=3D"letter-spacing:0.1px">El tiempo requerido para identificar l=
+a ATD en los modelos es el adecuado? Tambi=C3=A9n revisar=C3=ADa&nbsp;que la pregunt=
+a anterior, que habla tambi=C3=A9n de tiempo de identificaci=C3=B3n, no se solape co=
+n esta pregunta,&nbsp;aclarar la identificaci=C3=B3n en una y otra a que se refi=
+ere concretamente. En el taller o en la pregunta deber=C3=ADa introducirse la si=
+gla en &quot;Modelos C&amp;C&quot;.</span></div><div id=3D"gmail-i1" class=3D"gm=
+ail-freebirdFormviewerComponentsQuestionBaseTitle exportItemTitle gmail-free=
+birdCustomFont" style=3D"font-family:&quot;Google Sans&quot;,Roboto,Helvetica,=
+Arial,sans-serif;font-size:16px;letter-spacing:0.1px;line-height:24px;color:=
+rgb(32,33,36);width:590px;word-break:break-word"><span style=3D"letter-spacing=
+:0.1px"><br></span></div><div id=3D"gmail-i1" class=3D"gmail-freebirdFormviewerC=
+omponentsQuestionBaseTitle exportItemTitle gmail-freebirdCustomFont" style=3D"=
+line-height:24px;width:590px;word-break:break-word"><div class=3D"gmail-freebi=
+rdFormviewerComponentsQuestionBaseHeader" style=3D"display:flex;margin-bottom:=
+16px"><div class=3D"gmail-freebirdFormviewerComponentsQuestionBaseTitleDescCon=
+tainer" style=3D"box-sizing:border-box;display:flex;max-width:100%;min-width:0=
+%"><div id=3D"gmail-i118" class=3D"gmail-freebirdFormviewerComponentsQuestionBas=
+eTitle exportItemTitle gmail-freebirdCustomFont" style=3D"color:rgb(32,33,36);=
+font-family:&quot;Google Sans&quot;,Roboto,Helvetica,Arial,sans-serif;font-s=
+ize:16px;letter-spacing:0.1px;line-height:24px;width:590px;word-break:break-=
+word">24- [Completitud] Califique de mayor a menor, qu=C3=A9 tan de acuerdo est=C3=
+=A1 con los artefactos empleados por la herramienta.<span class=3D"gmail-freebir=
+dFormviewerComponentsQuestionBaseRequiredAsterisk" id=3D"gmail-i121" style=3D"co=
+lor:rgb(217,48,37)">&nbsp;</span></div></div></div><div class=3D"gmail-freebir=
+dFormviewerComponentsQuestionGridRoot" style=3D""><div class=3D"gmail-freebirdFo=
+rmviewerComponentsQuestionGridContainer" style=3D"line-height:20px;margin-top:=
+4px;overflow:hidden"><div class=3D"gmail-freebirdFormviewerComponentsQuestionG=
+ridScrollContainer" style=3D"overflow:auto hidden;padding-bottom:10px"><div cl=
+ass=3D"gmail-freebirdFormviewerComponentsQuestionGridScrollingData" style=3D"bor=
+der-collapse:collapse;display:table;width:590px"><div class=3D"gmail-freebirdF=
+ormviewerComponentsQuestionGridRow gmail-freebirdFormviewerComponentsQuestio=
+nGridColumnHeader" style=3D"font-family:Roboto,Arial,sans-serif;font-size:14px=
+;letter-spacing:0.2px;color:rgb(32,33,36);border-bottom:none;display:table-r=
+ow;background-color:transparent">Esta pregunta no me queda clara, =C2=BFde acuer=
+do con que los incluye?, o de acuerdo con que los usa correctamente?, o de a=
+cuerdo con que deber=C3=ADa incluirlos? Deber=C3=ADa ser m=C3=A1s especifico como: En qu=
+e grado la herramienta permite incluir / especificar/ aprovechar / analizar/=
+etc los siguientes artefactos: Totalmente, parcialmente, ligeramente, No los=
+ incluye/especifica&nbsp;/&nbsp;etc<br class=3D"gmail-Apple-interchange-newlin=
+e"></div><div class=3D"gmail-freebirdFormviewerComponentsQuestionGridRow gmail=
+-freebirdFormviewerComponentsQuestionGridColumnHeader" style=3D"font-family:Ro=
+boto,Arial,sans-serif;font-size:14px;letter-spacing:0.2px;color:rgb(32,33,36=
+);border-bottom:none;display:table-row;background-color:transparent"><br></d=
+iv><div class=3D"gmail-freebirdFormviewerComponentsQuestionGridRow gmail-freeb=
+irdFormviewerComponentsQuestionGridColumnHeader" style=3D"font-family:Roboto,A=
+rial,sans-serif;font-size:14px;letter-spacing:0.2px;border-bottom:none;displ=
+ay:table-row;background-color:transparent"><span style=3D"font-family:&quot;Go=
+ogle Sans&quot;,Roboto,Helvetica,Arial,sans-serif;font-size:16px;letter-spac=
+ing:0.1px"><font color=3D"#202124">25- [Completitud] =C2=BFQu=C3=A9 otros artefactos <=
+/font><font color=3D"#ff0000">incluir=C3=ADa</font><font color=3D"#202124"> para apo=
+yar la identificaci=C3=B3n de la ATD? Ac=C3=A1 importante en la intro del taller, ex=
+plicar que se refiere como artefactos y que entra en ese conjunto.&nbsp;</fo=
+nt></span><br></div><div class=3D"gmail-freebirdFormviewerComponentsQuestionGr=
+idRow gmail-freebirdFormviewerComponentsQuestionGridColumnHeader" style=3D"fon=
+t-family:Roboto,Arial,sans-serif;font-size:14px;letter-spacing:0.2px;border-=
+bottom:none;display:table-row;background-color:transparent"><span style=3D"fon=
+t-family:&quot;Google Sans&quot;,Roboto,Helvetica,Arial,sans-serif;font-size=
+:16px;letter-spacing:0.1px"><font color=3D"#202124"><br></font></span></div><d=
+iv class=3D"gmail-freebirdFormviewerComponentsQuestionGridRow gmail-freebirdFo=
+rmviewerComponentsQuestionGridColumnHeader" style=3D"border-bottom:none;displa=
+y:table-row"><div class=3D"gmail-freebirdFormviewerComponentsQuestionBaseHeade=
+r" style=3D"display:flex;margin-bottom:16px"><div class=3D"gmail-freebirdFormvie=
+werComponentsQuestionBaseTitleDescContainer" style=3D"box-sizing:border-box;di=
+splay:flex;max-width:100%;min-width:0%"><div id=3D"gmail-i139" class=3D"gmail-fr=
+eebirdFormviewerComponentsQuestionBaseTitle exportItemTitle gmail-freebirdCu=
+stomFont" style=3D"font-family:&quot;Google Sans&quot;,Roboto,Helvetica,Arial,=
+sans-serif;font-size:16px;letter-spacing:0.1px;background-color:transparent;=
+line-height:24px;color:rgb(32,33,36);width:590px;word-break:break-word">27- =
+[Visualizaci=C3=B3n] =C2=BFLa herramienta permite visualizar adecuadamente los model=
+os cargados?<span class=3D"gmail-freebirdFormviewerComponentsQuestionBaseRequi=
+redAsterisk" id=3D"gmail-i142" style=3D"color:rgb(217,48,37)">&nbsp;</span><span=
+ style=3D"font-family:Arial,Helvetica,sans-serif;font-size:small;letter-spacin=
+g:normal;color:rgb(34,34,34)">-&gt; De nuevo recomendar=C3=ADa escala likert de =
+4 o 5, para tener el grado, no solo un si o no. Por otro lado, no veo el val=
+or de &quot;visualizar adecuadamente&quot;, es decir, que quiero lograr con =
+la visualizaci=C3=B3n, como entender X, Y, o comparar X y Y, o explorar Z, porqu=
+e la visualizaci=C3=B3n por si sola sonar=C3=ADa como algo est=C3=A9tico, no de valor re=
+al para el usuario.</span></div><div id=3D"gmail-i139" class=3D"gmail-freebirdFo=
+rmviewerComponentsQuestionBaseTitle exportItemTitle gmail-freebirdCustomFont=
+" style=3D"font-family:&quot;Google Sans&quot;,Roboto,Helvetica,Arial,sans-ser=
+if;font-size:16px;letter-spacing:0.1px;background-color:transparent;line-hei=
+ght:24px;color:rgb(32,33,36);width:590px;word-break:break-word"><br></div><d=
+iv id=3D"gmail-i139" class=3D"gmail-freebirdFormviewerComponentsQuestionBaseTitl=
+e exportItemTitle gmail-freebirdCustomFont" style=3D"background-color:transpar=
+ent;line-height:24px;width:590px;word-break:break-word">Pregunta 27 est=C3=A1 re=
+petida 3 veces, pero estas si me suenan mejor desde el punto de vista de vis=
+ualizaci=C3=B3n con un prop=C3=B3sito.</div><div id=3D"gmail-i139" class=3D"gmail-freebi=
+rdFormviewerComponentsQuestionBaseTitle exportItemTitle gmail-freebirdCustom=
+Font" style=3D"background-color:transparent;line-height:24px;width:590px;word-=
+break:break-word"><br></div><div id=3D"gmail-i139" class=3D"gmail-freebirdFormvi=
+ewerComponentsQuestionBaseTitle exportItemTitle gmail-freebirdCustomFont" st=
+yle=3D"background-color:transparent;line-height:24px;width:590px;word-break:br=
+eak-word"><span style=3D"color:rgb(32,33,36);font-family:&quot;Google Sans&quo=
+t;,Roboto,Helvetica,Arial,sans-serif;font-size:16px;letter-spacing:0.1px">28=
+- [Preferencia] =C2=BFCon qu=C3=A9 facilidad podr=C3=ADa incluirse esta herramienta en s=
+u organizaci=C3=B3n o entorno de trabajo?</span><span class=3D"gmail-freebirdFormv=
+iewerComponentsQuestionBaseRequiredAsterisk" id=3D"gmail-i172" style=3D"color:rg=
+b(217,48,37);font-family:&quot;Google Sans&quot;,Roboto,Helvetica,Arial,sans=
+-serif;font-size:16px;letter-spacing:0.1px">&nbsp;</span><span class=3D"gmail-=
+freebirdFormviewerComponentsQuestionBaseRequiredAsterisk" style=3D"font-family=
+:&quot;Google Sans&quot;,Roboto,Helvetica,Arial,sans-serif;font-size:16px;le=
+tter-spacing:0.1px"><font color=3D"#000000">-&gt; Creo que ac=C3=A1 y en las sigui=
+entes. el t=C3=A9rmino no es &quot;preferencia&quot;, sino aplicabilidad o imple=
+mentaci=C3=B3n, o algo as=C3=AD.</font></span><br></div><div id=3D"gmail-i139" class=3D"=
+gmail-freebirdFormviewerComponentsQuestionBaseTitle exportItemTitle gmail-fr=
+eebirdCustomFont" style=3D"background-color:transparent;line-height:24px;width=
+:590px;word-break:break-word"><span class=3D"gmail-freebirdFormviewerComponent=
+sQuestionBaseRequiredAsterisk" style=3D"font-family:&quot;Google Sans&quot;,Ro=
+boto,Helvetica,Arial,sans-serif;font-size:16px;letter-spacing:0.1px"><font c=
+olor=3D"#000000"><br></font></span></div><div id=3D"gmail-i139" class=3D"gmail-fre=
+ebirdFormviewerComponentsQuestionBaseTitle exportItemTitle gmail-freebirdCus=
+tomFont" style=3D"background-color:transparent;line-height:24px;width:590px;wo=
+rd-break:break-word"><span class=3D"gmail-freebirdFormviewerComponentsQuestion=
+BaseRequiredAsterisk" style=3D"font-family:&quot;Google Sans&quot;,Roboto,Helv=
+etica,Arial,sans-serif;font-size:16px;letter-spacing:0.1px"><span style=3D"col=
+or:rgb(32,33,36);letter-spacing:0.1px">30- [Conclusiones] =C2=BFQu=C3=A9 beneficios =
+o usos adicionales considera que se pueden obtener con esta herramienta-&gt;=
+ Est=C3=A1 obligator=C3=ADa, =C2=BFy sino no hay beneficios adicionales? Poner N/A o dej=
+arla opcional</span><font color=3D"#000000"><br></font></span></div><div id=3D"g=
+mail-i139" class=3D"gmail-freebirdFormviewerComponentsQuestionBaseTitle export=
+ItemTitle gmail-freebirdCustomFont" style=3D"background-color:transparent;line=
+-height:24px;width:590px;word-break:break-word"><span class=3D"gmail-freebirdF=
+ormviewerComponentsQuestionBaseRequiredAsterisk" style=3D"font-family:&quot;Go=
+ogle Sans&quot;,Roboto,Helvetica,Arial,sans-serif;font-size:16px;letter-spac=
+ing:0.1px"><span style=3D"color:rgb(32,33,36);letter-spacing:0.1px"><br></span=
+></span></div><div id=3D"gmail-i139" class=3D"gmail-freebirdFormviewerComponents=
+QuestionBaseTitle exportItemTitle gmail-freebirdCustomFont" style=3D"line-heig=
+ht:24px;width:590px;word-break:break-word"><span class=3D"gmail-freebirdFormvi=
+ewerComponentsQuestionBaseRequiredAsterisk" style=3D"background-color:transpar=
+ent;font-family:&quot;Google Sans&quot;,Roboto,Helvetica,Arial,sans-serif;fo=
+nt-size:16px;letter-spacing:0.1px"><span style=3D"color:rgb(32,33,36);letter-s=
+pacing:0.1px">=C2=BFTiene comentarios u observaciones adicionales?</span><span c=
+lass=3D"gmail-freebirdFormviewerComponentsQuestionBaseRequiredAsterisk" id=3D"gm=
+ail-i202" style=3D"color:rgb(217,48,37);letter-spacing:0.1px">&nbsp;</span></s=
+pan>-&gt; No tiene n=C3=BAmero de pregunta, solo por si falt=C3=B3, y est=C3=A1 como obl=
+igatoria a pesar de ser &quot;adicionales&quot;</div>qie entiendo podr=C3=ADa no=
+ haberlos.</div></div><div class=3D"gmail-freebirdFormviewerComponentsQuestion=
+RadioRoot" style=3D"font-family:Roboto,Arial,sans-serif;font-size:14px;letter-=
+spacing:0.2px;background-color:transparent"><div class=3D"gmail-appsMaterialWi=
+zToggleRadiogroupGroupContainer exportGroupContainer gmail-freebirdFormviewe=
+rViewItemsRadiogroupRadioGroup" style=3D"padding:0px"><span class=3D"gmail-appsM=
+aterialWizToggleRadiogroupGroupContent exportGroupContent" style=3D"display:fl=
+ex"><div class=3D"gmail-freebirdFormviewerComponentsQuestionRadioChoicesContai=
+ner" style=3D"display:flex;width:590px"><div class=3D"gmail-freebirdFormviewerCo=
+mponentsQuestionRadioChoice gmail-freebirdFormviewerComponentsQuestionRadioO=
+ptionContainer" style=3D"display:flex;width:582px;min-height:24px;padding:0.5e=
+m 0.5em 0.5em 0px"><label for=3D"i143" class=3D"gmail-docssharedWizToggleLabeled=
+Container gmail-freebirdFormviewerComponentsQuestionRadioRadio" style=3D"displ=
+ay:flex;width:582px"><div class=3D"gmail-docssharedWizToggleLabeledLabelWrappe=
+r exportLabelWrapper" style=3D"display:flex;min-width:0%"><div class=3D"gmail-do=
+cssharedWizToggleLabeledContent" style=3D"display:flex;margin-left:0.75em;min-=
+width:0%;color:rgb(32,33,36);font-family:Roboto,RobotoDraft,Helvetica,Arial,=
+sans-serif;font-size:medium;letter-spacing:normal"><div class=3D"gmail-docssha=
+redWizToggleLabeledPrimaryText" style=3D"display:flex;min-width:0%"><br></div>=
+</div></div></label></div></div></span></div></div></div><div class=3D"gmail-f=
+reebirdFormviewerComponentsQuestionGridRow gmail-freebirdFormviewerComponent=
+sQuestionGridColumnHeader" style=3D"font-family:Roboto,Arial,sans-serif;font-s=
+ize:14px;letter-spacing:0.2px;border-bottom:none;display:table-row;backgroun=
+d-color:transparent"></div></div></div></div></div></div></div></div></div><=
+/div></body></html>
+
+--B_3698140006_1665139566--
+

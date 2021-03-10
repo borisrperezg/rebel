@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated rebel_github -->
+      <package
+            uri="http://uniandes/rebel_github"
+            class="rebel_github.Rebel_githubPackage"
+            genModel="model/rebel_github.genmodel"/>
+   </extension>
+
+</plugin>

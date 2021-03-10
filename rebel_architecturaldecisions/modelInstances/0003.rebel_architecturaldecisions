@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rebel_architecturaldecisions:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rebel_architecturaldecisions="http://uniandes/rebel_architecturaldecisions" name="CHIPER">
+  <decisions number="0003" title="Use elastic search for exposing search AIP" date="2020-02-22T15:30:54.898-0500" description="Chosen option: &quot;Use ElasticSearch tor data indexing&quot;&#xD;&#xA;&#xD;" phase="Sprint 2">
+    <alternatives description="ElasticSearch"/>
+    <alternatives description="StaticSearch"/>
+    <motivatedBy description="There is a need of having an AM .posed which can be used. search enterprise wide common data model."/>
+    <motivatedBy description="The data currently resid."/>
+    <motivatedBy description="In a IRDOms database, a is difficult to expose micro-services directly quer,ng out of ROOMS databases since the applicahon runs oM the same ennronrnent There are options like ElasticSearch or Sok where data can be replicated."/>
+    <deciders name="Dar&#xed;o Correal"/>
+  </decisions>
+</rebel_architecturaldecisions:Project>

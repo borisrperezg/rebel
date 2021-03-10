@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated rebel_chatlogs -->
+      <package
+            uri="http://uniandes/rebel_chatlogs"
+            class="rebel_chatlogs.Rebel_chatlogsPackage"
+            genModel="model/rebel_chatlogs.genmodel"/>
+   </extension>
+
+</plugin>

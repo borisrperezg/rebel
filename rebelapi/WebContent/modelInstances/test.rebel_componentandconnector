@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII" standalone="no"?><rebel_componentandconnector:Project xmlns:rebel_componentandconnector="http://uniandes/rebel_componentandconnector" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="draw" xmi:version="2.0">
+  <functionalviews name="cnc1">
+    <components height="50" id="4" name="DataAccess" posX="0" posY="270" width="156">
+      <ports id="4_4_5" name="4_4_5" type="PROVIDED"/>
+      <ports id="4_4_6" name="4_4_6"/>
+    </components>
+    <components height="50" id="5" name="MaterialLoan" posX="0" posY="270" width="156">
+      <ports id="5_4_5" name="5_4_5"/>
+    </components>
+    <components height="50" id="6" name="MaterialReturn" posX="0" posY="370" width="156">
+      <ports id="6_4_6" name="6_4_6" type="PROVIDED"/>
+    </components>
+    <connectors buffering="UNBUFFERED" id="2" name="con2" protocol="" xsi:type="rebel_componentandconnector:ProcedureCall">
+      <roles port="//@functionalviews.0/@components.0/@ports.0" type="IN"/>
+      <roles port="//@functionalviews.0/@components.1/@ports.0"/>
+    </connectors>
+    <connectors id="3" name="con1" protocol="" sync="SYNC" xsi:type="rebel_componentandconnector:ProcedureCall">
+      <roles port="//@functionalviews.0/@components.0/@ports.1"/>
+      <roles port="//@functionalviews.0/@components.2/@ports.0" type="IN"/>
+    </connectors>
+  </functionalviews>
+</rebel_componentandconnector:Project>

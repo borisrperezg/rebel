@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="rebel_architecturaldecisions" nsURI="http://uniandes/rebel_architecturaldecisions"
+    nsPrefix="rebel_architecturaldecisions">
+  <eClassifiers xsi:type="ecore:EClass" name="Project">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responsibles" upperBound="-1"
+        eType="#//Person" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="decisions" upperBound="-1"
+        eType="#//Decision" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelingDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Decision">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//StateType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" upperBound="-1"
+        eType="#//Alternative" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assumptions" upperBound="-1"
+        eType="#//Assumption" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consequences" upperBound="-1"
+        eType="#//Consequence" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="motivatedBy" upperBound="-1"
+        eType="#//Motivator" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supercedes" eType="#//Decision"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deciders" lowerBound="1"
+        upperBound="-1" eType="#//Person" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="phase" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userStories" upperBound="-1"
+        eType="#//UserStory" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assumption">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Alternative">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Consequence">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ConsequenceType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Motivator">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UserStory">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ModelType">
+    <eLiterals name="COMPONENT"/>
+    <eLiterals name="DEPLOYMENT" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StateType">
+    <eLiterals name="ACCEPTED"/>
+    <eLiterals name="PROPOSED" value="1"/>
+    <eLiterals name="DEPRECATED" value="2"/>
+    <eLiterals name="SUPERCEDES" value="3" literal="SUPERCEDES"/>
+    <eLiterals name="REJECTED" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ConsequenceType">
+    <eLiterals name="POSITIVE"/>
+    <eLiterals name="NEGATIVE" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>

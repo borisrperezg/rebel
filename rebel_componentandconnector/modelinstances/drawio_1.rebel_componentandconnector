@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rebel_componentandconnector:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rebel_componentandconnector="http://uniandes/rebel_componentandconnector" name="NIDOO">
+  <functionalviews name="drawio_1">
+    <components name="DataAccess" id="4" posX="250" posY="270" width="156" height="50">
+      <ports name="4_4_5" type="PROVIDED" id="4_4_5"/>
+      <ports name="4_4_6" id="4_4_6"/>
+    </components>
+    <components name="MaterialLoan" id="5" posX="590" posY="270" width="156" height="50">
+      <ports name="5_4_5" id="5_4_5"/>
+    </components>
+    <components name="MaterialReturn" id="6" posX="590" posY="370" width="156" height="50">
+      <ports name="6_4_6" type="PROVIDED" id="6_4_6"/>
+    </components>
+    <connectors xsi:type="rebel_componentandconnector:ProcedureCall" name="con2" buffering="UNBUFFERED" protocol="" id="2" posX="" posY="">
+      <roles type="IN" port="//@functionalviews.0/@components.0/@ports.0"/>
+      <roles port="//@functionalviews.0/@components.1/@ports.0"/>
+    </connectors>
+    <connectors xsi:type="rebel_componentandconnector:ProcedureCall" name="con1" sync="SYNC" protocol="" id="3" posX="" posY="">
+      <roles port="//@functionalviews.0/@components.0/@ports.1"/>
+      <roles type="IN" port="//@functionalviews.0/@components.2/@ports.0"/>
+    </connectors>
+  </functionalviews>
+</rebel_componentandconnector:Project>

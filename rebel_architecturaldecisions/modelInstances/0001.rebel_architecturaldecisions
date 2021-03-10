@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rebel_architecturaldecisions:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rebel_architecturaldecisions="http://uniandes/rebel_architecturaldecisions" name="CHIPER">
+  <decisions number="0001" title="Implement load balancer" date="2020-02-19T21:38:54.287-0500" description="Chosen option: &quot;Implement a load balancing&quot;, because we already have several servers and the idea is to improve the way requests are handle.&#xD;&#xA;&#xD;" phase="Sprint 1">
+    <alternatives description="Implement a load balancing"/>
+    <alternatives description="Cloud service to scale by demand"/>
+    <assumptions description="There is a list of servers available"/>
+    <assumptions description="Each server can answer at least 1000 request per second for 2 minutes"/>
+    <consequences description="control of the servers"/>
+    <consequences description="lower expenses"/>
+    <consequences description="time configuring the load balancer" type="NEGATIVE"/>
+    <motivatedBy description="It is expected a big increase in the number of request. The company is increasing its market participation."/>
+    <motivatedBy description="It is expected to increase 200% in the number of request."/>
+    <motivatedBy description="Time of response should be kept under 1 second."/>
+    <deciders name="Boris Perez"/>
+    <deciders name="Camilo Castellanos"/>
+    <userStories id="US001"/>
+  </decisions>
+</rebel_architecturaldecisions:Project>

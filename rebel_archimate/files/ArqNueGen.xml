@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://www.opengroup.org/xsd/archimate/3.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Diagram.xsd" identifier="id-64abfb4f07bc4c47a4515ae51e695063">
+  <name xml:lang="en">ArqNueGen</name>
+  <elements>
+    <element identifier="id-422adffe172f429c9ca75592e0a3a064" xsi:type="Resource">
+      <name xml:lang="en">Resource</name>
+    </element>
+    <element identifier="id-2b59039cdcb241928752def23e632000" xsi:type="Capability">
+      <name xml:lang="en">Capability</name>
+    </element>
+    <element identifier="id-d42e68e54831426e88b3555674610059" xsi:type="BusinessService">
+      <name xml:lang="en">Service B</name>
+    </element>
+    <element identifier="id-d13271ca71024af7a67ca4fa8dfb47be" xsi:type="BusinessService">
+      <name xml:lang="en">Service A</name>
+    </element>
+    <element identifier="id-184f452719af46fe9408e51f4c6bea96" xsi:type="BusinessService">
+      <name xml:lang="en">Service C</name>
+    </element>
+    <element identifier="id-ba880a74729f4132987c64759038bf5d" xsi:type="ApplicationComponent">
+      <name xml:lang="en">CRM system</name>
+    </element>
+    <element identifier="id-71a0cf6de81b4052a40a085811da033c" xsi:type="ApplicationService">
+      <name xml:lang="en">Customer Data Management</name>
+    </element>
+    <element identifier="id-259288ffce514298bb9008d13673e411" xsi:type="Device">
+      <name xml:lang="en">Personal Device</name>
+    </element>
+    <element identifier="id-a1afc0c3127a40bd8f375f914e09074a" xsi:type="Assessment">
+      <name xml:lang="en">Assessment</name>
+    </element>
+  </elements>
+  <relationships>
+    <relationship identifier="id-3b55d4f8846f4b389824fedb47deee21" source="id-ba880a74729f4132987c64759038bf5d" target="id-71a0cf6de81b4052a40a085811da033c" xsi:type="Realization" />
+    <relationship identifier="id-94f2d0bf0de54d0ea26a9b991fa60153" source="id-71a0cf6de81b4052a40a085811da033c" target="id-d42e68e54831426e88b3555674610059" xsi:type="Realization" />
+    <relationship identifier="id-7cba9eba282645ec90cc96bcf73f1ee0" source="id-71a0cf6de81b4052a40a085811da033c" target="id-d13271ca71024af7a67ca4fa8dfb47be" xsi:type="Realization" />
+    <relationship identifier="id-d7a0846d43c240ecb87fa2c4289833e6" source="id-259288ffce514298bb9008d13673e411" target="id-71a0cf6de81b4052a40a085811da033c" xsi:type="Realization" />
+    <relationship identifier="id-90cf8dc5045e49f08df5fd91e773ca9f" source="id-259288ffce514298bb9008d13673e411" target="id-a1afc0c3127a40bd8f375f914e09074a" xsi:type="Influence" />
+    <relationship identifier="id-8eb4c972c2c44edfb15d44b9b907888f" source="id-184f452719af46fe9408e51f4c6bea96" target="id-d42e68e54831426e88b3555674610059" xsi:type="Composition" />
+    <relationship identifier="id-b196022591264c51b15f734f0f23c37d" source="id-184f452719af46fe9408e51f4c6bea96" target="id-d42e68e54831426e88b3555674610059" xsi:type="Aggregation" />
+  </relationships>
+  <organizations>
+    <item>
+      <label xml:lang="en">Strategy</label>
+      <item identifierRef="id-422adffe172f429c9ca75592e0a3a064" />
+      <item identifierRef="id-2b59039cdcb241928752def23e632000" />
+    </item>
+    <item>
+      <label xml:lang="en">Business</label>
+      <item identifierRef="id-d42e68e54831426e88b3555674610059" />
+      <item identifierRef="id-d13271ca71024af7a67ca4fa8dfb47be" />
+      <item identifierRef="id-184f452719af46fe9408e51f4c6bea96" />
+    </item>
+    <item>
+      <label xml:lang="en">Application</label>
+      <item identifierRef="id-ba880a74729f4132987c64759038bf5d" />
+      <item identifierRef="id-71a0cf6de81b4052a40a085811da033c" />
+    </item>
+    <item>
+      <label xml:lang="en">Technology &amp; Physical</label>
+      <item identifierRef="id-259288ffce514298bb9008d13673e411" />
+    </item>
+    <item>
+      <label xml:lang="en">Motivation</label>
+      <item identifierRef="id-a1afc0c3127a40bd8f375f914e09074a" />
+    </item>
+    <item>
+      <label xml:lang="en">Relations</label>
+      <item identifierRef="id-3b55d4f8846f4b389824fedb47deee21" />
+      <item identifierRef="id-94f2d0bf0de54d0ea26a9b991fa60153" />
+      <item identifierRef="id-7cba9eba282645ec90cc96bcf73f1ee0" />
+      <item identifierRef="id-d7a0846d43c240ecb87fa2c4289833e6" />
+      <item identifierRef="id-90cf8dc5045e49f08df5fd91e773ca9f" />
+      <item identifierRef="id-8eb4c972c2c44edfb15d44b9b907888f" />
+      <item identifierRef="id-b196022591264c51b15f734f0f23c37d" />
+    </item>
+    <item>
+      <label xml:lang="en">Views</label>
+      <item identifierRef="id-ed272108d20f4965ab6cdcea0e6fa823" />
+    </item>
+  </organizations>
+  <views>
+    <diagrams>
+      <view identifier="id-ed272108d20f4965ab6cdcea0e6fa823" xsi:type="Diagram">
+        <name xml:lang="en">Layered view</name>
+        <node identifier="id-7ecff211ab2147d79ed311685598ea9a" elementRef="id-71a0cf6de81b4052a40a085811da033c" xsi:type="Element" x="503" y="204" w="145" h="49">
+          <style>
+            <fillColor r="181" g="255" b="255" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Lucida Grande" size="12">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <node identifier="id-2166273da7244444abead62776d65f4b" elementRef="id-d42e68e54831426e88b3555674610059" xsi:type="Element" x="516" y="81" w="120" h="55">
+          <style>
+            <fillColor r="255" g="255" b="181" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Lucida Grande" size="12">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <node identifier="id-cc92b88ec3db4e1cbe4767e9bd5cd143" elementRef="id-d13271ca71024af7a67ca4fa8dfb47be" xsi:type="Element" x="684" y="81" w="120" h="55">
+          <style>
+            <fillColor r="255" g="255" b="181" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Lucida Grande" size="12">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <node identifier="id-05c13a392e074233bdea6fa6819598f9" elementRef="id-259288ffce514298bb9008d13673e411" xsi:type="Element" x="516" y="300" w="120" h="55">
+          <style>
+            <fillColor r="201" g="231" b="183" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Lucida Grande" size="12">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <node identifier="id-2d72b721e5f0497dbe91393868c5d03f" elementRef="id-a1afc0c3127a40bd8f375f914e09074a" xsi:type="Element" x="343" y="221" w="120" h="55">
+          <style>
+            <fillColor r="204" g="204" b="255" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Lucida Grande" size="12">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <node identifier="id-e3e734e6fc4d43d898109c0fb8e839eb" elementRef="id-184f452719af46fe9408e51f4c6bea96" xsi:type="Element" x="343" y="81" w="120" h="55">
+          <style>
+            <fillColor r="255" g="255" b="181" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Lucida Grande" size="12">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <connection identifier="id-391dd511381d4c1ebce2c5151f6814e8" relationshipRef="id-94f2d0bf0de54d0ea26a9b991fa60153" xsi:type="Relationship" source="id-7ecff211ab2147d79ed311685598ea9a" target="id-2166273da7244444abead62776d65f4b">
+          <style>
+            <lineColor r="0" g="0" b="0" />
+            <font name="Lucida Grande" size="12">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </connection>
+        <connection identifier="id-97472b8626b74bb78bce2ffaae9fd6bd" relationshipRef="id-7cba9eba282645ec90cc96bcf73f1ee0" xsi:type="Relationship" source="id-7ecff211ab2147d79ed311685598ea9a" target="id-cc92b88ec3db4e1cbe4767e9bd5cd143">
+          <style>
+            <lineColor r="0" g="0" b="0" />
+            <font name="Lucida Grande" size="12">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+          <bendpoint x="720" y="228" />
+        </connection>
+        <connection identifier="id-e78918f6a5dc4c3b851afa6faa7bcc6b" relationshipRef="id-d7a0846d43c240ecb87fa2c4289833e6" xsi:type="Relationship" source="id-05c13a392e074233bdea6fa6819598f9" target="id-7ecff211ab2147d79ed311685598ea9a">
+          <style>
+            <lineColor r="0" g="0" b="0" />
+            <font name="Lucida Grande" size="12">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </connection>
+        <connection identifier="id-ce0bf93abda34f43a982d9e36c74fb67" relationshipRef="id-90cf8dc5045e49f08df5fd91e773ca9f" xsi:type="Relationship" source="id-05c13a392e074233bdea6fa6819598f9" target="id-2d72b721e5f0497dbe91393868c5d03f">
+          <style>
+            <lineColor r="0" g="0" b="0" />
+            <font name="Lucida Grande" size="12">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+          <bendpoint x="408" y="312" />
+        </connection>
+        <connection identifier="id-05952001549f47ea9c24a3fb165cd801" relationshipRef="id-b196022591264c51b15f734f0f23c37d" xsi:type="Relationship" source="id-e3e734e6fc4d43d898109c0fb8e839eb" target="id-2166273da7244444abead62776d65f4b">
+          <style>
+            <lineColor r="0" g="0" b="0" />
+            <font name="Lucida Grande" size="12">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </connection>
+      </view>
+    </diagrams>
+  </views>
+</model>

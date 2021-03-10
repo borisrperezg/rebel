@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rebel_architecturaldecisions:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rebel_architecturaldecisions="http://uniandes/rebel_architecturaldecisions" name="CHIPER">
+  <decisions number="0002" title="Use no" date="2020-02-21T14:40:54.846-0500" phase="Sprint 2">
+    <assumptions description="No consistency required"/>
+    <consequences description="easy to record"/>
+    <consequences description="easy to read"/>
+    <consequences description="fast"/>
+    <consequences description="eventual or none consistency" type="NEGATIVE"/>
+    <consequences/>
+    <motivatedBy description="It is expected to store a lot of unstructured data, with few relations. Also, it is required a short time of retrieve of data. Consistency is not a priority."/>
+    <deciders name="Dario Correal"/>
+    <deciders name="Boris Perez"/>
+    <userStories id="US003"/>
+    <userStories id="US002"/>
+  </decisions>
+</rebel_architecturaldecisions:Project>

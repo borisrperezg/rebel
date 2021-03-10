@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rebel_core:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rebel_core="http://www.example.org/rebel_core" name="REBEL">
+  <functionalviews name="First BoI">
+    <components name="PSE" id="jxPyhxedDIrEgVc5iX8Y-5" posX="590" posY="310" width="100" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-5_jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-5" type="PROVIDED" id="jxPyhxedDIrEgVc5iX8Y-5_jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-5"/>
+    </components>
+    <components name="MaterialLoan" id="jxPyhxedDIrEgVc5iX8Y-2" posX="340" posY="180" width="140" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1" id="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1"/>
+      <ports name="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-7" id="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-7"/>
+    </components>
+  </functionalviews>
+</rebel_core:Project>

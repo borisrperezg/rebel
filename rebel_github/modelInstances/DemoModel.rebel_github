@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rebel_github:Repository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rebel_github="http://uniandes/rebel_github" name="Demo">
+  <members name="borisperezg@gmail.com" email="borisperezg" messages="//@messages.0"/>
+  <members name="borisperezg@gmail.com" email="borisperezg" messages="//@messages.1"/>
+  <members name="borisperezg@gmail.com" email="borisperezg" messages="//@messages.2"/>
+  <messages subject="Improve codification of the models" scope="models" body="New models were included and its code was generated." id="7aa32a74edba59f1c295a41e95f5deab0d1753c8" person="//@members.0"/>
+  <messages subject="Improve of models and codification of a client class" scope="models" body="" id="b6e0a1749da95238af5be0081074ce123bf507bd" person="//@members.1"/>
+  <messages subject="first commit" scope="models" body="null" id="6d77c0a78b2a4b8386fbaeaaeaf28fcf89ec8b2c" person="//@members.2"/>
+</rebel_github:Repository>

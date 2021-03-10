@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rebel_componentandconnector:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rebel_componentandconnector="http://uniandes/rebel_componentandconnector" name="REBEL">
+  <functionalviews name="BibliotecaV1.xml" date="2020-04-25T00:00:00.000-0500">
+    <components name="MaterialReturn" id="jxPyhxedDIrEgVc5iX8Y-1" posX="330" posY="310" width="150" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1" type="PROVIDED" id="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1"/>
+    </components>
+    <components name="MaterialLoan" id="jxPyhxedDIrEgVc5iX8Y-2" posX="340" posY="180" width="130" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1" id="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1"/>
+    </components>
+    <connectors xsi:type="rebel_componentandconnector:ProcedureCall" name="connLtoR" sync="SYNC" protocol="" id="jxPyhxedDIrEgVc5iX8Y-3" posX="" posY="">
+      <roles port="//@functionalviews.0/@components.1/@ports.0"/>
+      <roles type="IN" port="//@functionalviews.0/@components.0/@ports.0"/>
+    </connectors>
+  </functionalviews>
+</rebel_componentandconnector:Project>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rebel_componentandconnector:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rebel_componentandconnector="http://uniandes/rebel_componentandconnector" name="REBEL">
+  <functionalviews name="BibliotecaV3.xml" date="2020-05-10T00:00:00.000-0500">
+    <components name="MaterialReturn" id="jxPyhxedDIrEgVc5iX8Y-1" posX="330" posY="310" width="150" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-5" id="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-5"/>
+      <ports name="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1" type="PROVIDED" id="jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1"/>
+    </components>
+    <components name="MaterialLoan" id="jxPyhxedDIrEgVc5iX8Y-2" posX="340" posY="180" width="130" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1" id="jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-2_jxPyhxedDIrEgVc5iX8Y-1"/>
+    </components>
+    <components name="PSE" id="jxPyhxedDIrEgVc5iX8Y-5" posX="590" posY="310" width="100" height="50">
+      <ports name="jxPyhxedDIrEgVc5iX8Y-5_jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-5" type="PROVIDED" id="jxPyhxedDIrEgVc5iX8Y-5_jxPyhxedDIrEgVc5iX8Y-1_jxPyhxedDIrEgVc5iX8Y-5"/>
+    </components>
+    <connectors xsi:type="rebel_componentandconnector:ProcedureCall" name="connRtoP" protocol="" id="jxPyhxedDIrEgVc5iX8Y-6" posX="" posY="">
+      <roles port="//@functionalviews.0/@components.0/@ports.0"/>
+      <roles type="IN" port="//@functionalviews.0/@components.2/@ports.0"/>
+    </connectors>
+    <connectors xsi:type="rebel_componentandconnector:Event" name="connLtoR" delivery="EXACTLY_ONE" protocol="" id="jxPyhxedDIrEgVc5iX8Y-3" posX="" posY="">
+      <roles port="//@functionalviews.0/@components.1/@ports.0"/>
+      <roles type="IN" port="//@functionalviews.0/@components.0/@ports.1"/>
+    </connectors>
+  </functionalviews>
+</rebel_componentandconnector:Project>

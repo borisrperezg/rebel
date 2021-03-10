@@ -1,0 +1,21 @@
+<mxGraphModel dx="786" dy="447" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="3utFMe_CyTTxKIfodFuy-1" value="BusinessService" style="html=1;outlineConnect=0;whiteSpace=wrap;fillColor=#ffff99;shape=mxgraph.archimate3.application;appType=serv;archiType=rounded;" vertex="1" parent="1">
+      <mxGeometry x="210" y="140" width="150" height="75" as="geometry" />
+    </mxCell>
+    <mxCell id="3utFMe_CyTTxKIfodFuy-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;endArrow=block;endFill=0;" edge="1" parent="1" source="3utFMe_CyTTxKIfodFuy-2" target="3utFMe_CyTTxKIfodFuy-1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="3utFMe_CyTTxKIfodFuy-2" value="ApplicationService" style="html=1;outlineConnect=0;whiteSpace=wrap;fillColor=#99ffff;shape=mxgraph.archimate3.application;appType=serv;archiType=rounded" vertex="1" parent="1">
+      <mxGeometry x="210" y="280" width="150" height="75" as="geometry" />
+    </mxCell>
+    <mxCell id="3utFMe_CyTTxKIfodFuy-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;endArrow=block;endFill=0;" edge="1" parent="1" source="3utFMe_CyTTxKIfodFuy-3" target="3utFMe_CyTTxKIfodFuy-2">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="3utFMe_CyTTxKIfodFuy-3" value="Devide" style="html=1;outlineConnect=0;whiteSpace=wrap;fillColor=#AFFFAF;shape=mxgraph.archimate3.tech;techType=device;" vertex="1" parent="1">
+      <mxGeometry x="240" y="420" width="250" height="140" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>

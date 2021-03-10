@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="rebel_archimate" nsURI="http://www.example.org/rebel_archimate"
+    nsPrefix="rebel_archimate">
+  <eClassifiers xsi:type="ecore:EClass" name="Project">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="view" upperBound="-1" eType="#//View"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelingDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="View">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relation" upperBound="-1"
+        eType="#//Relation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" upperBound="-1"
+        eType="#//Element" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="posX" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="posY" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ELEMENTTYPE"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="grouper" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sync" eType="#//SyncType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="delivery" eType="#//DeliveryModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notification" eType="#//NotificationModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="buffering" eType="#//Buffering"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="throughput" eType="#//Throughput"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Relation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//RELATIONTYPE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RELATIONTYPE">
+    <eLiterals name="NONE"/>
+    <eLiterals name="REALIZATION" value="1"/>
+    <eLiterals name="INFLUENCE" value="2"/>
+    <eLiterals name="AGGREGATION" value="3"/>
+    <eLiterals name="TRIGGERING" value="4" literal="TRIGGERING"/>
+    <eLiterals name="SERVING" value="5" literal="SERVING"/>
+    <eLiterals name="ACCESS" value="6" literal="ACCESS"/>
+    <eLiterals name="COMPOSITION" value="7" literal="COMPOSITION"/>
+    <eLiterals name="ASSOCIATION" value="8"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ELEMENTTYPE">
+    <eLiterals name="NONE"/>
+    <eLiterals name="BUSINESS_SERVICE" value="1" literal="BUSINESS_SERVICE"/>
+    <eLiterals name="APPLICATION_SERVICE" value="2"/>
+    <eLiterals name="DEVICE" value="3"/>
+    <eLiterals name="ASSESSMENT" value="4" literal="ASSESSMENT"/>
+    <eLiterals name="APPLICATION_COMPONENT" value="5"/>
+    <eLiterals name="BUSINESS_PROCESS" value="6"/>
+    <eLiterals name="APPLICATION_COLLABORATION" value="7" literal="APPLICATION_COLLABORATION"/>
+    <eLiterals name="DATAOBJECT" value="8" literal="DATAOBJECT"/>
+    <eLiterals name="MOTIVATION_STAKEHOLDER" value="9"/>
+    <eLiterals name="MOTIVATION_DRIVER" value="10"/>
+    <eLiterals name="MOTIVATION_GOAL" value="11"/>
+    <eLiterals name="MOTIVATION_OUTCOME" value="12"/>
+    <eLiterals name="MOTIVATION_REQUIREMENT" value="13" literal="MOTIVATION_REQUIREMENT"/>
+    <eLiterals name="BUSINESS_COLLABORATION" value="14"/>
+    <eLiterals name="APPLICATION_INTERFACE" value="15"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SyncType">
+    <eLiterals name="NONE"/>
+    <eLiterals name="SYNC" value="1"/>
+    <eLiterals name="ASYNC" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Buffering">
+    <eLiterals name="NONE" literal="NONE"/>
+    <eLiterals name="UNBUFFERED" value="1"/>
+    <eLiterals name="BUFFERED" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DeliveryModel">
+    <eLiterals name="NONE"/>
+    <eLiterals name="AT_LEAST_ONE" value="1"/>
+    <eLiterals name="AT_MOST_ONE" value="2"/>
+    <eLiterals name="EXACTLY_ONE" value="3"/>
+    <eLiterals name="BEST_EFFORT" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Throughput">
+    <eLiterals name="NONE"/>
+    <eLiterals name="HIGH_ORDER" value="1" literal="HIGH_ORDER"/>
+    <eLiterals name="ATOMIC" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="NotificationModel">
+    <eLiterals name="NONE"/>
+    <eLiterals name="PUBSUB" value="1"/>
+    <eLiterals name="QUEUED" value="2"/>
+    <eLiterals name="CENTRAL" value="3"/>
+    <eLiterals name="POLLED" value="4"/>
+  </eClassifiers>
+</ecore:EPackage>

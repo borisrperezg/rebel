@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="www.draw.io" modified="2020-09-12T22:21:21.788Z" agent="5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36" etag="dvKfLGEool1E90iOYIHu" version="13.6.5" type="device">
+  <diagram id="T5GPgBRMXHK-AeUYvBSJ" name="Page-1">
+    <mxGraphModel dx="764" dy="447" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="0qHZau69T8o0EWCNN1bu-1" value="App" style="html=1;outlineConnect=0;whiteSpace=wrap;fillColor=#99ffff;shape=mxgraph.archimate3.application;appType=serv;archiType=rounded" vertex="1" parent="1">
+          <mxGeometry x="150" y="250" width="150" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="0qHZau69T8o0EWCNN1bu-2" value="Bus" style="html=1;outlineConnect=0;whiteSpace=wrap;fillColor=#ffff99;shape=mxgraph.archimate3.application;appType=serv;archiType=rounded;" vertex="1" parent="1">
+          <mxGeometry x="150" y="90" width="150" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="0qHZau69T8o0EWCNN1bu-3" value="" style="edgeStyle=elbowEdgeStyle;html=1;endArrow=block;elbow=vertical;endFill=0;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="0qHZau69T8o0EWCNN1bu-1" target="0qHZau69T8o0EWCNN1bu-2">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="310" y="230" as="sourcePoint" />
+            <mxPoint x="470" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

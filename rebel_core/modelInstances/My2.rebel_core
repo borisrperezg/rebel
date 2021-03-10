@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rebel_core:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rebel_core="http://www.example.org/rebel_core" name="REBEL">
+  <blockofinterest name="First BoI">
+    <element name="MaterialLoan" posX="10" posY="10" id="asdadasdasdasda">
+      <outElement name="con1" id="asgfghfdadasdasdasda"/>
+    </element>
+    <element name="con1" type="CONNECTOR" posX="10" posY="100" id="asgfghfdadasdasdasda">
+      <inElement name="MaterialLoan" id="asdadasdasdasda"/>
+      <outElement name="Material" id="asdadwe234234asdasdasda"/>
+    </element>
+    <element name="Material" posX="200" posY="100" id="asdadwe234234asdasdasda">
+      <inElement name="con1" type="CONNECTOR"/>
+    </element>
+    <fact date="2019-03-20T00:00:00.000-0500" observations="Component created to handle operations related to library materials." element="//@blockofinterest.0/@element.2">
+      <architecturaldecision number="0004" title="Use Rust for performance">
+        <section description="There is a need of having an AM .posed which can be used. search enterprise wide common data model."/>
+      </architecturaldecision>
+      <commit id="7aa32a74edba59f1c295a41e95f5deab0d1753c8" subject="Improve codification of the models"/>
+      <email/>
+    </fact>
+    <fact date="2019-04-03T00:00:00.000-0500" action="UPDATE" observations="Component was changed because new requirements about how these elements need to be handle." element="//@blockofinterest.0/@element.2"/>
+    <fact date="2019-03-20T00:00:00.000-0500" observations="Connector created to set a relationship between components. This connector is of type ProcedureCall." element="//@blockofinterest.0/@element.1">
+      <architecturaldecision number="0003" title="Use elastic search for exposing search AIP">
+        <section description="eventual or none consistency"/>
+      </architecturaldecision>
+      <commit id="b6e0a1749da95238af5be0081074ce123bf507bd" subject="Improve of models and codification of a client class"/>
+    </fact>
+    <fact date="2019-04-03T00:00:00.000-0500" action="UPDATE" observations="Connector update due to improve its communication. Queue connector is now used." element="//@blockofinterest.0/@element.1"/>
+    <fact date="2019-03-29T00:00:00.000-0500" observations="Creation of component due to requirements" element="//@blockofinterest.0/@element.0"/>
+  </blockofinterest>
+</rebel_core:Project>
+

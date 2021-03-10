@@ -1,0 +1,19 @@
+commit 7aa32a74edba59f1c295a41e95f5deab0d1753c8
+Author: borisperezg <borisperezg@gmail.com>
+Date:   Tue Feb 18 19:16:49 2020 -0500
+
+    feat<models>: Improve codification of the models
+    
+    Se pretende hacer asignación de las citas.
+
+commit b6e0a1749da95238af5be0081074ce123bf507bd
+Author: borisperezg <borisperezg@gmail.com>
+Date:   Fri Feb 14 23:40:07 2020 -0500
+
+    feat<models>: Inclusión de cola Mecanico Outbound
+
+commit 6d77c0a78b2a4b8386fbaeaaeaf28fcf89ec8b2c
+Author: borisperezg <borisperezg@gmail.com>
+Date:   Thu Feb 13 23:02:24 2020 -0500
+
+    feat<models>: first commit

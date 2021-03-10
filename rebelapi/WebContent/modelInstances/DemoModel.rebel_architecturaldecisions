@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rebel_architecturaldecisions:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rebel_architecturaldecisions="http://uniandes/rebel_architecturaldecisions" name="Demo">
+  <decisions number="0001" title="Implement load balancer" date="2020-02-19T21:38:22.798-0500" description="Chosen option: &quot;Implement a load balancing&quot;, because we already have several servers and the idea is to improve the way requests are handle.&#xD;&#xA;&#xD;" phase="Sprint 1">
+    <alternatives description="Implement a load balancing"/>
+    <alternatives description="Cloud service to scale by demand"/>
+    <assumptions description="There is a list of servers available"/>
+    <assumptions description="Each server can answer at least 1000 request per second for 2 minutes"/>
+    <consequences description="control of the servers"/>
+    <consequences description="lower expenses"/>
+    <consequences description="time configuring the load balancer" type="NEGATIVE"/>
+    <motivatedBy description="It is expected a big increase in the number of request. The company is increasing its market participation."/>
+    <motivatedBy description="It is expected to increase 200% in the number of request."/>
+    <motivatedBy description="Time of response should be kept under 1 second."/>
+    <deciders name="Boris Perez"/>
+    <deciders name="Camilo Castellanos"/>
+    <userStories id="US001"/>
+  </decisions>
+  <decisions number="0002" title="Use no" date="2020-02-21T14:40:22.811-0500" phase="Sprint 2">
+    <assumptions description="No consistency required"/>
+    <consequences description="easy to record"/>
+    <consequences description="easy to read"/>
+    <consequences description="fast"/>
+    <consequences description="eventual or none consistency" type="NEGATIVE"/>
+    <consequences/>
+    <motivatedBy description="It is expected to store a lot of unstructured data, with few relations. Also, it is required a short time of retrieve of data. Consistency is not a priority."/>
+    <deciders name="Dario Correal"/>
+    <deciders name="Boris Perez"/>
+    <userStories id="US003"/>
+    <userStories id="US002"/>
+  </decisions>
+  <decisions number="0003" title="Use elastic search for exposing search AIP" date="2020-02-22T15:30:22.814-0500" description="Chosen option: &quot;Use ElasticSearch tor data indexing&quot;&#xD;&#xA;&#xD;" phase="Sprint 2">
+    <alternatives description="ElasticSearch"/>
+    <alternatives description="StaticSearch"/>
+    <motivatedBy description="There is a need of having an AM .posed which can be used. search enterprise wide common data model."/>
+    <motivatedBy description="The data currently resid."/>
+    <motivatedBy description="In a IRDOms database, a is difficult to expose micro-services directly quer,ng out of ROOMS databases since the applicahon runs oM the same ennronrnent There are options like ElasticSearch or Sok where data can be replicated."/>
+    <deciders name="Dar&#xed;o Correal"/>
+  </decisions>
+  <decisions number="0004" title="Use Rust for performance" state="SUPERCEDES" supercedes="//@decisions.1" date="2020-03-25T12:10:22.816-0500" description="Chosen option: &quot;use rust&quot;&#xD;&#xA;&#xD;" phase="Sprint 3">
+    <alternatives description="use rust"/>
+    <alternatives description="no use rust"/>
+    <motivatedBy description="The issue motivating this decision, and any context that influences or constrains the decision."/>
+    <deciders name="Boris Perez"/>
+    <userStories id="US003"/>
+    <userStories id="US002"/>
+  </decisions>
+</rebel_architecturaldecisions:Project>

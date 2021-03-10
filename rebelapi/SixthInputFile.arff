@@ -1,0 +1,33 @@
+@relation SixthInputFile
+
+@attribute date {120-10-22,120-10-27,120-11-4,120-11-9}
+@attribute source {'Asignación Cita','Asignación de Turno','Cuidado del Vehículo Collaboration','Localización Centros de Atención','Pre-asignación Cita','Post-asignacion Cita Service','Asignación Cita Service','Pre-asignación Cita Service','Asignación Service','Asignacion Cita Componente','Asignacion Mecanico Topic','Solicitud Mecanico Outbound Queue','Asignacion Mecanico Inbound Queue'}
+@attribute target {'Localización Centros de Atención','Selección de Mecánico','Asignación de Turno','Post-asignación Cita','Asignación Cita Service','Asignación Cita','Automation of Car Service Assigment','Cuidado del Vehículo Collaboration','Asignación Service','Solicitud Mecanico Outbound Queue','Asignacion Mecanico Topic'}
+@attribute facttype {ELEMENT,RELATION}
+@attribute elementtype {BUSINESS_PROCESS,BUSINESS_COLLABORATION,COMPOSITION,TRIGGERING,REALIZATION,SERVING,APPLICATION_COMPONENT,APPLICATION_COLLABORATION}
+@attribute action {CREATE}
+@attribute atd {n,y}
+
+@data
+120-10-22,'Asignación Cita',?,ELEMENT,BUSINESS_PROCESS,CREATE,n
+120-10-22,'Asignación de Turno',?,ELEMENT,BUSINESS_PROCESS,CREATE,n
+120-10-22,'Cuidado del Vehículo Collaboration',?,ELEMENT,BUSINESS_COLLABORATION,CREATE,y
+120-10-22,'Asignación Cita','Localización Centros de Atención',RELATION,COMPOSITION,CREATE,n
+120-10-22,'Asignación Cita','Selección de Mecánico',RELATION,COMPOSITION,CREATE,n
+120-10-22,'Asignación Cita','Asignación de Turno',RELATION,COMPOSITION,CREATE,n
+120-10-22,'Asignación Cita','Post-asignación Cita',RELATION,TRIGGERING,CREATE,y
+120-10-22,'Asignación Cita','Asignación Cita Service',RELATION,REALIZATION,CREATE,n
+120-10-22,'Localización Centros de Atención','Asignación de Turno',RELATION,TRIGGERING,CREATE,n
+120-10-22,'Asignación de Turno','Selección de Mecánico',RELATION,TRIGGERING,CREATE,n
+120-10-22,'Pre-asignación Cita','Asignación Cita',RELATION,TRIGGERING,CREATE,y
+120-10-22,'Cuidado del Vehículo Collaboration','Automation of Car Service Assigment',RELATION,REALIZATION,CREATE,n
+120-10-22,'Post-asignacion Cita Service','Cuidado del Vehículo Collaboration',RELATION,SERVING,CREATE,y
+120-10-22,'Asignación Cita Service','Cuidado del Vehículo Collaboration',RELATION,SERVING,CREATE,n
+120-10-22,'Pre-asignación Cita Service','Cuidado del Vehículo Collaboration',RELATION,SERVING,CREATE,n
+120-10-27,'Asignación Service','Asignación de Turno',RELATION,SERVING,CREATE,n
+120-11-4,'Asignacion Cita Componente',?,ELEMENT,APPLICATION_COMPONENT,CREATE,n
+120-11-4,'Asignacion Cita Componente','Asignación Service',RELATION,REALIZATION,CREATE,y
+120-11-9,'Asignacion Mecanico Topic',?,ELEMENT,APPLICATION_COLLABORATION,CREATE,n
+120-11-9,'Asignacion Cita Componente','Solicitud Mecanico Outbound Queue',RELATION,COMPOSITION,CREATE,n
+120-11-9,'Solicitud Mecanico Outbound Queue','Asignacion Mecanico Topic',RELATION,SERVING,CREATE,y
+120-11-9,'Asignacion Mecanico Inbound Queue','Asignacion Mecanico Topic',RELATION,SERVING,CREATE,y

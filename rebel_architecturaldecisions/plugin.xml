@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated rebel_architecturaldecisions -->
+      <package
+            uri="http://uniandes/rebel_architecturaldecisions"
+            class="rebel_architecturaldecisions.Rebel_architecturaldecisionsPackage"
+            genModel="model/rebel_architecturaldecisions.genmodel"/>
+   </extension>
+
+</plugin>

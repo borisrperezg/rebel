@@ -1,0 +1,19 @@
+id,Nombre,Biblioteca de figuras,ID de página,Contenido por,Grupo,Origen de línea,Destino de la línea,Flecha de origen,Flecha de destino,Área de texto 1
+1,Página,,,,,,,,,Página 1
+2,Componente,UML,1,,,,,,,Devolución Material
+3,Componente,UML,1,,,,,,,Préstamo Material
+4,Componente,UML,1,,,,,,,Acceso a datos
+5,Interfaz requerida,UML,1,,,,,,,
+6,Interfaz proporcionada,UML,1,,,,,,,
+7,Interfaz proporcionada,UML,1,,,,,,,
+8,Rectángulo,Figuras geométricas,1,,,,,,,Procedure Call
+9,Interfaz requerida,UML,1,,,,,,,
+10,Rectángulo,Figuras geométricas,1,,,,,,,Procedure Call
+11,Línea,,1,,,3,5,None,None,
+12,Línea,,1,,,6,4,None,None,
+13,Línea,,1,,,7,4,None,None,
+14,Línea,,1,,,5,8,None,None,
+15,Línea,,1,,,8,6,None,None,
+16,Línea,,1,,,2,9,None,None,
+17,Línea,,1,,,9,10,None,None,
+18,Línea,,1,,,7,10,None,None,

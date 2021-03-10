@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rebel_core:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rebel_core="http://www.example.org/rebel_core">
+  <blockofinterest>
+    <element name="MaterialLoan" posX="10" posY="10" id="asdadasdasdasda">
+      <outElement name="con1" id="asgfghfdadasdasdasda"/>
+    </element>
+    <element name="con1" type="CONNECTOR" posX="10" posY="100" id="asgfghfdadasdasdasda">
+      <fact date="2019-03-20T00:00:00.000-0500"  observations="Connector created to set a relationship between components. This connector is of type ProcedureCall."/>
+      <fact date="2019-04-03T00:00:00.000-0500" action="UPDATE" observations="Connector update due to improve its communication. Queue connector is now used."/>
+      <inElement name="MaterialLoan" id="asdadasdasdasda"/>
+      <outElement name="Material" id="asdadwe234234asdasdasda"/>
+    </element>
+    <element name="Material" posX="200" posY="100" id="asdadwe234234asdasdasda">
+      <fact date="2019-03-20T00:00:00.000-0500" observations="Component created to handle operations related to library materials."/>
+      <fact date="2019-04-03T00:00:00.000-0500" action="UPDATE" observations="Component was changed because new requirements about how these elements need to be handle."/>
+      <inElement name="con1" type="CONNECTOR"/>
+    </element>
+  </blockofinterest>
+</rebel_core:Project>

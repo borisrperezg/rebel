@@ -1,0 +1,149 @@
+Delivered-To: borisperezg@gmail.com
+Received: by 2002:a05:6638:33a2:0:0:0:0 with SMTP id h34csp2460684jav;
+        Wed, 3 Mar 2021 08:44:19 -0800 (PST)
+X-Received: by 2002:a05:6e02:d53:: with SMTP id h19mr100659ilj.157.1614789859656;
+        Wed, 03 Mar 2021 08:44:19 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1614789859; cv=none;
+        d=google.com; s=arc-20160816;
+        b=GZ9QeykV1D2526d16nyfvxv7b3UcTY/kheqD+aAyXQtz0Iax6HsjdtdzvX5y5+gMLS
+         S5ii6MCYv80ejlG45OmLdLq3AF29Vd8Ly/oBV2JnC1sbQt3k/uMokgFQwagLG/VKEyXN
+         lCz6/BpmKTBefHCWm0btNW3D4nt1418JR6JURKFJ6EMVxs4h7G5jfhc/OUR3aoe09Vcw
+         uJd5TVhhIqTp6lg59jqh6MfebJOFdr0GE5OgBYgCGRqIF0iKZEdmg8LuCdDqBBNawZmI
+         nH/kzuiIxCtItZATk9/t8861S+nJQkxG7nLfceVQpL3NKU/KPyYb54Jth16j5gai6rEE
+         CF5g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=b4bkoD7M5KPH2hPfvH9icO9PAWlZEUuqohvZQubyIXo=;
+        b=VXQGp1r1y4Sywtv+HxkJf5a0j6M/1lbZJKKbaDPARBozd6a4UGUgA32ersUjAx0bL1
+         V1WQG3CFG/ZioKX1CWxqmHW+FZcjM1BEyQXaLWPZgrfcDcNbVUGLeGWrtl+IJ3XNvD78
+         041WfGcWcsiCmLRdj7AP+LoxIFJ8ZH+sqhd5bZWrOsk24Jobgz6oa+Plru82Uy9p30MA
+         3g8kSOhqvZD89Ga7V9GKW4VcNADKP3ZOnkvEBIqlInLaJux+EtkqYzxsNQZNCmY6+KJe
+         LaS6KrY+isjfwu9HbUVzKOZ3rxaF1TwiLTRBb832thZ1tNeEGEh8e5bC2t8lZFvdwHn5
+         T4+w==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@viviendasyvalores.com.co header.s=google header.b=jzg78nA6;
+       spf=pass (google.com: domain of mgquintero@viviendasyvalores.com.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=mgquintero@viviendasyvalores.com.co
+Return-Path: <mgquintero@viviendasyvalores.com.co>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id v31sor8449551jal.8.2021.03.03.08.44.19
+        for <borisperezg@gmail.com>
+        (Google Transport Security);
+        Wed, 03 Mar 2021 08:44:19 -0800 (PST)
+Received-SPF: pass (google.com: domain of mgquintero@viviendasyvalores.com.co designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@viviendasyvalores.com.co header.s=google header.b=jzg78nA6;
+       spf=pass (google.com: domain of mgquintero@viviendasyvalores.com.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=mgquintero@viviendasyvalores.com.co
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=viviendasyvalores.com.co; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=b4bkoD7M5KPH2hPfvH9icO9PAWlZEUuqohvZQubyIXo=;
+        b=jzg78nA6ZsqOSSRYXxfTvrm3ZheoU0XAlMPxS+0O2601ofSekxNK7sgHoImZ7PwUas
+         ciNJwi49MlUdETdpTLRK+GNFXwmYefytcbWX2roqp46/Td0mBTGpxuLOU/v1TUQnUZXu
+         B/Iz4BEkvob+cvhFC0n0tSr58rd73rTrVTBRusojNHm8SUaiaDkqwaUO2rPzGm+TUK5a
+         8jRd5KYB4Iq4L567t6/Jd4OvvGk4b7k51MrOfeGepFF5rH+U05o8Gq7jWvSE7qywxAmv
+         9avHsyc4Qe9j+5TmvrH2KunXi1mGq6Bie/hbHVxdgdHxAPr4G5d3Qkd4fvaXZrBJXYFp
+         csYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=b4bkoD7M5KPH2hPfvH9icO9PAWlZEUuqohvZQubyIXo=;
+        b=Vbg3svNQH+Jpv/YgZtoYDfVVXu/VULyIECzc3sRKcXkA8213yMABWOri1I6NP5b9Qk
+         wr+lt6XCE2VUhsHDe5uWM10XjKZBD/d+65+UCq6RUC45KiTi40vnYHc7/YSfeLB90kW2
+         x4BlsuT/Nwk7R6kdd1jhiGcsnhlcJA8eE2njqbZDKuQUw3gu9CbWX9EFMC1ntGXw/Krg
+         zb50VxFLFHOEBGIvdYIrlM/tWv7rSSXZNWh6qS6B7kZJVlgHtgP903ancu+XhxCd5cP5
+         ZooUuGPfqh1U8zRmMnSZ0JNe8fSjuRYFrgRdc9IwRSk3AZ0zoFx5GNzMcR3wbVxLilZo
+         Q6Sw==
+X-Gm-Message-State: AOAM533Y3It53lw44f2qq08gnNOdEL2bG5c2vIVcD2FN3xCiFTIBE5Qc
+	gc6ejcGttT/UZmCOxdHlcjMx1KsH2i5qlhhZ6gAXOlxhLmJSaw==
+X-Google-Smtp-Source: ABdhPJyhC8Wcyk7DBSkmhuQ1Xtwc2YpGUOP+tOQVUDbf43cJek6tr1Buy5yhnVpbOL8HL9TkWV4iqSQggEo+VaGRNIw=
+X-Received: by 2002:a05:6638:218f:: with SMTP id s15mr18405998jaj.58.1614789859135;
+ Wed, 03 Mar 2021 08:44:19 -0800 (PST)
+MIME-Version: 1.0
+References: <CAFWRN0GRxQXt1bXx1qEewZ-6fE567HLBE7R6goZ1H9pGZi__qQ@mail.gmail.com>
+In-Reply-To: <CAFWRN0GRxQXt1bXx1qEewZ-6fE567HLBE7R6goZ1H9pGZi__qQ@mail.gmail.com>
+From: MARTHA GRISSEL QUINTERO MOLINA <mgquintero@viviendasyvalores.com.co>
+Date: Wed, 3 Mar 2021 11:44:11 -0500
+Message-ID: <CAPXGFLqOfZX9xaP_H0HxoLVEXCxyhiPGbSP7vO5Zvv6zYBF+-g@mail.gmail.com>
+Subject: =?UTF-8?Q?Re=3A_Solicitud_cotizaci=C3=B3n_reformas?=
+To: Boris Rainiero Perez Gutierrez <borisperezg@gmail.com>
+Content-Type: multipart/alternative; boundary="000000000000f0e93e05bca48f86"
+
+--000000000000f0e93e05bca48f86
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Gracias sr Boris,  la voy a reeenviar nuevamente, porque me solicitaron el
+cambio, gracias
+Atentamente,
+
+
+
+Este mensaje y sus adjuntos se dirigen exclusivamente a su destinatario,
+puede contener informaci=C3=B3n privilegiada o confidencial y es para uso
+exclusivo de la persona o entidad de destino. Si no es usted. el
+destinatario indicado, queda notificado de que la lectura, utilizaci=C3=B3n=
+,
+divulgaci=C3=B3n y/o copia sin autorizaci=C3=B3n puede estar prohibida en v=
+irtud de
+la legislaci=C3=B3n vigente. Si ha recibido este mensaje por error, le roga=
+mos
+que nos lo comunique inmediatamente por esta misma v=C3=ADa y proceda a su
+destrucci=C3=B3n.
+Los sistemas de Viviendas y Valores S.A. cuentan con un programa
+anti-virus, no obstante, el destinatario debe examinar el mensaje ya que
+Viviendas y Valores S.A. no se hace responsable en ning=C3=BAn caso por da=
+=C3=B1os
+derivados de la recepci=C3=B3n del presente mensaje.
+
+
+El mi=C3=A9, 3 mar 2021 a las 11:28, Boris Rainiero Perez Gutierrez (<
+borisperezg@gmail.com>) escribi=C3=B3:
+
+> Hola Martha, cordial saludo.
+>
+> Adjunto formato de solicitud de reformas. Por favor revisar que est=C3=A9=
+ bien.
+>
+> Quedo atento. Muchas gracias.
+>
+> *----*
+> *Ph.D. (c) BORIS R. P=C3=89REZ GUTI=C3=89RREZ*
+>
+
+--000000000000f0e93e05bca48f86
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Gracias sr Boris,=C2=A0 la voy a reeenviar nuevamente, por=
+que me solicitaron el cambio, gracias<br clear=3D"all"><div><div dir=3D"ltr=
+" class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"=
+ltr">Atentamente,<div><br></div><div><img src=3D"http://viviendasyvalores.c=
+om.co/intranetn/firmas/MARTHA%20QUINTERO.jpg"><br></div><div><font color=3D=
+"#666666"><br></font></div><div><div><font color=3D"#666666">Este mensaje y=
+ sus adjuntos se dirigen exclusivamente a su destinatario, puede contener i=
+nformaci=C3=B3n privilegiada o confidencial y es para uso exclusivo de la p=
+ersona o entidad de destino. Si no es usted. el destinatario indicado, qued=
+a notificado de que la lectura, utilizaci=C3=B3n, divulgaci=C3=B3n y/o copi=
+a sin autorizaci=C3=B3n puede estar prohibida en virtud de la legislaci=C3=
+=B3n vigente. Si ha recibido este mensaje por error, le rogamos que nos lo =
+comunique inmediatamente por esta misma v=C3=ADa y proceda a su destrucci=
+=C3=B3n.</font></div><div><font color=3D"#666666">Los sistemas de Viviendas=
+ y Valores S.A. cuentan con un programa anti-virus, no obstante, el destina=
+tario debe examinar el mensaje ya que Viviendas y Valores S.A. no se hace r=
+esponsable en ning=C3=BAn caso por da=C3=B1os derivados de la recepci=C3=B3=
+n del presente mensaje.</font></div></div></div></div></div><br></div><br><=
+div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">El mi=C3=A9=
+, 3 mar 2021 a las 11:28, Boris Rainiero Perez Gutierrez (&lt;<a href=3D"ma=
+ilto:borisperezg@gmail.com">borisperezg@gmail.com</a>&gt;) escribi=C3=B3:<b=
+r></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
+;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr">=
+Hola Martha, cordial saludo.<br><br>Adjunto formato de solicitud de reforma=
+s. Por favor revisar que est=C3=A9 bien.<br><br>Quedo atento. Muchas gracia=
+s.<br clear=3D"all"><div><div dir=3D"ltr"><div dir=3D"ltr"><div><br></div><=
+div></div><div><b>----</b></div><div><b>Ph.D. (c) BORIS R. P=C3=89REZ GUTI=
+=C3=89RREZ</b></div></div></div></div></div>
+</blockquote></div>
+
+--000000000000f0e93e05bca48f86--
