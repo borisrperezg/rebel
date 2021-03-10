@@ -1,0 +1,10 @@
+package uniandes.rebel.chatlogs;
+
+public class CEDerbyDBMediator {
+
+	public void insertModel(String projectName, String modelName, String modelType, String uriAddress) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

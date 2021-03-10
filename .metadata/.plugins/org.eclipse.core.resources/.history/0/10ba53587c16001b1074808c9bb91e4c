@@ -1,0 +1,731 @@
+package uniandes.rebelapi.boi;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import org.eclipse.emf.ecore.resource.Resource;
+
+import rebel_archimate.Element;
+import rebel_archimate.Relation;
+import rebel_archimate.View;
+import rebel_core.Action;
+import rebel_core.ArchimateView;
+import rebel_core.BlockOfInterest;
+import rebel_core.Fact;
+import rebel_core.Project;
+import rebel_core.RELATIONTYPE;
+import uniandes.rebel.archimate.AMModel;
+import uniandes.rebel.core.model.CoreModel;
+import uniandes.rebelapi.bo.APIBOI;
+import uniandes.rebelapi.bo.Model;
+import uniandes.rebelapi.db.APIModelDerby;
+import uniandes.rebelapi.util.AsynchronousSearch;
+import uniandes.rebelapi.util.RebelArchiToXML;
+
+public class RebelCoreCreationArchimate {
+
+	private AMModel amModel;
+	private CoreModel cModel;
+	private int factUniqueId;
+
+	public RebelCoreCreationArchimate() {
+		amModel = new AMModel();
+		cModel = new CoreModel();
+		
+		
+		int major = 0;
+    	// Obtener los modelos tipo rebel.
+    	List<APIBOI> bois = (new APIModelDerby()).listAllBOIs();
+    	
+    	if(bois!=null) {
+	    	// Cargar el proyecto y recorrer los Fact
+	    	for(APIBOI boi : bois) {
+	    		try {
+	    			Resource res = cModel.buildModelRebelCore(boi.getUrl(), boi.getName());
+	    			Project project = (Project) res.getContents().get(0);
+					
+					if(project.getBlockofinterest()!=null) {
+						
+						for(BlockOfInterest block : project.getBlockofinterest()) {
+							
+							if(block.getFact()!=null) {
+							
+								for(Fact fact : block.getFact()) {
+								
+									// Encontrar el valor mayor y asignarlo a variable de clase
+									int val = Integer.parseInt(fact.getId()!=null&&fact.getId().length()>0?fact.getId():"0");
+									if(val>major) {
+										major = val;
+									}									
+								}
+							}
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+	    	}
+    	}
+    	
+    	factUniqueId = major;
+		
+	}
+    
+    private int nextFactId() {
+    	factUniqueId++;
+    	return factUniqueId;
+    }
+
+	public static void main(String[] args) {
+		RebelCoreCreationArchimate m = new RebelCoreCreationArchimate();
+
+		String params = "p=FinalProject&bm=AppOnly_20201022&boi=FirstBOI&Servicio Gestion Cliente";
+
+		m.boiCreationArchi(params);
+	}
+
+	/**
+	 * Este metodo crea el boi para cuando se trabaja desde un modelo en Archimate
+	 * 
+	 * @param params p=Archimate
+	 *               Project&bm=Bus-to-App_v2&boi=FirstBOI&[element1]&[element2]
+	 * @return
+	 */
+	public String boiCreationArchi(String params) {
+
+		String resp = "NOK";
+
+		try {
+			String[] aParams = params.split("&");
+
+			String project = aParams[0].substring(aParams[0].indexOf("=") + 1);
+			String baseModel = aParams[1].substring(aParams[1].indexOf("=") + 1);
+			String boiName = aParams[2].substring(aParams[2].indexOf("=") + 1);
+
+			// Para manejar nombres unicos de los elementos y para facilitar su localizacion
+			HashMap<String, String> elementsName = new HashMap<String, String>();
+
+			for (int t = 3; t < aParams.length; t++) {
+				elementsName.put(aParams[t], aParams[t]);
+			}
+
+			// Para cada elemento, se debe construir un objeto con su estructura.
+			// Para esto, se toma el primer elemento y se busca en el primer modelo.
+			// Se extraen las relaciones de entrada y de salida de ese elemento.
+
+			// Saco de la BD todos los modelos archimate de ese proyecto y que cumplan con
+			// el prefijo de nombre.
+			String prefijoBaseModel = obtenerPrefijoNombreModel(baseModel);
+			List<Model> archimateModels = (new APIModelDerby()).listArchimateModels(project, prefijoBaseModel);
+
+			// Conjunto de listas para incluirse en Rebel, porque son las vistas
+			// que tienen los elementos seleccionados en el BOI.
+			List<rebel_archimate.View> vistasParaRebel = obtenerVistasConCoincidencias(archimateModels, elementsName);
+
+			// Se encontraron vistas que contienen a los elementos
+			if (vistasParaRebel != null && vistasParaRebel.size() > 0) {
+
+				// Se crea el modelo Core
+				cModel.createModel(project, boiName);
+
+				// Mover vistas a Rebel
+				archimateViewsInRebelCore(vistasParaRebel, elementsName);				
+				
+				if(cModel.getProject().getView()!=null) {
+					
+					// Creación de BOI
+					BlockOfInterest boi = cModel.createBOI();
+					boi.setId((int) Calendar.getInstance().getTimeInMillis());
+					boi.setName(boiName);
+					
+					// Agrego el BOI al proyecto
+					cModel.getProject().getBlockofinterest().add(boi);
+					
+					
+					/*
+					 * Revisar por cada vista los cambios para la construccion de los Fact.
+					 * Consideraciones: 
+					 * - Toca revisar por relación, es decir, donde coincida source y target 
+					 * - Buscar cada relación del modelo origen en el modelo destino 
+					 * - Si la relación no existe, entonces hay un fact indicando la ausencia de relación
+					 * entre elementos 
+					 * - Si hay nueva relación, entonces hay un fact indicando la aparición de relación 
+					 * - No hay Facts de Update 
+					 * - Comparación por nombres
+					 */
+					buildFacts(boi, elementsName);
+					
+					
+					// Persistir el model.
+					cModel.storeModel();
+					
+					// **************************************************************
+					// LLAMADA ASINCRONO PARA LA BUSQUEDA EN ARTEFACTOS HETEROGENEOS
+					// **************************************************************
+					
+					// Link heterogeneous artifacts - Asynchronous call
+					new Thread(() -> {
+//						findAndLinkHeterogeneousArtifacts(boi, resource);
+						(new AsynchronousSearch()).findAndLinkHeterogeneousArtifacts(cModel, boi, project);
+					}).start();
+					
+					
+					// **************************************************
+					// CREACION DEL XML PARA VISUALIZACION
+					// **************************************************
+					
+					// Se debe hacer acá recorriendo las vistas, porque debe estar creado físicamente el modelo en disco
+					
+					
+					if(!(new RebelArchiToXML()).xmlCreation(boiName, cModel.getProject().getName()))
+						throw new Exception("Couldn't create the xml for visualization");
+					
+					resp = "OK";
+					
+					
+				}else {
+					resp = "NOK. No Rebel views could be created.";
+				}
+				
+				
+			}else {
+				resp = "NOK. There is no views with the elements selected.";
+			}
+
+		} catch (Exception e) {
+			resp = e.getMessage();
+			e.printStackTrace();
+		}
+
+		return resp;
+	}
+	
+	private void buildFacts(BlockOfInterest boi, 
+			HashMap<String, String> elementsName) {
+		
+		if (cModel.getProject().getView().size() == 1) {
+			createFirstFacts(cModel.getProject().getView().get(0), boi, elementsName);
+		} else if (cModel.getProject().getView().size() > 1) {
+
+			// Para los create del primer modelo
+			createFirstFacts(cModel.getProject().getView().get(0), boi, elementsName);
+
+			// Para las comparaciones con modelos posteriores
+			for (int u = 0; u < cModel.getProject().getView().size(); u++) {
+				ArchimateView m1 = cModel.getProject().getView().get(u);
+				try {
+					ArchimateView m2 = cModel.getProject().getView().get(u + 1);
+					compareViews(m1, m2, boi, elementsName);
+				} catch (IndexOutOfBoundsException ie) {
+					System.err.println("--- Comparison end");
+				}
+			}
+		}
+		
+	}
+	
+	private void createFirstFacts(ArchimateView m1, BlockOfInterest boi, 
+			HashMap<String, String> elementsName) {
+		
+		// Para crear los Facts de creación de elementos
+		
+		for(rebel_core.Element element : m1.getElement()) {
+			
+			if(elementsName.get(element.getName())!=null) {
+				Fact f = createFact(element.getName(), m1.getDate(), element.getType().getLiteral(), "", "Create");
+				
+				f.getView().add(m1);
+				
+				boi.getFact().add(f);
+				
+			}
+			
+		}
+		
+		// Para crear los Facts de creación de relaciones
+		
+		for(rebel_core.Relation relation: m1.getRelation()) {
+			
+			if (elementsName.get(relation.getSource().getName()) != null
+					|| elementsName.get(relation.getTarget().getName()) != null) {
+				
+				String name = relation.getSource().getName() + " -> " + relation.getTarget().getName();
+				
+				Fact f = createFact(name, m1.getDate(), relation.getType().getLiteral(), "", "Create");
+				
+				f.getView().add(m1);
+				
+				boi.getFact().add(f);
+				
+			}
+			
+		}
+		
+	}
+	
+	/**
+	 * Compara las vistas para establecer los cambios tanto de elementos, como 
+	 * de sus relaciones.
+	 * @param m1
+	 * @param m2
+	 * @param boi
+	 * @param elementsName
+	 */
+	private void compareViews(ArchimateView m1, ArchimateView m2, BlockOfInterest boi, 
+			HashMap<String, String> elementsName) {
+		
+		
+		// Aca toca tener presente cuando un elemento aparezca en un segundo modelo
+		
+		// Verificar estado de los elementos: 1) Creación, 2) Eliminación
+		// Preguntar si está en un modelo, y luego si está en el otro: No pasa nada
+		// Preguntas si está en el primero modelo, y no está en el segundo: Eliminacion
+		// Preguntar si no está en el primer modelo, y sí está en el seungi: Creación
+		
+		// -------------------------------------------------
+		// BLOQUE DE VALIDACION DE ESTADO DE LOS ELEMENTOS
+		// -------------------------------------------------
+		
+		List<String> elementsNameList = new ArrayList<String>(elementsName.keySet());
+		
+		for(String elementName : elementsNameList) {
+			
+			boolean existsM1 = false;
+			boolean existsM2 = false;
+			
+			String elementType = "";
+			
+			for(rebel_core.Element coreElement : m1.getElement()) {
+				if(elementName.equals(coreElement.getName())){
+					existsM1 = true;
+					break;
+				}
+			}
+			
+			for(rebel_core.Element coreElement : m2.getElement()) {
+				if(elementName.equals(coreElement.getName())){
+					existsM2 = true;
+					elementType = coreElement.getType().getLiteral();
+					break;
+				}
+			}
+			
+			if(existsM1 && existsM2) {
+				// No hay Fact
+			}else if(!existsM1 && existsM2) { 
+				// Creacion
+				Fact f = createFact(elementName, m2.getDate(), elementType, "", "Create");				
+				f.getView().add(m2);				
+				boi.getFact().add(f);
+			}else if(existsM1 && !existsM2) { 
+				// Creacion
+				Fact f = createFact(elementName, m2.getDate(), elementType, "", "Delete");				
+				f.getView().add(m2);				
+				boi.getFact().add(f);
+			}else if(!existsM1 && !existsM2) { 
+				// No hay Fact
+			}
+			
+		}
+		
+		// -------------------------------------------------
+		// BLOQUE DE VALIDACION DE ESTADO DE LAS RELACIONES
+		// -------------------------------------------------
+		
+		for(rebel_core.Relation coreRelationFirst : m1.getRelation()) {
+			
+			// Esto no necesita validarse porque en el BOI ya están las relaciones
+			// que involucran únicamente a los elementos seleccionados
+//			if (elementsName.get(coreRelationFirst.getSource().getName()) != null || elementsName.get(coreRelationFirst.getTarget().getName()) != null) {
+			
+			String sfeName = coreRelationFirst.getSource().getName();
+			String tfeName = coreRelationFirst.getTarget().getName();
+			
+			boolean existe = false;
+			
+			for(rebel_core.Relation coreRelationSecond : m2.getRelation()) {
+				
+				String sseName = coreRelationSecond.getSource().getName();
+				String tseName = coreRelationSecond.getTarget().getName();
+				
+				if(sfeName.equals(sseName) && tfeName.equals(tseName)) {
+					existe = true;
+					break;
+				}
+			}
+			
+			if(!existe) {
+				
+				String name = coreRelationFirst.getSource().getName() + " -# " + coreRelationFirst.getTarget().getName();
+				
+				// Se crea un Fact de Eliminación de Relación
+				Fact f = createFact(name, m2.getDate(), coreRelationFirst.getType().getName(), "", "Delete");				
+				f.getView().add(m2);				
+				boi.getFact().add(f);
+			}
+			
+		}
+		
+		for(rebel_core.Relation coreRelationSecond : m2.getRelation()) {
+			
+			// Esto no necesita validarse porque en el BOI ya están las relaciones
+			// que involucran únicamente a los elementos seleccionados
+//			if (elementsName.get(coreRelationFirst.getSource().getName()) != null || elementsName.get(coreRelationFirst.getTarget().getName()) != null) {
+			
+			String sseName = coreRelationSecond.getSource().getName();
+			String tseName = coreRelationSecond.getTarget().getName();
+			
+			boolean existe = false;
+			
+			for(rebel_core.Relation coreRelationFirst : m1.getRelation()) {
+				
+				String sfeName = coreRelationFirst.getSource().getName();
+				String tfeName = coreRelationFirst.getTarget().getName();
+				
+				if(sfeName.equals(sseName) && tfeName.equals(tseName)) {
+					existe = true;
+					break;
+				}
+			}
+			
+			if(!existe) {
+				
+				String name = coreRelationSecond.getSource().getName() + " -> " + coreRelationSecond.getTarget().getName();
+				
+				// Se crea un Fact de Eliminación de Relación
+				Fact f = createFact(name, m2.getDate(), coreRelationSecond.getType().getName(), "", "Create");				
+				f.getView().add(m2);				
+				boi.getFact().add(f);
+			}
+			
+		}
+			
+	
+		
+	}
+	
+	public Fact createFact(String name, Date date, String type, String obs, String action) {
+		Fact fact = cModel.createFact();
+		
+		fact.setElementName(name);
+		fact.setDate(new Date(date.getYear(), date.getMonth(), date.getDate()));
+		fact.setObservations(obs);
+		fact.setId(String.valueOf(nextFactId()));		
+		fact.setElementType(type);
+		
+		if(action.equals("Create"))
+			fact.setAction(Action.CREATE);
+		else if(action.equals("Delete"))
+			fact.setAction(Action.DELETE);
+		else if(action.equals("Update"))
+			fact.setAction(Action.UPDATE);
+		else if(action.equals("Divide"))
+			fact.setAction(Action.DIVIDE);
+		
+		return fact;
+	}
+
+	/**
+	 * Este metodo toma las vistas de archimate y las mueve al modelo Core.
+	 * 
+	 * @param vistasParaRebel
+	 * @return
+	 */
+	private void archimateViewsInRebelCore(List<View> vistasParaRebel,
+			HashMap<String, String> elementsName) throws Exception {
+
+		// Este Map se usa para guardar las referencias de los elementos que se van
+		// pasando a rebel_core
+		HashMap<String, rebel_core.Element> elementsToRebelCore = null;
+
+//		System.out.println("RebelMediator.archimateViewsInRebelCore ::: Iniciando construccion de elementos de vista");
+
+		for (int t = 0; t < vistasParaRebel.size(); t++) {
+
+			elementsToRebelCore = new HashMap<String, rebel_core.Element>();
+
+			View vista = vistasParaRebel.get(t);
+
+			
+			
+			ArchimateView archiView = cModel.createArchimateView(vista.getId(), vista.getName());
+			archiView.setDate(new Date(vista.getDate().getYear(), vista.getDate().getMonth(), vista.getDate().getDate()));
+			
+//			System.out.println(archiView.getName());
+//			System.out.println(archiView.getDate().getYear() + " - " + archiView.getDate().getMonth());
+//			System.out.println("----");
+			
+			
+			// ----------------------------------------
+			// BLOQUE PARA PROCESAR LOS ELEMENTOS
+			// ----------------------------------------
+
+			// Se tienen que ir guardando los element en un Map para poderlos asociar en los
+			// Relations
+			if (vista.getElement() != null) {
+				// Se obtienen los elementos de la vista de archimate
+				for (Element element : vista.getElement()) {
+					// Se verifica que el elemento fue de los seleccionados para el boi
+					if (elementsName.get(element.getName()) != null) {
+						
+						// Se convierte a un elemento rebel_core y se agrega a la vista de rebel_core
+						rebel_core.Element coreElement = giveMeACoreElement(element);
+						if(elementsToRebelCore.get(coreElement.getName())==null) {
+							System.out.println("Adding "+coreElement.getName());
+							archiView.getElement().add(coreElement);
+							// Este Map se usa para almacenar las referencias de los elementos en rebel_core
+							// Se usara para crear las relaciones en rebel_core
+							elementsToRebelCore.put(coreElement.getName(), coreElement);
+						}						
+					}
+				}
+			}
+			
+			// ----------------------------------------
+			// INI - BLOQUE PARA PROCESAR LOS ELEMENTOS - FORMA 2
+			// ----------------------------------------
+			
+			
+//			recursiveGetElementsRelated(vista, "Queuing Service", elementsToRebelCore, archiView);
+			
+			
+//			elementsToRebelCore.forEach((key,value) -> System.out.println(key + " = " + value));
+		
+			// ----------------------------------------
+			// FIN - BLOQUE PARA PROCESAR LOS ELEMENTOS - FORMA 2
+			// ----------------------------------------
+			
+
+			// ----------------------------------------
+			// BLOQUE PARA INSERTAR LAS RELACIONES
+			// ----------------------------------------
+			if (vista.getRelation() != null) {
+
+				for (Relation relation : vista.getRelation()) {
+
+					// Validar si en el source o en el target, están los elementos selecionados para
+					// el boi
+					if (elementsToRebelCore.get(relation.getSource().getName()) != null
+							|| elementsToRebelCore.get(relation.getTarget().getName()) != null) {
+
+						// Crea la relación
+						rebel_core.Relation coreRelation = giveMeACoreRelation(relation);
+
+						// Asocia los elementos de origen y destino
+						if (elementsToRebelCore.get(relation.getSource().getName()) != null)
+							coreRelation.setSource(elementsToRebelCore.get(relation.getSource().getName()));
+						else {
+							rebel_core.Element coreElement = giveMeACoreElement(relation.getSource());
+							System.out.println("Adding (relation) "+coreElement.getName());
+							archiView.getElement().add(coreElement);
+							coreRelation.setSource(coreElement);
+							elementsToRebelCore.put(coreElement.getName(), coreElement);
+						}
+
+						if (elementsToRebelCore.get(relation.getTarget().getName()) != null) {
+							coreRelation.setTarget(elementsToRebelCore.get(relation.getTarget().getName()));
+						} else {
+							rebel_core.Element coreElement = giveMeACoreElement(relation.getTarget());
+							System.out.println("Adding (relation) "+coreElement.getName());
+							archiView.getElement().add(coreElement);
+							coreRelation.setTarget(coreElement);
+							elementsToRebelCore.put(coreElement.getName(), coreElement);
+						}
+
+						archiView.getRelation().add(coreRelation);
+					}
+				}
+			}
+
+			cModel.getProject().getView().add(archiView);
+			
+		}
+	}
+	
+	
+	/**
+	 * Este es un metodo recursivo que se usa para poder extraer las relaiones asociadas
+	 * al elemento seleccionado para el BOI. 
+	 * Este metodo busca obtener los nombres de los elementos que se usarán para la creación
+	 * del BOI. 
+	 * @param elementsName Contiene la lista de los nombres de los elementos que irán para el boi
+	 */
+	private void recursiveGetElementsRelated(View vista, String elementName, 
+			HashMap<String, rebel_core.Element> elementsToRebelCore, ArchimateView archiView) {
+		
+//		System.out.println("Recursive");
+		
+		if (vista.getRelation() != null) {
+			// Se obtienen los elementos de la vista de archimate
+			for (Relation relation : vista.getRelation()) {
+				// Se verifica que el elemento fue de los seleccionados para el boi
+				if (elementName.equals(relation.getSource().getName())) {					
+					
+					String relationElementName = relation.getTarget().getName();
+					
+					if(elementsToRebelCore.get(relationElementName)==null) {
+						
+						rebel_core.Element coreElement = giveMeACoreElement(relation.getTarget());
+						archiView.getElement().add(coreElement);
+						
+												
+						elementsToRebelCore.put(relationElementName, coreElement);
+						
+						if(relation.getTarget().getType()!=rebel_archimate.ELEMENTTYPE.DATAOBJECT)						
+							recursiveGetElementsRelated(vista, relationElementName, elementsToRebelCore, archiView);
+					}					
+				}else if (elementName.equals(relation.getTarget().getName())) {		
+					
+					String relationElementName = relation.getSource().getName();
+					
+					if(elementsToRebelCore.get(relationElementName)==null) {
+						
+						rebel_core.Element coreElement = giveMeACoreElement(relation.getSource());
+						archiView.getElement().add(coreElement);
+						
+												
+						elementsToRebelCore.put(relationElementName, coreElement);
+						
+						if(relation.getSource().getType()!=rebel_archimate.ELEMENTTYPE.DATAOBJECT)
+							recursiveGetElementsRelated(vista, relationElementName, elementsToRebelCore, archiView);
+					}	
+				} 
+					
+					
+					
+					
+					/*
+					
+					// Se convierte a un elemento rebel_core y se agrega a la vista de rebel_core
+					rebel_core.Element coreElement = giveMeACoreElement(element);
+					archiView.getElement().add(coreElement);
+
+					// Este Map se usa para almacenar las referencias de los elementos en rebel_core
+					// Se usara para crear las relaciones en rebel_core
+					elementsToRebelCore.put(coreElement.getName(), coreElement);
+					
+					*/
+				
+			}
+		}
+	}
+
+	private rebel_core.Relation giveMeACoreRelation(Relation relation) {
+		rebel_core.Relation coreRelation = cModel.createRelation(relation.getId());
+
+		if (relation.getType().getLiteral().equals("REALIZATION")) {
+			coreRelation.setType(RELATIONTYPE.REALIZATION);
+		} else if (relation.getType().getLiteral().equals("AGGREGATION")) {
+			coreRelation.setType(RELATIONTYPE.AGGREGATION);
+		} else if (relation.getType().getLiteral().equals("INFLUENCE")) {
+			coreRelation.setType(RELATIONTYPE.INFLUENCE);
+		} else if (relation.getType().getLiteral().equals("TRIGGERING")) {
+			coreRelation.setType(RELATIONTYPE.TRIGGERING);
+		} else if (relation.getType().getLiteral().equals("SERVING")) {
+			coreRelation.setType(RELATIONTYPE.SERVING);
+		}
+
+		return coreRelation;
+	}
+
+	private rebel_core.Element giveMeACoreElement(Element element) {
+		rebel_core.Element coreElement = cModel.createElement(element.getId(), element.getName());
+
+		coreElement.setPosX(element.getPosX());
+		coreElement.setPosY(element.getPosY());
+		coreElement.setWidth(element.getWidth());
+		coreElement.setHeight(element.getHeight());
+
+		if (element.getType().getLiteral().equals("BUSINESS_SERVICE"))
+			coreElement.setType(rebel_core.ELEMENTTYPE.BUSINESS_SERVICE);
+		else if (element.getType().getLiteral().equals("BUSINESS_PROCESS"))
+			coreElement.setType(rebel_core.ELEMENTTYPE.BUSINESS_PROCESS);
+		else if (element.getType().getLiteral().equals("APPLICATION_SERVICE"))
+			coreElement.setType(rebel_core.ELEMENTTYPE.APPLICATION_SERVICE);
+		else if (element.getType().getLiteral().equals("APPLICATION_COMPONENT"))
+			coreElement.setType(rebel_core.ELEMENTTYPE.APPLICATION_COMPONENT);
+
+		return coreElement;
+	}
+
+	/**
+	 * Obtiene los nombres de las vistas que tienen uno o más de los elementos
+	 * solicitados para la creación del boi. Este método se invoca desde
+	 * boiCreationArchi().
+	 */
+	private List<rebel_archimate.View> obtenerVistasConCoincidencias(List<Model> archimateModels,
+			HashMap<String, String> elementsName) throws Exception {
+
+		// Lista con nombres unicos retornados.
+		List<rebel_archimate.View> vistasParaRebel = new ArrayList<rebel_archimate.View>();
+
+		if (archimateModels != null && archimateModels.size() > 0) {
+			for (int t = 0; t < archimateModels.size(); t++) {
+				Model archiModel = archimateModels.get(t);
+
+				System.out.println("archiModel.getName() "+archiModel.getName());
+				
+				Resource resourceModel = amModel.loadResource(archiModel.getRute());
+				rebel_archimate.Project projectArchimate = (rebel_archimate.Project) resourceModel.getContents().get(0);
+				
+				
+				
+				if (projectArchimate != null) {
+					// Navego la vista para obtener los elementos y sus relaciones
+					rebel_archimate.View vistaArchi = projectArchimate.getView().get(0);
+
+					if (vistaArchi != null) {
+
+						if (vistaArchi.getElement() != null) {
+
+							boolean encontrado = false;
+							
+							// Se recorren los elementos de la vista para buscar coincidencia
+							for (rebel_archimate.Element element : vistaArchi.getElement()) {
+
+								// Esta lista de elementos fueron obtenidos a partir de la url
+								if (elementsName.get(element.getName()) != null) {
+
+									//hset.add(vistaArchi);
+									encontrado = true;
+									break;
+								}
+							}
+							
+							if(encontrado) {
+								vistasParaRebel.add(vistaArchi);
+							}
+							
+						}
+
+					}
+
+				}
+			}
+		}
+		
+		
+		
+		
+
+//		if (hset.size() > 0) {
+//			vistasParaRebel = new ArrayList<rebel_archimate.View>(hset);
+//		}
+
+		
+		
+		return vistasParaRebel;
+	}
+
+	private String obtenerPrefijoNombreModel(String baseModel) {
+		String prefijo = "";
+
+		prefijo = baseModel.substring(0, baseModel.indexOf("_"));
+
+		return prefijo;
+	}
+
+}

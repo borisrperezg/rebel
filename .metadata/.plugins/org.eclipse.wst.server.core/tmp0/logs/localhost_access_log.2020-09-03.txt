@@ -1,0 +1,14 @@
+127.0.0.1 - - [03/Sep/2020:20:36:51 -0500] "GET / HTTP/1.1" 404 706
+0:0:0:0:0:0:0:1 - - [03/Sep/2020:20:36:52 -0500] "GET /rebelviz/angular/appopers.js HTTP/1.1" 200 12962
+0:0:0:0:0:0:0:1 - - [03/Sep/2020:20:36:52 -0500] "GET /rebelviz/css/style.css HTTP/1.1" 200 28020
+0:0:0:0:0:0:0:1 - - [03/Sep/2020:20:36:52 -0500] "GET /rebelviz/angular/angular.js HTTP/1.1" 200 1232632
+0:0:0:0:0:0:0:1 - - [03/Sep/2020:20:36:53 -0500] "GET /rebelviz/images/favicon.ico HTTP/1.1" 404 661
+0:0:0:0:0:0:0:1 - - [03/Sep/2020:20:36:53 -0500] "GET /rebelviz/favicon-16x16.png HTTP/1.1" 404 660
+0:0:0:0:0:0:0:1 - - [03/Sep/2020:20:36:54 -0500] "GET /rebelviz/listprojects.html HTTP/1.1" 200 4779
+0:0:0:0:0:0:0:1 - - [03/Sep/2020:20:36:55 -0500] "GET /rebelapi/rest/rebel/listprojects HTTP/1.1" 200 76
+0:0:0:0:0:0:0:1 - - [03/Sep/2020:20:38:30 -0500] "GET /rebelviz/listprojects.html HTTP/1.1" 200 4787
+0:0:0:0:0:0:0:1 - - [03/Sep/2020:20:38:30 -0500] "GET /rebelapi/rest/rebel/listprojects HTTP/1.1" 200 76
+0:0:0:0:0:0:0:1 - - [03/Sep/2020:20:38:31 -0500] "GET /rebelviz/listprojects.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [03/Sep/2020:20:38:32 -0500] "GET /rebelapi/rest/rebel/listprojects HTTP/1.1" 200 76
+0:0:0:0:0:0:0:1 - - [03/Sep/2020:20:42:16 -0500] "GET /rebelviz/listprojects.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [03/Sep/2020:20:42:17 -0500] "GET /rebelapi/rest/rebel/listprojects HTTP/1.1" 200 76

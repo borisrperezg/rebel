@@ -25,13 +25,6 @@ public class CEPopulation {
 		ceModel = new CEModel();
 	}
 
-	public static void main(String[] args) throws Exception {
-		CEPopulation ce = new CEPopulation();
-//		ce.execute("AutoNuevo", "Survey Comments.eml");
-		ce.execute("AutoNuevo", "_chat.txt");
-		
-//		display(new File("/Users/borisperezg/temporaluploadfolder/Survey Comments.eml"));
-	}
 
 	/**
 	 * Executed by revelapi

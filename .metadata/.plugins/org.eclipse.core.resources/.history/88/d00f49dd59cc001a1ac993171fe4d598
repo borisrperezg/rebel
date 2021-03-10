@@ -1,0 +1,60 @@
+package uniandes.rebelapi.similarity;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+
+public class SemanticSimilarityExec {
+
+	/**
+	 * 
+	 * @param architecturalElementName
+	 * @param sentences
+	 * @param accuracy Integer value with the percentage of accuracy required
+	 * @return
+	 */
+	public boolean sentenceHasSimilarities(String architecturalElementName, String sentences, int accuracy) {
+		boolean hasSimilarities = false;
+		
+		// Prepare each sentence
+		
+		
+		return hasSimilarities;
+	}
+	
+	/**
+	 * This method is used to change every white-space to semicolon (;)
+	 * This is required because the function for similarity is not accepting
+	 * white-spaces in sentences. 
+	 * @param sentence "hola mundo"
+	 * @return "hola;mundo"
+	 */
+	public String prepareSentence(String sentence) {
+		
+	}
+	
+	public static void main(String[] args) throws Exception {
+		
+		
+		
+		File f = new File("");
+		System.out.println(f.getAbsolutePath());
+		Process p = Runtime.getRuntime().exec("/Users/borisperezg/eclipsews/rebelapi/resources/wrapper.sh find_similarity \"perro\" \"El;perrito;se;salió;del;pozo\"");
+	    p.waitFor();
+
+	    BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+	    BufferedReader errorReader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+
+
+	    String line = "";
+	    while ((line = reader.readLine()) != null) {
+	        System.out.println(line);
+	    }
+
+	    line = "";
+	    while ((line = errorReader.readLine()) != null) {
+	        System.out.println(line);
+	    }
+	}
+	
+}

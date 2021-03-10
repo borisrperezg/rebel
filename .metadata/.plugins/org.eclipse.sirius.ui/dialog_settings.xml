@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ExportRepresentationsAsImagesDialog">
+		<item key="ExportRepresentationsAsImagesDialog.imageFormat" value="JPG"/>
+		<list key="ExportRepresentationsAsImagesDialog.file">
+			<item value="/Users/borisperezg/Desktop"/>
+			<item value="/Users/borisperezg/Desktop/rebel_core.jpg"/>
+		</list>
+	</section>
+</section>

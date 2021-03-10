@@ -1,0 +1,73 @@
+package co.edu.uniandes.rebel.chatlogs;
+
+import java.util.Date;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+import rebel_chatlogs.Message;
+import rebel_chatlogs.MessageLog;
+import rebel_chatlogs.MessageLogType;
+import rebel_chatlogs.Project;
+import rebel_chatlogs.Rebel_chatlogsFactory;
+import rebel_chatlogs.Rebel_chatlogsPackage;
+import rebel_chatlogs.User;
+
+public class Client {
+
+	public static void main(String[] args) throws Exception {
+		// Create a resource set to hold the resources.
+		ResourceSet resourceSet = new ResourceSetImpl();
+
+		// Register the appropriate resource factory to handle all file extensions.
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+				.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+
+		// Register the package to ensure it is available during loading.
+		resourceSet.getPackageRegistry().put(Rebel_chatlogsPackage.eNS_URI, Rebel_chatlogsPackage.eINSTANCE);
+		
+		Resource resource = resourceSet.createResource(URI.createURI("http:///My.github"));
+		
+		Project root = Rebel_chatlogsFactory.eINSTANCE.createProject();
+		root.setName("ProjectName");
+		
+		MessageLog msgLog = Rebel_chatlogsFactory.eINSTANCE.createMessageLog();
+		msgLog.setTitle("Chat de trabajo de analisis");
+		msgLog.setType(MessageLogType.CHATLOG);
+		msgLog.setCreation(new Date());
+		root.getMessagelogs().add(msgLog); 
+		
+		User u1 = Rebel_chatlogsFactory.eINSTANCE.createUser();
+		u1.setName("Boris Perez");
+		u1.setCellPhone(123123123);
+		u1.setEmail("boris@correo.com");
+		root.getUsers().add(u1);
+		
+		User u2 = Rebel_chatlogsFactory.eINSTANCE.createUser();
+		u2.setName("Paola Romero");
+		u2.setCellPhone(56756567);
+		u2.setEmail("paola@correo.com");
+		root.getUsers().add(u2);
+		
+		Message msg1 = Rebel_chatlogsFactory.eINSTANCE.createMessage();
+		msg1.setText("Hola... qué ha pasado? ya tienen listo eso?");
+		msg1.setSendBy(u1);
+		msg1.setTimestamp(new Date());
+		msgLog.getMessages().add(msg1);
+		
+		Message msg2 = Rebel_chatlogsFactory.eINSTANCE.createMessage();
+		msg2.setText("Hola Boris, no pues aca estamos, pendientes a ver");
+		msg2.setSendBy(u2);
+		msg2.setTimestamp(new Date());
+		msg2.setReceivedBy(u1);
+		msgLog.getMessages().add(msg2);
+		
+		
+		resource.getContents().add(root);		
+		resource.save(System.out, null);
+	}
+	
+}

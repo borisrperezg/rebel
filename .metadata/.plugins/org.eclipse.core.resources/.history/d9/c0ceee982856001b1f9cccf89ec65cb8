@@ -1,0 +1,1424 @@
+package uniandes.rebelapi.mediator;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import co.edu.uniandes.rebel.architecturaldecisions.PopulationADR;
+import rebel_architecturaldecisions.Decision;
+import rebel_core.ArchimateView;
+import rebel_core.BlockOfInterest;
+import rebel_core.Fact;
+import rebel_core.Project;
+import rebel_core.Relation;
+import uniandes.rebel.archimate.AMModel;
+import uniandes.rebel.archimate.Processing;
+import uniandes.rebel.cc.drawio.PopulationDraw;
+import uniandes.rebel.core.model.CoreModel;
+import uniandes.rebel.github.GHPopulation;
+import uniandes.rebelapi.bo.APIArchitecturalDecision;
+import uniandes.rebelapi.bo.APIBOI;
+import uniandes.rebelapi.bo.APIElement;
+import uniandes.rebelapi.bo.APIFact;
+import uniandes.rebelapi.bo.APIModelElement;
+import uniandes.rebelapi.bo.APIView;
+import uniandes.rebelapi.bo.Model;
+import uniandes.rebelapi.db.APIModelDerby;
+import uniandes.rebelapi.similarity.SemanticSimilarityExec;
+import uniandes.rebelapi.util.ModelFiltering;
+import uniandes.rebelapi.util.RebelCoreJSONGenerator;
+import uniandes.rebelapi.util.Util;
+import uniandes.rebelapi.weka.SupervisedLearning;
+
+public class ModelMediator {
+
+	final String DATAFILESFOLDER = "/Users/borisperezg/rebel/InputDataFiles/";
+	
+	public String buildAndStoreXMI(String project, String artifactType, String fileName) {
+		String resp = "";
+
+		try {
+
+			// Separar por el tipo de artefacto
+			if (artifactType.equals("ccm")) {
+				PopulationDraw pd = new PopulationDraw();
+				pd.execute(project, fileName);
+				resp = "OK";
+			} else if (artifactType.equals("adrs")) {
+				PopulationADR pd = new PopulationADR();
+				pd.execute(project, fileName);
+				resp = "OK";
+			} else if (artifactType.equals("commitlogs")) {
+				GHPopulation pd = new GHPopulation();
+				pd.execute(project, fileName);
+				resp = "OK";
+			} else if (artifactType.equals("archi")) {
+
+				// Procesarlo para cargarlo (llamar a Processing.execute)
+				boolean exito = (new Processing()).execute(project, fileName);
+				// La conversion a xml se hace al final del processing.
+				// Se hace así porque se debe generar un xml por cada vista.
+				if (exito)
+					resp = "OK";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// Llamar el population correspondiente
+
+		return resp;
+	}
+
+	public List<APIArchitecturalDecision> listArchitecturalDecisions(String projectName) {
+		List<APIArchitecturalDecision> resp = new ArrayList<APIArchitecturalDecision>();
+
+		Document input = null;
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+		try {
+			// Obtener el xml
+			List<Model> admodels = (new APIModelDerby()).listArchitecturalDecisions(projectName);
+
+			for (Model ad : admodels) {
+
+				File f2 = new File(ad.getRute());
+
+				DocumentBuilder builder = factory.newDocumentBuilder();
+				input = builder.parse(f2);
+
+				// ***************************************************************
+				// architectural decisions
+				// ***************************************************************
+
+				NodeList cellNodes = input.getElementsByTagName("decisions");
+
+				for (int i = 0; i < cellNodes.getLength(); i++) {
+					Element e = (Element) cellNodes.item(i);
+					resp.add(new APIArchitecturalDecision(e.getAttribute("number"), e.getAttribute("title")));
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return resp;
+	}
+
+	public List<APIModelElement> listModelElements(String params) {
+		List<APIModelElement> finalList = null;
+
+//		System.out.println("ModelMediator.listModelElements ::: Params = "+params);
+
+		String[] vars = params.split("&");
+		String projectName = vars[0];
+		String modelType = vars[1];
+		String modelName = vars[2]; // llega de la forma: bus-to-app_v3
+
+		// Obtiene la parte del nombre que corresponde.
+		String shortModelName = modelName.substring(0, modelName.indexOf("_"));
+
+		if (modelType.equals("arc")) {
+			finalList = listModelElementsArchi(projectName, shortModelName);
+		} else if (modelType.equals("cnc"))
+			finalList = listModelElementsCnC(projectName);
+
+		return finalList;
+	}
+
+	/**
+	 * Este metodo se encarga de listar todos los elementos de los modelos de
+	 * archimate de un proyecto. Es importante tener en cuenta que solo se listan
+	 * los elementos encontrados en modelos con el mismo nombre aunque diferente
+	 * versión.
+	 * 
+	 * @param projectName
+	 * @param modelName   Este es el nombre base con el cual se buscarán los
+	 *                    elementos en los demás modelos. Si el modelo se llama
+	 *                    bus-to-app_v2, entonces se buscarán los elementos en todos
+	 *                    los modelos que se llamen 'bus-to-app'. Es importante que
+	 *                    el nombre del modelo no use el _ dentro del nombre.
+	 * @return
+	 */
+	public List<APIModelElement> listModelElementsArchi(String projectName, String modelName) {
+		Set<APIModelElement> resp = new HashSet<APIModelElement>();
+
+		Document input = null;
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+		try {
+
+			// Listar todos los modelos que sean del proyecto y que sean de tipo
+			// functionalview
+			List<Model> modelsList = (new APIModelDerby()).listXMLRute(projectName, "archimate", modelName);
+
+			for (Model m : modelsList) {
+
+				// Obtener la ruta del xml
+				String xmlRute = m.getRute();
+
+				File f2 = new File(xmlRute);
+
+				DocumentBuilder builder = factory.newDocumentBuilder();
+				input = builder.parse(f2);
+
+				// ***************************************************************
+				// ELEMENTS
+				// ***************************************************************
+
+				NodeList cellNodes = input.getElementsByTagName("element");
+
+				for (int i = 0; i < cellNodes.getLength(); i++) {
+					Element e = (Element) cellNodes.item(i);
+					resp.add(new APIModelElement(e.getAttribute("name"), e.getAttribute("type")));
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// ********************************
+		List<APIModelElement> finalList = new ArrayList<APIModelElement>();
+		if (resp.size() > 0) {
+//			System.out.println("******************************************");
+
+//			System.out.println("resp.size = "+resp.size());
+
+			Iterator<APIModelElement> i = resp.iterator();
+			int ite = 0;
+			while (i.hasNext()) {
+
+				APIModelElement val = i.next();
+				String nameVal = val.getName();
+
+				if (ite == 0) {
+					finalList.add(val);
+					ite++;
+				} else {
+					boolean found = false;
+					for (int t = 0; t < finalList.size(); t++) {
+						APIModelElement listVal = finalList.get(t);
+						String nameListVal = listVal.getName();
+
+//	            		System.out.println("'"+nameVal + "' compareTo '"+nameListVal+"' = "+nameVal.compareTo(nameListVal));
+
+						if (nameVal.compareTo(nameListVal) < 0) {
+							finalList.add(t, val);
+							found = true;
+							break;
+						}
+					}
+					if (!found)
+						finalList.add(val);
+				}
+			}
+
+//	        System.out.println("finalList.size = " + finalList.size());
+
+		}
+
+		return finalList;
+	}
+
+	/**
+	 * Este metodo se encarga de listar todos los componentes y conectos de los
+	 * modelos relacionados a un proyecto.
+	 * 
+	 * @param params
+	 * @return
+	 */
+	public List<APIModelElement> listModelElementsCnC(String projectName) {
+
+		Set<APIModelElement> resp = new HashSet<APIModelElement>();
+
+		Document input = null;
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+		try {
+
+			// Listar todos los modelos que sean del proyecto y que sean de tipo
+			// functionalview
+			List<Model> modelsList = (new APIModelDerby()).listXMLRute(projectName, "functionalview");
+
+			for (Model m : modelsList) {
+
+				// Obtener la ruta del xml
+				String xmlRute = m.getRute();
+
+				File f2 = new File(xmlRute);
+
+				DocumentBuilder builder = factory.newDocumentBuilder();
+				input = builder.parse(f2);
+
+				// ***************************************************************
+				// COMPONENTS
+				// ***************************************************************
+
+				NodeList cellNodes = input.getElementsByTagName("components");
+
+				for (int i = 0; i < cellNodes.getLength(); i++) {
+					Element e = (Element) cellNodes.item(i);
+					resp.add(new APIModelElement(e.getAttribute("name"), "Component"));
+				}
+
+				// ***************************************************************
+				// CONNECTORS
+				// ***************************************************************
+
+				cellNodes = input.getElementsByTagName("connectors");
+
+				for (int i = 0; i < cellNodes.getLength(); i++) {
+					Element e = (Element) cellNodes.item(i);
+					resp.add(new APIModelElement(e.getAttribute("name"), "Connector"));
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// ********************************
+
+		List<APIModelElement> finalList = new ArrayList<APIModelElement>();
+		if (resp.size() > 0)
+			finalList.addAll(resp);
+
+		return finalList;
+	}
+
+	public void updateElementsPosition(String filtro) {
+		// ccmodel?con2&231@202?con1&146@236?DataAccess&85@31?MaterialLoan&413@31?MaterialReturn&248@31
+
+		String[] elements = filtro.split("\\+");
+		String modelName = elements[0];
+
+		Document input = null;
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+		try {
+			// Obtener el xml
+			String xmlRute = (new APIModelDerby()).get(modelName);
+
+			File f2 = new File(xmlRute);
+
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			input = builder.parse(f2);
+
+			// ***************************************************************
+			// COMPONENTS
+			// ***************************************************************
+
+			NodeList cellNodes = input.getElementsByTagName("components");
+
+			// Por cada elemento, se hace esto
+
+			for (int t = 1; t < elements.length; t++) {
+				String element = elements[t];
+
+				String[] elementStructure = element.split("&");
+
+				String elementName = elementStructure[0];
+				String position = elementStructure[1];
+
+				String[] positionDecomposed = position.split("@");
+
+				String posX = positionDecomposed[0];
+				String posY = positionDecomposed[1];
+
+				for (int i = 0; i < cellNodes.getLength(); i++) {
+					Element e = (Element) cellNodes.item(i);
+					if (e.getAttribute("name").equals(elementName)) {
+						e.setAttribute("posX", posX);
+						e.setAttribute("posY", posY);
+						break;
+					}
+				}
+
+			}
+
+			// ***************************************************************
+			// CONNECTORS
+			// ***************************************************************
+
+			cellNodes = input.getElementsByTagName("connectors");
+
+			// Por cada elemento, se hace esto
+
+			for (int t = 1; t < elements.length; t++) {
+				String element = elements[t];
+
+				String[] elementStructure = element.split("&");
+
+				String elementName = elementStructure[0];
+				String position = elementStructure[1];
+
+				String[] positionDecomposed = position.split("@");
+
+				String posX = positionDecomposed[0];
+				String posY = positionDecomposed[1];
+
+				for (int i = 0; i < cellNodes.getLength(); i++) {
+					Element e = (Element) cellNodes.item(i);
+					if (e.getAttribute("name").equals(elementName)) {
+						e.setAttribute("posX", posX);
+						e.setAttribute("posY", posY);
+						break;
+					}
+				}
+			}
+
+			DOMSource source = new DOMSource(input);
+
+			StreamResult result = new StreamResult(f2);
+
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+
+			transformer.transform(source, result);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+//	public static void main(String[] args) {
+//		(new ModelMediator()).buildTimeLine("chiper&first");
+//	}
+
+	public List<APIFact> listFacts(String params) throws Exception {
+		List<APIFact> list = null;
+
+		String[] arrayP = params.split("&");
+
+		String projectName = arrayP[0];
+		String boiName = arrayP[1];
+
+		String xml = "";
+
+		// boiModels save the xml routes of the boi models.
+		xml = (new APIModelDerby()).get(boiName, projectName);
+
+		// Lo transforma en json
+		list = (new RebelCoreJSONGenerator()).buildListOfFacts(xml, boiName);
+
+		return list;
+	}
+
+	/**
+	 * 
+	 * @param params projectname&bioname
+	 * @return
+	 * @throws Exception
+	 */
+	public String buildTimeLine(String params) throws Exception {
+		String resp = null;
+
+		if (params != null) {
+
+			String[] arrayP = params.split("&");
+
+			String projectName = arrayP[0];
+			String boiName = arrayP[1];
+
+			String xml = "";
+
+			// boiModels save the xml routes of the boi models.
+			xml = (new APIModelDerby()).get(boiName, projectName);
+
+			// Lo transforma en json
+			RebelCoreJSONGenerator c = new RebelCoreJSONGenerator();
+			resp = c.buildJSONForTimeline(xml, boiName);
+
+		}
+
+		return resp;
+	}
+
+	/**
+	 * Este metodo se usa para cargar los modelos de Archi historicos en la
+	 * visualizacion de los Facts.
+	 * 
+	 * @param params
+	 * @return
+	 * @throws Exception
+	 */
+	public String buildBOIDiagramArchi(String params) throws Exception {
+		return null;
+	}
+
+	public String buildBOIDiagram(String params) throws Exception {
+		String resp = null;
+
+		if (params != null) {
+
+			String[] arrayP = params.split("&");
+
+			// Valida que se vaya a cargar el BOI por primera vez. Buscando y mostrando
+			// el FV mas reciente
+			if (arrayP.length == 2) {
+
+				String projectName = arrayP[0];
+				String boiName = arrayP[1];
+
+				String xml = "";
+
+				xml = (new APIModelDerby()).get(boiName, projectName);
+
+				// Lo transforma en json
+				RebelCoreJSONGenerator c = new RebelCoreJSONGenerator();
+				resp = c.buildJSONForJoint(xml, boiName);
+
+				// Cuando vienen tres parametros, es porque se manda a cargar un FV historico
+				// como parte del BOI. Esta parte se ejecuta desde un llamado de una entrada del
+				// Timeline
+			} else if (arrayP.length == 3) {
+
+				String projectName = arrayP[0];
+				String boiName = arrayP[1];
+				String functionalView = arrayP[2];
+
+				String xml = "";
+				xml = (new APIModelDerby()).get(boiName, projectName);
+
+				// Lo transforma en json
+				RebelCoreJSONGenerator c = new RebelCoreJSONGenerator();
+				resp = c.buildJSONForJoint(xml, boiName, functionalView);
+
+			}
+
+		}
+
+		return resp;
+	}
+
+	public String buildBOITable(String params) throws Exception {
+		String resp = null;
+
+		if (params != null) {
+
+			String[] arrayP = params.split("&");
+
+			String projectName = arrayP[0];
+			String boiName = arrayP[1];
+
+			String xml = "";
+
+			xml = (new APIModelDerby()).get(boiName, projectName);
+
+			// Lo transforma en json
+			RebelCoreJSONGenerator c = new RebelCoreJSONGenerator();
+			resp = c.buildHTMLForTable(xml, boiName);
+
+		}
+
+		return resp;
+	}
+
+	/**
+	 * Lista todos los BOI donde se encuentre coincidencia con el nombre del
+	 * elemento arquitectural pasado como parámetro
+	 * 
+	 * @param params Los parametros vienen sin letra, el primero es el proyecto, el
+	 *               segundo es el nombre del elemento
+	 * @return
+	 * @throws Exception
+	 */
+	public List<APIBOI> listBOIWithElement(String params) throws Exception {
+
+		List<APIBOI> list = new ArrayList<APIBOI>();
+
+		// 1. Obtener el nombre del proyecto y el nombre del elemento
+		String[] arrayP = params.split("&");
+
+		String projectName = arrayP[0];
+		String elementName = arrayP[1];
+
+		// 2. Listar todos los BOIs que correspondan a ese proyecto
+		List<APIBOI> tempList = (new APIModelDerby()).listBOIs(projectName);
+
+		// 3. Usando la ruta, instancio cada BOI
+		if (tempList != null) {
+			for (APIBOI boi : tempList) {
+
+				Resource res = (new CoreModel()).buildModelRebelCore(boi.getUrl(), boi.getName());
+				Project rebelcore_Project = (Project) res.getContents().get(0);
+
+				// 4. Consulto en la clase Fact por el atributo "elementName"
+				for (BlockOfInterest rebelcore_boi : rebelcore_Project.getBlockofinterest()) {
+					for (Fact rebelcore_fact : rebelcore_boi.getFact()) {
+						if (rebelcore_fact.getElementName().toUpperCase().contains(elementName.toUpperCase())) {
+
+							int total = (new RebelCoreJSONGenerator()).countArchitecturalElementsByName(boi.getUrl(),
+									boi.getName());
+							list.add(new APIBOI("seeboi.html?p=" + projectName + "&boi=" + boi.getName(), boi.getName(),
+									total));
+						}
+					}
+				}
+			}
+		}
+
+		return list;
+	}
+
+	public List<APIBOI> listBOIs(String projectName) throws Exception {
+
+		List<APIBOI> list = null;
+
+		APIModelDerby pd = new APIModelDerby();
+		List<Model> listBOIs = pd.listByName(projectName);
+
+		list = new ArrayList<APIBOI>();
+
+		if (listBOIs != null && listBOIs.size() > 0) {
+
+			for (Model boi : listBOIs) {
+				int total = (new RebelCoreJSONGenerator()).countArchitecturalElementsByName(boi.getRute(),
+						boi.getName());
+
+				// ==================================================================
+				// INSTANCIACION DEL BOI PARA OBTENER LA VISTA MAS RECIENTE
+				// ==================================================================
+
+				String lastModelName = "";
+
+				CoreModel core = new CoreModel();
+				Resource res = core.loadResource(boi.getRute());
+				if (res != null) {
+					rebel_core.Project coreProject = (rebel_core.Project) res.getContents().get(0);
+					if (coreProject != null) {
+						if (coreProject.getView() != null && coreProject.getView().size() > 0) {
+							lastModelName = coreProject.getView().get(coreProject.getView().size() - 1).getName();
+						}
+					}
+				}
+
+				// ==================================================================
+				// LISTA DE PARAMETROS
+				// ==================================================================
+
+				String params = "p=" + boi.getProjectName() + "&boi=" + boi.getName() + "&mn=" + lastModelName;
+
+				// ==================================================================
+				// CONFIGURACION DEL ICONO
+				// ==================================================================
+
+				String syncIcon = "";
+				if (boi.getSyncState() != null) {
+					if (boi.getSyncState().equals("SEARCHING"))
+						syncIcon = "syncprogressicon.png";
+					else if (boi.getSyncState().equals("DONE"))
+						syncIcon = "syncdoneicon.png";
+				} else {
+					syncIcon = "editicon.png";
+				}
+
+				list.add(new APIBOI("seeboi.html?" + params, boi.getName(), total, "linkfactstoadrs.html?" + params,
+						syncIcon, boi.getId()));
+
+			}
+		}
+
+		return list;
+	}
+
+	public List<APIModelElement> listArtifactsProject(String projectName) throws Exception {
+
+		List<APIModelElement> list = (new APIModelDerby()).listAllArtifacts(projectName);
+
+		return list;
+	}
+
+	public String findRelationshipsBySimilarity(String boiName) {
+
+		// 1. Utilizo el boi para encontrar los elementos arquitecturales. Cada uno de
+		// estos tiene una asociación a un Fact.
+
+		// 2. Para cada elemento arquitectural (después completo)
+
+		String architecturalElement = "Payment";
+		String[] sentences = { "We have to change the payment component to a queue mechanism",
+				"It was better to remove the dependencies for the payment and increase its throughput" };
+
+		// Se debe descomponer cada sentencia en sus palabras, y hacer la comparación
+		// palabra por palabra.
+		// Si dentro de esa sentencia se encuentra una coincidencia alta, entonces se
+		// toma toda la frase.
+
+		SemanticSimilarityExec exec = null; //new SemanticSimilarityExec();
+
+		for (String sentence : sentences) {
+			System.out.println("ModelMediator.findRelationshipsBySimilarity ::: sentence = " + sentence);
+			try {
+//				System.out.println(exec.sentenceHasSimilarities(architecturalElement, sentence));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return "OK";
+	}
+
+	/**
+	 * Este método se encarga de establecer la asociación entre un Fact y una
+	 * Decisión de arquitectura.
+	 * 
+	 * @param params projectname@boiname & idfact@idadr & idfact@idadr &
+	 *               idfact@idadr
+	 * @return OK | NOK
+	 */
+	public List<APIFact> setLinkFactToADR(String params) throws Exception {
+
+//		System.out.println("ModelMediator.setLinkFactToADR ::: params = "+params);
+
+		List<APIFact> resp = null;
+
+		String projectName = "", boiName = "";
+
+		// Descomposion de los parametros
+		String[] arrayParams = params.split("&");
+		if (arrayParams.length > 0) {
+			String projectAndBOI = arrayParams[0];
+
+			String[] arrayProjectAndBOI = projectAndBOI.split("@");
+			if (arrayProjectAndBOI.length == 2) {
+				projectName = arrayProjectAndBOI[0];
+				boiName = arrayProjectAndBOI[1];
+			} else {
+				throw new Exception("No fueron recibidos el nombre del proyecto y el nombre del bloque de interes");
+			}
+
+		}
+
+		// Traer el modelo BOI usando el nombre del proyecto y el nombre del BOI
+		APIBOI boiBD = (new APIModelDerby()).getBOI(projectName, boiName);
+
+		CoreModel core = new CoreModel();
+
+		Resource res = core.buildModelRebelCore(boiBD.getUrl(), boiBD.getName());
+		Project boiProject = (Project) res.getContents().get(0);
+
+		// 1. Traer todos los modelos de los ADRs. Cargar cada modelo y almacenarlo en
+		// un HashMap
+
+		// 1.1 Consultar en la BD
+		List<Model> listADR = (new APIModelDerby()).listArchitecturalDecisions(projectName);
+
+		HashMap<String, rebel_core.Decision> mapADRs = new HashMap<String, rebel_core.Decision>();
+
+		// 1.2 Crear el objeto Decision
+		if (listADR != null) {
+			for (Model modelADR : listADR) {
+				String modelName = modelADR.getName();
+				String modelRoute = modelADR.getRute();
+
+				rebel_architecturaldecisions.Project projADR = Util.buildModelRebelArchitecturalDecisions(modelRoute,
+						modelName);
+				Decision decisionADR = projADR.getDecisions().get(0);
+				if (decisionADR != null) {
+					rebel_core.Decision temporalDec = ModelFiltering.getRebelDecision(core, decisionADR);
+					mapADRs.put(modelName, temporalDec);
+					// Add to Project
+					boiProject.getDecisions().add(temporalDec);
+				}
+			}
+		}
+
+		if (boiProject != null) {
+			// Solo existirá una. Cada BOI se crea como un archivo, así sean varias para el
+			// mismo proyecto.
+			for (BlockOfInterest boi : boiProject.getBlockofinterest()) {
+				if (boi.getFact() != null) {
+					for (Fact fact : boi.getFact()) {
+						// Buscar este ID en la lista que llegó como parametros
+						String idFact = fact.getId();
+
+						if (arrayParams.length > 1) {
+							for (int i = 1; i < arrayParams.length; i++) {
+								String idFactIdADRPair = arrayParams[i];
+								String[] arrayidFactIdADRPair = idFactIdADRPair.split("@");
+								if (arrayidFactIdADRPair.length == 2) {
+									String idFactByParam = arrayidFactIdADRPair[0];
+									String idADRByParam = arrayidFactIdADRPair[1];
+
+//									System.out.println("ModelMediator.setLinkFactToADR ::: idFactByParam = "+idFactByParam+" -- idFact = "+idFact);
+
+									if (idFact.equals(idFactByParam)) {
+//										System.out.println("ModelMediator.setLinkFactToADR ::: Entering last IFs");
+
+										rebel_core.Decision decADR = mapADRs.get(idADRByParam);
+
+										if (decADR != null) {
+
+											fact.getArchitecturaldecision().add(decADR);
+											break;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			res.save(Collections.EMPTY_MAP);
+
+			String params2 = projectName + "&" + boiName;
+			resp = listFacts(params2);
+//			System.out.println("ModelMediator.setLinkFactToADR ::: Updated model");
+		}
+
+		return resp;
+	}
+
+	/**
+	 * 
+	 * @param params projectName & boiName & idAD & idFact -- Spaces added for
+	 *               readibility
+	 * @return
+	 */
+	public List<APIFact> removeADToFact(String params) throws Exception {
+		List<APIFact> list = null;
+
+		String[] arrayP = params.split("&");
+
+		String projectName = arrayP[0];
+		String boiName = arrayP[1];
+		String idAD = arrayP[2];
+		String idFact = arrayP[3];
+
+		String xml = "";
+
+		// boiModels save the xml routes of the boi models.
+		xml = (new APIModelDerby()).get(boiName, projectName);
+
+		// Buscar el Fact
+		Resource res = (new CoreModel()).buildModelRebelCore(xml, boiName);
+		Project project = (Project) res.getContents().get(0);
+
+		if (project != null) {
+			for (BlockOfInterest boi : project.getBlockofinterest()) {
+
+				for (Fact f : boi.getFact()) {
+//					System.out.println("f.getId() = "+f.getId()+" - idFact = "+idFact);
+					if (f.getId().equals(idFact)) {
+						// Sacar la lista de ADs y Buscar el idAD
+						EList<rebel_core.Decision> decisions = f.getArchitecturaldecision();
+						if (decisions != null) {
+							for (int i = 0; i < decisions.size(); i++) {
+								rebel_core.Decision dec = decisions.get(i);
+//								System.out.println("dec.getNumber() = "+dec.getNumber()+" - idAD = "+idAD);
+								if (dec.getNumber().equals(idAD)) {
+									decisions.remove(i);
+//									f.getArchitecturaldecision().clear();
+//									f.getArchitecturaldecision().addAll(decisions);
+									res.save(Collections.EMPTY_MAP);
+//									System.out.println("Encontro y borro");
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		// Realizando
+		list = listFacts(params);
+
+		return list;
+	}
+
+	public List<APIView> listBOIViews(String params) throws Exception {
+
+		List<APIView> resp = null;
+		ArrayList<APIView> finalOrderedList = null;
+
+		// *********************************************
+		// EXTRACCION DEL NOMBRE DEL PROYECTO Y DEL BOI
+		// *********************************************
+		String[] arrayP = params.split("&");
+		String projectName = arrayP[0];
+		String boiName = arrayP[1];
+
+		// ************************************
+		// GENERACION DEL XML
+		// ************************************
+		String xml = "";
+
+		// boiModels save the xml routes of the boi models.
+		xml = (new APIModelDerby()).get(boiName, projectName);
+
+		// Buscar el Fact
+		Resource res = (new CoreModel()).buildModelRebelCore(xml, boiName);
+		Project project = (Project) res.getContents().get(0);
+
+		HashSet<String> hs = new HashSet<String>();
+
+		if (project != null) {
+			for (BlockOfInterest boi : project.getBlockofinterest()) {
+				for (Fact f : boi.getFact()) {
+					for (ArchimateView av : f.getView()) {
+						hs.add(av.getName());
+					}
+				}
+			}
+
+			ArrayList<String> orderedList = new ArrayList<String>();
+			finalOrderedList = new ArrayList<APIView>();
+
+			// ************************************
+			// LLENADO DE LA LISTA PARA RETORNAR
+			// ************************************
+			if (hs.size() > 0) {
+				resp = new ArrayList<APIView>();
+				for (String name : hs) {
+
+					String id = name.substring(name.indexOf("_") + 1);
+					resp.add(new APIView(id, name));
+					orderedList.add(id);
+				}
+				// Se recorre la lista para ordenarla
+				if (resp.size() > 0) {
+					Collections.sort(orderedList, Collections.reverseOrder());
+
+					for (int t = 0; t < orderedList.size(); t++) {
+						String id = orderedList.get(t);
+
+						for (int u = 0; u < resp.size(); u++) {
+							APIView lastView = resp.get(u);
+							if (lastView.getId().equals(id)) {
+								finalOrderedList.add(lastView);
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return finalOrderedList;
+	}
+
+	public List<APIElement> listBOIElements(String params) throws Exception {
+		List<APIElement> resp = null;
+		ArrayList<APIElement> finalOrderedList = null;
+
+		// *********************************************
+		// EXTRACCION DEL NOMBRE DEL PROYECTO Y DEL BOI
+		// *********************************************
+		String[] arrayP = params.split("&");
+		String projectName = arrayP[0];
+		String boiName = arrayP[1];
+
+		// ************************************
+		// GENERACION DEL XML
+		// ************************************
+		String xml = "";
+
+		// boiModels save the xml routes of the boi models.
+		xml = (new APIModelDerby()).get(boiName, projectName);
+
+		// Buscar el Fact
+		Resource res = (new CoreModel()).buildModelRebelCore(xml, boiName);
+		Project project = (Project) res.getContents().get(0);
+
+		HashSet<String> hs = new HashSet<String>();
+
+		if (project != null) {
+			for (BlockOfInterest boi : project.getBlockofinterest()) {
+				for (Fact f : boi.getFact()) {
+					for (ArchimateView av : f.getView()) {
+						for (rebel_core.Element boiElement : av.getElement()) {
+							if (boiElement.isBoiElement())
+								hs.add(boiElement.getName());
+						}
+					}
+				}
+			}
+
+			ArrayList<String> orderedList = new ArrayList<String>();
+			finalOrderedList = new ArrayList<APIElement>();
+
+			// ************************************
+			// LLENADO DE LA LISTA PARA RETORNAR
+			// ************************************
+			if (hs.size() > 0) {
+				resp = new ArrayList<APIElement>();
+				for (String name : hs) {
+
+					resp.add(new APIElement(name, name));
+					orderedList.add(name);
+				}
+				// Se recorre la lista para ordenarla
+				if (resp.size() > 0) {
+					Collections.sort(orderedList, Collections.reverseOrder());
+
+					for (int t = 0; t < orderedList.size(); t++) {
+						String id = orderedList.get(t);
+
+						for (int u = 0; u < resp.size(); u++) {
+							APIElement lastView = resp.get(u);
+							if (lastView.getId().equals(id)) {
+								finalOrderedList.add(lastView);
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return finalOrderedList;
+	}
+	
+	public static void main(String[] args) throws Exception {
+		(new ModelMediator()).trainingModel("ShowProject&Great");
+	}
+
+	/**
+	 * Responsable de tomar los datos del Fact para un determinado BOI, prepararlos y
+	 * enviarlos a entrenar un modelo.
+	 * @param params
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("deprecation")
+	public String trainingModel(String params) throws Exception {
+
+		String resp = "NOK";
+		String fileContent = "date,prevelementnames,types,relationtypes,sourceelementname,sourceelementtype,targetelementname,isnewelement,targetelementtype,facttype,relatontype,action,atd\n";
+		
+		// *********************************************
+		// EXTRACCION DEL NOMBRE DEL PROYECTO Y DEL BOI
+		// *********************************************
+		String[] arrayP = params.split("&");
+		String projectName = arrayP[0];
+		String boiName = arrayP[1];
+
+		// ************************************
+		// INSTANCIACION DEL PROJECT
+		// ************************************
+		String xml = "";
+
+		// boiModels save the xml routes of the boi models.
+		xml = (new APIModelDerby()).get(boiName, projectName);
+
+		// Buscar el Fact
+		Resource res = (new CoreModel()).buildModelRebelCore(xml, boiName);
+		Project project = (Project) res.getContents().get(0);
+
+		
+		// ************************************
+		// IMPRESION DE FACTS
+		// ************************************
+
+		if (project != null) {
+			for (BlockOfInterest boi : project.getBlockofinterest()) {
+				for (Fact f : boi.getFact()) {
+					StringBuilder stringBuilder = new StringBuilder();
+					stringBuilder.append(f.getDate().getYear());
+					stringBuilder.append("-");
+					stringBuilder.append((f.getDate().getMonth() + 1));
+					stringBuilder.append("-");
+					stringBuilder.append(f.getDate().getDate());
+					String fecha = stringBuilder.toString();
+					
+					// Guarda el nombre de los elementos de origen y destino en una relación
+					String origen = "", destino = "";
+					String tipoFact = "";
+					
+					/* -----------------------------------------
+					 * Bloque para la extracción del nombre del 
+					 * elemento creo, o de los elementos de la
+					 * relación
+					 */
+					if(f.getElementName().contains("->")) {
+						String[] elementos = f.getElementName().split(" -> ");
+						origen = elementos[0];
+						destino = elementos[1];
+					}else
+						origen = f.getElementName();
+					
+					/* -----------------------------------------
+					 * 
+					 */
+					if(f.getElementType().contains("_"))
+						tipoFact = "ELEMENT";
+					else
+						tipoFact = "RELATION";
+					
+					/* -----------------------------------------
+					 * Búsqueda del tipo del elemento de destino 
+					 */
+					String sourceType = "";
+					String targetType = "";
+					if(f.getView()!=null) {
+						for(ArchimateView vForTarget : f.getView()) {
+							if(vForTarget.getRelation()!=null) {
+								for(Relation relForTarget : vForTarget.getRelation()) {
+									String sourceFT = relForTarget.getSource().getName();
+									String targetFT = relForTarget.getTarget().getName();
+									
+									if(sourceFT.equals(origen) && targetFT.equals(destino)) {
+										targetType = relForTarget.getTarget().getType().getLiteral();
+										sourceType = relForTarget.getSource().getType().getLiteral();
+									}
+								}
+							}
+						}
+					}
+					/* -----------------------------------------
+					 * En este bloque se revisaran los diagramas de archimate para poder 
+					 * establecer si el elemento target es creado en la version actual, o 
+					 * en una version anterior.
+					 */
+					
+					String esNuevoString = "";
+					if(tipoFact.equals("RELATION")) {
+						boolean esNuevo = identificarSiTargetEsNuevo(project, destino, f.getDate(), f.getView().get(0).getName());
+						esNuevoString = String.valueOf(esNuevo);
+					}
+					
+					
+					/* -----------------------------------------
+					 * En este bloque se extraen las relaciones anteriores del elemento de interés
+					 * del Fact.
+					 */
+					
+					String previousRelations = findPreviousRelationships(project, origen, f.getDate());
+					
+					
+					/* -----------------------------------------
+					 * CONSIDERACIONES
+						- Incluir nombre y tipo de elemento de la relacion, tanto origen como destino
+						- Vale la pena incluir creación de elementos, o solo la relación entre ellos? 
+							* Crearlo en sí no implicaría TD porque no estaría relacionado con los demás elementos. 
+							* Puede ser TD cuando exista una relación.
+						- Apoyar la identificación con el uso de palabras clave de paper de issue trackers del 
+						  Brasilero (Using natural language processing to automatically detect self-admitted technical debt) y otro de 
+						  Krtuchen (Detecting Technical Debt through Issue Trackers.)
+						- Unir información textual con información de xmi. Para el caso de querer combinar los goals, outcomes y demás, para el entrenamiento.
+						- Cómo representar la información textual? Por ejemplo, justificación de la TD
+						- Permitir la ejecución de varios algortimos en paralelo para mostrar un promedio de los items candidatos.
+					 */
+					
+					/* -----------------------------------------	
+					 * (1) Si el Fact es de creación de elemento, entonces su tipo será el tipo del elemento.
+					 * (2) Si el Fact es de creación de relación, entonces su tipo será el tipo de relación.
+					 * 
+					 * Para el caso de (1), lo mejor sería que mostrara vacío, porque el tipo de elemento ya se muestra
+					 * en la variable 'sourceType'.
+					 */
+					String relationType = "";
+					if(tipoFact.equals("RELATION")) {
+						relationType = f.getElementType();
+					}
+					
+					String separador = ",";
+					
+					// date = fecha del fact
+					// prevelementnames = nombres de los elementos relacionados en una version anterior del modelo, para el mismo elemento de origen 
+					// types = tipos de elemento, de los elementos relacionados en una version anterior del modelo.
+					// relationtypes = tipos de relación que se tiene con los elementos
+					
+//					String fileContent = "date,prevelementnames,types,relationtypes,sourceelementname,sourceelementtype,targetelementname,esnuevo,targetelementtype,facttype,relatontype,action,atd\n";
+					
+					if(Math.random()*10<3) {
+						fileContent += fecha + separador + previousRelations + separador + origen + separador + sourceType + separador + 
+								destino + separador + esNuevoString + separador + targetType + separador + tipoFact + separador + relationType + 
+								separador + f.getAction() + separador + "y" + "\n";
+					}else {
+						fileContent += fecha + separador + previousRelations + separador + origen + separador + sourceType + separador + 
+								destino + separador + esNuevoString + separador + targetType + separador + tipoFact + separador + relationType + 
+								separador + f.getAction() + separador + "n" + "\n";
+					}
+				}
+			}
+		}
+		
+		System.out.println(fileContent.toLowerCase());
+
+		// ************************************
+		// ESCRITURA A ARCHIVO Y NOTIFICACION A WEKA
+		// ************************************
+		String fileName = boiName+"InputFile";
+		
+		if(writeInputFile(fileName, "csv", fileContent) ) {
+			SupervisedLearning wk = new SupervisedLearning();
+			double correct = wk.training(fileName, "csv");
+			resp = "Correctly Classified Instances: "+correct;
+		}		
+		
+		return resp;
+	}
+
+	private boolean writeInputFile(String fileName, String extension, String content) {
+		try {
+			FileWriter myWriter = new FileWriter(DATAFILESFOLDER+fileName+"."+extension);
+			myWriter.write(content);
+			myWriter.close();
+			System.out.println("ModelMediator.writeInputFile ::: Written file: "+DATAFILESFOLDER+fileName+"."+extension);
+			return true;
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/**
+	 * Este metodo se encarga de recorrer las vistas de archimate para identificar si 
+	 * el elemento Target fue creado en la vista donde se estableció la relación, o si 
+	 * fue creado en una vista anterior.
+	 * Las vistas se guardar en orden cronológico, por lo cual, su recorrido se haría de 
+	 * forma secuencial.
+	 * @param project
+	 * @param targetName
+	 * @return
+	 */
+	private boolean identificarSiTargetEsNuevo(Project project, String targetName, Date targetViewDate, String archimateViewName) {
+		boolean esNuevo = false;
+		Date targetDate = null;
+		
+		System.out.println("--------");
+		System.out.println("targetName = "+targetName);
+		System.out.println("archimateViewName = "+archimateViewName);
+		
+		if(!archimateViewName.isEmpty()) {
+			
+			// ************************************
+			// BLOQUE DE OBTENCION DE OTROS MODELOS
+			// ************************************
+			
+			// Se extrae la parte inicial del nombre: Layered_20201108. Se extrae "Layered"
+			String prenombre = "";
+			ArrayList<APIModelElement> listOfViews = null;
+			
+			String[] split = archimateViewName.split("_");
+			if(split.length>0) {
+				prenombre = split[0];
+			}
+			
+			System.out.println("prenombre = "+prenombre);
+			
+			// Se obtiene la lista de modelos que coinciden con el nombre del modelo
+			if(prenombre.length()>0) {
+				System.out.println("project.getId() = "+project.getId());
+				listOfViews = (new APIModelDerby()).obtenerListaDeVistas(project.getName(), prenombre);
+			}
+			
+			// ************************************
+			// BLOQUE DE RECORRIDO DE OTROS MODELOS
+			// ************************************
+			
+			System.out.println("listOfViews.size = "+listOfViews.size());
+			
+			if(listOfViews!=null && listOfViews.size()>0) {
+				
+				
+				for(int t=0;t<listOfViews.size();t++) {
+				
+					APIModelElement archiModel = listOfViews.get(t);
+					
+					System.out.println("archiModel.getName = "+archiModel.getName());
+					
+					Resource resourceModel = null;
+					rebel_archimate.Project projectArchimate = null;
+					
+					if(targetDate==null) {
+					
+						try {
+							resourceModel = (new AMModel()).loadResource(archiModel.getXmlroute());
+							projectArchimate = (rebel_archimate.Project) resourceModel.getContents().get(0);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					
+						if (projectArchimate != null) {
+							// Navego la vista para obtener los elementos y sus relaciones
+							rebel_archimate.View view = projectArchimate.getView().get(0);
+							
+							for (int j = 0; j < view.getElement().size(); j++) {
+								
+								rebel_archimate.Element element = view.getElement().get(j);
+								
+								if(element.getName().equals(targetName)) {
+									targetDate = view.getDate();
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			
+			// ************************************
+			// BLOQUE DE IDENTIFICACION DE SI ES NUEVO
+			// ************************************
+			if(targetDate!=null) {
+				
+				System.out.println("targetDate = "+targetDate);
+				System.out.println("targetViewDate = "+targetViewDate);
+				
+				if(targetDate.compareTo(targetViewDate)==0)
+					esNuevo = true;
+			}
+			
+			
+		}
+		
+		return esNuevo;
+	}
+	
+	
+//	private boolean identificarSiTargetEsNuevo(Project project, String targetName, Date targetViewDate) {
+//		boolean esNuevo = false;
+//		Date targetDate = null;
+//		
+//		System.out.println("--------");
+//		System.out.println("targetName = "+targetName);
+//		
+//		if(project!=null) {
+//			for (int i = 0; i < project.getView().size(); i++) {
+//				
+//				// Mientras no se haya encontrado la fecha del elemento de destino
+//				if(targetDate==null) {
+//				
+//					ArchimateView view = project.getView().get(i);
+//					Date viewDate = view.getDate();
+//					
+//					System.out.println("*******");
+//					System.out.println("Archimate name = "+view.getName());
+//					System.out.println("Archimate viewDate = "+viewDate);
+//					
+//					// Se recorren todos los elementos para encontrar el target.
+//					if(view!=null) {
+//						for (int j = 0; j < view.getElement().size(); j++) {
+//							
+//							rebel_core.Element element = view.getElement().get(j);
+//							
+//							if(element.getName().equals(targetName)) {
+//								targetDate = viewDate;
+//								break;
+//							}
+//						}
+//					}					
+//				}				
+//			}
+//			
+//			if(targetDate!=null) {
+//				
+//				
+//				System.out.println("targetDate = "+targetDate);
+//				System.out.println("targetViewDate = "+targetViewDate);
+//				
+//				if(targetDate.compareTo(targetViewDate)==0)
+//					esNuevo = true;
+//			}
+//			
+//		}
+//		
+//		return esNuevo;
+//	}
+	
+	/**
+	 * Busca en el modelo anterior (por fecha) las relaciones del elemento de interés pasado como
+	 * parámetro. Obtiene los nombres de los elementos relacionados, el tipo de relación y el tipo
+	 * de elemento. Se construye una cadena de la forma "nombres elementos, tipo elementos, relaciones elementos".
+	 * La idea es concatenar este resultado a la cadena que se está construyendo. Serían tres columnas 
+	 * a agregar.
+	 * @param sourceElementName
+	 * @param sourceElementViewDate
+	 * @return
+	 */
+	private String findPreviousRelationships(Project project, String sourceElementName, Date sourceElementViewDate) {
+		String previousRelationships = "";
+		
+		String names = "";
+		String types = "";
+		String relationTypes = "";
+		
+		// Recorrer los modelos hasta el directamente anterior
+		
+		if(project!=null) {
+			for (int i = 0; i < project.getView().size(); i++) {
+				
+				ArchimateView view = project.getView().get(i);
+				ArchimateView nextView;
+				
+				// Obtengo el view siguiente para ver si este (view) es el directamente anterior
+				if(i+1<project.getView().size() && project.getView().get(i+1)!=null) {
+					nextView = project.getView().get(i+1);
+					
+					if(nextView.getDate().compareTo(sourceElementViewDate)==0) {
+						// Significa que son iguales. Es decir, (view) sería la vista
+						// directamente anterior, y por tanto es esta la que necesitamos
+						// para encontrar las relaciones del elemento.
+						
+						for (int j = 0; j < view.getRelation().size(); j++) {
+							
+							Relation relat = view.getRelation().get(j);
+							
+							rebel_core.Element objectRelation = null;
+							
+							// Relaciones como origen
+							if(relat.getSource().getName().equals(sourceElementName)) {
+								
+								objectRelation = relat.getTarget();
+								
+							// Relaciones como destino
+							}else if(relat.getTarget().getName().equals(sourceElementName)) {
+								
+								objectRelation = relat.getSource();
+								
+							} 
+							
+							if(objectRelation!=null) {
+								names += objectRelation.getName() + " ";
+								types += objectRelation.getType().getName() + " ";
+								relationTypes += relat.getType().getName() + " ";
+							}
+							
+						}						
+						
+						break;
+					}
+				
+				}
+				
+			}
+			
+			previousRelationships = names + "," + types + "," + relationTypes;
+			
+		}
+		
+		return previousRelationships;
+	}
+
+}

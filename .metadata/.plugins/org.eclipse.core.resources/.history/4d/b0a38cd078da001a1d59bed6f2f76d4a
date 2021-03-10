@@ -1,0 +1,317 @@
+package uniandes.rebelapi.mediator;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.emf.ecore.resource.Resource;
+
+import rebel_componentandconnector.Project;
+import rebel_core.Fact;
+import rebel_core.FunctionalView;
+import rebel_github.Message;
+import uniandes.rebel.core.model.CoreModel;
+import uniandes.rebelapi.bo.APIModelElement;
+import uniandes.rebelapi.bo.Model;
+import uniandes.rebelapi.db.APIModelDerby;
+import uniandes.rebelapi.similarity.SemanticSimilarityExec;
+import uniandes.rebelapi.util.ModelComparison;
+import uniandes.rebelapi.util.ModelFiltering;
+import uniandes.rebelapi.util.Util;
+
+public class RebelMediator {
+
+	public String boiCreation(String projectName, String boiName, ArrayList<String> componentsName, ArrayList<String> connectorsName) {
+		
+		String resp = "NOK";
+		
+		try {
+		
+			// Listar todos los modelos que sean del proyecto y que sean de tipo functionalview
+			List<Model> modelsList = (new APIModelDerby()).listXMLRute(projectName);
+			
+			
+			// Se crea el modelo Rebel Core donde se pasaran los modelos
+			Resource resource = CoreModel.getInstance().createModel(projectName, boiName);
+			
+			// Llena el model con los functional views obtenidos, y unicamente con los elementos
+			// seleccionados desde la GUI para el BoI
+			buildFunctionalViews(modelsList, boiName, componentsName, connectorsName);
+			
+			// Crea los Fact
+			rebel_core.BlockOfInterest boi = buildFacts(boiName);
+			
+			// Storing the model
+			CoreModel.getInstance().storeModel(projectName, boiName, "rebel");
+			
+			// Link heterogeneous artifacts - Asynchronous call
+			new Thread(() -> {
+				findAndLinkHeterogeneousArtifacts(boi, resource);
+			}).start();
+			
+			resp = "OK";
+			
+		}catch(Exception e) {
+			resp = e.getMessage();
+			e.printStackTrace();
+		}
+		
+		return resp;
+		
+	}
+	
+	/**
+	 * Este metodo es responsable de buscar las coincidencias de los nombres de los elementos
+	 * arquitecturales en los demás artefactos heterogéneos.
+	 * @param boi
+	 * @param projectName Se utiliza para buscar los modelos en la BD
+	 */
+	private void findAndLinkHeterogeneousArtifacts(rebel_core.BlockOfInterest boi, Resource resource) {
+		
+		
+		
+		rebel_core.Project rebelProject = (rebel_core.Project) resource.getContents().get(0);
+		
+		SemanticSimilarityExec simiExec = new SemanticSimilarityExec();
+		
+		// Colocar el valor de la columna LOOKINARTIF a SEARCHING
+		
+		try {
+			int rowsUpdated = (new APIModelDerby()).updateLookForArtifactsState(boi.getName(), rebelProject.getName(), "SEARCHING");
+			System.out.println(rowsUpdated>0?"RebelMediator.findAndLinkHeterogeneousArtifacts ::: State changed to Searching":"RebelMediator.findAndLinkHeterogeneousArtifacts ::: Error updating state to Searching");
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		// Se recorre la lista de Fact
+		if(boi!=null) {
+			for(Fact fact : boi.getFact()) {
+				if(fact!=null) {
+					// Por cada Fact, se saca el nombre del elemento arquitectural, y la accion
+					String elementName = fact.getElementName();
+					String action = fact.getAction().getLiteral();
+					String descAction = fact.getObservations();
+					// incluir el tipo de elemento arquitectural?
+					
+					System.out.println("***************************");
+					System.out.println("RebelMediator.findAndLinkHeterogeneousArtifacts ::: Fact = "+elementName + " - " + action + " - " + descAction);
+					
+					// Se revisa que el nombre pueda dividirse (ej, separar nombres compuestos MaterialReturn)
+					ArrayList<String> wordsOfElementName = Util.separateInWords(elementName);
+					
+					// Lematización se hace en el python
+					// Se construye el conjunto de palabras
+					String finalName = "";
+					for(String word : wordsOfElementName) {
+						finalName += word + " ";
+					}
+					
+					// ************************************
+					// Acceder los modelos de GitHub para encontrar cuáles vincular a los Fact
+					// ************************************
+					
+					// Buscar en BD la lista de modelos para el proyecto pasado como parámetro
+					List<APIModelElement> listArtifacts = (new APIModelDerby()).listAllArtifacts(rebelProject.getName());
+					if(listArtifacts!=null && listArtifacts.size()>0) {
+						for(APIModelElement modelArtifact : listArtifacts) {
+							
+							// Para los artefactos que correspondan a mensajes de commit
+							if(modelArtifact.getType().equals("github")) {
+								// Se saca la ruta del modelo
+								String xmlRoute = modelArtifact.getXmlroute();
+							
+								rebel_github.Project ghProj = null;
+								
+								// Instancia los modelos encontrados usando el método de Util.
+								try {
+									ghProj = Util.buildModelRebelGitHub(xmlRoute);
+								} catch (Exception e) {
+									System.err.println("RebelMediator.findAndLinkHeterogeneousArtifacts ::: No se pudo crear la instancia Project del model de github. "+e.getMessage());
+								}
+								
+								if(ghProj!=null) {
+									// Only one message is actually stored, but the model allow to have several messages in one model.
+									Message msg = ghProj.getMessages()!=null?ghProj.getMessages().get(0):null;
+									
+									if(msg!=null) {
+										// Se extrae tanto el subject como el contenido del commit.
+										String fullCommitMessage = msg.getSubject() + " " + msg.getBody();
+										
+										System.out.println("finalName = "+finalName);
+										System.out.println("fullCommitMessage = "+fullCommitMessage);
+										
+										// Se divide el contenido en oraciones, y cada oración se pasa para hallar similaridad
+										// Para el caso de los commits, como el contenido es concreto, no sería necesario separarlo.
+										// Para cuando se incluyan los chats, sí habrá que considerarlos.
+										
+										// Enviar a comprobar similaridad
+										
+										boolean accuracy = simiExec.sentenceHasSimilarities(finalName, fullCommitMessage, 0.7);
+										
+										System.out.println("Comparison accuracy = "+simiExec.sentenceHasSimilarities(finalName, fullCommitMessage, 0.7));
+										System.out.println("");
+										
+										if(accuracy) {
+											// Si supera el umbral definido, se debe convertir el modelo rebel_github a rebel_core.
+											rebel_core.Message coreMsg = createMessage(msg);
+											rebel_core.Person pers = createPerson(msg.getPerson());
+											
+											if(coreMsg!=null) {
+											
+												
+												
+												// Asociarlo al Project
+												rebelProject.getPerson().add(pers);
+												
+												coreMsg.setPerson(pers);
+												rebelProject.getMessage().add(coreMsg);
+												
+												// A cuál Fact se debería asociar el resultado? Por eso debe incluirse el action.	
+												fact.getMessage().add(coreMsg);
+											}
+										}
+										
+									}
+								}
+							}								
+						}
+					}					
+				}
+			}
+		}
+		
+		// Colocar el valor de la columna LOOKINARTIF a DONE
+		try {
+			int rowsUpdated = (new APIModelDerby()).updateLookForArtifactsState(boi.getName(), rebelProject.getName(), "DONE");
+			System.out.println(rowsUpdated>0?"RebelMediator.findAndLinkHeterogeneousArtifacts ::: State changed to DONE":"RebelMediator.findAndLinkHeterogeneousArtifacts ::: Error updating state to DONE");
+			
+			resource.save(Collections.EMPTY_MAP);
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		
+	}
+	
+	private rebel_core.BlockOfInterest buildFacts(String boiName) {
+		// Se obtiene la lista de los FVs de acuerdo al proyecto.
+		rebel_core.Project proj =  CoreModel.getInstance().getProject();
+		
+		rebel_core.BlockOfInterest boi = CoreModel.getInstance().createBOI();
+		boi.setId((int)Calendar.getInstance().getTimeInMillis());
+		boi.setName(boiName);
+		proj.getBlockofinterest().add(boi);
+		
+		ArrayList<FunctionalView> modelsList = new ArrayList<FunctionalView>();
+		
+		for(FunctionalView fvs : proj.getFunctionalviews()) {
+			modelsList.add(fvs);
+		}
+		
+		
+		
+		// Comparacion dinamica de modelos		
+		ModelComparison mcSingleton = ModelComparison.getInstance();
+		
+		if(modelsList.size()==1) {
+			mcSingleton.comparisonOfModels(modelsList.get(0), null, boi);
+		}else if(modelsList.size()>1){
+			
+			// Para los create del primer modelo
+			mcSingleton.comparisonOfModels(modelsList.get(0), null, boi);
+			
+			// Para las comparaciones con modelos posteriores
+			for(int u=0;u<modelsList.size();u++) {
+				FunctionalView m1 = modelsList.get(u);
+				try {
+					FunctionalView m2 = modelsList.get(u+1);
+					mcSingleton.comparisonOfModels(m1, m2, boi);
+				}catch(IndexOutOfBoundsException ie) {
+					System.err.println("--- Comparison end");
+				}				
+			}
+		}
+		return boi;
+	}
+	
+	private void buildFunctionalViews(List<Model> modelsList, String boiName, ArrayList<String> componentsName, ArrayList<String> connectorsName) throws Exception {
+		// Se procesan todos los modelos de Componentes, porque puede ser que hayan modelos donde los elementos se eliminaran
+		// por tanto, se deberán incluir para mostrar que fueron eliminados
+		for(Model m : modelsList) {
+			
+			String xmlRute = m.getRute();
+			String sourceModelName = m.getName();
+			
+			// fvD = FunctionalView of the destiny model
+			FunctionalView fvD = CoreModel.getInstance().createFunctionalView(); 
+			
+			Project projectS = Util.buildModelRebelComponentAndConnector(xmlRute, sourceModelName);
+			rebel_componentandconnector.FunctionalView fvS = projectS.getFunctionalviews().get(0);
+			
+			fvD.setName(fvS.getName());
+			fvD.setDate(fvS.getDate());
+				
+			// Copiar la parte de los modelos, donde estén involucrados los elementos
+			// Se recorre la lista para irlos agregando al boi
+			for(String componentName : componentsName) {
+				ModelFiltering.copyComponent(projectS, fvD, boiName, componentName);
+			}
+			
+			for(String connectorName : connectorsName) {
+				ModelFiltering.copyConnector(projectS, fvD, boiName, connectorName);
+			}
+			
+			CoreModel.getInstance().getProject().getFunctionalviews().add(fvD);
+			
+		}
+	}
+	
+	private rebel_core.Message createMessage(rebel_github.Message msg){
+		rebel_core.Message coreMsg = null;
+		if(msg!=null){
+			coreMsg = CoreModel.getInstance().createMessage();
+			
+			coreMsg.setBody(msg.getBody());
+			coreMsg.setDate(msg.getDate());
+			coreMsg.setFooter(msg.getFooter());
+			coreMsg.setId(msg.getId());
+			coreMsg.setScope(msg.getScope());
+			coreMsg.setSubject(msg.getSubject());
+			
+			if(msg.getAction().getLiteral().equals("COMMIT"))
+				coreMsg.setAction(rebel_core.ACTIONTYPE.COMMIT);
+			
+			if(msg.getType().getLiteral().equals("FEAT")) {
+				coreMsg.setType(rebel_core.OPERATIONTYPE.FEAT);
+			}else if(msg.getType().getLiteral().equals("DOCS")) {
+				coreMsg.setType(rebel_core.OPERATIONTYPE.DOCS);
+			}else if(msg.getType().getLiteral().equals("FIX")) {
+				coreMsg.setType(rebel_core.OPERATIONTYPE.FIX);
+			}else if(msg.getType().getLiteral().equals("MODELS")) {
+				coreMsg.setType(rebel_core.OPERATIONTYPE.MODELS);
+			}else if(msg.getType().getLiteral().equals("REFACTOR")) {
+				coreMsg.setType(rebel_core.OPERATIONTYPE.REFACTOR);
+			} 
+			
+		}
+		return coreMsg;
+	}
+	
+	private rebel_core.Person createPerson(rebel_github.Person per){
+		rebel_core.Person person = null;
+		
+		if(per!=null) {
+			person = CoreModel.getInstance().createPerson();
+			person.setEmail(per.getEmail());
+			person.setName(per.getName());
+		}
+		
+		return person;
+	}
+	
+}

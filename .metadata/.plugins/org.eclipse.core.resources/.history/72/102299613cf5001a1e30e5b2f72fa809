@@ -1,0 +1,313 @@
+package uniandes.rebel.archimate;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import rebel_archimate.ELEMENTTYPE;
+import rebel_archimate.View;
+
+public class Processing {
+
+	private AMModel amModel;
+	private HashMap<String, rebel_archimate.Element> rebelElements;
+	// ID, AMElement
+	private HashMap<String, AMElement> sourceModelElements;
+	// ID, AMElement
+	private HashMap<String, AMRelations> sourceModelRelations;
+	// ID, AMElement
+	private HashMap<String, Element> sourceModelViews;
+
+	
+	public Processing(){
+		amModel = new AMModel();
+	}
+
+	/**
+	 * Este metodo se llama apenas se carga el archivo por la gui.
+	 * @param project
+	 * @param fileName El filename debe tener al final una subraya para separar la version o fecha del archivo. 
+	 * Esto se usa para diferenciar las vistas una vez quedan cargadas en el sistema.
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean execute(String project, String fileName) throws Exception {
+		String file = "/Users/borisperezg/temporaluploadfolder/" + fileName;
+
+		sourceModelElements = new HashMap<String, AMElement>();
+		// ID, AMElement
+		sourceModelRelations = new HashMap<String, AMRelations>();
+		// ID, AMElement
+		sourceModelViews = new HashMap<String, Element>();
+
+		// Open and read XML pasado como parametro
+		Document doc = ArchimateUtil.parseXML(file);
+		
+		// Se saca la informacion de los nodos
+		processingNodes(doc);
+		
+		// Se obtiene el prefijo que correspondera a lo que hay entre la subraya "_" y el ".extesion"
+		String prefijo = obtenerPrefijo(fileName);
+		
+		// Se crean y se persisten por separado cada View
+		buildViewModels(project, prefijo);
+		
+		return true;
+	}
+	
+	/**
+	 * Este metodo se encarga de crear un modelo, por cada vista de Archimate. Un modelo corresponde a un archivo físico, y a una entrada en la BD.
+	 */
+	private void buildViewModels(String project, String prefijo) throws Exception {
+		
+		if(sourceModelViews.size()>0) {
+		
+			for (Map.Entry<String, Element> modelView : sourceModelViews.entrySet()) {
+//		        modelView.getKey(); 
+//        		modelView.getValue();
+				
+				// Para almacenar los Elements en el MM de destino.
+				// Estos se usaran para llevar el registro de los objetos y poderles crear las relaciones.
+				rebelElements = new HashMap<String, rebel_archimate.Element>(); 
+				
+				Element element = modelView.getValue(); 
+				
+				String elementID = element.getAttribute("id");
+				String elementName = element.getAttribute("name");
+				
+				// Todas las vistas se llamaran igual. Unicamente el nombre del xml tendrá
+				// concatenado la version/fecha del archivo original.
+				amModel.createModel(project, elementName+"_"+prefijo);
+				
+				// Todas las vistas se llamaran igual. Unicamente el nombre del xml tendrá
+				// concatenado la version/fecha del archivo original.
+				View view = amModel.createView(elementID, elementName);
+				
+				// Se recorren todos los "child" del diagrama para vincularlos al View
+				view.getElement().addAll(buildElementsIntoView(element));
+				
+				view.getRelation().addAll(buildRelationsIntoView(element));
+				
+				amModel.setViewToProject(view);
+				
+				// Store result
+				amModel.storeModel();
+				
+				// Si llega a este punto, se construye el .xml para la visualizacion
+				// Se usa la variable 'elementName'
+				
+				boolean exito = (new ArchiToXML()).xmlCreation(amModel.getModelName(), project);
+				if(!exito) {
+					break;
+				}
+				
+		    }
+		}
+	}
+	
+	/**
+	 * Se recibe el objeto Element, que corresponde a la vista de un diagrama en Archimate.
+	 * Se busca obtener las relaciones asociadas a cada elemento.
+	 * @param element
+	 * @return
+	 */
+	private List<rebel_archimate.Relation> buildRelationsIntoView(Element element) {
+		List<rebel_archimate.Relation> listRelations = new ArrayList<rebel_archimate.Relation>();
+		
+		// Se saca el Value, y se obtienen todos los elementos que sean child
+		NodeList childNodes = element.getElementsByTagName("child");
+		if(childNodes!=null) {
+			for (int i = 0; i < childNodes.getLength(); i++) {
+				Node childNode = childNodes.item(i);
+				if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element childrenElement = (Element) childNode;
+				}
+			}
+		}
+		
+		return listRelations;
+	}
+	
+	/**
+	 * Se recibe el objeto Element, que corresponde a la vista de un diagrama en Archimate.
+	 * El Element está compuesto de objetos, los cuales tienen propiedades y relaciones
+	 * @param element
+	 * @return
+	 */
+	private List<rebel_archimate.Element> buildElementsIntoView(Element element) {
+		
+		List<rebel_archimate.Element> listElements = new ArrayList<rebel_archimate.Element>();
+		
+		// Se saca el Value, y se obtienen todos los elementos que sean child
+		NodeList childNodes = element.getElementsByTagName("child");
+		if(childNodes!=null) {
+			for (int i = 0; i < childNodes.getLength(); i++) {
+				Node childNode = childNodes.item(i);
+				if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element childrenElement = (Element) childNode;
+					
+					int posX = 0, posY = 0;
+					int width = 0, height = 0;
+					
+					// Se obtiene el Bounds para sacar las dimensiones y posición
+					NodeList boundNodes = childrenElement.getElementsByTagName("bounds");
+					if(boundNodes!=null) {
+						Node boundNode = boundNodes.item(0);
+						Element boundElement = (Element) boundNode;
+						
+						posX = boundElement.getAttribute("x")!=null?Integer.parseInt(boundElement.getAttribute("x")):0;
+						posY = boundElement.getAttribute("y")!=null?Integer.parseInt(boundElement.getAttribute("y")):0;
+						width = boundElement.getAttribute("width")!=null?Integer.parseInt(boundElement.getAttribute("width")):0;
+						height = boundElement.getAttribute("height")!=null?Integer.parseInt(boundElement.getAttribute("height")):0;
+					}
+					
+					// Se obtiene el objeto AMElement que contiene la información obtenida del element de Archimate
+					AMElement amElement = sourceModelElements.get(childrenElement.getAttribute("archimateElement"));
+					
+					// Se crea el element de rebel archimate, para asociarlo a la vista
+					rebel_archimate.Element archiRebelElement = amModel.createElement();
+					archiRebelElement.setName(amElement.getName());
+					archiRebelElement.setId(amElement.getId());
+					archiRebelElement.setType(getElementType(amElement.getType()));
+					archiRebelElement.setPosX(posX);
+					archiRebelElement.setPosY(posY);
+					archiRebelElement.setWidth(width);
+					archiRebelElement.setHeight(height);
+					
+					listElements.add(archiRebelElement);
+					
+					rebelElements.put(archiRebelElement.getId(), archiRebelElement);
+				}
+			}
+		}
+		
+		return listElements;
+	}
+	
+	/**
+	 * Este metodo se encarga de recorrer el xml y sacar la informacion de los nodos. Para el caso de las vistas, guarda el elemento del xml para su posterior procesamiento
+	 * @param doc
+	 * @param sourceModelElements
+	 * @param sourceModelRelations
+	 * @param sourceModelViews
+	 */
+	private void processingNodes(Document doc) {
+		
+		// Obtengo la instancia del proyecto
+//		Project proj = (Project) resource.getContents().get(0);
+		
+		// Get properties of diagram
+		NodeList objectNodes = doc.getElementsByTagName("folder");
+		for (int i = 0; i < objectNodes.getLength(); i++) {
+			Node connectorNode = objectNodes.item(i);
+			if (connectorNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element objectElement = (Element) connectorNode;
+				if (objectElement.hasChildNodes()) {
+
+					// Corresponden a las Vistas
+					if (objectElement.getAttribute("type").equals("diagrams")) {
+						NodeList childrenNodes = objectElement.getChildNodes();
+						for (int j = 0; j < childrenNodes.getLength(); j++) {
+							Node childrenNode = childrenNodes.item(j);
+							if (childrenNode.getNodeType() == Node.ELEMENT_NODE) {
+								Element childrenElement = (Element) childrenNode;
+
+								sourceModelViews.put(childrenElement.getAttribute("id"), childrenElement);
+								
+//								// Se crea la vista
+//								View view = amModel.createView(childrenElement.getAttribute("name"));
+//								proj.getView().add(view);								
+
+							}
+
+						}
+					} else if (objectElement.getAttribute("type").equals("relations")) {
+						NodeList childrenNodes = objectElement.getChildNodes();
+						for (int j = 0; j < childrenNodes.getLength(); j++) {
+							Node childrenNode = childrenNodes.item(j);
+							if (childrenNode.getNodeType() == Node.ELEMENT_NODE) {
+								Element childrenElement = (Element) childrenNode;
+
+								AMRelations elem = new AMRelations();
+								elem.setId(childrenElement.getAttribute("id"));
+								elem.setType(childrenElement.getAttribute("xsi:type"));
+								elem.setSource(childrenElement.getAttribute("source"));
+								elem.setTarget(childrenElement.getAttribute("target"));
+								
+								sourceModelRelations.put(childrenElement.getAttribute("id"), elem);
+
+							}
+
+						}
+					// Filtro para recorrer los folder que son tipo business, strategy, application, etc
+					} else if (!objectElement.getAttribute("type").equals("other")
+							&& !objectElement.getAttribute("type").equals("implementation_migration")) {
+
+						NodeList childrenNodes = objectElement.getChildNodes();
+						for (int j = 0; j < childrenNodes.getLength(); j++) {
+							Node childrenNode = childrenNodes.item(j);
+							if (childrenNode.getNodeType() == Node.ELEMENT_NODE) {
+								Element childrenElement = (Element) childrenNode;
+
+								AMElement elem = new AMElement();
+								elem.setId(childrenElement.getAttribute("id"));
+								elem.setName(childrenElement.getAttribute("name"));
+								elem.setType(childrenElement.getAttribute("xsi:type"));
+								
+								sourceModelElements.put(childrenElement.getAttribute("id"), elem);
+
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/** 
+	 * Este metodo toma el tipo de elemento del modelo de Archi y lo 
+	 * transforma al MM de Archimate en Rebel
+	 * @param elementType
+	 * @return
+	 */
+	private ELEMENTTYPE getElementType(String elementType) {
+		if(elementType.equals("archimate:BusinessService"))
+			return ELEMENTTYPE.BUSINESS_SERVICE;
+		else if(elementType.equals("archimate:ApplicationService"))
+			return ELEMENTTYPE.APPLICATION_SERVICE;
+		else if(elementType.equals("archimate:ApplicationComponent"))
+			return ELEMENTTYPE.APPLICATION_COMPONENT;
+		else if(elementType.equals("archimate:BusinessProcess"))
+			return ELEMENTTYPE.BUSINESS_PROCESS;
+		
+		return null;
+			
+	}
+	
+private String obtenerPrefijo(String fileName) {
+		
+		Pattern rId = Pattern.compile("[a-z]+\\_([\\w|\\d]+)\\.[\\w|\\d]+");
+		Matcher mId = rId.matcher(fileName);
+		mId.find();
+		
+		String prefijo = "";
+		
+		try {
+			if(mId.group(1)!=null)
+				prefijo = mId.group(1);
+		} catch (Exception e) {
+			System.err.println("Processing.obtenerPrefijo ::: No match found");
+		}
+		
+		return prefijo;
+	}
+
+}

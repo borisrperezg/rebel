@@ -1,0 +1,11 @@
+package uniandes.rebel.chatlogs;
+
+public class CEPopulation {
+
+private CEModel ceModel;
+	
+	public CEPopulation() {
+		ceModel = new CEModel();
+	}
+	
+}

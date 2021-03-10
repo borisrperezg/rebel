@@ -1,0 +1,137 @@
+<html ng-app="rebel">
+<title>Why ATD?</title>
+<head>
+    
+    <title>Justify why the fact could be considered an ATD item</title>
+    
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+    
+    <!-- JOINTJS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jointjs/2.1.0/joint.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/2.1.0/joint.js"></script>
+	
+	<!-- STYLES -->
+	<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:200">
+	<link rel="stylesheet" href="/rebelviz/css/style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/animatecss/3.5.2/animate.min.css" />
+	
+	<!-- ANGULARJS -->
+	<script src="/rebelviz/angular/angular.js"></script>
+	<script src="/rebelviz/angular/appopers.js"></script>
+	
+	<script src="https://laingsimon.github.io/render-diagram/drawio-renderer.js"></script>
+</head>
+
+<body ng-controller="RebelController as ctr">
+
+<div id="main">
+
+	<div class="header">
+	    <h1>Why ATD?</h1>
+	</div>
+	
+	<div class="content" data-ng-init="ctr.listFactsFromCnC()">
+	
+		<div id="default-buttons" class="content-subhead">
+			<form id="myForm" class="pure-form" action="/rebelapi/atdrationale" method="post">
+				<fieldset>
+					<label for="boiname"><strong>BoI name:</strong> </label>
+					<input type="text" id="boiname" name="boiname" readonly style="font-weight: bold; border: none; border-width:0px; box-shadow: none; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden; border-bottom-style: hidden; background-color: #ffffff; font-size:24px; outline: none;">
+					<br/>
+					<label for="projname"><strong>Project name:</strong> </label>
+					<input type="text" id="projname" name="projname" readonly style="border: none; border-width:0px; box-shadow: none; border-top-style: hidden; border-right-style: hidden; border-left-style: hidden; border-bottom-style: hidden; background-color: #ffffff; outline: none;">
+					
+					<br/><br/>		
+					<input type="hidden" id="factId" name="factId">
+					<label for="facttype"><strong>Fact type:</strong> </label>
+					<input type="text" id="facttype" name="facttype" readonly style="border-top-style: hidden; border: none; border-width:0px; box-shadow: none; border-right-style: hidden; border-left-style: hidden; border-bottom-style: hidden; background-color: #ffffff; outline: none;width: 700px;">
+					<br/>
+					<label for="description"><strong>Description:</strong> </label>
+					<input type="text" id="description" name="description" readonly style="border-top-style: hidden; border: none; border-width:0px; box-shadow: none; border-right-style: hidden; border-left-style: hidden; border-bottom-style: hidden; background-color: #ffffff; outline: none;width: 700px;">
+					
+					<br/><br/>
+					<label><strong>Compromised QA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+					<input type="text" id="compromisedqatext" name="compromisedqatext" style="height: 2.6em;width: 200px;">
+					
+					<select id="compromisedqalist" name="compromisedqalist" ng-model="ctr.compromisedqas" style="height: 3em; width: 200px; font-size: 12px;">
+					  	<option ng:repeat="qa in ctr.compromisedqas track by qa.id" value="{{qa.name}}">     
+		                	{{qa.name}}
+		            	</option>
+					</select>
+					<br/>
+					<br/>
+					<label><strong>ATD Type Category</strong></label>
+					<input type="text" id="atdcausetypetext" name="atdcausetypetext" style="height: 2.6em;width: 200px;">
+					
+					<select id="atdcausetypelist" name="atdcausetypelist" ng-model="ctr.causetypes" style="height: 3em; width: 200px; font-size: 12px;">
+					  	<option ng:repeat="causetype in ctr.causetypes track by causetype.id" value="{{causetype.name}}">     
+		                	{{causetype.name}}
+		            	</option>
+					</select>
+					<br/><br/>
+					<label for="justify"><strong>Rationale</strong> </label>
+					<br/>
+					<textarea id="justify" name="justify" rows="3" cols="109"></textarea>	
+					<br/>
+					<label><strong>Benefits</strong> </label>
+					<br/>
+					<textarea id="benefits" name="benefits" rows="3" cols="109"></textarea>	
+
+					<br/><br/>
+					<label for="factsname"><strong>Related facts from CnC model:</strong></label>
+					<br/>
+					<select id="factsname" name="factsname" ng-model="ctr.facts" style="height: 3em; width: 800px; font-size: 12px;">
+					  	<option ng:repeat="fact in ctr.facts track by fact.id" value="{{fact.name}}">     
+		                	{{fact.name}}
+		            	</option>
+					</select>
+
+					<br/><br/>
+					<input type="button" onclick="submitForm()" value="Save ATD rationale">
+					<br/><br/>
+					
+					<!-- ***************************************** -->
+					<!-- Visualizar el table con las coincidencias -->
+					<!-- ***************************************** -->
+					
+					<div style="border-top-style: hidden; border: none; border-width:0px; box-shadow: none; border-right-style: hidden; border-left-style: hidden; border-bottom-style: hidden;width: 700px;">						
+						<div id="tableid" style="padding-top: 13px; padding-bottom: 13px" ng-bind-html="htmlBind"></div>						
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+<script>
+
+	const queryString = window.location.search;
+	
+	const urlParams = new URLSearchParams(queryString);
+	const boi_name = urlParams.get('b')
+	const proj_name = urlParams.get('p')
+	const type = urlParams.get('t')
+	const desc = urlParams.get('d')
+	const id = urlParams.get('i')
+	
+	document.getElementById("boiname").value = boi_name;
+	document.getElementById("projname").value = proj_name;
+	document.getElementById("facttype").value = type;
+	document.getElementById("description").value = desc;
+	document.getElementById("factId").value = id;
+	
+	function submitForm() {
+		
+		document.getElementById("myForm").submit();
+	}
+	
+</script>
+</html>

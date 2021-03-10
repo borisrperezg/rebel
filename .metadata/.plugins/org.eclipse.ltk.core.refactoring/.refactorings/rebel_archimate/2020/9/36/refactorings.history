@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;uniandes.rebel.archimate.AMDerby&apos; to &apos;AMModelDerby&apos;&#x0A;- Original project: &apos;rebel_archimate&apos;&#x0A;- Original element: &apos;uniandes.rebel.archimate.AMDerby&apos;&#x0A;- Renamed element: &apos;uniandes.rebel.archimate.AMModelDerby&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;AMDerby&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;uniandes.rebel.archimate{AMDerby.java[AMDerby" matchStrategy="1" name="AMModelDerby" qualified="false" references="true" similarDeclarations="false" stamp="1599167901274" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,134 @@
+package uniandes.rebel.chatlogs;
+
+import java.util.Date;
+
+import rebel_chatlogs.Message;
+import rebel_chatlogs.MessageLog;
+
+public class CEPopulation {
+
+private CEModel ceModel;
+	
+	public CEPopulation() {
+		ceModel = new CEModel();
+	}
+	
+	public static void main(String[] args) throws Exception {
+		CEPopulation ce = new CEPopulation();
+		ce.execute("DDDD", "Survey Comments.eml");
+	}
+	
+	/**
+	 * Executed by revelapi
+	 * @param project
+	 * @param commits
+	 * @throws Exception
+	 */
+	@SuppressWarnings("deprecation")
+	public void execute(String project, String chatEmailFileName) throws Exception {		
+		
+		// Temporal loaded route from web page
+		String contentLog =  CEUtil.readFile("/Users/borisperezg/temporaluploadfolder/"+chatEmailFileName);
+		
+		MessageLog msgLog = ceModel.createMessageLog();
+		
+		// ---------------
+		// Type
+		// ---------------
+		String type = "chat";
+		if(chatEmailFileName.indexOf(".eml")>=0)
+			type = "email";
+		
+		msgLog.setType(CEUtil.getMessageType(type));	
+		System.out.println("type = "+type);	
+		
+		// ---------------
+		// Subject
+		// ---------------
+		String subject = CEUtil.getValueMatch("Subject:\\s([\\w|\\d|\\s|?|\\[|\\]|:]+)\\n", contentLog);
+		
+		msgLog.setTitle(subject);
+		System.out.println("subject = "+subject);
+		
+		// ---------------
+		// Creation date
+		// ---------------
+		
+		Date msgDate = null;
+		// La fecha se captura así:
+		// "4 Mar 2021 14:31:54 "
+		String date = CEUtil.getValueMatch("Date:\\s[\\w|,]+([\\w|,|\\s|\\d|:]+)", contentLog);
+		System.out.println("date = "+date);
+		if(date!=null && date.length()>0) {
+			String[] textualDate = date.trim().split(" ");
+			
+			System.out.println("textualDate[0] = "+textualDate[0]);
+			System.out.println("textualDate[1] = "+textualDate[1]);
+			System.out.println("textualDate[2] = "+textualDate[2]);
+			
+			int dayNumber = Integer.parseInt(textualDate[0]);
+			String monthText = textualDate[1];
+			int yearNumber = Integer.parseInt(textualDate[2]);
+			
+			msgDate = new Date(yearNumber-1900, CEUtil.monthNumber(monthText), dayNumber);
+		}
+		
+		msgLog.setCreation(msgDate);
+		
+		// ---------------
+		// Se espera que se cargue un solo archivo por subject.
+		// Esto aplica para correos y chats.
+		// ---------------
+		
+		Message msg = matchingPatterns(project, contentLog);
+		msg.setTimestamp(msgLog.getCreation());
+				
+		msgLog.getMessages().add(msg);
+		
+		String modelName = chatEmailFileName.substring(0, chatEmailFileName.indexOf(".eml"));
+		
+		ceModel.storeModel(project, modelName, "chatlogs");
+			
+	}
+	
+	/**
+	 * Extract specific information within the commit
+	 * @param listOfCommits
+	 */
+	public Message matchingPatterns(String project, String contentLog) throws Exception {
+		
+		Message msg = ceModel.createMessage();
+		
+		String from = CEUtil.getValueMatch("From:\\s([?|\\w|\\d|\\s|\\-|=]+<[\\w|\\d|@|.]+>)", contentLog);
+		
+		String to = CEUtil.getValueMatch("To:\\s([?|\\w|\\d|\\s|\\-]+<[\\w|\\d|@|.]+>(,\\s([?|\\w|\\d|\\-|\\s|=]+\\s<[\\w|\\d|@|.]+>)*))", contentLog);
+		
+		
+		System.out.println("from = "+from);
+		System.out.println("to = "+to);
+		
+		// ---------------------------------------
+		// Nota: Por ahora no se esta usando
+		// ---------------------------------------
+		String cc = CEUtil.getValueMatch("CC:\\s([?|\\w|\\d|\\s|\\-|=]+\\s<[\\w|\\d|@|.]+>(,\\s([?|\\w|\\d|=|\\-|\\s]+\\s<[\\w|\\d|@|.]+>)*))", contentLog);
+		
+		msg.setSentBy(from);
+		msg.setReceivedBy(to);
+		
+		
+		String boundary = CEUtil.getValueMatch("boundary=\\\"([\\\\d|\\\\w|_]+)\\\"", contentLog);
+		String msgText = CEUtil.getValueMatch("--"+boundary+"\\n+([\\w|\\-|:|\\s|/|;|=|\"|,|.|(|)])+--"+boundary, contentLog);
+		
+		System.out.println("boundary = "+boundary);
+		System.out.println("msgText = "+msgText);
+		
+		msg.setText(msgText);
+		
+		return msg;
+		
+		
+			
+		
+	}
+	
+}

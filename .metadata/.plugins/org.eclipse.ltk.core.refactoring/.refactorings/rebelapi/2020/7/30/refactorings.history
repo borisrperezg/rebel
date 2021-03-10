@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;uniandes.rebelapi.similarity.ClientShell&apos; to &apos;SemanticSimilarityExec&apos;&#x0A;- Original project: &apos;rebelapi&apos;&#x0A;- Original element: &apos;uniandes.rebelapi.similarity.ClientShell&apos;&#x0A;- Renamed element: &apos;uniandes.rebelapi.similarity.SemanticSimilarityExec&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;ClientShell&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;uniandes.rebelapi.similarity{ClientShell.java[ClientShell" matchStrategy="1" name="SemanticSimilarityExec" qualified="false" references="true" similarDeclarations="false" stamp="1595447036626" textual="false" version="1.0"/>
+</session>

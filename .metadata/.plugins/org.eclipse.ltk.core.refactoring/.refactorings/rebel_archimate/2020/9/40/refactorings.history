@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ArchiToXML.java&apos; to &apos;rebelapi/src/uniandes.rebelapi.util&apos;&#x0A;- Original project: &apos;rebel_archimate&apos;&#x0A;- Destination element: &apos;rebelapi/src/uniandes.rebelapi.util&apos;&#x0A;- Original element: &apos;uniandes.rebel.archimate.ArchiToXML.java&apos;" description="Copy compilation unit" destination="=rebelapi/src&lt;uniandes.rebelapi.util" element1="/src&lt;uniandes.rebel.archimate{ArchiToXML.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1601414993842" units="1" version="1.0"/>
+</session>

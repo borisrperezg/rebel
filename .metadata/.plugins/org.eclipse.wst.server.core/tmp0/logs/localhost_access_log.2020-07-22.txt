@@ -1,0 +1,6 @@
+127.0.0.1 - - [22/Jul/2020:16:19:14 -0500] "GET / HTTP/1.1" 404 706
+0:0:0:0:0:0:0:1 - - [22/Jul/2020:16:21:01 -0500] "GET /rebelapi/rest/rebel/findbysimilarity/boi HTTP/1.1" 200 12
+0:0:0:0:0:0:0:1 - - [22/Jul/2020:16:21:01 -0500] "GET /favicon.ico HTTP/1.1" 404 645
+0:0:0:0:0:0:0:1 - - [22/Jul/2020:16:24:26 -0500] "GET /rebelapi/rest/rebel/findbysimilarity/boi HTTP/1.1" 200 12
+0:0:0:0:0:0:0:1 - - [22/Jul/2020:16:27:36 -0500] "GET /rebelapi/rest/rebel/findbysimilarity/boi HTTP/1.1" 200 12
+0:0:0:0:0:0:0:1 - - [22/Jul/2020:16:53:20 -0500] "GET /rebelapi/rest/rebel/findbysimilarity/boi HTTP/1.1" 200 12

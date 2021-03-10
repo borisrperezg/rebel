@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1 - - [31/Jul/2020:12:21:30 -0500] "GET /rebelviz/listinterestblocks.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [31/Jul/2020:12:21:30 -0500] "GET /rebelviz/angular/appopers.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [31/Jul/2020:12:21:30 -0500] "GET /rebelapi/rest/rebel/listprojects HTTP/1.1" 200 76
+0:0:0:0:0:0:0:1 - - [31/Jul/2020:12:21:33 -0500] "GET /rebelapi/rest/rebel/listbois/First%20Project HTTP/1.1" 200 175
+0:0:0:0:0:0:0:1 - - [31/Jul/2020:12:21:35 -0500] "GET /rebelviz/seeboi.html?p=First%20Project&boi=First%20BOI HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [31/Jul/2020:12:21:35 -0500] "GET /rebelapi/rest/rebel/getmodelboi/First%20Project&First%20BOI HTTP/1.1" 200 803
+0:0:0:0:0:0:0:1 - - [31/Jul/2020:12:21:35 -0500] "GET /rebelapi/rest/rebel/getTimeline/First%20Project&First%20BOI HTTP/1.1" 200 1227
+0:0:0:0:0:0:0:1 - - [31/Jul/2020:12:21:35 -0500] "GET /rebelapi/rest/rebel/loadhtml/First%20Project&First%20BOI HTTP/1.1" 200 1565

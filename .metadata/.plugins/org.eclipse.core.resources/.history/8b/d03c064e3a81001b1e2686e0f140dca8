@@ -1,0 +1,187 @@
+package uniandes.rebel.chatlogs;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Properties;
+
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
+import rebel_chatlogs.Message;
+import rebel_chatlogs.MessageLog;
+
+public class CEPopulation {
+
+	private CEModel ceModel;
+
+	public CEPopulation() {
+		ceModel = new CEModel();
+	}
+
+	public static void main(String[] args) throws Exception {
+		CEPopulation ce = new CEPopulation();
+		ce.execute("AutoNuevo", "Survey Comments.eml");
+		
+//		display(new File("/Users/borisperezg/temporaluploadfolder/Survey Comments.eml"));
+	}
+
+	/**
+	 * Executed by revelapi
+	 * 
+	 * @param project
+	 * @param commits
+	 * @throws Exception
+	 */
+	public void execute(String project, String chatEmailFileName) throws Exception {
+
+		String filePathName = "/Users/borisperezg/temporaluploadfolder/" + chatEmailFileName;
+		
+		// Temporal loaded route from web page
+		String contentLog = CEUtil.readFile(filePathName);
+		
+		// ---------------
+		// Type
+		// ---------------
+		String type = "chat";
+		if (chatEmailFileName.indexOf(".eml") >= 0)
+			type = "email";
+		
+		// ---------------
+		// Model name
+		// ---------------
+		String modelName = "";
+		
+		if(type.equals("email"))
+			modelName = chatEmailFileName.substring(0, chatEmailFileName.indexOf(".eml"));
+		else
+			modelName = chatEmailFileName.substring(0, chatEmailFileName.indexOf(".txt"));
+		
+		
+		// ---------------
+		// Model construction
+		// ---------------
+		ceModel.createModel(project, modelName);		
+		
+		if(type.equals("email")) {
+			
+			MessageLog msgLog = ceModel.createMessageLog();
+			msgLog.setType(CEUtil.getMessageType(type));
+			
+			// ---------------
+			// Creation date
+			// ---------------
+			
+			// La fecha se captura así:
+			// "4 Mar 2021 14:31:54 "
+			String date = CEUtil.getValueMatch("Date:\\s[\\w|,]+([\\w|,|\\s|\\d|:]+)", contentLog);
+			msgLog.setCreation(CEUtil.getDateFormat(date));
+			
+			// ------------------------------
+			// Get properties of email
+			// ------------------------------
+			getEmailProperties(msgLog, filePathName);
+			
+			ceModel.storeMessageLog(msgLog);
+			
+		}else if(type.equals("chat")) {
+			// ---------------
+			// Creation date
+			// ---------------
+			
+			// Se usara como fecha la primera fecha del archivo
+			String date = CEUtil.getValueMatch("Date:\\s[\\w|,]+([\\w|,|\\s|\\d|:]+)", contentLog);
+			msgLog.setCreation(CEUtil.getDateFormat(date));
+			
+			// ------------------------------
+			// Get properties of chat
+			// ------------------------------
+			
+			
+			// Separar por dia, y por hora.
+			
+			// Un MessageLog es el bloque por hora, y varios Messages de esa franja
+		}
+		
+		ceModel.storeModel(project, modelName, "chatlogs");
+
+	}
+	
+	public void getChatProperties(String contentTxtFileName) throws Exception {
+		
+		// Se lee cada linea. Se saca la fecha y la hora.
+		
+		// El title de cada MsgLog es la fecha y la hora (solo la hora)
+		
+		// Se usara un HashMap
+		
+		HashMap<String, Message> hashMsgs = new HashMap<String, Message>();
+		
+		
+		String[] contentSplitted = contentTxtFileName.split("\n");
+		if(contentSplitted!=null && contentSplitted.length>0) {
+			for(int t=0;t<contentSplitted.length;t++) {
+				String lineChat = contentSplitted[t];
+				
+				String[] severalValues = CEUtil.getValuesMatch("\\[(\\d{1,2}\\/\\d{1,2}\\/\\d{1,2}),\\s(\\d{1,2}:\\d{1,2}:\\d{1,2})\\s\\w\\.\\s\\w\\.\\]\\s[\\w|\\s]+:\\s(.+)", lineChat);
+				if(severalValues!=null && severalValues.length>0) {
+					
+					Message msg = ceModel.createMessage();
+					
+					String date = severalValues[0];
+					String time = severalValues[1];
+					String personFrom = severalValues[2];
+					String msgChat = severalValues[3];
+					
+					msg.setText(msgChat);
+					msg.setSentBy(personFrom);
+				}
+			}			
+		}
+		
+		
+		
+		
+	}
+
+	public void getEmailProperties(MessageLog msgLog, String emlFileName) throws Exception {
+		
+		// --------------------------------------
+		// Bloque para instanciar EML
+		// --------------------------------------
+		File emlFile = new File(emlFileName);
+		
+		Properties props = System.getProperties();
+		props.put("mail.host", "smtp.dummydomain.com");
+		props.put("mail.transport.protocol", "smtp");
+
+		Session mailSession = Session.getDefaultInstance(props, null);
+		InputStream source = new FileInputStream(emlFile);
+		MimeMessage message = new MimeMessage(mailSession, source);
+		
+		// --------------------------------------
+		// Obtencion de propiedades
+		// --------------------------------------
+		
+		msgLog.setTitle(message.getSubject());
+		
+		Message msg = ceModel.createMessage();
+		
+		msg.setSentBy(message.getFrom()[0].toString());
+		msg.setReceivedBy(message.getAllRecipients()[0].toString());
+		
+		MimeMultipart mimeMultipart = (MimeMultipart) message.getContent();
+        String result = CEUtil.getTextFromMimeMultipart(mimeMultipart);
+		
+        msg.setText(result);
+        msg.setTimestamp(msgLog.getCreation());
+        
+        msgLog.getMessages().add(msg);
+        
+	}
+	
+	
+
+}

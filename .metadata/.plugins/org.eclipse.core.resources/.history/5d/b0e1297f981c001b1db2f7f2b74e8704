@@ -1,0 +1,129 @@
+package excel;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.HashMap;
+
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;  
+
+public class Procesar {
+
+	public static void main(String[] args) throws Exception {
+		// Getting the file path
+				String excelFilePath = Util.getExcelFile();
+				
+				
+				(new Procesar()).procesarArchivo(excelFilePath);
+			    
+	}
+	
+	public void procesarArchivo(String excelPath) throws Exception {
+		
+		FileInputStream inputStream = new FileInputStream(new File("BaseDatos.xls"));
+		 
+	    // Open Excel file
+		HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
+		HSSFSheet firstSheet = workbook.getSheetAt(0);
+		
+		HashMap<String, Salon> clientes = new HashMap<String, Salon>();
+	    
+		for(int t=1;t<firstSheet.getLastRowNum()+1;t++) {
+	    	
+	    	if(firstSheet.getRow(t)!=null) {
+	    		
+	    		Row row = firstSheet.getRow(t);
+	    		
+	    		// Se obtiene el nombre del cliente
+	    		String nombreCliente = "";
+	    		Cell nombreClienteCell = row.getCell(1);
+	    		if(nombreClienteCell!=null)
+	    			nombreCliente = nombreClienteCell.toString();
+	    		
+	    		
+	    		Salon s = null;
+	    		
+	    		if(clientes.get(nombreCliente)!=null) {
+	    			s = clientes.get(nombreCliente);	    			
+	    		}else {
+	    			s = new Salon();
+	    			clientes.put(nombreCliente, s);
+	    		}
+	    		
+	    		String salonString = "";
+	    		Cell salon = row.getCell(5);
+	    		if(salon!=null)
+	    			salonString = salon.toString();
+	    		
+	    		int valorInt = 0;
+	    		Cell valor = row.getCell(11);
+	    		if(valor!=null) {
+	    			
+	    			String money = valor.toString();
+//	    			System.out.println(nombreCliente + " : " + money);
+	    			valorInt = (int)Double.parseDouble(money);
+	    		}
+	    		
+	    		if(salonString.toUpperCase().equals("TERRACOTA")) {
+	    			s.addTerracota(valorInt);
+	    			s.setVecesTerracota(1);
+	    		}else if(salonString.toUpperCase().equals("CIAN")) {
+	    			s.addCian(valorInt);
+	    			s.setVecesCian(1);
+	    		}else if(salonString.toUpperCase().equals("AMBAR")) {
+	    			s.addAmbar(valorInt);
+	    			s.setVecesAmbar(1);
+	    		}else if(salonString.toUpperCase().equals("RUBI")) {
+	    			s.addRubi(valorInt);
+	    			s.setVecesRubi(1);
+	    		}else if(salonString.toUpperCase().equals("MARFIL")) {
+	    			s.addMarfil(valorInt);
+	    			s.setVecesMarfil(1);
+	    		}else if(salonString.toUpperCase().equals("CARMESI")) {
+	    			s.addCarmesi(valorInt);
+	    			s.setVecesCarmesi(1);
+	    		}else if(salonString.toUpperCase().equals("MAGENTA")) {
+	    			s.addMagenta(valorInt);
+	    			s.setVecesMagenta(1);
+	    		}else if(salonString.toUpperCase().equals("ZAFIRO")) {
+	    			s.addZafiro(valorInt);
+	    			s.setVecesZafiro(1);
+	    		}else if(salonString.toUpperCase().equals("CORAL")) {
+	    			s.addCoral(valorInt);
+	    			s.setVecesCoral(1);
+	    		}else if(salonString.toUpperCase().equals("GRANATE")) {
+	    			s.addGranate(valorInt);
+	    			s.setVecesGranate(1);
+	    		}else if(salonString.toUpperCase().equals("JADE-TOPACIO")) {
+	    			s.addJade(valorInt);
+	    			s.setVecesJade(1);
+	    		}else if(salonString.toUpperCase().equals("SALA DE JUNTAS")) {
+	    			s.addSalaJuntas(valorInt);
+	    			s.setVecesSalaJuntas(1);
+	    		}else if(salonString.toUpperCase().equals("SEDE CAMPESTRE")) {
+	    			s.addCampestre(valorInt);
+	    			s.setVecesCampestre(1);
+	    		}
+	    		
+//	    		System.out.println(nombreCliente + " - " + salonString);
+	    			
+	    	}
+	    }
+		
+		System.out.println("i|Cliente|Terracota|Cian|Ambar|Rubi|Marfil|Carmesi|Magenta|Zafiro|Coral|Granate|Jade|SalaJuntas|Campestre");
+		
+		clientes.entrySet().forEach(entry->{
+		    System.out.println(entry.getKey() + "|" + entry.getValue().getTerracota() + "|" + 
+		    		entry.getValue().getCian() + "|" + entry.getValue().getAmbar() + "|" +
+		    		entry.getValue().getRubi() + "|" + entry.getValue().getMarfil() + "|" +
+		    		entry.getValue().getCarmesi() + "|" + entry.getValue().getMagenta() + "|" +
+		    		entry.getValue().getZafiro() + "|" + entry.getValue().getCoral() + "|" +
+		    		entry.getValue().getGranate() + "|" + entry.getValue().getJade() + "|" +
+		    		entry.getValue().getSalaJuntas() + "|" + entry.getValue().getCampestre());
+		 });
+		
+	}
+	
+}

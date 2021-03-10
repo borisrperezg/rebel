@@ -1,0 +1,452 @@
+/**
+ */
+package rebel_chatlogs.impl;
+
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import rebel_chatlogs.Message;
+import rebel_chatlogs.Rebel_chatlogsPackage;
+import rebel_chatlogs.User;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Message</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link rebel_chatlogs.impl.MessageImpl#getSendBy <em>Send By</em>}</li>
+ *   <li>{@link rebel_chatlogs.impl.MessageImpl#getReceivedBy <em>Received By</em>}</li>
+ *   <li>{@link rebel_chatlogs.impl.MessageImpl#getText <em>Text</em>}</li>
+ *   <li>{@link rebel_chatlogs.impl.MessageImpl#getTimestamp <em>Timestamp</em>}</li>
+ * </ul>
+ *
+ * @generated
+ */
+public class MessageImpl extends MinimalEObjectImpl.Container implements Message {
+	/**
+	 * The cached value of the '{@link #getSendBy() <em>Send By</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSendBy()
+	 * @generated
+	 * @ordered
+	 */
+	protected User sendBy;
+
+	/**
+	 * The cached value of the '{@link #getReceivedBy() <em>Received By</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReceivedBy()
+	 * @generated
+	 * @ordered
+	 */
+	protected User receivedBy;
+
+	/**
+	 * The default value of the '{@link #getText() <em>Text</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getText()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TEXT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getText() <em>Text</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getText()
+	 * @generated
+	 * @ordered
+	 */
+	protected String text = TEXT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTimestamp()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Date TIMESTAMP_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTimestamp()
+	 * @generated
+	 * @ordered
+	 */
+	protected Date timestamp = TIMESTAMP_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MessageImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return Rebel_chatlogsPackage.Literals.MESSAGE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public User getSendBy() {
+		if (sendBy != null && sendBy.eIsProxy()) {
+			InternalEObject oldSendBy = (InternalEObject) sendBy;
+			sendBy = (User) eResolveProxy(oldSendBy);
+			if (sendBy != oldSendBy) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Rebel_chatlogsPackage.MESSAGE__SEND_BY,
+							oldSendBy, sendBy));
+			}
+		}
+		return sendBy;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public User basicGetSendBy() {
+		return sendBy;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSendBy(User newSendBy, NotificationChain msgs) {
+		User oldSendBy = sendBy;
+		sendBy = newSendBy;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					Rebel_chatlogsPackage.MESSAGE__SEND_BY, oldSendBy, newSendBy);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setSendBy(User newSendBy) {
+		if (newSendBy != sendBy) {
+			NotificationChain msgs = null;
+			if (sendBy != null)
+				msgs = ((InternalEObject) sendBy).eInverseRemove(this, Rebel_chatlogsPackage.USER__SEND, User.class,
+						msgs);
+			if (newSendBy != null)
+				msgs = ((InternalEObject) newSendBy).eInverseAdd(this, Rebel_chatlogsPackage.USER__SEND, User.class,
+						msgs);
+			msgs = basicSetSendBy(newSendBy, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Rebel_chatlogsPackage.MESSAGE__SEND_BY, newSendBy,
+					newSendBy));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public User getReceivedBy() {
+		if (receivedBy != null && receivedBy.eIsProxy()) {
+			InternalEObject oldReceivedBy = (InternalEObject) receivedBy;
+			receivedBy = (User) eResolveProxy(oldReceivedBy);
+			if (receivedBy != oldReceivedBy) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY, oldReceivedBy, receivedBy));
+			}
+		}
+		return receivedBy;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public User basicGetReceivedBy() {
+		return receivedBy;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetReceivedBy(User newReceivedBy, NotificationChain msgs) {
+		User oldReceivedBy = receivedBy;
+		receivedBy = newReceivedBy;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY, oldReceivedBy, newReceivedBy);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setReceivedBy(User newReceivedBy) {
+		if (newReceivedBy != receivedBy) {
+			NotificationChain msgs = null;
+			if (receivedBy != null)
+				msgs = ((InternalEObject) receivedBy).eInverseRemove(this, Rebel_chatlogsPackage.USER__RECEIVE,
+						User.class, msgs);
+			if (newReceivedBy != null)
+				msgs = ((InternalEObject) newReceivedBy).eInverseAdd(this, Rebel_chatlogsPackage.USER__RECEIVE,
+						User.class, msgs);
+			msgs = basicSetReceivedBy(newReceivedBy, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY,
+					newReceivedBy, newReceivedBy));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getText() {
+		return text;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setText(String newText) {
+		String oldText = text;
+		text = newText;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Rebel_chatlogsPackage.MESSAGE__TEXT, oldText, text));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Date getTimestamp() {
+		return timestamp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setTimestamp(Date newTimestamp) {
+		Date oldTimestamp = timestamp;
+		timestamp = newTimestamp;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Rebel_chatlogsPackage.MESSAGE__TIMESTAMP,
+					oldTimestamp, timestamp));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case Rebel_chatlogsPackage.MESSAGE__SEND_BY:
+			if (sendBy != null)
+				msgs = ((InternalEObject) sendBy).eInverseRemove(this, Rebel_chatlogsPackage.USER__SEND, User.class,
+						msgs);
+			return basicSetSendBy((User) otherEnd, msgs);
+		case Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY:
+			if (receivedBy != null)
+				msgs = ((InternalEObject) receivedBy).eInverseRemove(this, Rebel_chatlogsPackage.USER__RECEIVE,
+						User.class, msgs);
+			return basicSetReceivedBy((User) otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case Rebel_chatlogsPackage.MESSAGE__SEND_BY:
+			return basicSetSendBy(null, msgs);
+		case Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY:
+			return basicSetReceivedBy(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+		case Rebel_chatlogsPackage.MESSAGE__SEND_BY:
+			if (resolve)
+				return getSendBy();
+			return basicGetSendBy();
+		case Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY:
+			if (resolve)
+				return getReceivedBy();
+			return basicGetReceivedBy();
+		case Rebel_chatlogsPackage.MESSAGE__TEXT:
+			return getText();
+		case Rebel_chatlogsPackage.MESSAGE__TIMESTAMP:
+			return getTimestamp();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+		case Rebel_chatlogsPackage.MESSAGE__SEND_BY:
+			setSendBy((User) newValue);
+			return;
+		case Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY:
+			setReceivedBy((User) newValue);
+			return;
+		case Rebel_chatlogsPackage.MESSAGE__TEXT:
+			setText((String) newValue);
+			return;
+		case Rebel_chatlogsPackage.MESSAGE__TIMESTAMP:
+			setTimestamp((Date) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+		case Rebel_chatlogsPackage.MESSAGE__SEND_BY:
+			setSendBy((User) null);
+			return;
+		case Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY:
+			setReceivedBy((User) null);
+			return;
+		case Rebel_chatlogsPackage.MESSAGE__TEXT:
+			setText(TEXT_EDEFAULT);
+			return;
+		case Rebel_chatlogsPackage.MESSAGE__TIMESTAMP:
+			setTimestamp(TIMESTAMP_EDEFAULT);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+		case Rebel_chatlogsPackage.MESSAGE__SEND_BY:
+			return sendBy != null;
+		case Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY:
+			return receivedBy != null;
+		case Rebel_chatlogsPackage.MESSAGE__TEXT:
+			return TEXT_EDEFAULT == null ? text != null : !TEXT_EDEFAULT.equals(text);
+		case Rebel_chatlogsPackage.MESSAGE__TIMESTAMP:
+			return TIMESTAMP_EDEFAULT == null ? timestamp != null : !TIMESTAMP_EDEFAULT.equals(timestamp);
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (text: ");
+		result.append(text);
+		result.append(", timestamp: ");
+		result.append(timestamp);
+		result.append(')');
+		return result.toString();
+	}
+
+} //MessageImpl

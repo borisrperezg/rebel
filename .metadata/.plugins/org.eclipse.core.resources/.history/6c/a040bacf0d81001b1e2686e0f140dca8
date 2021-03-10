@@ -1,0 +1,28 @@
+package uniandes.rebel.chatlogs;
+
+import java.util.ArrayList;
+
+public class CEPopulation {
+
+private CEModel ceModel;
+	
+	public CEPopulation() {
+		ceModel = new CEModel();
+	}
+	
+	/**
+	 * Executed by revelapi
+	 * @param project
+	 * @param commits
+	 * @throws Exception
+	 */
+	public void execute(String project, String chatEmailFileName) throws Exception {		
+		
+		// Temporal loaded route from web page
+		String log =  CEUtil.readFile("/Users/borisperezg/temporaluploadfolder/"+chatEmailFileName);
+		
+		
+			
+	}
+	
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;rebelviz/WebContent/modalContent.html&apos; to &apos;whyatd.html&apos;" description="Rename resource &apos;modalContent.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="WebContent/modalContent.html" name="whyatd.html" stamp="1611720068163" updateReferences="true"/>
+</session>

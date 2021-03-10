@@ -1,0 +1,138 @@
+package uniandes.rebel.archimate;
+
+import java.util.HashMap;
+
+import org.eclipse.emf.ecore.resource.Resource;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import rebel_archimate.Project;
+import rebel_archimate.View;
+
+public class Processing {
+
+	private AMModel amModel;
+	private Resource resource;
+	
+	public Processing(){
+		amModel = new AMModel();
+	}
+	
+	public static void main(String[] args) throws Exception {
+		Processing fp = new Processing();
+		fp.execute("REBEL", "Model-ago20.archimate");
+	}
+
+	public void execute(String project, String model) throws Exception {
+		String file = "/Users/borisperezg/temporaluploadfolder/" + model;
+
+		// ID, AMElement
+		HashMap<String, AMElement> sourceModelElements = new HashMap<String, AMElement>();
+		// ID, AMElement
+		HashMap<String, AMRelations> sourceModelRelations = new HashMap<String, AMRelations>();
+		// ID, AMElement
+		HashMap<String, Element> sourceModelViews = new HashMap<String, Element>();
+
+		// Open and read XML
+		Document doc = ArchimateUtil.parseXML(file);
+		if(doc!=null) {
+			resource = amModel.createModel(project, model);
+		}
+		
+		// Se saca la informacion de los nodos
+		processingNodes(doc, sourceModelElements, sourceModelRelations, sourceModelViews);
+		
+		// Se crean los elementos en el MM de archimate
+		
+		// Persistir el model
+		
+	}
+	
+	private void buildElementsIntoView() {
+		// Pasos para obtener propiedades de los elementos
+	}
+	
+	/**
+	 * Este metodo se encarga de recorrer el xml y sacar la informacion de los nodos. Para el caso de las vistas, guarda el elemento del xml para su posterior procesamiento
+	 * @param doc
+	 * @param sourceModelElements
+	 * @param sourceModelRelations
+	 * @param sourceModelViews
+	 */
+	private void processingNodes(Document doc, HashMap<String, AMElement> sourceModelElements, HashMap<String, AMRelations> sourceModelRelations, HashMap<String, Element> sourceModelViews) {
+		
+		// Obtengo la instancia del proyecto
+		Project proj = (Project) resource.getContents().get(0);
+		
+		// Get properties of diagram
+		NodeList objectNodes = doc.getElementsByTagName("folder");
+		for (int i = 0; i < objectNodes.getLength(); i++) {
+			Node connectorNode = objectNodes.item(i);
+			if (connectorNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element objectElement = (Element) connectorNode;
+				if (objectElement.hasChildNodes()) {
+					System.out.println("* " + objectElement.getAttribute("type"));
+
+					if (objectElement.getAttribute("type").equals("diagrams")) {
+						NodeList childrenNodes = objectElement.getChildNodes();
+						for (int j = 0; j < childrenNodes.getLength(); j++) {
+							Node childrenNode = childrenNodes.item(j);
+							if (childrenNode.getNodeType() == Node.ELEMENT_NODE) {
+								Element childrenElement = (Element) childrenNode;
+
+								sourceModelViews.put(childrenElement.getAttribute("id"), childrenElement);
+								
+								// Se crea la vista
+								View view = amModel.createView(childrenElement.getAttribute("name"));
+								proj.getView().add(view);								
+
+							}
+
+						}
+					} else if (objectElement.getAttribute("type").equals("relations")) {
+						NodeList childrenNodes = objectElement.getChildNodes();
+						for (int j = 0; j < childrenNodes.getLength(); j++) {
+							Node childrenNode = childrenNodes.item(j);
+							if (childrenNode.getNodeType() == Node.ELEMENT_NODE) {
+								Element childrenElement = (Element) childrenNode;
+
+								AMRelations elem = new AMRelations();
+								elem.setId(childrenElement.getAttribute("id"));
+								elem.setType(childrenElement.getAttribute("xsi:type"));
+								elem.setSource(childrenElement.getAttribute("source"));
+								elem.setTarget(childrenElement.getAttribute("target"));
+								
+								sourceModelRelations.put(childrenElement.getAttribute("id"), elem);
+
+							}
+
+						}
+						// Filtro para recorrer los folder que son tipo business, strategy, application,
+						// etc
+					} else if (!objectElement.getAttribute("type").equals("other")
+							&& !objectElement.getAttribute("type").equals("implementation_migration")) {
+
+						NodeList childrenNodes = objectElement.getChildNodes();
+						for (int j = 0; j < childrenNodes.getLength(); j++) {
+							Node childrenNode = childrenNodes.item(j);
+							if (childrenNode.getNodeType() == Node.ELEMENT_NODE) {
+								Element childrenElement = (Element) childrenNode;
+
+								AMElement elem = new AMElement();
+								elem.setId(childrenElement.getAttribute("id"));
+								elem.setName(childrenElement.getAttribute("name"));
+								elem.setType(childrenElement.getAttribute("xsi:type"));
+								
+								sourceModelElements.put(childrenElement.getAttribute("id"), elem);
+
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+}

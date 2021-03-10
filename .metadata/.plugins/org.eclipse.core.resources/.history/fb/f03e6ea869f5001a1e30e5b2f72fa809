@@ -1,0 +1,307 @@
+package uniandes.rebel.archimate;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.eclipse.emf.ecore.resource.Resource;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import rebel_archimate.Project;
+import rebel_archimate.View;
+
+/**
+ * Esta clase se usa para para transformar el rebel_archimate a un xml 
+ * que se pueda leer por la libreria de draw.io para visualizacion únicamente.
+ * @author borisperezg
+ *
+ */
+public class ArchiToXML {
+
+	
+	/**
+	 * 
+	 * @param xmlFileName
+	 * @param projectName Se utiliza para crear estructura de carpetas, y mantener las vistas de los modelos separadas de acuerdo al proyecto
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean xmlCreation(String xmlFileName, String projectName) throws Exception  {
+		
+		AMModel amModel = new AMModel();
+		
+		HashMap<String, AMElement> elementsRebel = new HashMap<String, AMElement>();
+		
+		boolean resp = false;
+		
+		// Se guarda el archivo en dos ubicaciones, la carpeta en ejecucion en el tomcat, y la carpeta en desarrollo.
+		// De esta forma, cuando se redespliegue, no se pierden los xml creados.
+		
+		// Validar que exista la carpeta
+		
+		String xmlRunningFilePath = "/Users/borisperezg/apache-tomcat-7.0.100/webapps/rebelviz/archimatemodels/"+projectName;
+		if(checkOrCreateFolder(xmlRunningFilePath))
+			xmlRunningFilePath += "/"+xmlFileName+".xml";
+		
+		String xmlSourceFilePath = "/Users/borisperezg/eclipsews/rebelviz/WebContent/archimatemodels/"+projectName;
+		if(checkOrCreateFolder(xmlSourceFilePath))
+			xmlSourceFilePath += "/"+xmlFileName+".xml";
+		 
+		// Open and read XML
+//		Document docRebelArchimate = ArchimateUtil.parseXML("/Users/borisperezg/rebel/"+projectName+"/archimate/"+xmlFileName);
+		Resource res = amModel.loadResource("/Users/borisperezg/rebel/"+projectName+"/archimate/"+xmlFileName);
+		
+		if(res!=null) {
+			
+			DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();		 
+	        DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+	        Document docGraph = documentBuilder.newDocument();
+	        
+	        // root element
+	        Element mxGraphModel = docGraph.createElement("mxGraphModel");
+	        docGraph.appendChild(mxGraphModel);
+	        
+	        attributesCreationForGraphModel(docGraph, mxGraphModel);
+	        
+	        Element root = docGraph.createElement("root");
+	        mxGraphModel.appendChild(root);
+	        
+	        Element mxCell = docGraph.createElement("mxCell");
+	        root.appendChild(mxCell);
+	        Attr attr = docGraph.createAttribute("id");
+	        attr.setValue("0");
+	        mxCell.setAttributeNode(attr);
+	        
+	        mxCell = docGraph.createElement("mxCell");
+	        root.appendChild(mxCell);
+	        attr = docGraph.createAttribute("id");
+	        attr.setValue("1");
+	        mxCell.setAttributeNode(attr);
+	        
+	        // -----------------------------------------------------------
+	        
+	        Project project = (Project) res.getContents().get(0);
+	        List<View> views = project.getView();
+	        if(views!=null) {
+	        	for(View view : views) {
+	        		List<rebel_archimate.Element> elementNodes = view.getElement();
+	        		if(elementNodes!=null) {
+	        			for(rebel_archimate.Element elementNode : elementNodes) {
+	        			
+	    				String id = elementNode.getId();
+	    				String name = elementNode.getName();
+	    				String type = elementNode.getType().getName();
+	    				
+	    				String x = String.valueOf(elementNode.getPosX());
+	    				String y = String.valueOf(elementNode.getPosY());
+	    				String w = String.valueOf(elementNode.getWidth());
+	    				String h = String.valueOf(elementNode.getHeight());
+	    				
+	    				root.appendChild(createMxCellElement(docGraph, id, name, 
+	    						type, x, y, w, h));
+	    				
+	    				// Se usa para poderlos referenciar y calcular posiciones de las conexiones
+	    				AMElement amE = new AMElement();
+	    				amE.setId(id);
+	    				amE.setName(value);
+	    				amE.setPosX(Integer.parseInt(x));
+	    				amE.setPosY(Integer.parseInt(y));
+	    				amE.setHeight(Integer.parseInt(h));
+	    				amE.setWidth(Integer.parseInt(w));
+	    				elementsRebel.put(id, amE);
+	    			}
+	        	}
+	        }
+	        
+	        // Procesando las relaciones
+	        NodeList relationNodes = docRebelArchimate.getElementsByTagName("relation");
+	        if(relationNodes!=null) {
+	        	for (int i = 0; i < relationNodes.getLength(); i++) {
+	    			Node relationNode = relationNodes.item(i);
+	    			if (relationNode.getNodeType() == Node.ELEMENT_NODE) {
+	    				Element node = (Element) relationNode;
+	    				
+	    			}
+	        	}
+	        }
+	        
+	        // -----------------------------------------------------------
+	        
+	        // create the xml file
+	        // transform the DOM Object to an XML File
+	        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+	        Transformer transformer = transformerFactory.newTransformer();
+	        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+	        
+	        DOMSource domSource = new DOMSource(docGraph);
+	        StreamResult streamResultWebApp = new StreamResult(new File(xmlRunningFilePath));
+	        StreamResult streamResultSourceAppFolder = new StreamResult(new File(xmlSourceFilePath));
+
+	        transformer.transform(domSource, streamResultWebApp);
+	        transformer.transform(domSource, streamResultSourceAppFolder);
+
+	        resp = true;
+		}
+		
+		return resp;
+		
+	}
+	
+	private Element createMxCellElement(Document document, String id, String value, String type, String x, String y, String w, String h) {
+		Element mxCell = createMxCell(document, id, value, type);
+		Element mxGeometry = createMxGeometry(document, x, y, w, h);
+		mxCell.appendChild(mxGeometry);
+		return mxCell;
+	}
+	
+	/**
+	 * Este metodo crea los elementos y asigna el estilo de acuerdo al tipo.
+	 * @param document
+	 * @param id
+	 * @param value
+	 * @param type
+	 * @return
+	 */
+	private Element createMxCell(Document document, String id, String value, String type) {
+		Element mxCell = document.createElement("mxCell");
+        
+		Attr attr = document.createAttribute("vertex");
+        attr.setValue("1");
+        mxCell.setAttributeNode(attr);
+        attr = document.createAttribute("parent");
+        attr.setValue("1");
+        mxCell.setAttributeNode(attr);
+				
+		attr = document.createAttribute("id");
+        attr.setValue(id);
+        mxCell.setAttributeNode(attr);
+        attr = document.createAttribute("value");
+        attr.setValue(value);
+        mxCell.setAttributeNode(attr);
+        
+        attr = document.createAttribute("style");
+        
+        if(type.equals("BUSINESS_SERVICE"))
+        	attr.setValue("html=1;outlineConnect=0;whiteSpace=wrap;fillColor=#ffff99;shape=mxgraph.archimate3.application;appType=serv;archiType=rounded;");
+        else if(type.equals("APPLICATION_SERVICE"))
+        	attr.setValue("html=1;outlineConnect=0;whiteSpace=wrap;fillColor=#99ffff;shape=mxgraph.archimate3.application;appType=serv;archiType=rounded");
+        else if(type.equals("APPLICATION_COMPONENT"))
+        	attr.setValue("html=1;outlineConnect=0;whiteSpace=wrap;fillColor=#99ffff;shape=mxgraph.archimate3.component;");
+        else if(type.equals("BUSINESS_PROCESS"))
+        	attr.setValue("html=1;outlineConnect=0;whiteSpace=wrap;fillColor=#ffff99;shape=mxgraph.archimate3.application;appType=proc;archiType=rounded;");
+        
+        mxCell.setAttributeNode(attr);
+        
+        
+        return mxCell;
+	}
+	
+	private Element createMxGeometry(Document document, String x, String y, String w, String h) {
+		Element mxGeometry = document.createElement("mxGeometry");
+        
+        
+        Attr attr = document.createAttribute("x");
+        attr.setValue(x);
+        mxGeometry.setAttributeNode(attr);
+        attr = document.createAttribute("y");
+        attr.setValue(y);
+        mxGeometry.setAttributeNode(attr);
+        attr = document.createAttribute("width");
+        attr.setValue(w);
+        mxGeometry.setAttributeNode(attr);
+        attr = document.createAttribute("height");
+        attr.setValue(h);
+        mxGeometry.setAttributeNode(attr);
+        attr = document.createAttribute("as");
+        attr.setValue("geometry");
+        mxGeometry.setAttributeNode(attr);
+        
+        return mxGeometry;
+	}
+	
+	private void attributesCreationForGraphModel(Document document, Element root) {
+		Attr attr = document.createAttribute("dx");
+        attr.setValue("786");
+        root.setAttributeNode(attr);
+        
+        attr = document.createAttribute("dy");
+        attr.setValue("447");
+        root.setAttributeNode(attr);
+        
+        attr = document.createAttribute("grid");
+        attr.setValue("1");
+        root.setAttributeNode(attr);
+        
+        attr = document.createAttribute("gridSize");
+        attr.setValue("10");
+        root.setAttributeNode(attr);
+        
+        attr = document.createAttribute("guides");
+        attr.setValue("1");
+        root.setAttributeNode(attr);
+        
+        attr = document.createAttribute("tooltips");
+        attr.setValue("1");
+        root.setAttributeNode(attr);
+        
+        attr = document.createAttribute("connect");
+        attr.setValue("1");
+        root.setAttributeNode(attr);
+        
+        attr = document.createAttribute("arrows");
+        attr.setValue("1");
+        root.setAttributeNode(attr);
+        
+        attr = document.createAttribute("fold");
+        attr.setValue("1");
+        root.setAttributeNode(attr);
+        
+        attr = document.createAttribute("page");
+        attr.setValue("1");
+        root.setAttributeNode(attr);
+        
+        attr = document.createAttribute("pageScale");
+        attr.setValue("1");
+        root.setAttributeNode(attr);
+        
+        attr = document.createAttribute("pageWidth");
+        attr.setValue("827");
+        root.setAttributeNode(attr);
+        
+        attr = document.createAttribute("pageHeight");
+        attr.setValue("1169");
+        root.setAttributeNode(attr);
+	}
+	
+	/**
+	 * Esta carpeta valida si existe la ruta indicada. Se pasa la ruta completa porque se usarán
+	 * dos rutas para crear archivos.
+	 * @param path Esta es la ruta completa para insetar
+	 * @return
+	 */
+	public static boolean checkOrCreateFolder(String folderName) {
+		boolean isReady = false;
+		
+		File folder = new File(folderName);
+		if(folder.exists()) {
+			isReady = true;
+		}else {
+			isReady = folder.mkdir();			
+		}
+		
+		return isReady;
+	}
+	
+}

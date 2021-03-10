@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ASCII" standalone="no"?><rebel_componentandconnector:Project xmlns:rebel_componentandconnector="http://uniandes/rebel_componentandconnector" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="chiper" xmi:version="2.0">
+  <functionalviews name="cnc1">
+    <components height="50" id="5" name="Pedidos" posX="212" posY="8" width="120">
+      <ports id="5_5_7" name="5_5_7"/>
+      <ports id="5_5_8" name="5_5_8"/>
+      <ports id="5_5_10" name="5_5_10"/>
+    </components>
+    <components height="50" id="7" name="ManejadorEstadisticas" posX="399" posY="78" width="170">
+      <ports id="7_5_7" name="7_5_7" type="PROVIDED"/>
+      <ports id="7_7_11" name="7_7_11"/>
+    </components>
+    <components height="50" id="8" name="Pagos" posX="33" posY="112" width="100">
+      <ports id="8_5_8" name="8_5_8" type="PROVIDED"/>
+    </components>
+    <components height="50" id="10" name="Logistica" posX="18" posY="222" width="120">
+      <ports id="10_5_10" name="10_5_10" type="PROVIDED"/>
+      <ports id="10_10_11" name="10_10_11"/>
+    </components>
+    <components height="50" id="11" name="Persistencia" posX="398" posY="222" width="120">
+      <ports id="11_7_11" name="11_7_11" type="PROVIDED"/>
+      <ports id="11_10_11" name="11_10_11" type="PROVIDED"/>
+    </components>
+    <connectors id="2" name="Con2" posX="365" posY="9" protocol="" xsi:type="rebel_componentandconnector:ProcedureCall">
+      <roles port="//@functionalviews.0/@components.0/@ports.0"/>
+      <roles port="//@functionalviews.0/@components.1/@ports.0" type="IN"/>
+    </connectors>
+    <connectors id="3" name="Con1" posX="8" posY="8" protocol="" xsi:type="rebel_componentandconnector:Stream">
+      <roles port="//@functionalviews.0/@components.0/@ports.1"/>
+      <roles port="//@functionalviews.0/@components.2/@ports.0" type="IN"/>
+    </connectors>
+    <connectors id="4" name="con3" posX="167" posY="113" protocol="" xsi:type="rebel_componentandconnector:ProcedureCall">
+      <roles port="//@functionalviews.0/@components.0/@ports.2"/>
+      <roles port="//@functionalviews.0/@components.3/@ports.0" type="IN"/>
+    </connectors>
+    <connectors id="6" name="con5" posX="419" posY="153" protocol="" xsi:type="rebel_componentandconnector:Distributor">
+      <roles port="//@functionalviews.0/@components.1/@ports.1"/>
+      <roles port="//@functionalviews.0/@components.4/@ports.0" type="IN"/>
+    </connectors>
+    <connectors id="9" name="con4" posX="201" posY="224" protocol="" xsi:type="rebel_componentandconnector:Distributor">
+      <roles port="//@functionalviews.0/@components.3/@ports.1"/>
+      <roles port="//@functionalviews.0/@components.4/@ports.1" type="IN"/>
+    </connectors>
+  </functionalviews>
+</rebel_componentandconnector:Project>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;uniandes.rebelapi.bo.ArchitecturalDecision&apos; to &apos;APIArchitecturalDecision&apos;&#x0A;- Original project: &apos;rebelapi&apos;&#x0A;- Original element: &apos;uniandes.rebelapi.bo.ArchitecturalDecision&apos;&#x0A;- Renamed element: &apos;uniandes.rebelapi.bo.APIArchitecturalDecision&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;ArchitecturalDecision&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;uniandes.rebelapi.bo{ArchitecturalDecision.java[ArchitecturalDecision" matchStrategy="1" name="APIArchitecturalDecision" qualified="false" references="true" similarDeclarations="false" stamp="1597362158068" textual="false" version="1.0"/>
+</session>

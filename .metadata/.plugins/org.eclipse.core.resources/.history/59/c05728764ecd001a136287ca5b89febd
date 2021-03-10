@@ -1,0 +1,122 @@
+package uniandes.rebel.github;
+
+import java.util.Collections;
+import java.util.Map;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+import rebel_github.Message;
+import rebel_github.Person;
+import rebel_github.Rebel_githubFactory;
+import rebel_github.Rebel_githubPackage;
+import rebel_github.Repository;
+import uniandes.rebel.github.mediator.DerbyDBMediator;
+
+public class GitHubModel {
+
+	private Repository repository;
+	private Rebel_githubFactory factory;
+	private Resource resource;
+	private String uriAddress;
+	
+	//--------------------
+	// SINGLETON
+	private static GitHubModel instance;	
+	private GitHubModel() {	
+		factory = Rebel_githubFactory.eINSTANCE;
+	}	
+	public static GitHubModel getInstance(){
+        if(instance == null){
+            instance = new GitHubModel();
+        }
+        return instance;
+    }
+	//--------------------
+	
+	
+//	public String deleteAndCreateModel(String projectName) throws Exception {
+//		// delete model
+//		
+//		// create model
+//		String model = createModel(projectName);
+//		return model;
+//	}
+	
+	public void createModel(String projectName, String modelName) throws Exception {
+		
+		
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+        Map<String, Object> m = reg.getExtensionToFactoryMap();
+        m.put("rebel_github", new XMIResourceFactoryImpl());
+        
+        ResourceSet resourceSet = new ResourceSetImpl();
+        
+        // Validar si existe la carpeta, si no existe, entonces se crea
+ 		if(Util.checkOrCreateFolder(projectName)) {
+        
+ 			uriAddress = "/Users/borisrainieroperezgutierrez/rebel/"+projectName+"/github/" + modelName + ".rebel_github";
+	 		
+	 		resource = resourceSet.createResource(URI.createURI(uriAddress));
+			
+	 		//--------------------
+	 		// ROOT NODE CREATION
+	 		repository = factory.createRepository();
+	 		repository.setName(projectName);
+	 		resource.getContents().add(repository);		
+ 		
+ 		}else{
+			throw new Exception("No se pudo crear la carpeta del proyecto para Commits ::: "+projectName+" - "+modelName);
+		}
+	}
+	
+	public void loadModel(String modelName) {
+		Rebel_githubPackage.eINSTANCE.eClass();
+		
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+        Map<String, Object> m = reg.getExtensionToFactoryMap();
+        m.put("rebel_github", new XMIResourceFactoryImpl());
+        
+        ResourceSet resSet = new ResourceSetImpl();
+
+        // Get the resource
+        Resource resource = resSet.getResource(URI
+                .createURI(uriAddress), true);
+        
+        repository = (Repository) resource.getContents().get(0);
+//        return repository;
+	}
+	
+	public void storeModel(String projectName, String modelName, String modelType) throws Exception {
+		resource.save(Collections.EMPTY_MAP);
+		
+		// persistirlo a la base de datos
+//		String xmlFileContent = new String(Files.readAllBytes(Paths.get(uriAddress)), StandardCharsets.UTF_8);
+
+		DerbyDBMediator d = new DerbyDBMediator();
+		d.insertModel(projectName, modelName, modelType, uriAddress);
+	}
+	
+	public Message createMessage() {
+		return factory.createMessage();		
+	}
+	
+	public Person createPerson() {
+		return factory.createPerson();		
+	}
+	
+	public void storeMessage(Message m) {
+		repository.getMessages().add(m);
+	}
+	
+	public void storePerson(Person p) {
+		// Check that person doesnot exist in the list of members
+		
+		// Store the person
+		repository.getMembers().add(p);
+	}
+	
+}
