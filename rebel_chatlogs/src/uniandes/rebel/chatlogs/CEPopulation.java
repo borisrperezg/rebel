@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -67,6 +68,7 @@ public class CEPopulation {
 			
 			MessageLog msgLog = ceModel.createMessageLog();
 			msgLog.setType(CEUtil.getMessageType(type));
+			msgLog.setId("id-"+Calendar.getInstance().getTimeInMillis());
 			
 			// ---------------
 			// Creation date
@@ -133,6 +135,7 @@ public class CEPopulation {
 					String personFrom = severalValues[2];
 					String msgChat = severalValues[3];
 					
+					msg.setId("id-"+Calendar.getInstance().getTimeInMillis());
 					msg.setText(msgChat);
 					msg.setSentBy(personFrom);
 					
@@ -169,8 +172,10 @@ public class CEPopulation {
 		        Map.Entry<String, ArrayList<Message>> entry = iterator.next();
 		        
 		        MessageLog ml = ceModel.createMessageLog();
+		        ml.setId("id-"+Calendar.getInstance().getTimeInMillis());
 		        ml.setTitle(entry.getKey());
 		        ml.getMessages().addAll(entry.getValue());
+		        ml.setType(CEUtil.getMessageType("chat"));
 		        ml.setCreation(CEUtil.processingStringToDate(entry.getKey()));
 		        
 		        ceModel.storeMessageLog(ml);
@@ -205,6 +210,7 @@ public class CEPopulation {
 		
 		Message msg = ceModel.createMessage();
 		
+		msg.setId("id-"+Calendar.getInstance().getTimeInMillis());
 		msg.setSentBy(message.getFrom()[0].toString());
 		msg.setReceivedBy(message.getAllRecipients()[0].toString());
 		

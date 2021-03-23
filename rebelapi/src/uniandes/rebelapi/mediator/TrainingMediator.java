@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -18,7 +19,11 @@ import rebel_core.ATDItem;
 import rebel_core.ATDRationale;
 import rebel_core.ArchimateView;
 import rebel_core.BlockOfInterest;
+import rebel_core.ChatEmailMessage;
+import rebel_core.CommitMessage;
+import rebel_core.Decision;
 import rebel_core.Fact;
+import rebel_core.MessageLog;
 import rebel_core.Project;
 import rebel_core.Relation;
 import uniandes.rebel.archimate.AMModel;
@@ -46,7 +51,7 @@ public class TrainingMediator {
 //		Se descarta la informacion de las conexiones que tenia en la version anterior
 //		String fileContent = "date,prevelementnames,types,relationtypes,sourceelementname,sourceelementtype,targetelementname,isnewelement,targetelementtype,facttype,relatontype,action,atdcause\n";
 		
-		String fileContent = "driver,goal,sourceelementname,sourceelementtype,layersource,targetelementname,targetelementtype,layertarget,isnewelement,facttype,relatontype,action,incoming,outcoming,ratioLinks,mostlinkedlayer,atdcause,affectedqa\n";
+		String fileContent = "driver|goal|sourceelementname|sourceelementtype|layersource|targetelementname|targetelementtype|layertarget|isnewelement|facttype|relatontype|action|incoming|outcoming|ratioLinks|mostlinkedlayer|commitlogs|adrlogs|chatlogs|atdcause|affectedqa\n";
 		
 		// *********************************************
 		// EXTRACCION DEL NOMBRE DEL PROYECTO Y DEL BOI
@@ -106,7 +111,7 @@ public class TrainingMediator {
 		
 		HashMap<String, Integer> hashRelaciones = obtenerVistasConCoincidencias(archimateModels);
 		
-		System.out.println("ModelMediator.trainingModel ::: Extraccion del total de relaciones -> OK");
+		System.out.println("ModelMediator.trainingModel ::: Extraccion del total de relaciones  -> OK "+(hashRelaciones!=null));
 		
 		// ************************************
 		// IMPRESION DE FACTS
@@ -136,21 +141,25 @@ public class TrainingMediator {
 						String origen = "", destino = "";
 						String tipoFact = "";
 						
-						/* -----------------------------------------
-						 * Bloque para la extracción del nombre del 
-						 * elemento creo, o de los elementos de la
-						 * relación
-						 */
+						// ----------------------------------------
+						// SEPARACION DE ELEMENTOS EN RELACION
+						// Se separan los elementos cuando se involucra -O)- o -X
+						// ----------------------------------------
 						if(f.getElementName().contains("->")) {
 							String[] elementos = f.getElementName().split(" -> ");
 							origen = elementos[0];
 							destino = elementos[1];
-						}else if(f.getElementName().contains("-#")) {
-							String[] elementos = f.getElementName().split(" -# ");
-							origen = elementos[0];
-							destino = elementos[1];					
+						}else if(f.getElementName().contains("-X")) {
+							String[] elementos = f.getElementName().split("-X");
+							origen = elementos[0].trim();
+							destino = elementos[1].trim();					
+						}else if(f.getElementName().contains("-O)-")) {
+							String[] elementos = f.getElementName().split("-O");
+							origen = elementos[0].trim();
+							destino = elementos[1].substring(2).trim();
 						}else
 							origen = f.getElementName();
+						
 						
 						/* -----------------------------------------
 						 * 
@@ -164,11 +173,6 @@ public class TrainingMediator {
 						 * Obtencion de la categoria del texto clasificado.
 						 * Se usa el ID del Fact para obtener la etiqueta de clasificacion 
 						 */
-						
-						
-//						String atdCauseCategory = listOfTags.get(f.getId());
-//						if(atdCauseCategory==null || atdCauseCategory.length()==0)
-//							atdCauseCategory = "NONE";
 						
 						String atdTypeCategory = "NOATD";
 						String affectedQA = "none";
@@ -263,15 +267,23 @@ public class TrainingMediator {
 						int allLinks = 0;
 						double ratioLinks = 0;
 						
-						incomingLinks = hashRelaciones.get(f.getView().get(0).getName()+"#"+f.getElementName()+"#incoming");
-						outcomingLinks = hashRelaciones.get(f.getView().get(0).getName()+"#"+f.getElementName()+"#incoming");
-						allLinks = hashRelaciones.get("allLinks#"+f.getView().get(0).getName());
-						
-						ratioLinks = (double)(incomingLinks + outcomingLinks) / allLinks;
-						BigDecimal bd = BigDecimal.valueOf(ratioLinks);
-					    bd = bd.setScale(2, RoundingMode.HALF_UP);
-					    ratioLinks = bd.doubleValue();
-						
+						if(f.getView()!=null && f.getView().get(0)!=null) {
+							
+							if(hashRelaciones.get(f.getView().get(0).getName()+"#"+f.getElementName()+"#incoming")!=null)
+								incomingLinks = hashRelaciones.get(f.getView().get(0).getName()+"#"+f.getElementName()+"#incoming");
+							
+							if(hashRelaciones.get(f.getView().get(0).getName()+"#"+f.getElementName()+"#outcoming")!=null)
+								outcomingLinks = hashRelaciones.get(f.getView().get(0).getName()+"#"+f.getElementName()+"#outcoming");
+							
+							if(hashRelaciones.get("allLinks#"+f.getView().get(0).getName())!=null)
+								allLinks = hashRelaciones.get("allLinks#"+f.getView().get(0).getName());
+								
+							ratioLinks = (double)(incomingLinks + outcomingLinks) / allLinks;
+							BigDecimal bd = BigDecimal.valueOf(ratioLinks);
+							bd = bd.setScale(2, RoundingMode.HALF_UP);
+							ratioLinks = bd.doubleValue();
+							
+						}
 						
 						APIElementRelations elementRelations = findIncomingAndOutcomingLinks(project, origen, f.getDate());
 						if(elementRelations!=null) {
@@ -298,14 +310,62 @@ public class TrainingMediator {
 							relationType = f.getElementType();
 						}
 						
-						String separador = ",";
+						// ------------------------------------------------------------------------
+						// OBTENCION DE LOS TEXTOS DE COINCIDENCIA EN LOS ARTEFACTOS HETEROGENEOS
+						// ------------------------------------------------------------------------
+						
+						// Texto de GitHub
+						
+						String commitMsgsText = "";
+						if(f.getMessage()!=null && f.getMessage().size()>0) {
+							for(CommitMessage commitMsg : f.getMessage()) {
+								commitMsgsText += procesarTexto(commitMsg.getBody());
+							}
+						}
+						
+						// Texto de ADR
+						
+						String adrMsgsText = "";
+						if(f.getArchitecturaldecision()!=null && f.getArchitecturaldecision().size()>0) {
+							for(Decision adrMsg : f.getArchitecturaldecision()) {
+//								System.out.println("ADR Desc: "+adrMsg.getDescription());
+								adrMsgsText += adrMsg.getDescription();
+//								System.out.println("adrMsgsText: "+adrMsgsText);
+							}
+						}
+						
+//						System.out.println("adrMsgsText = "+adrMsgsText);
+						
+						// Texto de Chat/Email
+						
+						String chatEmailMsgsText = "";
+						if(f.getMessagelogs()!=null && f.getMessagelogs().size()>0) {
+							for(MessageLog msgLog : f.getMessagelogs()) {
+								if(msgLog.getMsgLogMessages()!=null && msgLog.getMsgLogMessages().size()>0) {
+									for(ChatEmailMessage chatEmailMsg : msgLog.getMsgLogMessages()) {
+										chatEmailMsgsText += procesarTexto(chatEmailMsg.getText());
+									}
+								}
+							}
+						}
+						
+						
+						// ----------------------------------------
+						// CONSTRUCCION DEL DATASET DE ENTRADA
+						// ----------------------------------------
+						
+						String separador = "|";
 						
 	//					String fileContent = "driver,goal,sourceelementname,sourceelementtype,layersource,targetelementname,targetelementtype,layertarget,isnewelement,facttype,relatontype,action,incoming,outcoming,ratioLinks,mostlinkedlayer,atdcause\n";
 						
-							fileContent += driver + separador + goal + separador + origen + separador + sourceElementType + separador + layerSource + separador+ destino + separador + 
-									targetElementType + separador + layerTarget + separador + esNuevoString + separador + tipoFact + separador + 
-									relationType + separador + f.getAction() + separador + incomingLinks + separador + outcomingLinks + separador + 
-									ratioLinks + separador + mostLinkedLayer + separador + atdTypeCategory + separador + affectedQA + "\n";
+							fileContent += driver + separador + goal + separador + origen + separador + 
+									sourceElementType + separador + layerSource + separador + 
+									destino + separador + targetElementType + separador + layerTarget + separador + 
+									esNuevoString + separador + tipoFact + separador + relationType + separador + 
+									f.getAction() + separador + incomingLinks + separador + outcomingLinks + separador + 
+									ratioLinks + separador + mostLinkedLayer + separador + commitMsgsText + separador + 
+									adrMsgsText + separador + chatEmailMsgsText + separador + 
+									atdTypeCategory + separador + affectedQA + "\n";
 					}
 				}
 			}
@@ -321,7 +381,7 @@ public class TrainingMediator {
 		finalFileContent = transformsDataset(fileContent);
 		
 		// Escritura a archivo.
-		String fileName = "multiclass_entrydataset_atdidentification.csv";
+		String fileName = "facts_training_dataset_"+Calendar.getInstance().getTimeInMillis()+".csv";
 		
 		// La ruta esta en la variable DATAFILESFOLDER
 		if(writeInputFile(fileName, finalFileContent) ) {
@@ -342,6 +402,21 @@ public class TrainingMediator {
 //		}		
 		
 		return resp;
+	}
+
+	private String procesarTexto(String body) {
+		String textToLines = "";
+		if(body!=null) {
+			body = body.replaceAll(",", "");
+			String[] linesOfText = body.split("(?s).*[\\n\\r].*");
+			if(linesOfText.length>=0) {
+				for(String line : linesOfText) {
+					textToLines += " " + line;
+				}
+			}else
+				textToLines = body;
+		}
+		return textToLines;
 	}
 
 	private String transformsDataset(String oldDataset) {
@@ -615,12 +690,9 @@ public class TrainingMediator {
 	}
 	
 	public static void main(String[] args) {
-		int a = 5;
-		int b = 6;
-		int c = 20;
-		
-		double rel = (double)(a+b)/c;
-		System.out.println(rel);
+		String val = "Centro de Atención Componente -O)- Localización Centros de Atención";
+		String[] arr = val.split("-O");
+		System.out.println(arr.length);
 	}
 	
 	private String obtenerPrefijoNombreModel(String baseModel) {
@@ -689,8 +761,6 @@ public class TrainingMediator {
 				
 		return totalRelaciones;
 	}
-	
-	
 	
 	
 }

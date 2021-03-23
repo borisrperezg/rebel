@@ -71,6 +71,45 @@ public class APIModelDerby {
 
 		return list;
 	}
+	
+	public APIModelElement getChatEmailArtifacts(String projectName, String modelName, String type) {
+
+		APIModelElement model = null;
+
+		try {
+			Statement stmt = conn.createStatement();
+
+			ResultSet results = stmt.executeQuery(
+					"SELECT A.ID, A.NAME, A.PROJECTID, A.XMLRUTE "
+					+ "FROM REB.MODEL A, REB.PROJECT B "
+					+ "WHERE A.TYPE = '"+type+"' AND A.PROJECTID = B.ID "
+					+ "AND B.NAME = '" + projectName + "'" 
+					+ "AND A.NAME = '" + modelName + "'");
+
+			if (results.next()) {
+				String id = results.getString(1);
+				String name = results.getString(2);
+				String pId = results.getString(3);
+				String route = results.getString(4);
+
+				model = new APIModelElement();
+				model.setId(id);
+				model.setName(name);
+				model.setType(type);
+				model.setProjectId(pId);
+				model.setXmlroute(route);
+
+				
+			}
+
+			results.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return model;
+	}
 
 	public APIBOI getBOI(String projectName, String boiName) {
 

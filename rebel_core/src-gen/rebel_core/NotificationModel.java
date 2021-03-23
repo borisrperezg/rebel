@@ -27,10 +27,11 @@ public enum NotificationModel implements Enumerator {
 	 * @ordered
 	 */
 	NONE(0, "NONE", "NONE"),
+
 	/**
 	 * The '<em><b>PUBSUB</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #PUBSUB_VALUE
 	 * @generated
 	 * @ordered
@@ -56,10 +57,11 @@ public enum NotificationModel implements Enumerator {
 	 * @ordered
 	 */
 	CENTRAL(3, "CENTRAL", "CENTRAL"),
+
 	/**
 	 * The '<em><b>POLLED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #POLLED_VALUE
 	 * @generated
 	 * @ordered

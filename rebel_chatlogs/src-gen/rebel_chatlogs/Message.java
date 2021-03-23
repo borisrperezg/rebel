@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link rebel_chatlogs.Message#getTimestamp <em>Timestamp</em>}</li>
  *   <li>{@link rebel_chatlogs.Message#getSentBy <em>Sent By</em>}</li>
  *   <li>{@link rebel_chatlogs.Message#getReceivedBy <em>Received By</em>}</li>
+ *   <li>{@link rebel_chatlogs.Message#getId <em>Id</em>}</li>
  * </ul>
  *
  * @see rebel_chatlogs.Rebel_chatlogsPackage#getMessage()
@@ -47,6 +48,28 @@ public interface Message extends EObject {
 	 * @generated
 	 */
 	void setReceivedBy(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(String)
+	 * @see rebel_chatlogs.Rebel_chatlogsPackage#getMessage_Id()
+	 * @model
+	 * @generated
+	 */
+	String getId();
+
+	/**
+	 * Sets the value of the '{@link rebel_chatlogs.Message#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
+	void setId(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Text</b></em>' attribute.

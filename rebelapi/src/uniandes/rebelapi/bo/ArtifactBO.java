@@ -2,7 +2,9 @@ package uniandes.rebelapi.bo;
 
 public class ArtifactBO {
 
-	private String type, name, date;
+	private String type, name;
+	// YYYY-MM-DD
+	private String date;
 
 	public String getType() {
 		return type;
@@ -24,6 +26,10 @@ public class ArtifactBO {
 		return date;
 	}
 
+	/**
+	 * 
+	 * @param date YYYY-MM-DD
+	 */
 	public void setDate(String date) {
 		this.date = date;
 	}

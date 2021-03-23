@@ -19,12 +19,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_chatlogs.ecore#//MessageLog/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_chatlogs.ecore#//MessageLog/creation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_chatlogs.ecore#//MessageLog/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_chatlogs.ecore#//MessageLog/id"/>
     </genClasses>
     <genClasses ecoreClass="rebel_chatlogs.ecore#//Message">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_chatlogs.ecore#//Message/text"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_chatlogs.ecore#//Message/timestamp"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_chatlogs.ecore#//Message/sentBy"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_chatlogs.ecore#//Message/receivedBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_chatlogs.ecore#//Message/id"/>
     </genClasses>
     <genClasses ecoreClass="rebel_chatlogs.ecore#//Project">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rebel_chatlogs.ecore#//Project/messagelogs"/>

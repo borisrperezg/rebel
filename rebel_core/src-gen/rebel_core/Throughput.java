@@ -27,19 +27,21 @@ public enum Throughput implements Enumerator {
 	 * @ordered
 	 */
 	NONE(0, "NONE", "NONE"),
+
 	/**
 	 * The '<em><b>HIGH ORDER</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #HIGH_ORDER_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	HIGH_ORDER(1, "HIGH_ORDER", "HIGH_ORDER"),
+
 	/**
 	 * The '<em><b>ATOMIC</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #ATOMIC_VALUE
 	 * @generated
 	 * @ordered

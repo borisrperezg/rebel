@@ -24,6 +24,7 @@ import rebel_chatlogs.Rebel_chatlogsPackage;
  *   <li>{@link rebel_chatlogs.impl.MessageImpl#getTimestamp <em>Timestamp</em>}</li>
  *   <li>{@link rebel_chatlogs.impl.MessageImpl#getSentBy <em>Sent By</em>}</li>
  *   <li>{@link rebel_chatlogs.impl.MessageImpl#getReceivedBy <em>Received By</em>}</li>
+ *   <li>{@link rebel_chatlogs.impl.MessageImpl#getId <em>Id</em>}</li>
  * </ul>
  *
  * @generated
@@ -110,6 +111,26 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
 	protected String receivedBy = RECEIVED_BY_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -150,6 +171,29 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY,
 					oldReceivedBy, receivedBy));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Rebel_chatlogsPackage.MESSAGE__ID, oldId, id));
 	}
 
 	/**
@@ -239,6 +283,8 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
 			return getSentBy();
 		case Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY:
 			return getReceivedBy();
+		case Rebel_chatlogsPackage.MESSAGE__ID:
+			return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -262,6 +308,9 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
 			return;
 		case Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY:
 			setReceivedBy((String) newValue);
+			return;
+		case Rebel_chatlogsPackage.MESSAGE__ID:
+			setId((String) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -287,6 +336,9 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
 		case Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY:
 			setReceivedBy(RECEIVED_BY_EDEFAULT);
 			return;
+		case Rebel_chatlogsPackage.MESSAGE__ID:
+			setId(ID_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -307,6 +359,8 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
 			return SENT_BY_EDEFAULT == null ? sentBy != null : !SENT_BY_EDEFAULT.equals(sentBy);
 		case Rebel_chatlogsPackage.MESSAGE__RECEIVED_BY:
 			return RECEIVED_BY_EDEFAULT == null ? receivedBy != null : !RECEIVED_BY_EDEFAULT.equals(receivedBy);
+		case Rebel_chatlogsPackage.MESSAGE__ID:
+			return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -330,6 +384,8 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
 		result.append(sentBy);
 		result.append(", receivedBy: ");
 		result.append(receivedBy);
+		result.append(", id: ");
+		result.append(id);
 		result.append(')');
 		return result.toString();
 	}

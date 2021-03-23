@@ -27,19 +27,21 @@ public enum RoleType implements Enumerator {
 	 * @ordered
 	 */
 	NONE(0, "NONE", "NONE"),
+
 	/**
 	 * The '<em><b>IN</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #IN_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	IN(1, "IN", "IN"),
+
 	/**
 	 * The '<em><b>OUT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #OUT_VALUE
 	 * @generated
 	 * @ordered

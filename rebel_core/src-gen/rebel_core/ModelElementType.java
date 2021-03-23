@@ -37,19 +37,21 @@ public enum ModelElementType implements Enumerator {
 	 * @ordered
 	 */
 	CONNECTOR(1, "CONNECTOR", "CONNECTOR"),
+
 	/**
 	 * The '<em><b>ARCHIMATE ELEMENT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #ARCHIMATE_ELEMENT_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	ARCHIMATE_ELEMENT(2, "ARCHIMATE_ELEMENT", "ARCHIMATE_ELEMENT"),
+
 	/**
 	 * The '<em><b>ARCHIMATE RELATION</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #ARCHIMATE_RELATION_VALUE
 	 * @generated
 	 * @ordered

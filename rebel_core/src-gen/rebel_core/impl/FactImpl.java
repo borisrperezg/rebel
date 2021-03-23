@@ -6,27 +6,28 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import rebel_core.ATDItem;
 import rebel_core.Action;
 import rebel_core.ArchimateView;
+import rebel_core.CommitMessage;
 import rebel_core.Decision;
 import rebel_core.Fact;
 import rebel_core.FunctionalView;
-import rebel_core.Message;
+import rebel_core.MessageLog;
 import rebel_core.Rebel_corePackage;
 
 /**
@@ -49,6 +50,7 @@ import rebel_core.Rebel_corePackage;
  *   <li>{@link rebel_core.impl.FactImpl#getView <em>View</em>}</li>
  *   <li>{@link rebel_core.impl.FactImpl#getFact <em>Fact</em>}</li>
  *   <li>{@link rebel_core.impl.FactImpl#getAtditem <em>Atditem</em>}</li>
+ *   <li>{@link rebel_core.impl.FactImpl#getMessagelogs <em>Messagelogs</em>}</li>
  * </ul>
  *
  * @generated
@@ -202,7 +204,7 @@ public class FactImpl extends MinimalEObjectImpl.Container implements Fact {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Message> message;
+	protected EList<CommitMessage> message;
 
 	/**
 	 * The cached value of the '{@link #getView() <em>View</em>}' reference list.
@@ -233,6 +235,16 @@ public class FactImpl extends MinimalEObjectImpl.Container implements Fact {
 	 * @ordered
 	 */
 	protected EList<ATDItem> atditem;
+
+	/**
+	 * The cached value of the '{@link #getMessagelogs() <em>Messagelogs</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMessagelogs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<MessageLog> messagelogs;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -428,9 +440,10 @@ public class FactImpl extends MinimalEObjectImpl.Container implements Fact {
 	 * @generated
 	 */
 	@Override
-	public EList<Message> getMessage() {
+	public EList<CommitMessage> getMessage() {
 		if (message == null) {
-			message = new EObjectResolvingEList<Message>(Message.class, this, Rebel_corePackage.FACT__MESSAGE);
+			message = new EObjectResolvingEList<CommitMessage>(CommitMessage.class, this,
+					Rebel_corePackage.FACT__MESSAGE);
 		}
 		return message;
 	}
@@ -508,6 +521,20 @@ public class FactImpl extends MinimalEObjectImpl.Container implements Fact {
 	 * @generated
 	 */
 	@Override
+	public EList<MessageLog> getMessagelogs() {
+		if (messagelogs == null) {
+			messagelogs = new EObjectResolvingEList<MessageLog>(MessageLog.class, this,
+					Rebel_corePackage.FACT__MESSAGELOGS);
+		}
+		return messagelogs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case Rebel_corePackage.FACT__ATDITEM:
@@ -550,6 +577,8 @@ public class FactImpl extends MinimalEObjectImpl.Container implements Fact {
 			return basicGetFact();
 		case Rebel_corePackage.FACT__ATDITEM:
 			return getAtditem();
+		case Rebel_corePackage.FACT__MESSAGELOGS:
+			return getMessagelogs();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -591,7 +620,7 @@ public class FactImpl extends MinimalEObjectImpl.Container implements Fact {
 			return;
 		case Rebel_corePackage.FACT__MESSAGE:
 			getMessage().clear();
-			getMessage().addAll((Collection<? extends Message>) newValue);
+			getMessage().addAll((Collection<? extends CommitMessage>) newValue);
 			return;
 		case Rebel_corePackage.FACT__VIEW:
 			getView().clear();
@@ -603,6 +632,10 @@ public class FactImpl extends MinimalEObjectImpl.Container implements Fact {
 		case Rebel_corePackage.FACT__ATDITEM:
 			getAtditem().clear();
 			getAtditem().addAll((Collection<? extends ATDItem>) newValue);
+			return;
+		case Rebel_corePackage.FACT__MESSAGELOGS:
+			getMessagelogs().clear();
+			getMessagelogs().addAll((Collection<? extends MessageLog>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -652,6 +685,9 @@ public class FactImpl extends MinimalEObjectImpl.Container implements Fact {
 		case Rebel_corePackage.FACT__ATDITEM:
 			getAtditem().clear();
 			return;
+		case Rebel_corePackage.FACT__MESSAGELOGS:
+			getMessagelogs().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -688,6 +724,8 @@ public class FactImpl extends MinimalEObjectImpl.Container implements Fact {
 			return fact != null;
 		case Rebel_corePackage.FACT__ATDITEM:
 			return atditem != null && !atditem.isEmpty();
+		case Rebel_corePackage.FACT__MESSAGELOGS:
+			return messagelogs != null && !messagelogs.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

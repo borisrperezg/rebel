@@ -19,14 +19,14 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum StateType implements Enumerator {
 	/**
-	 * The '<em><b>ACCEPTED</b></em>' literal object.
+	 * The '<em><b>NONE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ACCEPTED_VALUE
+	 * @see #NONE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	ACCEPTED(0, "ACCEPTED", "ACCEPTED"),
+	NONE(0, "NONE", "NONE"),
 
 	/**
 	 * The '<em><b>PROPOSED</b></em>' literal object.
@@ -66,18 +66,28 @@ public enum StateType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	REJECTED(4, "REJECTED", "REJECTED");
+	REJECTED(4, "REJECTED", "REJECTED"),
 
 	/**
-	 * The '<em><b>ACCEPTED</b></em>' literal value.
+	 * The '<em><b>ACCEPTED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ACCEPTED
+	 * @see #ACCEPTED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ACCEPTED(5, "ACCEPTED", "ACCEPTED");
+
+	/**
+	 * The '<em><b>NONE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NONE
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ACCEPTED_VALUE = 0;
+	public static final int NONE_VALUE = 0;
 
 	/**
 	 * The '<em><b>PROPOSED</b></em>' literal value.
@@ -124,13 +134,24 @@ public enum StateType implements Enumerator {
 	public static final int REJECTED_VALUE = 4;
 
 	/**
+	 * The '<em><b>ACCEPTED</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ACCEPTED
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ACCEPTED_VALUE = 5;
+
+	/**
 	 * An array of all the '<em><b>State Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final StateType[] VALUES_ARRAY = new StateType[] { ACCEPTED, PROPOSED, DEPRECATED, SUPERCEDES,
-			REJECTED, };
+	private static final StateType[] VALUES_ARRAY = new StateType[] { NONE, PROPOSED, DEPRECATED, SUPERCEDES, REJECTED,
+			ACCEPTED, };
 
 	/**
 	 * A public read-only list of all the '<em><b>State Type</b></em>' enumerators.
@@ -186,8 +207,8 @@ public enum StateType implements Enumerator {
 	 */
 	public static StateType get(int value) {
 		switch (value) {
-		case ACCEPTED_VALUE:
-			return ACCEPTED;
+		case NONE_VALUE:
+			return NONE;
 		case PROPOSED_VALUE:
 			return PROPOSED;
 		case DEPRECATED_VALUE:
@@ -196,6 +217,8 @@ public enum StateType implements Enumerator {
 			return SUPERCEDES;
 		case REJECTED_VALUE:
 			return REJECTED;
+		case ACCEPTED_VALUE:
+			return ACCEPTED;
 		}
 		return null;
 	}

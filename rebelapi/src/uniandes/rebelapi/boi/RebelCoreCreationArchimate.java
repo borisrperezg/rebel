@@ -854,7 +854,7 @@ public class RebelCoreCreationArchimate {
 	public static void main(String[] args) {
 		RebelCoreCreationArchimate m = new RebelCoreCreationArchimate(new RebelMediator());
 
-		String params = "p=MyProject&bm=Layered_20201118&boi=37&dr=Cost reduction&go=Fast time to deployment&"
+		String params = "p=NewProject&bm=Layered_20201118&boi=6th&dr=Cost reduction&go=Fast time to deployment&"
 				+ "Asignacion Cita Componente&Asignación Cita&Asignación Service&Asignación de Turno&"
 				+ "Centro de Atención Componente&Localización Centros de Atención&Localización Service";
 

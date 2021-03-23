@@ -13,7 +13,12 @@ import java.util.Scanner;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
+import rebel_chatlogs.MessageLog;
+import rebel_core.BlockOfInterest;
+import rebel_core.ChatEmailMessage;
 import rebel_core.Fact;
+import rebel_core.MessageLogType;
+import rebel_core.Project;
 import rebel_github.Message;
 import uniandes.rebel.core.model.CoreModel;
 import uniandes.rebelapi.bo.APIBOI;
@@ -34,7 +39,7 @@ public class AsynchronousSearch {
 	 */
 	public void findAndLinkHeterogeneousArtifacts(CoreModel core, rebel_core.BlockOfInterest boi, String projectName) {
 
-		ArrayList<rebel_core.Message> messagesToProject = new ArrayList<rebel_core.Message>();		
+		ArrayList<rebel_core.CommitMessage> messagesToProject = new ArrayList<rebel_core.CommitMessage>();		
 		ArrayList<rebel_core.Person> personsToProject = new ArrayList<rebel_core.Person>();		
 		HashMap<String, ArrayList<String>> messagesToFact = new HashMap<String, ArrayList<String>>();
 
@@ -45,7 +50,6 @@ public class AsynchronousSearch {
 					rowsUpdated > 0 ? "RebelMediator.findAndLinkHeterogeneousArtifacts ::: State changed to Searching"
 							: "RebelMediator.findAndLinkHeterogeneousArtifacts ::: Error updating state to Searching");
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -74,6 +78,12 @@ public class AsynchronousSearch {
 					String descAction = fact.getObservations();
 					// incluir el tipo de elemento arquitectural?
 
+					// ------------------------------------------------------------
+					// Se eliminan los simbolos de las relaciones (Creacion, Eliminacion)
+					// ------------------------------------------------------------
+					
+					elementName = elementName.replaceAll("->", "").replaceAll("-X", "").replaceAll("-O\\)-", "");
+					
 					// Se revisa que el nombre pueda dividirse (ej, separar nombres compuestos
 					// MaterialReturn)
 					ArrayList<String> wordsOfElementName = Util.separateInWords(elementName);
@@ -93,7 +103,8 @@ public class AsynchronousSearch {
 					
 
 		// ************************************************************************
-		// Acceder los modelos de GitHub para encontrar cuáles vincular a los Fact
+		// ACCEDER A LOS RECURSOS PARA ENCONTRAR EN CUALES APLICAR LA BUSQUEDA
+		// POR SIMILARIDAD
 		// ************************************************************************
 
 		
@@ -103,7 +114,9 @@ public class AsynchronousSearch {
 		if (listArtifacts != null && listArtifacts.size() > 0) {
 			for (APIModelElement modelArtifact : listArtifacts) {
 
-				// Para los artefactos que correspondan a mensajes de commit
+				// ------------------------------------------------------------------
+				// ARTEFACTOS DE GITHUB
+				
 				if (modelArtifact.getType().equals("github")) {
 					// Se saca la ruta del modelo
 					String xmlRoute = modelArtifact.getXmlroute();
@@ -140,6 +153,7 @@ public class AsynchronousSearch {
 						}
 					}
 				}
+				
 			}
 		}
 		
@@ -193,12 +207,12 @@ public class AsynchronousSearch {
 			// Se procesa cada entrada del hashmap para creacion del objetos
 			for (Map.Entry<String, ArrayList<Double>> entry : procesarTXT.entrySet()) {
 		        
-				System.out.println("*** entry.getKey(): "+entry.getKey());
+				
 				
 				boolean tieneSimilitudes = simiExec.contarSimilitudes(entry.getValue());
 				
 				if(tieneSimilitudes) {
-					
+					System.out.println("*** entry.getKey(): "+entry.getKey());
 					System.out.println("    Hay similitudes");
 					
 					String[] splitFactMess = entry.getKey().split("::");
@@ -208,13 +222,13 @@ public class AsynchronousSearch {
 					Fact fact = hashFacts.get(idFact);
 					Message msg = hashMessages.get(idMess);
 					
-					rebel_core.Message coreMsg = createMessage(core, msg);
+					rebel_core.CommitMessage coreMsg = createMessage(core, msg);
 					rebel_core.Person pers = createPerson(core, msg.getPerson());
 
 					if (coreMsg != null) {
 						
 						boolean yaEsta = false;
-						for(rebel_core.Message m1 : messagesToProject) {
+						for(rebel_core.CommitMessage m1 : messagesToProject) {
 							if(m1.getId().equals(coreMsg.getId())) {
 								yaEsta = true;
 								break;
@@ -248,7 +262,6 @@ public class AsynchronousSearch {
 		    }		
 			
 		} catch (FileNotFoundException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 	      
@@ -276,7 +289,6 @@ public class AsynchronousSearch {
 				try {
 					resource = (new CoreModel()).buildModelRebelCore(apiBOI.getUrl(), boi.getName());
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -297,10 +309,8 @@ public class AsynchronousSearch {
 						
 						rebel_core.BlockOfInterest boiFinal = rebelProject.getBlockofinterest().get(0);
 						
-						for(rebel_core.Message msss : messagesToProject) {
-							rebelProject.getMessage().add(msss);
-							
-							System.out.println("Msss = "+msss.getId());
+						for(rebel_core.CommitMessage msss : messagesToProject) {
+							rebelProject.getCommitMessages().add(msss);
 							
 							// Revisar los Facts para poder asociar este Message
 							for (Fact fact : boiFinal.getFact()) {
@@ -308,7 +318,6 @@ public class AsynchronousSearch {
 								
 								if(messOfFact!=null) {
 									
-									System.out.println("	Mensajes a Fact: "+ fact.getId() + " - " + messOfFact.size());
 									
 									for(String idMess : messOfFact) {
 										
@@ -337,7 +346,6 @@ public class AsynchronousSearch {
 							resource.save(Collections.EMPTY_MAP);
 
 						} catch (Exception e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -354,7 +362,6 @@ public class AsynchronousSearch {
 								: "RebelMediator.findAndLinkHeterogeneousArtifacts ::: Error updating state to DONE");
 
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -395,10 +402,10 @@ public class AsynchronousSearch {
 	}
 
 	
-	private rebel_core.Message createMessage(CoreModel core, rebel_github.Message msg) {
-		rebel_core.Message coreMsg = null;
+	private rebel_core.CommitMessage createMessage(CoreModel core, rebel_github.Message msg) {
+		rebel_core.CommitMessage coreMsg = null;
 		if (msg != null) {
-			coreMsg = core.createMessage();
+			coreMsg = core.createCommitMessage();
 
 			coreMsg.setBody(msg.getBody());
 			coreMsg.setDate(msg.getDate());
@@ -437,5 +444,217 @@ public class AsynchronousSearch {
 
 		return person;
 	}
+	
+	// **********************************************************************
+	// **********************************************************************
+	
+	
+	public static void main(String[] args) {
+		(new AsynchronousSearch()).
+			moveMessageLogToCore(	"NewProject", // Nombre proyecto
+									"Survey Comments", // Nombre model artefactos
+									"email",  // Tipo de artefacto
+									"id-1615654283242", // Id message
+									"2nd BOI", // BOI Model Name
+									"38"); // Fact ID
+	}
+	
+	
+	/**
+	 * Este metodo busca un MessageLog por ID, y lo lleva al BOI indicado.
+	 * Especificamente se usa para vincular un MessaLog a un Fact. No pretende recorrer la lista de MessageLogs (emails y chats)
+	 * 
+	 */
+	private void moveMessageLogToCore(String projectName, String chatEmailModelName, 
+			String artifactType, String msgLogId, String boiName, String factId) {
+		
+		// Buscar e instanciar el modelo de chatlogs.		
+		APIModelElement apiModelElement = (new APIModelDerby()).getChatEmailArtifacts(projectName, chatEmailModelName, artifactType);
+		String xmlRoute = apiModelElement.getXmlroute();
+
+		rebel_chatlogs.Project ceProj = null;
+
+		// Instancia los modelos encontrados usando el método de Util.
+		try {
+			ceProj = Util.buildModelRebelChatLogs(xmlRoute);
+		} catch (Exception e) {
+			System.err.println(
+					"RebelMediator.findAndLinkHeterogeneousArtifacts ::: No se pudo crear la instancia Project del model de github. "
+							+ e.getMessage());
+		}
+
+		if (ceProj != null) {
+		
+			MessageLog msgLogToRebel = null;
+			
+			// ******************************************************
+			// SE BUSCA EL MESSAGELOG INDICADO EN PARAMETRO
+			// ******************************************************
+			
+			for(MessageLog msgLog : ceProj.getMessagelogs()) {
+				if(msgLog.getId().equals(msgLogId)) {
+					msgLogToRebel = msgLog;
+					break;
+				}
+			}
+			
+			// ******************************************************
+			// SE PASA EL MESSAGELOG A REBEL_CORE, ASOCIANDOLO AL FACT
+			// CORRESPONDIENTE
+			// ******************************************************
+			
+			if(msgLogToRebel!=null) {
+								
+				// ------------------------------------
+				// Se instancia el BOI
+				// ------------------------------------
+				
+				// Obtener el xml del BOI
+				APIBOI apiBOI = (new APIModelDerby()).getBOI(projectName, boiName);
+
+				if (apiBOI != null) {
+					Resource resource = null;
+					try {
+						resource = (new CoreModel()).buildModelRebelCore(apiBOI.getUrl(), boiName);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+					if (resource != null) {
+						
+						boolean encontroMessageLog = false;
+						// Este objeto guardara la referencia del MessageLog dentro de rebel_core.
+						rebel_core.MessageLog msgFromRebelCore = null;
+						
+						rebel_core.Project rebelProject = (rebel_core.Project) resource.getContents().get(0);
+						if (rebelProject != null) {
+							// Primero se inserta en Rebel Core
+							
+							// Se recorren los MessageLogs contenidos en Core, para asegurarse de que
+							// no exista uno igual ya creado.
+							if(rebelProject.getMessagelog()!=null) {
+								for(rebel_core.MessageLog msgLogRebel : rebelProject.getMessagelog()) {
+									if(msgLogRebel.getId().equals(msgLogToRebel.getId())) {
+										encontroMessageLog = true;
+										msgFromRebelCore = msgLogRebel;
+										break;
+									}
+								}
+							}
+							
+							// --------------------------------------------------
+							// SE CREA EL MESSAGELOG Y LOS MENSAJES, O SE ENCUENTRA
+							// EL MESSAGELOG Y SE GUARDA LA REFERENCIA
+							// --------------------------------------------------
+							
+							// Si recorrio todo el modelo y no lo encontro, entonces
+							// prosiga a insertarlo.
+							if(!encontroMessageLog) {
+								
+								// Se procede a crear el rebel_core.MessageLog y agregarlo a Project
+								rebel_core.MessageLog rebelMsgLog = (new CoreModel()).createMessageLog();
+								rebelMsgLog.setId(msgLogToRebel.getId());
+								rebelMsgLog.setTitle(msgLogToRebel.getTitle());
+								rebelMsgLog.setCreationDate(msgLogToRebel.getCreation());
+								
+								if(msgLogToRebel.getType().getLiteral().equals("EMAIL")) {
+									rebelMsgLog.setType(MessageLogType.EMAIL);
+								}else if(msgLogToRebel.getType().getLiteral().equals("CHATLOG")) {
+									rebelMsgLog.setType(MessageLogType.CHATLOG);
+								} 
+								
+								// Recorrer y transformar cada uno de los mensajes
+								iterarYCrearMessages(msgLogToRebel, rebelMsgLog);
+								
+								// Se agregan los MessageLogs al proyecto
+								rebelProject.getMessagelog().add(rebelMsgLog);
+								
+								// --------------------------------------------------
+								// BUSCAR EL FACT PARA ASOCIARLE EL MESSAGELOG GUARDADO 
+								// EN 'rebelMsgLog'
+								// --------------------------------------------------
+								Fact fact = buscarFactParaAsociarMessageLog(rebelProject, factId);
+								if(fact!=null)
+									fact.getMessagelogs().add(rebelMsgLog);
+								
+								
+							}else { // Si lo encontró, entonces asocielo al Fact
+							
+								// --------------------------------------------------
+								// BUSCAR EL FACT PARA ASOCIARLE EL MESSAGELOG GUARDADO 
+								// EN 'msgFromRebelCore'
+								// --------------------------------------------------
+								Fact fact = buscarFactParaAsociarMessageLog(rebelProject, factId);
+								if(fact!=null)
+									fact.getMessagelogs().add(msgFromRebelCore);
+								
+							}
+							
+							
+							
+							// Para cualquiera de los dos casos, se debe persistir.
+							// Se procede a actualizar el archivo fisico
+							try {
+								resource.save(Collections.EMPTY_MAP);
+								System.out.println("Done");
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							
+							
+						}
+					}
+				}
+				
+			}
+			
+		}else
+			System.out.println("moveMessageLogToCore ::: No logro instanciar al BOI");
+	}
+	
+	/**
+	 * Este metodo toma un rebel_chatlogs.MessageLog e itera sobre sus rebel_chatlogs.Message, 
+	 * los va convirtiendo en rebel_core.ChatEmailMessage, y los asocia a un rebel_core.MessageLog.
+	 * @param 
+	 */
+	private void iterarYCrearMessages(rebel_chatlogs.MessageLog mlSource, rebel_core.MessageLog mlTarget) {
+		for(rebel_chatlogs.Message msgSource : mlSource.getMessages()) {
+			
+			ChatEmailMessage msgTarget = (new CoreModel()).createChatEmailMessage();
+			msgTarget.setId(msgSource.getId());
+			msgTarget.setReceivedBy(msgSource.getReceivedBy());
+			msgTarget.setSentBy(msgSource.getSentBy());
+			msgTarget.setText(msgSource.getText());
+			msgTarget.setTimestamp(msgSource.getTimestamp());
+			
+			mlTarget.getMsgLogMessages().add(msgTarget);
+			
+		}
+	}
+	
+	/**
+	 * Se usa para encontrar el Fact al que se asociará el MessageLog
+	 * @param rebelProject
+	 * @param factId
+	 * @return
+	 */
+	private Fact buscarFactParaAsociarMessageLog(rebel_core.Project rebelProject, String factId) {
+		Fact fact = null;
+		
+		for(BlockOfInterest boi : rebelProject.getBlockofinterest()) {
+			if(boi!=null) {
+				for(Fact f : boi.getFact()) {
+					if(f!=null && f.getId().equals(factId)) {
+						fact = f;
+						break;
+					}
+				}
+			}
+		}
+		
+		return fact;
+	}
+	
+	
 	
 }

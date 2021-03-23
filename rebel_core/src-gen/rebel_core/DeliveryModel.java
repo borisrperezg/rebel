@@ -27,10 +27,11 @@ public enum DeliveryModel implements Enumerator {
 	 * @ordered
 	 */
 	NONE(0, "NONE", "NONE"),
+
 	/**
 	 * The '<em><b>AT LEAST ONE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #AT_LEAST_ONE_VALUE
 	 * @generated
 	 * @ordered
@@ -56,10 +57,11 @@ public enum DeliveryModel implements Enumerator {
 	 * @ordered
 	 */
 	EXACTLY_ONE(3, "EXACTLY_ONE", "EXACTLY_ONE"),
+
 	/**
 	 * The '<em><b>BEST EFFORT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #BEST_EFFORT_VALUE
 	 * @generated
 	 * @ordered

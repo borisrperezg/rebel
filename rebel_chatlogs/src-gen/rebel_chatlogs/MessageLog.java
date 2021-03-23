@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link rebel_chatlogs.MessageLog#getType <em>Type</em>}</li>
  *   <li>{@link rebel_chatlogs.MessageLog#getCreation <em>Creation</em>}</li>
  *   <li>{@link rebel_chatlogs.MessageLog#getTitle <em>Title</em>}</li>
+ *   <li>{@link rebel_chatlogs.MessageLog#getId <em>Id</em>}</li>
  * </ul>
  *
  * @see rebel_chatlogs.Rebel_chatlogsPackage#getMessageLog()
@@ -108,5 +109,27 @@ public interface MessageLog extends EObject {
 	 * @generated
 	 */
 	void setTitle(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(String)
+	 * @see rebel_chatlogs.Rebel_chatlogsPackage#getMessageLog_Id()
+	 * @model
+	 * @generated
+	 */
+	String getId();
+
+	/**
+	 * Sets the value of the '{@link rebel_chatlogs.MessageLog#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
+	void setId(String value);
 
 } // MessageLog

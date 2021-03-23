@@ -22,6 +22,8 @@ import rebel_core.ArchimateView;
 import rebel_core.Assumption;
 import rebel_core.BlockOfInterest;
 import rebel_core.Buffering;
+import rebel_core.ChatEmailMessage;
+import rebel_core.CommitMessage;
 import rebel_core.Component;
 import rebel_core.Connector;
 import rebel_core.Consequence;
@@ -33,7 +35,8 @@ import rebel_core.Element;
 import rebel_core.Event;
 import rebel_core.Fact;
 import rebel_core.FunctionalView;
-import rebel_core.Message;
+import rebel_core.MessageLog;
+import rebel_core.MessageLogType;
 import rebel_core.ModelElementType;
 import rebel_core.Motivator;
 import rebel_core.NotificationModel;
@@ -205,7 +208,7 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass messageEClass = null;
+	private EClass commitMessageEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -262,6 +265,20 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	private EClass atdEffectEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass messageLogEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass chatEmailMessageEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -367,6 +384,13 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	private EEnum elementtypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum messageLogTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -568,6 +592,16 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
+	public EReference getFact_Messagelogs() {
+		return (EReference) factEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getProject() {
 		return projectEClass;
 	}
@@ -628,7 +662,7 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
-	public EReference getProject_Message() {
+	public EReference getProject_CommitMessages() {
 		return (EReference) projectEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -660,6 +694,16 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	@Override
 	public EReference getProject_View() {
 		return (EReference) projectEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getProject_Messagelog() {
+		return (EReference) projectEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -1378,8 +1422,8 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
-	public EClass getMessage() {
-		return messageEClass;
+	public EClass getCommitMessage() {
+		return commitMessageEClass;
 	}
 
 	/**
@@ -1388,8 +1432,8 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMessage_Subject() {
-		return (EAttribute) messageEClass.getEStructuralFeatures().get(0);
+	public EAttribute getCommitMessage_Subject() {
+		return (EAttribute) commitMessageEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1398,8 +1442,8 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMessage_Footer() {
-		return (EAttribute) messageEClass.getEStructuralFeatures().get(1);
+	public EAttribute getCommitMessage_Footer() {
+		return (EAttribute) commitMessageEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1408,8 +1452,8 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMessage_Scope() {
-		return (EAttribute) messageEClass.getEStructuralFeatures().get(2);
+	public EAttribute getCommitMessage_Scope() {
+		return (EAttribute) commitMessageEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1418,8 +1462,8 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMessage_Body() {
-		return (EAttribute) messageEClass.getEStructuralFeatures().get(3);
+	public EAttribute getCommitMessage_Body() {
+		return (EAttribute) commitMessageEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1428,8 +1472,8 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMessage_Type() {
-		return (EAttribute) messageEClass.getEStructuralFeatures().get(4);
+	public EAttribute getCommitMessage_Type() {
+		return (EAttribute) commitMessageEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1438,8 +1482,8 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMessage_Action() {
-		return (EAttribute) messageEClass.getEStructuralFeatures().get(5);
+	public EAttribute getCommitMessage_Action() {
+		return (EAttribute) commitMessageEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1448,8 +1492,8 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMessage_Id() {
-		return (EAttribute) messageEClass.getEStructuralFeatures().get(6);
+	public EAttribute getCommitMessage_Id() {
+		return (EAttribute) commitMessageEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1458,8 +1502,8 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMessage_Date() {
-		return (EAttribute) messageEClass.getEStructuralFeatures().get(7);
+	public EAttribute getCommitMessage_Date() {
+		return (EAttribute) commitMessageEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1468,8 +1512,8 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
-	public EReference getMessage_Person() {
-		return (EReference) messageEClass.getEStructuralFeatures().get(8);
+	public EReference getCommitMessage_Person() {
+		return (EReference) commitMessageEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1938,6 +1982,126 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
+	public EClass getMessageLog() {
+		return messageLogEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getMessageLog_MsgLogMessages() {
+		return (EReference) messageLogEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMessageLog_Type() {
+		return (EAttribute) messageLogEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMessageLog_CreationDate() {
+		return (EAttribute) messageLogEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMessageLog_Title() {
+		return (EAttribute) messageLogEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMessageLog_Id() {
+		return (EAttribute) messageLogEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getChatEmailMessage() {
+		return chatEmailMessageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getChatEmailMessage_Text() {
+		return (EAttribute) chatEmailMessageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getChatEmailMessage_Timestamp() {
+		return (EAttribute) chatEmailMessageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getChatEmailMessage_SentBy() {
+		return (EAttribute) chatEmailMessageEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getChatEmailMessage_ReceivedBy() {
+		return (EAttribute) chatEmailMessageEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getChatEmailMessage_Id() {
+		return (EAttribute) chatEmailMessageEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getAction() {
 		return actionEEnum;
 	}
@@ -2088,6 +2252,16 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
+	public EEnum getMessageLogType() {
+		return messageLogTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Rebel_coreFactory getRebel_coreFactory() {
 		return (Rebel_coreFactory) getEFactoryInstance();
 	}
@@ -2125,6 +2299,7 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 		createEReference(factEClass, FACT__VIEW);
 		createEReference(factEClass, FACT__FACT);
 		createEReference(factEClass, FACT__ATDITEM);
+		createEReference(factEClass, FACT__MESSAGELOGS);
 
 		projectEClass = createEClass(PROJECT);
 		createEReference(projectEClass, PROJECT__BLOCKOFINTEREST);
@@ -2132,10 +2307,11 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 		createEAttribute(projectEClass, PROJECT__NAME);
 		createEReference(projectEClass, PROJECT__FUNCTIONALVIEWS);
 		createEReference(projectEClass, PROJECT__DECISIONS);
-		createEReference(projectEClass, PROJECT__MESSAGE);
+		createEReference(projectEClass, PROJECT__COMMIT_MESSAGES);
 		createEReference(projectEClass, PROJECT__PERSON);
 		createEAttribute(projectEClass, PROJECT__MODELING_DATE);
 		createEReference(projectEClass, PROJECT__VIEW);
+		createEReference(projectEClass, PROJECT__MESSAGELOG);
 
 		blockOfInterestEClass = createEClass(BLOCK_OF_INTEREST);
 		createEReference(blockOfInterestEClass, BLOCK_OF_INTEREST__FACT);
@@ -2226,16 +2402,16 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 		alternativeEClass = createEClass(ALTERNATIVE);
 		createEAttribute(alternativeEClass, ALTERNATIVE__DESCRIPTION);
 
-		messageEClass = createEClass(MESSAGE);
-		createEAttribute(messageEClass, MESSAGE__SUBJECT);
-		createEAttribute(messageEClass, MESSAGE__FOOTER);
-		createEAttribute(messageEClass, MESSAGE__SCOPE);
-		createEAttribute(messageEClass, MESSAGE__BODY);
-		createEAttribute(messageEClass, MESSAGE__TYPE);
-		createEAttribute(messageEClass, MESSAGE__ACTION);
-		createEAttribute(messageEClass, MESSAGE__ID);
-		createEAttribute(messageEClass, MESSAGE__DATE);
-		createEReference(messageEClass, MESSAGE__PERSON);
+		commitMessageEClass = createEClass(COMMIT_MESSAGE);
+		createEAttribute(commitMessageEClass, COMMIT_MESSAGE__SUBJECT);
+		createEAttribute(commitMessageEClass, COMMIT_MESSAGE__FOOTER);
+		createEAttribute(commitMessageEClass, COMMIT_MESSAGE__SCOPE);
+		createEAttribute(commitMessageEClass, COMMIT_MESSAGE__BODY);
+		createEAttribute(commitMessageEClass, COMMIT_MESSAGE__TYPE);
+		createEAttribute(commitMessageEClass, COMMIT_MESSAGE__ACTION);
+		createEAttribute(commitMessageEClass, COMMIT_MESSAGE__ID);
+		createEAttribute(commitMessageEClass, COMMIT_MESSAGE__DATE);
+		createEReference(commitMessageEClass, COMMIT_MESSAGE__PERSON);
 
 		personEClass = createEClass(PERSON);
 		createEAttribute(personEClass, PERSON__NAME);
@@ -2291,6 +2467,20 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 		atdEffectEClass = createEClass(ATD_EFFECT);
 		createEAttribute(atdEffectEClass, ATD_EFFECT__DESCRIPTION);
 
+		messageLogEClass = createEClass(MESSAGE_LOG);
+		createEReference(messageLogEClass, MESSAGE_LOG__MSG_LOG_MESSAGES);
+		createEAttribute(messageLogEClass, MESSAGE_LOG__TYPE);
+		createEAttribute(messageLogEClass, MESSAGE_LOG__CREATION_DATE);
+		createEAttribute(messageLogEClass, MESSAGE_LOG__TITLE);
+		createEAttribute(messageLogEClass, MESSAGE_LOG__ID);
+
+		chatEmailMessageEClass = createEClass(CHAT_EMAIL_MESSAGE);
+		createEAttribute(chatEmailMessageEClass, CHAT_EMAIL_MESSAGE__TEXT);
+		createEAttribute(chatEmailMessageEClass, CHAT_EMAIL_MESSAGE__TIMESTAMP);
+		createEAttribute(chatEmailMessageEClass, CHAT_EMAIL_MESSAGE__SENT_BY);
+		createEAttribute(chatEmailMessageEClass, CHAT_EMAIL_MESSAGE__RECEIVED_BY);
+		createEAttribute(chatEmailMessageEClass, CHAT_EMAIL_MESSAGE__ID);
+
 		// Create enums
 		actionEEnum = createEEnum(ACTION);
 		portTypeEEnum = createEEnum(PORT_TYPE);
@@ -2307,6 +2497,7 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 		operationtypeEEnum = createEEnum(OPERATIONTYPE);
 		relationtypeEEnum = createEEnum(RELATIONTYPE);
 		elementtypeEEnum = createEEnum(ELEMENTTYPE);
+		messageLogTypeEEnum = createEEnum(MESSAGE_LOG_TYPE);
 	}
 
 	/**
@@ -2365,9 +2556,9 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFact_Id(), ecorePackage.getEString(), "id", null, 0, 1, Fact.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFact_Message(), this.getMessage(), null, "message", null, 0, -1, Fact.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEReference(getFact_Message(), this.getCommitMessage(), null, "message", null, 0, -1, Fact.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFact_View(), this.getArchimateView(), null, "view", null, 0, -1, Fact.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
@@ -2377,6 +2568,9 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 		initEReference(getFact_Atditem(), this.getATDItem(), null, "atditem", null, 0, -1, Fact.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
+		initEReference(getFact_Messagelogs(), this.getMessageLog(), null, "messagelogs", null, 0, -1, Fact.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(projectEClass, Project.class, "Project", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProject_Blockofinterest(), this.getBlockOfInterest(), null, "blockofinterest", null, 0, -1,
@@ -2392,15 +2586,18 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 		initEReference(getProject_Decisions(), this.getDecision(), null, "decisions", null, 0, -1, Project.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProject_Message(), this.getMessage(), null, "message", null, 0, -1, Project.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProject_CommitMessages(), this.getCommitMessage(), null, "commitMessages", null, 0, -1,
+				Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProject_Person(), this.getPerson(), null, "person", null, 0, -1, Project.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 		initEAttribute(getProject_ModelingDate(), ecorePackage.getEDate(), "modelingDate", null, 0, 1, Project.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProject_View(), this.getArchimateView(), null, "view", null, 0, -1, Project.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProject_Messagelog(), this.getMessageLog(), null, "messagelog", null, 0, -1, Project.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2579,25 +2776,27 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 				Alternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 
-		initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMessage_Subject(), ecorePackage.getEString(), "subject", null, 0, 1, Message.class,
+		initEClass(commitMessageEClass, CommitMessage.class, "CommitMessage", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCommitMessage_Subject(), ecorePackage.getEString(), "subject", null, 0, 1,
+				CommitMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCommitMessage_Footer(), ecorePackage.getEString(), "footer", null, 0, 1, CommitMessage.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMessage_Footer(), ecorePackage.getEString(), "footer", null, 0, 1, Message.class,
+		initEAttribute(getCommitMessage_Scope(), ecorePackage.getEString(), "scope", null, 0, 1, CommitMessage.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMessage_Scope(), ecorePackage.getEString(), "scope", null, 0, 1, Message.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMessage_Body(), ecorePackage.getEString(), "body", null, 0, 1, Message.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMessage_Type(), this.getOPERATIONTYPE(), "type", null, 0, 1, Message.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMessage_Action(), this.getACTIONTYPE(), "action", null, 0, 1, Message.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMessage_Id(), ecorePackage.getEString(), "id", null, 0, 1, Message.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMessage_Date(), ecorePackage.getEDate(), "date", null, 0, 1, Message.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMessage_Person(), this.getPerson(), this.getPerson_Message(), "person", null, 0, 1,
-				Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+		initEAttribute(getCommitMessage_Body(), ecorePackage.getEString(), "body", null, 0, 1, CommitMessage.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCommitMessage_Type(), this.getOPERATIONTYPE(), "type", null, 0, 1, CommitMessage.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCommitMessage_Action(), this.getACTIONTYPE(), "action", null, 0, 1, CommitMessage.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCommitMessage_Id(), ecorePackage.getEString(), "id", null, 0, 1, CommitMessage.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCommitMessage_Date(), ecorePackage.getEDate(), "date", null, 0, 1, CommitMessage.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCommitMessage_Person(), this.getPerson(), this.getPerson_Message(), "person", null, 0, 1,
+				CommitMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(personEClass, Person.class, "Person", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2605,8 +2804,8 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_Email(), ecorePackage.getEString(), "email", null, 0, 1, Person.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPerson_Message(), this.getMessage(), this.getMessage_Person(), "message", null, 0, -1,
-				Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+		initEReference(getPerson_Message(), this.getCommitMessage(), this.getCommitMessage_Person(), "message", null, 0,
+				-1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationEClass, Relation.class, "Relation", !IS_ABSTRACT, !IS_INTERFACE,
@@ -2711,6 +2910,38 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 				ATDEffect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 
+		initEClass(messageLogEClass, MessageLog.class, "MessageLog", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMessageLog_MsgLogMessages(), this.getChatEmailMessage(), null, "msgLogMessages", null, 0, -1,
+				MessageLog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMessageLog_Type(), this.getMessageLogType(), "type", null, 0, 1, MessageLog.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMessageLog_CreationDate(), ecorePackage.getEDate(), "creationDate", null, 0, 1,
+				MessageLog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMessageLog_Title(), ecorePackage.getEString(), "title", null, 0, 1, MessageLog.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMessageLog_Id(), ecorePackage.getEString(), "id", null, 0, 1, MessageLog.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(chatEmailMessageEClass, ChatEmailMessage.class, "ChatEmailMessage", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getChatEmailMessage_Text(), ecorePackage.getEString(), "text", null, 0, 1,
+				ChatEmailMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChatEmailMessage_Timestamp(), ecorePackage.getEDate(), "timestamp", null, 0, 1,
+				ChatEmailMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChatEmailMessage_SentBy(), ecorePackage.getEString(), "sentBy", null, 0, 1,
+				ChatEmailMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChatEmailMessage_ReceivedBy(), ecorePackage.getEString(), "receivedBy", null, 0, 1,
+				ChatEmailMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChatEmailMessage_Id(), ecorePackage.getEString(), "id", null, 0, 1, ChatEmailMessage.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(actionEEnum, Action.class, "Action");
 		addEEnumLiteral(actionEEnum, Action.NONE);
@@ -2759,11 +2990,12 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 		addEEnumLiteral(syncTypeEEnum, SyncType.ASYNC);
 
 		initEEnum(stateTypeEEnum, StateType.class, "StateType");
-		addEEnumLiteral(stateTypeEEnum, StateType.ACCEPTED);
+		addEEnumLiteral(stateTypeEEnum, StateType.NONE);
 		addEEnumLiteral(stateTypeEEnum, StateType.PROPOSED);
 		addEEnumLiteral(stateTypeEEnum, StateType.DEPRECATED);
 		addEEnumLiteral(stateTypeEEnum, StateType.SUPERCEDES);
 		addEEnumLiteral(stateTypeEEnum, StateType.REJECTED);
+		addEEnumLiteral(stateTypeEEnum, StateType.ACCEPTED);
 
 		initEEnum(modelElementTypeEEnum, ModelElementType.class, "ModelElementType");
 		addEEnumLiteral(modelElementTypeEEnum, ModelElementType.COMPONENT);
@@ -2776,14 +3008,16 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 		addEEnumLiteral(consequenceTypeEEnum, ConsequenceType.NEGATIVE);
 
 		initEEnum(actiontypeEEnum, rebel_core.ACTIONTYPE.class, "ACTIONTYPE");
+		addEEnumLiteral(actiontypeEEnum, rebel_core.ACTIONTYPE.NONE);
 		addEEnumLiteral(actiontypeEEnum, rebel_core.ACTIONTYPE.COMMIT);
 
 		initEEnum(operationtypeEEnum, rebel_core.OPERATIONTYPE.class, "OPERATIONTYPE");
-		addEEnumLiteral(operationtypeEEnum, rebel_core.OPERATIONTYPE.FEAT);
+		addEEnumLiteral(operationtypeEEnum, rebel_core.OPERATIONTYPE.NONE);
 		addEEnumLiteral(operationtypeEEnum, rebel_core.OPERATIONTYPE.FIX);
 		addEEnumLiteral(operationtypeEEnum, rebel_core.OPERATIONTYPE.REFACTOR);
 		addEEnumLiteral(operationtypeEEnum, rebel_core.OPERATIONTYPE.MODELS);
 		addEEnumLiteral(operationtypeEEnum, rebel_core.OPERATIONTYPE.DOCS);
+		addEEnumLiteral(operationtypeEEnum, rebel_core.OPERATIONTYPE.FEAT);
 
 		initEEnum(relationtypeEEnum, rebel_core.RELATIONTYPE.class, "RELATIONTYPE");
 		addEEnumLiteral(relationtypeEEnum, rebel_core.RELATIONTYPE.NONE);
@@ -2813,6 +3047,11 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 		addEEnumLiteral(elementtypeEEnum, rebel_core.ELEMENTTYPE.MOTIVATION_REQUIREMENT);
 		addEEnumLiteral(elementtypeEEnum, rebel_core.ELEMENTTYPE.BUSINESS_COLLABORATION);
 		addEEnumLiteral(elementtypeEEnum, rebel_core.ELEMENTTYPE.APPLICATION_INTERFACE);
+
+		initEEnum(messageLogTypeEEnum, MessageLogType.class, "MessageLogType");
+		addEEnumLiteral(messageLogTypeEEnum, MessageLogType.NONE);
+		addEEnumLiteral(messageLogTypeEEnum, MessageLogType.EMAIL);
+		addEEnumLiteral(messageLogTypeEEnum, MessageLogType.CHATLOG);
 
 		// Create resource
 		createResource(eNS_URI);

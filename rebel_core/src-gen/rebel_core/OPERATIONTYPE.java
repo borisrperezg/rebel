@@ -19,14 +19,14 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum OPERATIONTYPE implements Enumerator {
 	/**
-	 * The '<em><b>FEAT</b></em>' literal object.
+	 * The '<em><b>NONE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #FEAT_VALUE
+	 * @see #NONE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	FEAT(0, "FEAT", "FEAT"),
+	NONE(0, "NONE", "NONE"),
 
 	/**
 	 * The '<em><b>FIX</b></em>' literal object.
@@ -66,18 +66,28 @@ public enum OPERATIONTYPE implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DOCS(4, "DOCS", "DOCS");
+	DOCS(4, "DOCS", "DOCS"),
 
 	/**
-	 * The '<em><b>FEAT</b></em>' literal value.
+	 * The '<em><b>FEAT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #FEAT
+	 * @see #FEAT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	FEAT(5, "FEAT", "FEAT");
+
+	/**
+	 * The '<em><b>NONE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NONE
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FEAT_VALUE = 0;
+	public static final int NONE_VALUE = 0;
 
 	/**
 	 * The '<em><b>FIX</b></em>' literal value.
@@ -124,12 +134,24 @@ public enum OPERATIONTYPE implements Enumerator {
 	public static final int DOCS_VALUE = 4;
 
 	/**
+	 * The '<em><b>FEAT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FEAT
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FEAT_VALUE = 5;
+
+	/**
 	 * An array of all the '<em><b>OPERATIONTYPE</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final OPERATIONTYPE[] VALUES_ARRAY = new OPERATIONTYPE[] { FEAT, FIX, REFACTOR, MODELS, DOCS, };
+	private static final OPERATIONTYPE[] VALUES_ARRAY = new OPERATIONTYPE[] { NONE, FIX, REFACTOR, MODELS, DOCS,
+			FEAT, };
 
 	/**
 	 * A public read-only list of all the '<em><b>OPERATIONTYPE</b></em>' enumerators.
@@ -185,8 +207,8 @@ public enum OPERATIONTYPE implements Enumerator {
 	 */
 	public static OPERATIONTYPE get(int value) {
 		switch (value) {
-		case FEAT_VALUE:
-			return FEAT;
+		case NONE_VALUE:
+			return NONE;
 		case FIX_VALUE:
 			return FIX;
 		case REFACTOR_VALUE:
@@ -195,6 +217,8 @@ public enum OPERATIONTYPE implements Enumerator {
 			return MODELS;
 		case DOCS_VALUE:
 			return DOCS;
+		case FEAT_VALUE:
+			return FEAT;
 		}
 		return null;
 	}

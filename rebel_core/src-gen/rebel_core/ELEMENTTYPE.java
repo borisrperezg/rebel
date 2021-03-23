@@ -87,69 +87,77 @@ public enum ELEMENTTYPE implements Enumerator {
 	 * @ordered
 	 */
 	BUSINESS_PROCESS(6, "BUSINESS_PROCESS", "BUSINESS_PROCESS"),
+
 	/**
 	 * The '<em><b>APPLICATION COLLABORATION</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #APPLICATION_COLLABORATION_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	APPLICATION_COLLABORATION(7, "APPLICATION_COLLABORATION", "APPLICATION_COLLABORATION"),
+
 	/**
 	 * The '<em><b>DATAOBJECT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #DATAOBJECT_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	DATAOBJECT(8, "DATAOBJECT", "DATAOBJECT"),
+
 	/**
 	 * The '<em><b>MOTIVATION STAKEHOLDER</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #MOTIVATION_STAKEHOLDER_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	MOTIVATION_STAKEHOLDER(9, "MOTIVATION_STAKEHOLDER", "MOTIVATION_STAKEHOLDER"),
+
 	/**
 	 * The '<em><b>MOTIVATION DRIVER</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #MOTIVATION_DRIVER_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	MOTIVATION_DRIVER(10, "MOTIVATION_DRIVER", "MOTIVATION_DRIVER"),
+
 	/**
 	 * The '<em><b>MOTIVATION GOAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #MOTIVATION_GOAL_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	MOTIVATION_GOAL(11, "MOTIVATION_GOAL", "MOTIVATION_GOAL"),
+
 	/**
 	 * The '<em><b>MOTIVATION OUTCOME</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #MOTIVATION_OUTCOME_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	MOTIVATION_OUTCOME(12, "MOTIVATION_OUTCOME", "MOTIVATION_OUTCOME"),
+
 	/**
 	 * The '<em><b>MOTIVATION REQUIREMENT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #MOTIVATION_REQUIREMENT_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	MOTIVATION_REQUIREMENT(13, "MOTIVATION_REQUIREMENT", "MOTIVATION_REQUIREMENT"),
+
 	/**
 	 * The '<em><b>BUSINESS COLLABORATION</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -159,10 +167,11 @@ public enum ELEMENTTYPE implements Enumerator {
 	 * @ordered
 	 */
 	BUSINESS_COLLABORATION(14, "BUSINESS_COLLABORATION", "BUSINESS_COLLABORATION"),
+
 	/**
 	 * The '<em><b>APPLICATION INTERFACE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #APPLICATION_INTERFACE_VALUE
 	 * @generated
 	 * @ordered

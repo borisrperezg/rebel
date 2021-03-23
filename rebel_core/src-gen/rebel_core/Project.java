@@ -3,6 +3,7 @@
 package rebel_core;
 
 import java.util.Date;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -21,10 +22,11 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link rebel_core.Project#getName <em>Name</em>}</li>
  *   <li>{@link rebel_core.Project#getFunctionalviews <em>Functionalviews</em>}</li>
  *   <li>{@link rebel_core.Project#getDecisions <em>Decisions</em>}</li>
- *   <li>{@link rebel_core.Project#getMessage <em>Message</em>}</li>
+ *   <li>{@link rebel_core.Project#getCommitMessages <em>Commit Messages</em>}</li>
  *   <li>{@link rebel_core.Project#getPerson <em>Person</em>}</li>
  *   <li>{@link rebel_core.Project#getModelingDate <em>Modeling Date</em>}</li>
  *   <li>{@link rebel_core.Project#getView <em>View</em>}</li>
+ *   <li>{@link rebel_core.Project#getMessagelog <em>Messagelog</em>}</li>
  * </ul>
  *
  * @see rebel_core.Rebel_corePackage#getProject()
@@ -113,16 +115,16 @@ public interface Project extends EObject {
 	EList<Decision> getDecisions();
 
 	/**
-	 * Returns the value of the '<em><b>Message</b></em>' containment reference list.
-	 * The list contents are of type {@link rebel_core.Message}.
+	 * Returns the value of the '<em><b>Commit Messages</b></em>' containment reference list.
+	 * The list contents are of type {@link rebel_core.CommitMessage}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Message</em>' containment reference list.
-	 * @see rebel_core.Rebel_corePackage#getProject_Message()
+	 * @return the value of the '<em>Commit Messages</em>' containment reference list.
+	 * @see rebel_core.Rebel_corePackage#getProject_CommitMessages()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Message> getMessage();
+	EList<CommitMessage> getCommitMessages();
 
 	/**
 	 * Returns the value of the '<em><b>Person</b></em>' containment reference list.
@@ -169,5 +171,17 @@ public interface Project extends EObject {
 	 * @generated
 	 */
 	EList<ArchimateView> getView();
+
+	/**
+	 * Returns the value of the '<em><b>Messagelog</b></em>' containment reference list.
+	 * The list contents are of type {@link rebel_core.MessageLog}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Messagelog</em>' containment reference list.
+	 * @see rebel_core.Rebel_corePackage#getProject_Messagelog()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<MessageLog> getMessagelog();
 
 } // Project

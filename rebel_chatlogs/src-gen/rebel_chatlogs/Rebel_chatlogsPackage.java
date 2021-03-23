@@ -104,13 +104,22 @@ public interface Rebel_chatlogsPackage extends EPackage {
 	int MESSAGE_LOG__TITLE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_LOG__ID = 4;
+
+	/**
 	 * The number of structural features of the '<em>Message Log</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_LOG_FEATURE_COUNT = 4;
+	int MESSAGE_LOG_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Message Log</em>' class.
@@ -168,13 +177,22 @@ public interface Rebel_chatlogsPackage extends EPackage {
 	int MESSAGE__RECEIVED_BY = 3;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE__ID = 4;
+
+	/**
 	 * The number of structural features of the '<em>Message</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_FEATURE_COUNT = 4;
+	int MESSAGE_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Message</em>' class.
@@ -296,6 +314,17 @@ public interface Rebel_chatlogsPackage extends EPackage {
 	EAttribute getMessageLog_Title();
 
 	/**
+	 * Returns the meta object for the attribute '{@link rebel_chatlogs.MessageLog#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see rebel_chatlogs.MessageLog#getId()
+	 * @see #getMessageLog()
+	 * @generated
+	 */
+	EAttribute getMessageLog_Id();
+
+	/**
 	 * Returns the meta object for class '{@link rebel_chatlogs.Message <em>Message</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -315,6 +344,17 @@ public interface Rebel_chatlogsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMessage_ReceivedBy();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rebel_chatlogs.Message#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see rebel_chatlogs.Message#getId()
+	 * @see #getMessage()
+	 * @generated
+	 */
+	EAttribute getMessage_Id();
 
 	/**
 	 * Returns the meta object for the attribute '{@link rebel_chatlogs.Message#getText <em>Text</em>}'.
@@ -457,6 +497,14 @@ public interface Rebel_chatlogsPackage extends EPackage {
 		EAttribute MESSAGE_LOG__TITLE = eINSTANCE.getMessageLog_Title();
 
 		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MESSAGE_LOG__ID = eINSTANCE.getMessageLog_Id();
+
+		/**
 		 * The meta object literal for the '{@link rebel_chatlogs.impl.MessageImpl <em>Message</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -473,6 +521,14 @@ public interface Rebel_chatlogsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MESSAGE__RECEIVED_BY = eINSTANCE.getMessage_ReceivedBy();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MESSAGE__ID = eINSTANCE.getMessage_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Text</b></em>' attribute feature.

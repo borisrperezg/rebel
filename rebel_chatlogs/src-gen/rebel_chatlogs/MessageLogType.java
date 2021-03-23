@@ -28,22 +28,22 @@ public enum MessageLogType implements Enumerator {
 	 */
 	NONE(0, "NONE", "NONE"),
 	/**
-	* The '<em><b>EMAIL</b></em>' literal object.
-	* <!-- begin-user-doc -->
+	 * The '<em><b>EMAIL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	* <!-- end-user-doc -->
-	* @see #EMAIL_VALUE
-	* @generated
-	* @ordered
-	*/
+	 * @see #EMAIL_VALUE
+	 * @generated
+	 * @ordered
+	 */
 	EMAIL(1, "EMAIL", "EMAIL"),
 	/**
-	* The '<em><b>CHATLOG</b></em>' literal object.
-	* <!-- begin-user-doc -->
+	 * The '<em><b>CHATLOG</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	* <!-- end-user-doc -->
-	* @see #CHATLOG_VALUE
-	* @generated
-	* @ordered
-	*/
+	 * @see #CHATLOG_VALUE
+	 * @generated
+	 * @ordered
+	 */
 	CHATLOG(2, "CHATLOG", "CHATLOG");
 
 	/**

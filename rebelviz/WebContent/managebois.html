@@ -58,9 +58,9 @@
         </div>
 	
 	
-		<div id="main">
+		<div id="main" style="background-image: url('images/backgroundimage.png');background-repeat: no-repeat;">
 		
-			<div class="header">
+			<div class="header" style="background-color:transparent">
 			    <h1>Blocks of Interest</h1>
 			</div>
 			
@@ -86,9 +86,9 @@
 				</form>
 				
 				<table class="pure-table pure-table-horizontal">	
-					<col width="250px" />
-				    <col width="150px" />
-				    <!-- <col width="50px" /> -->
+					<col width="300px" />
+				    <col width="100px" />
+				    <col width="100px" />
 				    <col width="100px" />
 				    <col width="70px" />
 				    <col width="70px" />
@@ -96,10 +96,10 @@
 				    	<tr>
 						    <th>Name</th>
 						    <th># elements</th>
-						    <!-- <th>Edit</th> -->
-						    <th>Link ADs</th>
-						    <th>Delete</th>
-						    <th>Sync</th>
+						    <th align="center">Find ATD</th>
+						    <th align="center">Link ADs</th>
+						    <th align="center">Delete</th>
+						    <th align="center">Synch</th>
 					  	</tr>
 				    </thead>
 				    <tbody>
@@ -107,12 +107,13 @@
 				    		<td data-title="'Nombre'">{{ b.name }}&nbsp;&nbsp;<a ng-href="{{b.url}}"><img alt="" src="images/openicon.png"></a></td>
 				    		<td>{{ b.numbersOfComponent }}</td>
 				    		<!-- <td align="center"><a href="#"><img alt="" src="images/editicon.png"></a></td> -->
-					  		<td align="center"><a ng-href="{{b.urlLinktoADRs}}"><img alt="" src="images/linkicon.png"></a></td>
-					  		<td align="center"><a href="#" ng-click="ctr.deleteBOI(b.id)"><img alt="" src="images/deleteicon.png"></a></td>
-					  		<td align="center"><a href="#"><img alt="" ng-src="images/{{b.syncIcon}}"></a></td>
+							<td align="center"><a ng-href="#" ng-click="ctr.goIdentify(b.name)"><img title="Find ATD candidates" alt="Find ATD candidates" src="images/findatd_4.png"></a></td>
+							<td align="center"><a ng-href="{{b.urlLinktoADRs}}"><img title="Link facts to ADRs" alt="Link facts to ADRs" src="images/linkicon.png"></a></td>
+					  		<td align="center"><a href="#" ng-click="ctr.deleteBOI(b.id)"><img title="Delete BoI" alt="Delete BoI" src="images/deleteicon.png"></a></td>
+					  		<td align="center"><a href="#"><img title="Synch state" alt="Synch state" ng-src="images/{{b.syncIcon}}"></a></td>
 						</tr>
 				    	<tr ng-show="!ctr.bois.length">
-				    		<td colspan="5" align="center">No records with this filter</td>				    	
+				    		<td colspan="6" align="center">No records with this filter</td>				    	
 				    	</tr>
 				    	
 				    	<!-- 

@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.mxgraph.util.mxCellRenderer"/>
-<fullyQualifiedTypeName name="java.awt.image.RenderedImage"/>
-<fullyQualifiedTypeName name="rebel_archimate.ELEMENTTYPE"/>
-<fullyQualifiedTypeName name="org.w3c.dom.Document"/>
-<fullyQualifiedTypeName name="org.w3c.dom.Element"/>
-<fullyQualifiedTypeName name="uniandes.rebel.archimate.ArchiToXML"/>
-<fullyQualifiedTypeName name="uniandes.rebel.archimate.AMModel"/>
-<fullyQualifiedTypeName name="uniandes.rebelapi.bo.APIArchiElement"/>
-<fullyQualifiedTypeName name="rebel_archimate.Element"/>
-<fullyQualifiedTypeName name="rebel_core.ELEMENTTYPE"/>
-<fullyQualifiedTypeName name="rebel_archimate.Relation"/>
-<fullyQualifiedTypeName name="rebel_core.Relation"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
-<fullyQualifiedTypeName name="rebel_archimate.View"/>
-<fullyQualifiedTypeName name="rebel_core.Element"/>
-<fullyQualifiedTypeName name="uniandes.rebelapi.util.RebelArchiToXML"/>
-<fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="rebel_core.ArchimateView"/>
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="org.apache.poi.xssf.usermodel.XSSFWorkbook"/>
@@ -25,7 +8,6 @@
 <fullyQualifiedTypeName name="excel.ProcesarAgregados"/>
 <fullyQualifiedTypeName name="uniandes.rebelapi.mediator.ModelMediator"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
-<fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="uniandes.rebelapi.bo.APIFact"/>
 <fullyQualifiedTypeName name="rebel_core.Port"/>
 <fullyQualifiedTypeName name="rebel_core.PortType"/>
@@ -35,7 +17,6 @@
 <fullyQualifiedTypeName name="rebel_componentandconnector.Rebel_componentandconnectorFactory"/>
 <fullyQualifiedTypeName name="rebel_componentandconnector.Rebel_componentandconnectorPackage"/>
 <fullyQualifiedTypeName name="uniandes.rebelapi.service.RebelAPIService"/>
-<fullyQualifiedTypeName name="rebel_core.BlockOfInterest"/>
 <fullyQualifiedTypeName name="rebel_core.Fact"/>
 <fullyQualifiedTypeName name="rebel_core.ATDItem"/>
 <fullyQualifiedTypeName name="uniandes.rebelapi.bo.ATDItemBO"/>
@@ -46,7 +27,6 @@
 <fullyQualifiedTypeName name="uniandes.rebelapi.ngrams.NgramGeneration"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="java.util.Iterator"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="uniandes.rebelapi.bo.APIElement"/>
 <fullyQualifiedTypeName name="rebel_archimate.SyncType"/>
@@ -60,4 +40,24 @@
 <fullyQualifiedTypeName name="rebel_core.Buffering"/>
 <fullyQualifiedTypeName name="rebel_core.Throughput"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="rebel_chatlogs.MessageLogType"/>
+<fullyQualifiedTypeName name="rebel_chatlogs.Message"/>
+<fullyQualifiedTypeName name="rebel_chatlogs.MessageLog"/>
+<fullyQualifiedTypeName name="java.lang.IllegalStateException"/>
+<fullyQualifiedTypeName name="uniandes.rebel.chatlogs.CEUtil"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.util.Properties"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="uniandes.rebel.chatlogs.CEPopulation"/>
+<fullyQualifiedTypeName name="uniandes.rebelapi.util.AsynchronousSearch"/>
+<fullyQualifiedTypeName name="rebel_core.MessageLogType"/>
+<fullyQualifiedTypeName name="rebel_core.Project"/>
+<fullyQualifiedTypeName name="rebel_core.BlockOfInterest"/>
+<fullyQualifiedTypeName name="rebel_core.CommitMessage"/>
+<fullyQualifiedTypeName name="rebel_core.Decision"/>
+<fullyQualifiedTypeName name="rebel_core.MessageLog"/>
+<fullyQualifiedTypeName name="rebel_core.ChatEmailMessage"/>
+<fullyQualifiedTypeName name="java.util.Calendar"/>
 </qualifiedTypeNameHistroy>

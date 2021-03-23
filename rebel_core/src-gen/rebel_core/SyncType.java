@@ -27,19 +27,21 @@ public enum SyncType implements Enumerator {
 	 * @ordered
 	 */
 	NONE(0, "NONE", "NONE"),
+
 	/**
 	 * The '<em><b>SYNC</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #SYNC_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	SYNC(1, "SYNC", "SYNC"),
+
 	/**
 	 * The '<em><b>ASYNC</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #ASYNC_VALUE
 	 * @generated
 	 * @ordered

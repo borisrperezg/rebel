@@ -136,6 +136,7 @@ public class CEUtil {
 	 * @param date
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static Date getDateFormat(String date) {
 		Date d = null;
 		

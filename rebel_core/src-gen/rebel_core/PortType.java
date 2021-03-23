@@ -27,19 +27,21 @@ public enum PortType implements Enumerator {
 	 * @ordered
 	 */
 	NONE(0, "NONE", "NONE"),
+
 	/**
 	 * The '<em><b>PROVIDED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #PROVIDED_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	PROVIDED(1, "PROVIDED", "PROVIDED"),
+
 	/**
 	 * The '<em><b>REQUIRED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #REQUIRED_VALUE
 	 * @generated
 	 * @ordered

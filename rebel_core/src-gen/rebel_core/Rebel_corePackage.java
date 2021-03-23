@@ -176,13 +176,22 @@ public interface Rebel_corePackage extends EPackage {
 	int FACT__ATDITEM = 11;
 
 	/**
+	 * The feature id for the '<em><b>Messagelogs</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACT__MESSAGELOGS = 12;
+
+	/**
 	 * The number of structural features of the '<em>Fact</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FACT_FEATURE_COUNT = 12;
+	int FACT_FEATURE_COUNT = 13;
 
 	/**
 	 * The number of operations of the '<em>Fact</em>' class.
@@ -249,13 +258,13 @@ public interface Rebel_corePackage extends EPackage {
 	int PROJECT__DECISIONS = 4;
 
 	/**
-	 * The feature id for the '<em><b>Message</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Commit Messages</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__MESSAGE = 5;
+	int PROJECT__COMMIT_MESSAGES = 5;
 
 	/**
 	 * The feature id for the '<em><b>Person</b></em>' containment reference list.
@@ -285,13 +294,22 @@ public interface Rebel_corePackage extends EPackage {
 	int PROJECT__VIEW = 8;
 
 	/**
+	 * The feature id for the '<em><b>Messagelog</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__MESSAGELOG = 9;
+
+	/**
 	 * The number of structural features of the '<em>Project</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT_FEATURE_COUNT = 9;
+	int PROJECT_FEATURE_COUNT = 10;
 
 	/**
 	 * The number of operations of the '<em>Project</em>' class.
@@ -1932,14 +1950,14 @@ public interface Rebel_corePackage extends EPackage {
 	int ALTERNATIVE_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link rebel_core.impl.MessageImpl <em>Message</em>}' class.
+	 * The meta object id for the '{@link rebel_core.impl.CommitMessageImpl <em>Commit Message</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see rebel_core.impl.MessageImpl
-	 * @see rebel_core.impl.Rebel_corePackageImpl#getMessage()
+	 * @see rebel_core.impl.CommitMessageImpl
+	 * @see rebel_core.impl.Rebel_corePackageImpl#getCommitMessage()
 	 * @generated
 	 */
-	int MESSAGE = 20;
+	int COMMIT_MESSAGE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Subject</b></em>' attribute.
@@ -1948,7 +1966,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__SUBJECT = 0;
+	int COMMIT_MESSAGE__SUBJECT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Footer</b></em>' attribute.
@@ -1957,7 +1975,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__FOOTER = 1;
+	int COMMIT_MESSAGE__FOOTER = 1;
 
 	/**
 	 * The feature id for the '<em><b>Scope</b></em>' attribute.
@@ -1966,7 +1984,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__SCOPE = 2;
+	int COMMIT_MESSAGE__SCOPE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' attribute.
@@ -1975,7 +1993,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__BODY = 3;
+	int COMMIT_MESSAGE__BODY = 3;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1984,7 +2002,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__TYPE = 4;
+	int COMMIT_MESSAGE__TYPE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Action</b></em>' attribute.
@@ -1993,7 +2011,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__ACTION = 5;
+	int COMMIT_MESSAGE__ACTION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2002,7 +2020,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__ID = 6;
+	int COMMIT_MESSAGE__ID = 6;
 
 	/**
 	 * The feature id for the '<em><b>Date</b></em>' attribute.
@@ -2011,7 +2029,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__DATE = 7;
+	int COMMIT_MESSAGE__DATE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Person</b></em>' reference.
@@ -2020,25 +2038,25 @@ public interface Rebel_corePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__PERSON = 8;
+	int COMMIT_MESSAGE__PERSON = 8;
 
 	/**
-	 * The number of structural features of the '<em>Message</em>' class.
+	 * The number of structural features of the '<em>Commit Message</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_FEATURE_COUNT = 9;
+	int COMMIT_MESSAGE_FEATURE_COUNT = 9;
 
 	/**
-	 * The number of operations of the '<em>Message</em>' class.
+	 * The number of operations of the '<em>Commit Message</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_OPERATION_COUNT = 0;
+	int COMMIT_MESSAGE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.impl.PersonImpl <em>Person</em>}' class.
@@ -2607,6 +2625,152 @@ public interface Rebel_corePackage extends EPackage {
 	int ATD_EFFECT_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link rebel_core.impl.MessageLogImpl <em>Message Log</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rebel_core.impl.MessageLogImpl
+	 * @see rebel_core.impl.Rebel_corePackageImpl#getMessageLog()
+	 * @generated
+	 */
+	int MESSAGE_LOG = 29;
+
+	/**
+	 * The feature id for the '<em><b>Msg Log Messages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_LOG__MSG_LOG_MESSAGES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_LOG__TYPE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Creation Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_LOG__CREATION_DATE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_LOG__TITLE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_LOG__ID = 4;
+
+	/**
+	 * The number of structural features of the '<em>Message Log</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_LOG_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>Message Log</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_LOG_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link rebel_core.impl.ChatEmailMessageImpl <em>Chat Email Message</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rebel_core.impl.ChatEmailMessageImpl
+	 * @see rebel_core.impl.Rebel_corePackageImpl#getChatEmailMessage()
+	 * @generated
+	 */
+	int CHAT_EMAIL_MESSAGE = 30;
+
+	/**
+	 * The feature id for the '<em><b>Text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAT_EMAIL_MESSAGE__TEXT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Timestamp</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAT_EMAIL_MESSAGE__TIMESTAMP = 1;
+
+	/**
+	 * The feature id for the '<em><b>Sent By</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAT_EMAIL_MESSAGE__SENT_BY = 2;
+
+	/**
+	 * The feature id for the '<em><b>Received By</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAT_EMAIL_MESSAGE__RECEIVED_BY = 3;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAT_EMAIL_MESSAGE__ID = 4;
+
+	/**
+	 * The number of structural features of the '<em>Chat Email Message</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAT_EMAIL_MESSAGE_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>Chat Email Message</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHAT_EMAIL_MESSAGE_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link rebel_core.Action <em>Action</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2614,7 +2778,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getAction()
 	 * @generated
 	 */
-	int ACTION = 29;
+	int ACTION = 31;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.PortType <em>Port Type</em>}' enum.
@@ -2624,7 +2788,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getPortType()
 	 * @generated
 	 */
-	int PORT_TYPE = 30;
+	int PORT_TYPE = 32;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.RoleType <em>Role Type</em>}' enum.
@@ -2634,7 +2798,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getRoleType()
 	 * @generated
 	 */
-	int ROLE_TYPE = 31;
+	int ROLE_TYPE = 33;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.Throughput <em>Throughput</em>}' enum.
@@ -2644,7 +2808,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getThroughput()
 	 * @generated
 	 */
-	int THROUGHPUT = 32;
+	int THROUGHPUT = 34;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.NotificationModel <em>Notification Model</em>}' enum.
@@ -2654,7 +2818,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getNotificationModel()
 	 * @generated
 	 */
-	int NOTIFICATION_MODEL = 33;
+	int NOTIFICATION_MODEL = 35;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.Buffering <em>Buffering</em>}' enum.
@@ -2664,7 +2828,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getBuffering()
 	 * @generated
 	 */
-	int BUFFERING = 34;
+	int BUFFERING = 36;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.DeliveryModel <em>Delivery Model</em>}' enum.
@@ -2674,7 +2838,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getDeliveryModel()
 	 * @generated
 	 */
-	int DELIVERY_MODEL = 35;
+	int DELIVERY_MODEL = 37;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.SyncType <em>Sync Type</em>}' enum.
@@ -2684,7 +2848,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getSyncType()
 	 * @generated
 	 */
-	int SYNC_TYPE = 36;
+	int SYNC_TYPE = 38;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.StateType <em>State Type</em>}' enum.
@@ -2694,7 +2858,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getStateType()
 	 * @generated
 	 */
-	int STATE_TYPE = 37;
+	int STATE_TYPE = 39;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.ModelElementType <em>Model Element Type</em>}' enum.
@@ -2704,7 +2868,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getModelElementType()
 	 * @generated
 	 */
-	int MODEL_ELEMENT_TYPE = 38;
+	int MODEL_ELEMENT_TYPE = 40;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.ConsequenceType <em>Consequence Type</em>}' enum.
@@ -2714,7 +2878,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getConsequenceType()
 	 * @generated
 	 */
-	int CONSEQUENCE_TYPE = 39;
+	int CONSEQUENCE_TYPE = 41;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.ACTIONTYPE <em>ACTIONTYPE</em>}' enum.
@@ -2724,7 +2888,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getACTIONTYPE()
 	 * @generated
 	 */
-	int ACTIONTYPE = 40;
+	int ACTIONTYPE = 42;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.OPERATIONTYPE <em>OPERATIONTYPE</em>}' enum.
@@ -2734,7 +2898,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getOPERATIONTYPE()
 	 * @generated
 	 */
-	int OPERATIONTYPE = 41;
+	int OPERATIONTYPE = 43;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.RELATIONTYPE <em>RELATIONTYPE</em>}' enum.
@@ -2744,7 +2908,7 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getRELATIONTYPE()
 	 * @generated
 	 */
-	int RELATIONTYPE = 42;
+	int RELATIONTYPE = 44;
 
 	/**
 	 * The meta object id for the '{@link rebel_core.ELEMENTTYPE <em>ELEMENTTYPE</em>}' enum.
@@ -2754,7 +2918,17 @@ public interface Rebel_corePackage extends EPackage {
 	 * @see rebel_core.impl.Rebel_corePackageImpl#getELEMENTTYPE()
 	 * @generated
 	 */
-	int ELEMENTTYPE = 43;
+	int ELEMENTTYPE = 45;
+
+	/**
+	 * The meta object id for the '{@link rebel_core.MessageLogType <em>Message Log Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rebel_core.MessageLogType
+	 * @see rebel_core.impl.Rebel_corePackageImpl#getMessageLogType()
+	 * @generated
+	 */
+	int MESSAGE_LOG_TYPE = 46;
 
 	/**
 	 * Returns the meta object for class '{@link rebel_core.Fact <em>Fact</em>}'.
@@ -2899,6 +3073,17 @@ public interface Rebel_corePackage extends EPackage {
 	EReference getFact_Atditem();
 
 	/**
+	 * Returns the meta object for the reference list '{@link rebel_core.Fact#getMessagelogs <em>Messagelogs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Messagelogs</em>'.
+	 * @see rebel_core.Fact#getMessagelogs()
+	 * @see #getFact()
+	 * @generated
+	 */
+	EReference getFact_Messagelogs();
+
+	/**
 	 * Returns the meta object for class '{@link rebel_core.Project <em>Project</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2964,15 +3149,15 @@ public interface Rebel_corePackage extends EPackage {
 	EReference getProject_Decisions();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link rebel_core.Project#getMessage <em>Message</em>}'.
+	 * Returns the meta object for the containment reference list '{@link rebel_core.Project#getCommitMessages <em>Commit Messages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Message</em>'.
-	 * @see rebel_core.Project#getMessage()
+	 * @return the meta object for the containment reference list '<em>Commit Messages</em>'.
+	 * @see rebel_core.Project#getCommitMessages()
 	 * @see #getProject()
 	 * @generated
 	 */
-	EReference getProject_Message();
+	EReference getProject_CommitMessages();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link rebel_core.Project#getPerson <em>Person</em>}'.
@@ -3006,6 +3191,17 @@ public interface Rebel_corePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getProject_View();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link rebel_core.Project#getMessagelog <em>Messagelog</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Messagelog</em>'.
+	 * @see rebel_core.Project#getMessagelog()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EReference getProject_Messagelog();
 
 	/**
 	 * Returns the meta object for class '{@link rebel_core.BlockOfInterest <em>Block Of Interest</em>}'.
@@ -3771,113 +3967,113 @@ public interface Rebel_corePackage extends EPackage {
 	EAttribute getAlternative_Description();
 
 	/**
-	 * Returns the meta object for class '{@link rebel_core.Message <em>Message</em>}'.
+	 * Returns the meta object for class '{@link rebel_core.CommitMessage <em>Commit Message</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Message</em>'.
-	 * @see rebel_core.Message
+	 * @return the meta object for class '<em>Commit Message</em>'.
+	 * @see rebel_core.CommitMessage
 	 * @generated
 	 */
-	EClass getMessage();
+	EClass getCommitMessage();
 
 	/**
-	 * Returns the meta object for the attribute '{@link rebel_core.Message#getSubject <em>Subject</em>}'.
+	 * Returns the meta object for the attribute '{@link rebel_core.CommitMessage#getSubject <em>Subject</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Subject</em>'.
-	 * @see rebel_core.Message#getSubject()
-	 * @see #getMessage()
+	 * @see rebel_core.CommitMessage#getSubject()
+	 * @see #getCommitMessage()
 	 * @generated
 	 */
-	EAttribute getMessage_Subject();
+	EAttribute getCommitMessage_Subject();
 
 	/**
-	 * Returns the meta object for the attribute '{@link rebel_core.Message#getFooter <em>Footer</em>}'.
+	 * Returns the meta object for the attribute '{@link rebel_core.CommitMessage#getFooter <em>Footer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Footer</em>'.
-	 * @see rebel_core.Message#getFooter()
-	 * @see #getMessage()
+	 * @see rebel_core.CommitMessage#getFooter()
+	 * @see #getCommitMessage()
 	 * @generated
 	 */
-	EAttribute getMessage_Footer();
+	EAttribute getCommitMessage_Footer();
 
 	/**
-	 * Returns the meta object for the attribute '{@link rebel_core.Message#getScope <em>Scope</em>}'.
+	 * Returns the meta object for the attribute '{@link rebel_core.CommitMessage#getScope <em>Scope</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Scope</em>'.
-	 * @see rebel_core.Message#getScope()
-	 * @see #getMessage()
+	 * @see rebel_core.CommitMessage#getScope()
+	 * @see #getCommitMessage()
 	 * @generated
 	 */
-	EAttribute getMessage_Scope();
+	EAttribute getCommitMessage_Scope();
 
 	/**
-	 * Returns the meta object for the attribute '{@link rebel_core.Message#getBody <em>Body</em>}'.
+	 * Returns the meta object for the attribute '{@link rebel_core.CommitMessage#getBody <em>Body</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Body</em>'.
-	 * @see rebel_core.Message#getBody()
-	 * @see #getMessage()
+	 * @see rebel_core.CommitMessage#getBody()
+	 * @see #getCommitMessage()
 	 * @generated
 	 */
-	EAttribute getMessage_Body();
+	EAttribute getCommitMessage_Body();
 
 	/**
-	 * Returns the meta object for the attribute '{@link rebel_core.Message#getType <em>Type</em>}'.
+	 * Returns the meta object for the attribute '{@link rebel_core.CommitMessage#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see rebel_core.Message#getType()
-	 * @see #getMessage()
+	 * @see rebel_core.CommitMessage#getType()
+	 * @see #getCommitMessage()
 	 * @generated
 	 */
-	EAttribute getMessage_Type();
+	EAttribute getCommitMessage_Type();
 
 	/**
-	 * Returns the meta object for the attribute '{@link rebel_core.Message#getAction <em>Action</em>}'.
+	 * Returns the meta object for the attribute '{@link rebel_core.CommitMessage#getAction <em>Action</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Action</em>'.
-	 * @see rebel_core.Message#getAction()
-	 * @see #getMessage()
+	 * @see rebel_core.CommitMessage#getAction()
+	 * @see #getCommitMessage()
 	 * @generated
 	 */
-	EAttribute getMessage_Action();
+	EAttribute getCommitMessage_Action();
 
 	/**
-	 * Returns the meta object for the attribute '{@link rebel_core.Message#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link rebel_core.CommitMessage#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see rebel_core.Message#getId()
-	 * @see #getMessage()
+	 * @see rebel_core.CommitMessage#getId()
+	 * @see #getCommitMessage()
 	 * @generated
 	 */
-	EAttribute getMessage_Id();
+	EAttribute getCommitMessage_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link rebel_core.Message#getDate <em>Date</em>}'.
+	 * Returns the meta object for the attribute '{@link rebel_core.CommitMessage#getDate <em>Date</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Date</em>'.
-	 * @see rebel_core.Message#getDate()
-	 * @see #getMessage()
+	 * @see rebel_core.CommitMessage#getDate()
+	 * @see #getCommitMessage()
 	 * @generated
 	 */
-	EAttribute getMessage_Date();
+	EAttribute getCommitMessage_Date();
 
 	/**
-	 * Returns the meta object for the reference '{@link rebel_core.Message#getPerson <em>Person</em>}'.
+	 * Returns the meta object for the reference '{@link rebel_core.CommitMessage#getPerson <em>Person</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Person</em>'.
-	 * @see rebel_core.Message#getPerson()
-	 * @see #getMessage()
+	 * @see rebel_core.CommitMessage#getPerson()
+	 * @see #getCommitMessage()
 	 * @generated
 	 */
-	EReference getMessage_Person();
+	EReference getCommitMessage_Person();
 
 	/**
 	 * Returns the meta object for class '{@link rebel_core.Person <em>Person</em>}'.
@@ -4378,6 +4574,136 @@ public interface Rebel_corePackage extends EPackage {
 	EAttribute getATDEffect_Description();
 
 	/**
+	 * Returns the meta object for class '{@link rebel_core.MessageLog <em>Message Log</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Message Log</em>'.
+	 * @see rebel_core.MessageLog
+	 * @generated
+	 */
+	EClass getMessageLog();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link rebel_core.MessageLog#getMsgLogMessages <em>Msg Log Messages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Msg Log Messages</em>'.
+	 * @see rebel_core.MessageLog#getMsgLogMessages()
+	 * @see #getMessageLog()
+	 * @generated
+	 */
+	EReference getMessageLog_MsgLogMessages();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rebel_core.MessageLog#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see rebel_core.MessageLog#getType()
+	 * @see #getMessageLog()
+	 * @generated
+	 */
+	EAttribute getMessageLog_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rebel_core.MessageLog#getCreationDate <em>Creation Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Creation Date</em>'.
+	 * @see rebel_core.MessageLog#getCreationDate()
+	 * @see #getMessageLog()
+	 * @generated
+	 */
+	EAttribute getMessageLog_CreationDate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rebel_core.MessageLog#getTitle <em>Title</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Title</em>'.
+	 * @see rebel_core.MessageLog#getTitle()
+	 * @see #getMessageLog()
+	 * @generated
+	 */
+	EAttribute getMessageLog_Title();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rebel_core.MessageLog#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see rebel_core.MessageLog#getId()
+	 * @see #getMessageLog()
+	 * @generated
+	 */
+	EAttribute getMessageLog_Id();
+
+	/**
+	 * Returns the meta object for class '{@link rebel_core.ChatEmailMessage <em>Chat Email Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Chat Email Message</em>'.
+	 * @see rebel_core.ChatEmailMessage
+	 * @generated
+	 */
+	EClass getChatEmailMessage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rebel_core.ChatEmailMessage#getText <em>Text</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Text</em>'.
+	 * @see rebel_core.ChatEmailMessage#getText()
+	 * @see #getChatEmailMessage()
+	 * @generated
+	 */
+	EAttribute getChatEmailMessage_Text();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rebel_core.ChatEmailMessage#getTimestamp <em>Timestamp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Timestamp</em>'.
+	 * @see rebel_core.ChatEmailMessage#getTimestamp()
+	 * @see #getChatEmailMessage()
+	 * @generated
+	 */
+	EAttribute getChatEmailMessage_Timestamp();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rebel_core.ChatEmailMessage#getSentBy <em>Sent By</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sent By</em>'.
+	 * @see rebel_core.ChatEmailMessage#getSentBy()
+	 * @see #getChatEmailMessage()
+	 * @generated
+	 */
+	EAttribute getChatEmailMessage_SentBy();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rebel_core.ChatEmailMessage#getReceivedBy <em>Received By</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Received By</em>'.
+	 * @see rebel_core.ChatEmailMessage#getReceivedBy()
+	 * @see #getChatEmailMessage()
+	 * @generated
+	 */
+	EAttribute getChatEmailMessage_ReceivedBy();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rebel_core.ChatEmailMessage#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see rebel_core.ChatEmailMessage#getId()
+	 * @see #getChatEmailMessage()
+	 * @generated
+	 */
+	EAttribute getChatEmailMessage_Id();
+
+	/**
 	 * Returns the meta object for enum '{@link rebel_core.Action <em>Action</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4528,6 +4854,16 @@ public interface Rebel_corePackage extends EPackage {
 	EEnum getELEMENTTYPE();
 
 	/**
+	 * Returns the meta object for enum '{@link rebel_core.MessageLogType <em>Message Log Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Message Log Type</em>'.
+	 * @see rebel_core.MessageLogType
+	 * @generated
+	 */
+	EEnum getMessageLogType();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4657,6 +4993,14 @@ public interface Rebel_corePackage extends EPackage {
 		EReference FACT__ATDITEM = eINSTANCE.getFact_Atditem();
 
 		/**
+		 * The meta object literal for the '<em><b>Messagelogs</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FACT__MESSAGELOGS = eINSTANCE.getFact_Messagelogs();
+
+		/**
 		 * The meta object literal for the '{@link rebel_core.impl.ProjectImpl <em>Project</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4707,12 +5051,12 @@ public interface Rebel_corePackage extends EPackage {
 		EReference PROJECT__DECISIONS = eINSTANCE.getProject_Decisions();
 
 		/**
-		 * The meta object literal for the '<em><b>Message</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Commit Messages</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROJECT__MESSAGE = eINSTANCE.getProject_Message();
+		EReference PROJECT__COMMIT_MESSAGES = eINSTANCE.getProject_CommitMessages();
 
 		/**
 		 * The meta object literal for the '<em><b>Person</b></em>' containment reference list feature.
@@ -4737,6 +5081,14 @@ public interface Rebel_corePackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROJECT__VIEW = eINSTANCE.getProject_View();
+
+		/**
+		 * The meta object literal for the '<em><b>Messagelog</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROJECT__MESSAGELOG = eINSTANCE.getProject_Messagelog();
 
 		/**
 		 * The meta object literal for the '{@link rebel_core.impl.BlockOfInterestImpl <em>Block Of Interest</em>}' class.
@@ -5343,14 +5695,14 @@ public interface Rebel_corePackage extends EPackage {
 		EAttribute ALTERNATIVE__DESCRIPTION = eINSTANCE.getAlternative_Description();
 
 		/**
-		 * The meta object literal for the '{@link rebel_core.impl.MessageImpl <em>Message</em>}' class.
+		 * The meta object literal for the '{@link rebel_core.impl.CommitMessageImpl <em>Commit Message</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see rebel_core.impl.MessageImpl
-		 * @see rebel_core.impl.Rebel_corePackageImpl#getMessage()
+		 * @see rebel_core.impl.CommitMessageImpl
+		 * @see rebel_core.impl.Rebel_corePackageImpl#getCommitMessage()
 		 * @generated
 		 */
-		EClass MESSAGE = eINSTANCE.getMessage();
+		EClass COMMIT_MESSAGE = eINSTANCE.getCommitMessage();
 
 		/**
 		 * The meta object literal for the '<em><b>Subject</b></em>' attribute feature.
@@ -5358,7 +5710,7 @@ public interface Rebel_corePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MESSAGE__SUBJECT = eINSTANCE.getMessage_Subject();
+		EAttribute COMMIT_MESSAGE__SUBJECT = eINSTANCE.getCommitMessage_Subject();
 
 		/**
 		 * The meta object literal for the '<em><b>Footer</b></em>' attribute feature.
@@ -5366,7 +5718,7 @@ public interface Rebel_corePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MESSAGE__FOOTER = eINSTANCE.getMessage_Footer();
+		EAttribute COMMIT_MESSAGE__FOOTER = eINSTANCE.getCommitMessage_Footer();
 
 		/**
 		 * The meta object literal for the '<em><b>Scope</b></em>' attribute feature.
@@ -5374,7 +5726,7 @@ public interface Rebel_corePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MESSAGE__SCOPE = eINSTANCE.getMessage_Scope();
+		EAttribute COMMIT_MESSAGE__SCOPE = eINSTANCE.getCommitMessage_Scope();
 
 		/**
 		 * The meta object literal for the '<em><b>Body</b></em>' attribute feature.
@@ -5382,7 +5734,7 @@ public interface Rebel_corePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MESSAGE__BODY = eINSTANCE.getMessage_Body();
+		EAttribute COMMIT_MESSAGE__BODY = eINSTANCE.getCommitMessage_Body();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
@@ -5390,7 +5742,7 @@ public interface Rebel_corePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MESSAGE__TYPE = eINSTANCE.getMessage_Type();
+		EAttribute COMMIT_MESSAGE__TYPE = eINSTANCE.getCommitMessage_Type();
 
 		/**
 		 * The meta object literal for the '<em><b>Action</b></em>' attribute feature.
@@ -5398,7 +5750,7 @@ public interface Rebel_corePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MESSAGE__ACTION = eINSTANCE.getMessage_Action();
+		EAttribute COMMIT_MESSAGE__ACTION = eINSTANCE.getCommitMessage_Action();
 
 		/**
 		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -5406,7 +5758,7 @@ public interface Rebel_corePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MESSAGE__ID = eINSTANCE.getMessage_Id();
+		EAttribute COMMIT_MESSAGE__ID = eINSTANCE.getCommitMessage_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Date</b></em>' attribute feature.
@@ -5414,7 +5766,7 @@ public interface Rebel_corePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MESSAGE__DATE = eINSTANCE.getMessage_Date();
+		EAttribute COMMIT_MESSAGE__DATE = eINSTANCE.getCommitMessage_Date();
 
 		/**
 		 * The meta object literal for the '<em><b>Person</b></em>' reference feature.
@@ -5422,7 +5774,7 @@ public interface Rebel_corePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MESSAGE__PERSON = eINSTANCE.getMessage_Person();
+		EReference COMMIT_MESSAGE__PERSON = eINSTANCE.getCommitMessage_Person();
 
 		/**
 		 * The meta object literal for the '{@link rebel_core.impl.PersonImpl <em>Person</em>}' class.
@@ -5809,6 +6161,106 @@ public interface Rebel_corePackage extends EPackage {
 		EAttribute ATD_EFFECT__DESCRIPTION = eINSTANCE.getATDEffect_Description();
 
 		/**
+		 * The meta object literal for the '{@link rebel_core.impl.MessageLogImpl <em>Message Log</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rebel_core.impl.MessageLogImpl
+		 * @see rebel_core.impl.Rebel_corePackageImpl#getMessageLog()
+		 * @generated
+		 */
+		EClass MESSAGE_LOG = eINSTANCE.getMessageLog();
+
+		/**
+		 * The meta object literal for the '<em><b>Msg Log Messages</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MESSAGE_LOG__MSG_LOG_MESSAGES = eINSTANCE.getMessageLog_MsgLogMessages();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MESSAGE_LOG__TYPE = eINSTANCE.getMessageLog_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Creation Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MESSAGE_LOG__CREATION_DATE = eINSTANCE.getMessageLog_CreationDate();
+
+		/**
+		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MESSAGE_LOG__TITLE = eINSTANCE.getMessageLog_Title();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MESSAGE_LOG__ID = eINSTANCE.getMessageLog_Id();
+
+		/**
+		 * The meta object literal for the '{@link rebel_core.impl.ChatEmailMessageImpl <em>Chat Email Message</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rebel_core.impl.ChatEmailMessageImpl
+		 * @see rebel_core.impl.Rebel_corePackageImpl#getChatEmailMessage()
+		 * @generated
+		 */
+		EClass CHAT_EMAIL_MESSAGE = eINSTANCE.getChatEmailMessage();
+
+		/**
+		 * The meta object literal for the '<em><b>Text</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHAT_EMAIL_MESSAGE__TEXT = eINSTANCE.getChatEmailMessage_Text();
+
+		/**
+		 * The meta object literal for the '<em><b>Timestamp</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHAT_EMAIL_MESSAGE__TIMESTAMP = eINSTANCE.getChatEmailMessage_Timestamp();
+
+		/**
+		 * The meta object literal for the '<em><b>Sent By</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHAT_EMAIL_MESSAGE__SENT_BY = eINSTANCE.getChatEmailMessage_SentBy();
+
+		/**
+		 * The meta object literal for the '<em><b>Received By</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHAT_EMAIL_MESSAGE__RECEIVED_BY = eINSTANCE.getChatEmailMessage_ReceivedBy();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHAT_EMAIL_MESSAGE__ID = eINSTANCE.getChatEmailMessage_Id();
+
+		/**
 		 * The meta object literal for the '{@link rebel_core.Action <em>Action</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5957,6 +6409,16 @@ public interface Rebel_corePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum ELEMENTTYPE = eINSTANCE.getELEMENTTYPE();
+
+		/**
+		 * The meta object literal for the '{@link rebel_core.MessageLogType <em>Message Log Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rebel_core.MessageLogType
+		 * @see rebel_core.impl.Rebel_corePackageImpl#getMessageLogType()
+		 * @generated
+		 */
+		EEnum MESSAGE_LOG_TYPE = eINSTANCE.getMessageLogType();
 
 	}
 

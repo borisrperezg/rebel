@@ -14,19 +14,20 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import rebel_core.ATDBenefit;
-import rebel_core.ATDCause;
 import rebel_core.ATDEffect;
 import rebel_core.ATDItem;
 import rebel_core.ATDRationale;
 import rebel_core.ArchimateView;
 import rebel_core.BlockOfInterest;
+import rebel_core.ChatEmailMessage;
+import rebel_core.CommitMessage;
 import rebel_core.Component;
 import rebel_core.Connector;
 import rebel_core.Decision;
 import rebel_core.Element;
 import rebel_core.Fact;
 import rebel_core.FunctionalView;
-import rebel_core.Message;
+import rebel_core.MessageLog;
 import rebel_core.Person;
 import rebel_core.Port;
 import rebel_core.Project;
@@ -114,6 +115,18 @@ public class CoreModel {
 		return e;
 	}
 	
+	public MessageLog createMessageLog() {
+		return factory.createMessageLog();
+	}
+	
+	public ChatEmailMessage createChatEmailMessage() {
+		return factory.createChatEmailMessage();
+	}
+	
+	public CommitMessage createCommitMessage() {
+		return factory.createCommitMessage();
+	}
+	
 	public Relation createRelation(String id) {
 		Relation r = factory.createRelation();
 		r.setId(id);
@@ -139,10 +152,6 @@ public class CoreModel {
 	
 	public ATDBenefit creaATDBenefit() {
 		return factory.createATDBenefit();
-	}
-	
-	public Message createMessage() {
-		return factory.createMessage();
 	}
 	
 	public Person createPerson(){

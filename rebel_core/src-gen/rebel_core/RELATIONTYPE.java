@@ -77,28 +77,31 @@ public enum RELATIONTYPE implements Enumerator {
 	 * @ordered
 	 */
 	SERVING(5, "SERVING", "SERVING"),
+
 	/**
 	 * The '<em><b>ACCESS</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #ACCESS_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	ACCESS(6, "ACCESS", "ACCESS"),
+
 	/**
 	 * The '<em><b>COMPOSITION</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #COMPOSITION_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	COMPOSITION(7, "COMPOSITION", "COMPOSITION"),
+
 	/**
 	 * The '<em><b>ASSOCIATION</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #ASSOCIATION_VALUE
 	 * @generated
 	 * @ordered

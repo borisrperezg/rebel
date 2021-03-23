@@ -5,7 +5,7 @@
     <semanticResources>rebel_chatlogs.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_WE1j8E63Eeqf_64kJ8GDKw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_WFaywU63Eeqf_64kJ8GDKw" name="rebel_chatlogs" repPath="#_WFUFEE63Eeqf_64kJ8GDKw" changeId="87db926e-10c9-4421-b2fb-dce611413627">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_WFaywU63Eeqf_64kJ8GDKw" name="rebel_chatlogs" repPath="#_WFUFEE63Eeqf_64kJ8GDKw" changeId="71aad902-f368-4c84-90a6-0eb020745b1e">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="rebel_chatlogs.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -42,6 +42,10 @@
               <styles xmi:type="notation:FontStyle" xmi:id="_-QMEMU7QEeqf_64kJ8GDKw" fontColor="2697711" fontName=".AppleSystemUIFont" fontHeight="8"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_-QMEMk7QEeqf_64kJ8GDKw"/>
             </children>
+            <children xmi:type="notation:Node" xmi:id="_i_7A0INGEeu605blko3T8Q" type="3010" element="_i_TVwINGEeu605blko3T8Q">
+              <styles xmi:type="notation:FontStyle" xmi:id="_i_7A0YNGEeu605blko3T8Q" fontColor="2697711" fontName=".AppleSystemUIFont" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_i_7A0oNGEeu605blko3T8Q"/>
+            </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_aEMVck63Eeqf_64kJ8GDKw"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_aEMVc063Eeqf_64kJ8GDKw"/>
           </children>
@@ -67,11 +71,15 @@
               <styles xmi:type="notation:FontStyle" xmi:id="_OAhoMYD1EeuAnJ3KOCawfg" fontColor="2697711" fontName=".AppleSystemUIFont" fontHeight="8"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_OAhoMoD1EeuAnJ3KOCawfg"/>
             </children>
+            <children xmi:type="notation:Node" xmi:id="_jU0SwINGEeu605blko3T8Q" type="3010" element="_jUm3YINGEeu605blko3T8Q">
+              <styles xmi:type="notation:FontStyle" xmi:id="_jU0SwYNGEeu605blko3T8Q" fontColor="2697711" fontName=".AppleSystemUIFont" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_jU0SwoNGEeu605blko3T8Q"/>
+            </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_ayjQRU63Eeqf_64kJ8GDKw"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_ayjQRk63Eeqf_64kJ8GDKw"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_ayjQQU63Eeqf_64kJ8GDKw" fontName=".AppleSystemUIFont" fontHeight="8"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ayjQQk63Eeqf_64kJ8GDKw" x="524" y="152" width="120" height="100"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ayjQQk63Eeqf_64kJ8GDKw" x="524" y="152" width="120" height="115"/>
         </children>
         <children xmi:type="notation:Node" xmi:id="_RkUUME65Eeqf_64kJ8GDKw" type="2003" element="_RkJ8IE65Eeqf_64kJ8GDKw">
           <children xmi:type="notation:Node" xmi:id="_RkUUM065Eeqf_64kJ8GDKw" type="5007"/>
@@ -148,7 +156,7 @@
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="__mo5wU7QEeqf_64kJ8GDKw" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_lg8zIYNGEeu605blko3T8Q" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
@@ -176,6 +184,14 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_i_TVwINGEeu605blko3T8Q" name="id : EString" tooltipText="">
+        <target xmi:type="ecore:EAttribute" href="rebel_chatlogs.ecore#//MessageLog/id"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="rebel_chatlogs.ecore#//MessageLog/id"/>
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_lg-oUYNGEeu605blko3T8Q" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
+      </ownedElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_aye-0E63Eeqf_64kJ8GDKw" name="Message" tooltipText="" incomingEdges="_f1j3Jk63Eeqf_64kJ8GDKw" width="12" height="10">
       <target xmi:type="ecore:EClass" href="rebel_chatlogs.ecore#//Message"/>
@@ -183,7 +199,7 @@
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_RXjOY4D1EeuAnJ3KOCawfg" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_nA0DY4NGEeu605blko3T8Q" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
@@ -215,6 +231,14 @@
         <target xmi:type="ecore:EAttribute" href="rebel_chatlogs.ecore#//Message/receivedBy"/>
         <semanticElements xmi:type="ecore:EAttribute" href="rebel_chatlogs.ecore#//Message/receivedBy"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_RXj1d4D1EeuAnJ3KOCawfg" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_jUm3YINGEeu605blko3T8Q" name="id : EString" tooltipText="">
+        <target xmi:type="ecore:EAttribute" href="rebel_chatlogs.ecore#//Message/id"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="rebel_chatlogs.ecore#//Message/id"/>
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_nA2fpYNGEeu605blko3T8Q" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>

@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="goTraining"/>
+		<item key="selection" value="main"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="main"/>
+			<item value="loadhtml"/>
+			<item value="listFactsFromCnC"/>
+			<item value="buildxmi"/>
 			<item value="goTraining"/>
 			<item value="loadBOIViews"/>
 			<item value="boiviews"/>
 			<item value="sync"/>
-			<item value="listFactsFromCnC"/>
 			<item value="loadModelBOI"/>
 			<item value="loadBOIModelIFrame"/>
 			<item value="createboi"/>
@@ -20,16 +23,13 @@
 			<item value="System.out"/>
 			<item value="listelements"/>
 			<item value="showAndListModel"/>
-			<item value="getUrlParameter"/>
-			<item value="loadhtml"/>
-			<item value="listProjects"/>
 		</list>
 		<list key="replacehistory">
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="986"/>
-		<item key="DIALOG_Y_ORIGIN" value="330"/>
+		<item key="DIALOG_Y_ORIGIN" value="329"/>
 		<item key="DIALOG_WIDTH" value="294"/>
 		<item key="DIALOG_HEIGHT" value="408"/>
 		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>

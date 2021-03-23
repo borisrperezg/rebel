@@ -53,7 +53,7 @@ public class SemanticSimilarityExec {
 		boolean hasSimilarities = false;
 		
 		int numberOfWords = similarities.size();
-		
+		System.out.println("numberOfWords = "+numberOfWords);
 		int numberOfSimilarities = 0;
 		
 		if(similarities.size()>0) {
@@ -63,6 +63,8 @@ public class SemanticSimilarityExec {
 				}
 			}
 		}
+		
+		System.out.println("numberOfSimilarities = "+numberOfSimilarities);
 		
 //		System.out.println(numberOfWords + " - " + numberOfSimilarities);
 		

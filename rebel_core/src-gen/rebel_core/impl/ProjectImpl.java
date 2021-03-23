@@ -3,8 +3,8 @@
 package rebel_core.impl;
 
 import java.util.Collection;
-
 import java.util.Date;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -21,9 +21,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import rebel_core.ArchimateView;
 import rebel_core.BlockOfInterest;
+import rebel_core.CommitMessage;
 import rebel_core.Decision;
 import rebel_core.FunctionalView;
-import rebel_core.Message;
+import rebel_core.MessageLog;
 import rebel_core.Person;
 import rebel_core.Project;
 import rebel_core.Rebel_corePackage;
@@ -41,10 +42,11 @@ import rebel_core.Rebel_corePackage;
  *   <li>{@link rebel_core.impl.ProjectImpl#getName <em>Name</em>}</li>
  *   <li>{@link rebel_core.impl.ProjectImpl#getFunctionalviews <em>Functionalviews</em>}</li>
  *   <li>{@link rebel_core.impl.ProjectImpl#getDecisions <em>Decisions</em>}</li>
- *   <li>{@link rebel_core.impl.ProjectImpl#getMessage <em>Message</em>}</li>
+ *   <li>{@link rebel_core.impl.ProjectImpl#getCommitMessages <em>Commit Messages</em>}</li>
  *   <li>{@link rebel_core.impl.ProjectImpl#getPerson <em>Person</em>}</li>
  *   <li>{@link rebel_core.impl.ProjectImpl#getModelingDate <em>Modeling Date</em>}</li>
  *   <li>{@link rebel_core.impl.ProjectImpl#getView <em>View</em>}</li>
+ *   <li>{@link rebel_core.impl.ProjectImpl#getMessagelog <em>Messagelog</em>}</li>
  * </ul>
  *
  * @generated
@@ -121,14 +123,14 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 	protected EList<Decision> decisions;
 
 	/**
-	 * The cached value of the '{@link #getMessage() <em>Message</em>}' containment reference list.
+	 * The cached value of the '{@link #getCommitMessages() <em>Commit Messages</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMessage()
+	 * @see #getCommitMessages()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Message> message;
+	protected EList<CommitMessage> commitMessages;
 
 	/**
 	 * The cached value of the '{@link #getPerson() <em>Person</em>}' containment reference list.
@@ -169,6 +171,16 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 	 * @ordered
 	 */
 	protected EList<ArchimateView> view;
+
+	/**
+	 * The cached value of the '{@link #getMessagelog() <em>Messagelog</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMessagelog()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<MessageLog> messagelog;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -283,11 +295,12 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 	 * @generated
 	 */
 	@Override
-	public EList<Message> getMessage() {
-		if (message == null) {
-			message = new EObjectContainmentEList<Message>(Message.class, this, Rebel_corePackage.PROJECT__MESSAGE);
+	public EList<CommitMessage> getCommitMessages() {
+		if (commitMessages == null) {
+			commitMessages = new EObjectContainmentEList<CommitMessage>(CommitMessage.class, this,
+					Rebel_corePackage.PROJECT__COMMIT_MESSAGES);
 		}
-		return message;
+		return commitMessages;
 	}
 
 	/**
@@ -347,6 +360,20 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 	 * @generated
 	 */
 	@Override
+	public EList<MessageLog> getMessagelog() {
+		if (messagelog == null) {
+			messagelog = new EObjectContainmentEList<MessageLog>(MessageLog.class, this,
+					Rebel_corePackage.PROJECT__MESSAGELOG);
+		}
+		return messagelog;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case Rebel_corePackage.PROJECT__BLOCKOFINTEREST:
@@ -355,12 +382,14 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 			return ((InternalEList<?>) getFunctionalviews()).basicRemove(otherEnd, msgs);
 		case Rebel_corePackage.PROJECT__DECISIONS:
 			return ((InternalEList<?>) getDecisions()).basicRemove(otherEnd, msgs);
-		case Rebel_corePackage.PROJECT__MESSAGE:
-			return ((InternalEList<?>) getMessage()).basicRemove(otherEnd, msgs);
+		case Rebel_corePackage.PROJECT__COMMIT_MESSAGES:
+			return ((InternalEList<?>) getCommitMessages()).basicRemove(otherEnd, msgs);
 		case Rebel_corePackage.PROJECT__PERSON:
 			return ((InternalEList<?>) getPerson()).basicRemove(otherEnd, msgs);
 		case Rebel_corePackage.PROJECT__VIEW:
 			return ((InternalEList<?>) getView()).basicRemove(otherEnd, msgs);
+		case Rebel_corePackage.PROJECT__MESSAGELOG:
+			return ((InternalEList<?>) getMessagelog()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -383,14 +412,16 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 			return getFunctionalviews();
 		case Rebel_corePackage.PROJECT__DECISIONS:
 			return getDecisions();
-		case Rebel_corePackage.PROJECT__MESSAGE:
-			return getMessage();
+		case Rebel_corePackage.PROJECT__COMMIT_MESSAGES:
+			return getCommitMessages();
 		case Rebel_corePackage.PROJECT__PERSON:
 			return getPerson();
 		case Rebel_corePackage.PROJECT__MODELING_DATE:
 			return getModelingDate();
 		case Rebel_corePackage.PROJECT__VIEW:
 			return getView();
+		case Rebel_corePackage.PROJECT__MESSAGELOG:
+			return getMessagelog();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -422,9 +453,9 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 			getDecisions().clear();
 			getDecisions().addAll((Collection<? extends Decision>) newValue);
 			return;
-		case Rebel_corePackage.PROJECT__MESSAGE:
-			getMessage().clear();
-			getMessage().addAll((Collection<? extends Message>) newValue);
+		case Rebel_corePackage.PROJECT__COMMIT_MESSAGES:
+			getCommitMessages().clear();
+			getCommitMessages().addAll((Collection<? extends CommitMessage>) newValue);
 			return;
 		case Rebel_corePackage.PROJECT__PERSON:
 			getPerson().clear();
@@ -436,6 +467,10 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 		case Rebel_corePackage.PROJECT__VIEW:
 			getView().clear();
 			getView().addAll((Collection<? extends ArchimateView>) newValue);
+			return;
+		case Rebel_corePackage.PROJECT__MESSAGELOG:
+			getMessagelog().clear();
+			getMessagelog().addAll((Collection<? extends MessageLog>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -464,8 +499,8 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 		case Rebel_corePackage.PROJECT__DECISIONS:
 			getDecisions().clear();
 			return;
-		case Rebel_corePackage.PROJECT__MESSAGE:
-			getMessage().clear();
+		case Rebel_corePackage.PROJECT__COMMIT_MESSAGES:
+			getCommitMessages().clear();
 			return;
 		case Rebel_corePackage.PROJECT__PERSON:
 			getPerson().clear();
@@ -475,6 +510,9 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 			return;
 		case Rebel_corePackage.PROJECT__VIEW:
 			getView().clear();
+			return;
+		case Rebel_corePackage.PROJECT__MESSAGELOG:
+			getMessagelog().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -498,14 +536,16 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 			return functionalviews != null && !functionalviews.isEmpty();
 		case Rebel_corePackage.PROJECT__DECISIONS:
 			return decisions != null && !decisions.isEmpty();
-		case Rebel_corePackage.PROJECT__MESSAGE:
-			return message != null && !message.isEmpty();
+		case Rebel_corePackage.PROJECT__COMMIT_MESSAGES:
+			return commitMessages != null && !commitMessages.isEmpty();
 		case Rebel_corePackage.PROJECT__PERSON:
 			return person != null && !person.isEmpty();
 		case Rebel_corePackage.PROJECT__MODELING_DATE:
 			return MODELING_DATE_EDEFAULT == null ? modelingDate != null : !MODELING_DATE_EDEFAULT.equals(modelingDate);
 		case Rebel_corePackage.PROJECT__VIEW:
 			return view != null && !view.isEmpty();
+		case Rebel_corePackage.PROJECT__MESSAGELOG:
+			return messagelog != null && !messagelog.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

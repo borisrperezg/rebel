@@ -22,7 +22,8 @@ import rebel_core.Decision;
 import rebel_core.Element;
 import rebel_core.Fact;
 import rebel_core.FunctionalView;
-import rebel_core.Message;
+import rebel_core.MessageLog;
+import rebel_core.CommitMessage;
 import rebel_core.Port;
 import rebel_core.Project;
 import rebel_core.Role;
@@ -117,29 +118,56 @@ public class RebelCoreJSONGenerator {
 		ArrayList<ArtifactBO> list = new ArrayList<ArtifactBO>();
 		
 		// Listing architectural decisions
+		getADRs(fact, list);
+		
+		// Listing github commits messages
+		getGitHubMessages(fact, list);
+		
+		// Listing chatlogs messages
+		getChatLogMessages(fact, list);
+		
+		return list;
+	}
+	
+	private void getChatLogMessages(Fact fact, ArrayList<ArtifactBO> list) {
+		if(fact.getMessagelogs()!=null) {
+			for(MessageLog ml : fact.getMessagelogs()) {
+				ArtifactBO bo = new ArtifactBO();
+				bo.setName(ml.getTitle());
+				bo.setType(ml.getType().getLiteral().toLowerCase());
+				bo.setDate((ml.getCreationDate().getYear()+1900) + "-" + (ml.getCreationDate().getMonth()+1) + "-" + ml.getCreationDate().getDate());
+				
+				
+				
+				list.add(bo);
+			}				
+		}
+	}
+	
+	private void getADRs(Fact fact, ArrayList<ArtifactBO> list) {
 		if(fact.getArchitecturaldecision()!=null) {
 			
 			for(Decision dec : fact.getArchitecturaldecision()) {
 				ArtifactBO bo = new ArtifactBO();
 				bo.setType("AD");
 				bo.setName(dec.getNumber()+"-"+dec.getTitle());
-				bo.setDate((fact.getDate().getYear()+1900) + "-" + (fact.getDate().getMonth()+1) + "-" + fact.getDate().getDate());
+				bo.setDate((dec.getDate().getYear()+1900) + "-" + (dec.getDate().getMonth()+1) + "-" + dec.getDate().getDate());
 				list.add(bo);
 			}
 		}
-		
-		// Listing github commits messages
+	}
+	
+	private void getGitHubMessages(Fact fact, ArrayList<ArtifactBO> list) {
 		if(fact.getMessage()!=null) {
 			
-			for(Message msn : fact.getMessage()) {
+			for(CommitMessage msn : fact.getMessage()) {
 				ArtifactBO bo = new ArtifactBO();
 				bo.setType("GH");
 				bo.setName(msn.getSubject());
+				bo.setDate((msn.getDate().getYear()+1900) + "-" + (msn.getDate().getMonth()+1) + "-" + msn.getDate().getDate());
 				list.add(bo);  
 			}
 		}
-		
-		return list;
 	}
 	
 	private String printHTMLEmptyContent() {

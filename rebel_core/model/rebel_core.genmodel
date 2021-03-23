@@ -132,7 +132,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rebel_core.ecore#//Fact/view"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rebel_core.ecore#//Fact/fact"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rebel_core.ecore#//Fact/atditem"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rebel_core.ecore#//Fact/messagelog"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rebel_core.ecore#//Fact/messagelogs"/>
     </genClasses>
     <genClasses ecoreClass="rebel_core.ecore#//Project">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rebel_core.ecore#//Project/blockofinterest"/>
@@ -140,7 +140,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Project/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rebel_core.ecore#//Project/functionalviews"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rebel_core.ecore#//Project/decisions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rebel_core.ecore#//Project/message"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rebel_core.ecore#//Project/commitMessages"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rebel_core.ecore#//Project/person"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Project/modelingDate"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rebel_core.ecore#//Project/view"/>
@@ -229,16 +229,16 @@
     <genClasses ecoreClass="rebel_core.ecore#//Alternative">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Alternative/description"/>
     </genClasses>
-    <genClasses ecoreClass="rebel_core.ecore#//Message">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Message/subject"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Message/footer"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Message/scope"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Message/body"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Message/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Message/action"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Message/id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Message/date"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rebel_core.ecore#//Message/person"/>
+    <genClasses ecoreClass="rebel_core.ecore#//CommitMessage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//CommitMessage/subject"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//CommitMessage/footer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//CommitMessage/scope"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//CommitMessage/body"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//CommitMessage/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//CommitMessage/action"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//CommitMessage/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//CommitMessage/date"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rebel_core.ecore#//CommitMessage/person"/>
     </genClasses>
     <genClasses ecoreClass="rebel_core.ecore#//Person">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Person/name"/>
@@ -295,16 +295,18 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//ATDEffect/description"/>
     </genClasses>
     <genClasses ecoreClass="rebel_core.ecore#//MessageLog">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rebel_core.ecore#//MessageLog/messages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rebel_core.ecore#//MessageLog/msgLogMessages"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//MessageLog/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//MessageLog/creationDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//MessageLog/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//MessageLog/id"/>
     </genClasses>
-    <genClasses ecoreClass="rebel_core.ecore#//Message.1">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Message.1/text"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Message.1/timestamp"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Message.1/sentBy"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Message.1/receivedBy"/>
+    <genClasses ecoreClass="rebel_core.ecore#//ChatEmailMessage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//ChatEmailMessage/text"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//ChatEmailMessage/timestamp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//ChatEmailMessage/sentBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//ChatEmailMessage/receivedBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//ChatEmailMessage/id"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

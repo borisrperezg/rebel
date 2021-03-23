@@ -602,6 +602,28 @@ app.controller('RebelController', function($http, $scope, $sce, $location){
 	    });
     }
     
+    this.goIdentify = function(item){
+    	
+    	console.log("Doing changes")
+    	
+    	var ctrler = this;
+    	
+    	// Obtener nombre proyecto
+    	var projectName = document.getElementById("pname").value;
+    	var nameBOI = item; 
+    	
+    	this.ruta = 'http://localhost:8080/rebelapi/rest/rebel/identifycandidates/'+projectName+'&'+nameBOI;
+    	
+    	$http.get(ctrler.ruta).then(function(response) {
+			if(response.data=='NOK')
+				window.alert('An error occurred: '+response.data);
+			else{
+				window.alert('Searching for ATD candidates');
+				$window.location.reload();
+			}
+	    });
+    }
+    
     this.goTraining = function(){
     	
     	var ctrler = this;
@@ -618,7 +640,7 @@ app.controller('RebelController', function($http, $scope, $sce, $location){
 			window.alert("Please select a view before training")
 		}else{
     	
-	    	this.ruta = 'http://localhost:8080/rebelapi/rest/rebel/gotraining/'+proj+'&'+boi+'&'+viewTemporalName;;
+	    	this.ruta = 'http://localhost:8080/rebelapi/rest/rebel/gotraining/'+proj+'&'+boi+'&'+viewTemporalName;
 	    	
 	    	$http.get(ctrler.ruta).then(function(response) {
 				if(response.data=='NOK')

@@ -19,6 +19,16 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum ACTIONTYPE implements Enumerator {
 	/**
+	 * The '<em><b>NONE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NONE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	NONE(0, "NONE", "NONE"),
+
+	/**
 	 * The '<em><b>COMMIT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -26,7 +36,18 @@ public enum ACTIONTYPE implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	COMMIT(0, "COMMIT", "COMMIT");
+	COMMIT(1, "COMMIT", "COMMIT");
+
+	/**
+	 * The '<em><b>NONE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NONE
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NONE_VALUE = 0;
 
 	/**
 	 * The '<em><b>COMMIT</b></em>' literal value.
@@ -37,7 +58,7 @@ public enum ACTIONTYPE implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int COMMIT_VALUE = 0;
+	public static final int COMMIT_VALUE = 1;
 
 	/**
 	 * An array of all the '<em><b>ACTIONTYPE</b></em>' enumerators.
@@ -45,7 +66,7 @@ public enum ACTIONTYPE implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final ACTIONTYPE[] VALUES_ARRAY = new ACTIONTYPE[] { COMMIT, };
+	private static final ACTIONTYPE[] VALUES_ARRAY = new ACTIONTYPE[] { NONE, COMMIT, };
 
 	/**
 	 * A public read-only list of all the '<em><b>ACTIONTYPE</b></em>' enumerators.
@@ -101,6 +122,8 @@ public enum ACTIONTYPE implements Enumerator {
 	 */
 	public static ACTIONTYPE get(int value) {
 		switch (value) {
+		case NONE_VALUE:
+			return NONE;
 		case COMMIT_VALUE:
 			return COMMIT;
 		}

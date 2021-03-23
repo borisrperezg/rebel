@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import rebel_architecturaldecisions.Rebel_architecturaldecisionsPackage;
+import rebel_chatlogs.Rebel_chatlogsPackage;
 import rebel_componentandconnector.Rebel_componentandconnectorPackage;
 import rebel_github.Rebel_githubPackage;
 
@@ -89,6 +90,20 @@ public class Util {
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource resource = resSet.getResource(URI.createURI(xmlRoute), true);
 		rebel_github.Project project = (rebel_github.Project) resource.getContents().get(0);
+
+		return project;
+	}
+	
+	public static rebel_chatlogs.Project buildModelRebelChatLogs(String xmlRoute) throws Exception {
+
+		Rebel_chatlogsPackage.eINSTANCE.eClass();
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m = reg.getExtensionToFactoryMap();
+		m.put("rebel_chatlogs", new XMIResourceFactoryImpl());
+
+		ResourceSet resSet = new ResourceSetImpl();
+		Resource resource = resSet.getResource(URI.createURI(xmlRoute), true);
+		rebel_chatlogs.Project project = (rebel_chatlogs.Project) resource.getContents().get(0);
 
 		return project;
 	}

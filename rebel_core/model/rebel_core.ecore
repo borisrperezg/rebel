@@ -13,12 +13,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="message" upperBound="-1"
-        eType="#//Message"/>
+        eType="#//CommitMessage"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="view" upperBound="-1" eType="#//ArchimateView"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="fact" eType="#//Fact"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="atditem" upperBound="-1"
         eType="#//ATDItem" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="messagelog" eType="#//MessageLog"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="messagelogs" upperBound="-1"
+        eType="#//MessageLog"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Project">
     <eStructuralFeatures xsi:type="ecore:EReference" name="blockofinterest" upperBound="-1"
@@ -29,8 +30,8 @@
         eType="#//FunctionalView" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="decisions" upperBound="-1"
         eType="#//Decision" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="message" upperBound="-1"
-        eType="#//Message" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commitMessages" upperBound="-1"
+        eType="#//CommitMessage" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="person" upperBound="-1"
         eType="#//Person" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelingDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
@@ -197,7 +198,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Alternative">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Message">
+  <eClassifiers xsi:type="ecore:EClass" name="CommitMessage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="subject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="footer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="scope" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -225,7 +226,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="message" upperBound="-1"
-        eType="#//Message" eOpposite="#//Message/person"/>
+        eType="#//CommitMessage" eOpposite="#//CommitMessage/person"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="RELATIONTYPE">
     <eLiterals name="NONE"/>
@@ -313,17 +314,19 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MessageLog">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="messages" upperBound="-1"
-        eType="#//Message.1" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="msgLogMessages" upperBound="-1"
+        eType="#//ChatEmailMessage" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//MessageLogType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="creationDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Message">
+  <eClassifiers xsi:type="ecore:EClass" name="ChatEmailMessage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sentBy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="receivedBy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MessageLogType">
     <eLiterals name="NONE"/>

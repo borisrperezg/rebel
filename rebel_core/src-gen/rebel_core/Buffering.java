@@ -27,19 +27,21 @@ public enum Buffering implements Enumerator {
 	 * @ordered
 	 */
 	NONE(0, "NONE", "NONE"),
+
 	/**
 	 * The '<em><b>UNBUFFERED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #UNBUFFERED_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	UNBUFFERED(1, "UNBUFFERED", "UNBUFFERED"),
+
 	/**
 	 * The '<em><b>BUFFERED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #BUFFERED_VALUE
 	 * @generated
 	 * @ordered

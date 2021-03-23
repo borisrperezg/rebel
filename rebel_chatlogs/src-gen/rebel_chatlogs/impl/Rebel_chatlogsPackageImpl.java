@@ -172,6 +172,16 @@ public class Rebel_chatlogsPackageImpl extends EPackageImpl implements Rebel_cha
 	 * @generated
 	 */
 	@Override
+	public EAttribute getMessageLog_Id() {
+		return (EAttribute) messageLogEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getMessage() {
 		return messageEClass;
 	}
@@ -184,6 +194,16 @@ public class Rebel_chatlogsPackageImpl extends EPackageImpl implements Rebel_cha
 	@Override
 	public EAttribute getMessage_ReceivedBy() {
 		return (EAttribute) messageEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMessage_Id() {
+		return (EAttribute) messageEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -291,12 +311,14 @@ public class Rebel_chatlogsPackageImpl extends EPackageImpl implements Rebel_cha
 		createEAttribute(messageLogEClass, MESSAGE_LOG__TYPE);
 		createEAttribute(messageLogEClass, MESSAGE_LOG__CREATION);
 		createEAttribute(messageLogEClass, MESSAGE_LOG__TITLE);
+		createEAttribute(messageLogEClass, MESSAGE_LOG__ID);
 
 		messageEClass = createEClass(MESSAGE);
 		createEAttribute(messageEClass, MESSAGE__TEXT);
 		createEAttribute(messageEClass, MESSAGE__TIMESTAMP);
 		createEAttribute(messageEClass, MESSAGE__SENT_BY);
 		createEAttribute(messageEClass, MESSAGE__RECEIVED_BY);
+		createEAttribute(messageEClass, MESSAGE__ID);
 
 		projectEClass = createEClass(PROJECT);
 		createEReference(projectEClass, PROJECT__MESSAGELOGS);
@@ -348,6 +370,8 @@ public class Rebel_chatlogsPackageImpl extends EPackageImpl implements Rebel_cha
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMessageLog_Title(), ecorePackage.getEString(), "title", null, 0, 1, MessageLog.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMessageLog_Id(), ecorePackage.getEString(), "id", null, 0, 1, MessageLog.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMessage_Text(), ecorePackage.getEString(), "text", null, 0, 1, Message.class, !IS_TRANSIENT,
@@ -358,6 +382,8 @@ public class Rebel_chatlogsPackageImpl extends EPackageImpl implements Rebel_cha
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMessage_ReceivedBy(), ecorePackage.getEString(), "receivedBy", null, 0, 1, Message.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMessage_Id(), ecorePackage.getEString(), "id", null, 0, 1, Message.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(projectEClass, Project.class, "Project", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProject_Messagelogs(), this.getMessageLog(), null, "messagelogs", null, 0, -1, Project.class,

@@ -1,6 +1,7 @@
 package uniandes.rebelapi.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -18,6 +19,7 @@ import uniandes.rebelapi.bo.APIView;
 import uniandes.rebelapi.bo.Model;
 import uniandes.rebelapi.bo.Project;
 import uniandes.rebelapi.mediator.DerbyDBMediator;
+import uniandes.rebelapi.mediator.IdentificationMediator;
 import uniandes.rebelapi.mediator.ModelMediator;
 import uniandes.rebelapi.mediator.RebelMediator;
 import uniandes.rebelapi.mediator.TrainingMediator;
@@ -38,6 +40,35 @@ public class RebelAPIService {
 		
 		try {
 			resp = (new TrainingMediator()).trainingModel(params); 
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return resp;
+	}
+	
+	/**
+	 * 
+	 * @param filtro
+	 * @return
+	 */
+	@Path("identifycandidates/{params}")
+	@GET
+	@Produces("text/plain")
+	public String identifyATDCandidates(@PathParam("params") String params) {
+		String resp = "NOK";
+		
+		String hora = ""+Calendar.getInstance().get(Calendar.HOUR);
+		String minuto = ""+Calendar.getInstance().get(Calendar.MINUTE);
+		String segundo = ""+Calendar.getInstance().get(Calendar.SECOND);
+		String milisegundo = ""+Calendar.getInstance().get(Calendar.MILLISECOND);
+		
+		String time = hora+":"+minuto+":"+segundo+"."+milisegundo;
+		
+		System.out.println("Service.identifyATDCandidates ::: Start java time: "+time);
+		
+		try {
+			resp = (new IdentificationMediator()).prepareDatasetToClassify(params); 
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

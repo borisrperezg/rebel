@@ -36,6 +36,7 @@ import rebel_chatlogs.Rebel_chatlogsPackage;
  *   <li>{@link rebel_chatlogs.impl.MessageLogImpl#getType <em>Type</em>}</li>
  *   <li>{@link rebel_chatlogs.impl.MessageLogImpl#getCreation <em>Creation</em>}</li>
  *   <li>{@link rebel_chatlogs.impl.MessageLogImpl#getTitle <em>Title</em>}</li>
+ *   <li>{@link rebel_chatlogs.impl.MessageLogImpl#getId <em>Id</em>}</li>
  * </ul>
  *
  * @generated
@@ -110,6 +111,26 @@ public class MessageLogImpl extends MinimalEObjectImpl.Container implements Mess
 	 * @ordered
 	 */
 	protected String title = TITLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -222,6 +243,29 @@ public class MessageLogImpl extends MinimalEObjectImpl.Container implements Mess
 	 * @generated
 	 */
 	@Override
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Rebel_chatlogsPackage.MESSAGE_LOG__ID, oldId, id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case Rebel_chatlogsPackage.MESSAGE_LOG__MESSAGES:
@@ -246,6 +290,8 @@ public class MessageLogImpl extends MinimalEObjectImpl.Container implements Mess
 			return getCreation();
 		case Rebel_chatlogsPackage.MESSAGE_LOG__TITLE:
 			return getTitle();
+		case Rebel_chatlogsPackage.MESSAGE_LOG__ID:
+			return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -272,6 +318,9 @@ public class MessageLogImpl extends MinimalEObjectImpl.Container implements Mess
 		case Rebel_chatlogsPackage.MESSAGE_LOG__TITLE:
 			setTitle((String) newValue);
 			return;
+		case Rebel_chatlogsPackage.MESSAGE_LOG__ID:
+			setId((String) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -296,6 +345,9 @@ public class MessageLogImpl extends MinimalEObjectImpl.Container implements Mess
 		case Rebel_chatlogsPackage.MESSAGE_LOG__TITLE:
 			setTitle(TITLE_EDEFAULT);
 			return;
+		case Rebel_chatlogsPackage.MESSAGE_LOG__ID:
+			setId(ID_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -316,6 +368,8 @@ public class MessageLogImpl extends MinimalEObjectImpl.Container implements Mess
 			return CREATION_EDEFAULT == null ? creation != null : !CREATION_EDEFAULT.equals(creation);
 		case Rebel_chatlogsPackage.MESSAGE_LOG__TITLE:
 			return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
+		case Rebel_chatlogsPackage.MESSAGE_LOG__ID:
+			return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -337,6 +391,8 @@ public class MessageLogImpl extends MinimalEObjectImpl.Container implements Mess
 		result.append(creation);
 		result.append(", title: ");
 		result.append(title);
+		result.append(", id: ");
+		result.append(id);
 		result.append(')');
 		return result.toString();
 	}

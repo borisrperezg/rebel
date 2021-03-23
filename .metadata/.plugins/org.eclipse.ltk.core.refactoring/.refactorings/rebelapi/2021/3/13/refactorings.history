@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;TrainingMediator.java&apos; to &apos;rebelapi/src/uniandes.rebelapi.mediator&apos;&#x0A;- Original project: &apos;rebelapi&apos;&#x0A;- Destination element: &apos;rebelapi/src/uniandes.rebelapi.mediator&apos;&#x0A;- Original element: &apos;uniandes.rebelapi.mediator.TrainingMediator.java&apos;" description="Copy compilation unit" destination="/src&lt;uniandes.rebelapi.mediator" element1="/src&lt;uniandes.rebelapi.mediator{TrainingMediator.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1616447740499" units="1" version="1.0"/>
+</session>
