@@ -16,6 +16,7 @@ import uniandes.rebelapi.bo.APIElement;
 import uniandes.rebelapi.bo.APIFact;
 import uniandes.rebelapi.bo.APIModelElement;
 import uniandes.rebelapi.bo.APIView;
+import uniandes.rebelapi.bo.ATDItemBO;
 import uniandes.rebelapi.bo.Model;
 import uniandes.rebelapi.bo.Project;
 import uniandes.rebelapi.mediator.DerbyDBMediator;
@@ -26,6 +27,27 @@ import uniandes.rebelapi.mediator.TrainingMediator;
 
 @Path("rebel")
 public class RebelAPIService {
+	
+	/**
+	 * Este metodo se usa en WhyATD para mostrar la informacion
+	 * almacenada respecto al item.
+	 * @param params
+	 */
+	@Path("getATDItemData/{params}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public ATDItemBO getATDItemData(@PathParam("params") String params) {
+		ATDItemBO resp = null;
+		
+		try {
+			resp = (new IdentificationMediator()).getATDItemData(params); 
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return resp;
+	}
+	
 	
 	/**
 	 * 

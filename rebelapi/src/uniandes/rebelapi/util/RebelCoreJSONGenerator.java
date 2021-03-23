@@ -688,9 +688,11 @@ public class RebelCoreJSONGenerator {
 						if(f.getAtditem()!=null && f.getAtditem().size()>0) {
 							if(f.getAtditem().get(0).isIdentifyByArchitect()) {
 								String content = "&nbsp;ATD item - Type: "+f.getAtditem().get(0).getType()+" - Compromised QA: "+f.getAtditem().get(0).getCompromisedQA()+"&nbsp;";
-								buttonJustify = "<a onclick=\"window.open('whyatd.html?b="+boi.getName()+"&p="+project.getName()+"&i="+f.getId()+"&t="+actionAndType+"&d="+name+"', '_blank', 'location=no,height=680,width=870,scrollbars=yes,status=yes');\"><img src=\"images/atdflagleft.png\"/>"+content+"<img src=\"images/atdflagright.png\"/></a>";
-							}else
-								buttonJustify = "<a onclick=\"window.open('whyatd.html?b="+boi.getName()+"&p="+project.getName()+"&i="+f.getId()+"&t="+actionAndType+"&d="+name+"', '_blank', 'location=no,height=680,width=870,scrollbars=yes,status=yes');\"><img src=\"images/atdflagleft.png\"/>&nbsp;ATD candidate item&nbsp;<img src=\"images/atdflagright.png\"/></a>";
+								buttonJustify = "<a onclick=\"window.open('whyatd_filled.html?b="+boi.getName()+"&p="+project.getName()+"&i="+f.getId()+"&t="+actionAndType+"&d="+name+"', '_blank', 'location=no,height=680,width=870,scrollbars=yes,status=yes');\"><img src=\"images/atdflagleft.png\"/>"+content+"<img src=\"images/atdflagright.png\"/></a>";
+							}else {
+								String content = "&nbsp;Candidate ATD item - Type: "+f.getAtditem().get(0).getType()+" - Compromised QA: "+f.getAtditem().get(0).getCompromisedQA()+"&nbsp;";
+								buttonJustify = "<a onclick=\"window.open('whyatd_filled.html?b="+boi.getName()+"&p="+project.getName()+"&i="+f.getId()+"&t="+actionAndType+"&d="+name+"', '_blank', 'location=no,height=680,width=870,scrollbars=yes,status=yes');\"><img src=\"images/atdflagleft.png\"/>"+content+"<img src=\"images/atdflagright.png\"/></a>";
+							}
 						}else
 							buttonJustify = "<a onclick=\"window.open('whyatd.html?b="+boi.getName()+"&p="+project.getName()+"&i="+f.getId()+"&t="+actionAndType+"&d="+name+"', '_blank', 'location=no,height=680,width=870,scrollbars=yes,status=yes');\">Why ATD?</a>";
 						

@@ -1,0 +1,83 @@
+package uniandes.rebelapi.mediator;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+public class IdentificationMediatorExecutor {
+
+	final String DATAFILECLASSIFIED = "/Users/borisperezg/rebelmodels_storing/datasets_classified/";
+
+	// ******************************************
+	// ESPACIO PARA VINCULAR CSV A REBEL_CORE
+	// ******************************************
+
+	/**
+	 * Este metodo main se usa con el unico proposito de leer el csv generado por
+	 * los Notebook, y crear las instancias correspondientes para el Fact
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		// ************************************
+		// VARIABLES DE CONFIGURACION
+		// ************************************
+		String csvFileName = "facts_prediction_dataset_1616475851518_done.csv";
+		String projectName = "";
+		String boiName = "";
+
+		IdentificationMediatorExecutor me = new IdentificationMediatorExecutor();
+
+		ArrayList<String> lines = me.readCSV(csvFileName);
+
+		if (lines.size() > 0) {
+			for (String sLine : lines) {
+				String[] fields = sLine.split(Pattern.quote(","));
+				me.linkATDToFact(fields);
+			}
+		}
+
+		// Leerlo y extraer en un Hash. Llave: el FactId, Valor: La info del ATD. Crear
+		// una clase para eso.
+	}
+
+	/**
+	 * 
+	 * @param fields Recibe la informacion del fact (pos 0), la deuda (pos 1) y el
+	 *               qa afectado (pos 2).
+	 */
+	private void linkATDToFact(String[] fields) {
+
+	}
+
+	/**
+	 * Este metodo se usa para leer el csv que se construye luego de ejecutar los
+	 * notebooks. Se encarga de extraer cada una de las lineas para guardarlas en
+	 * una lista.
+	 * 
+	 * @param csvFileName Nombre del archivo, incluida la extension.
+	 * @return
+	 */
+	private ArrayList<String> readCSV(String csvFileName) {
+
+		ArrayList<String> lines = new ArrayList<String>();
+
+		File myObj = new File(DATAFILECLASSIFIED + csvFileName);
+
+		try {
+			Scanner myReader = new Scanner(myObj);
+			while (myReader.hasNextLine()) {
+				String data = myReader.nextLine();
+				lines.add(data);
+			}
+			myReader.close();
+		} catch (Exception e) {
+			System.err.println("Se presento un error abriendo el CSV de facts clasificados: " + e.getMessage());
+		}
+
+		return lines;
+	}
+
+}

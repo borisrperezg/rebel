@@ -2,6 +2,24 @@ package uniandes.rebelapi.bo;
 
 public class ATDItemBO {
 
+	private String compromisedQA, type;
+	
+	public String getCompromisedQA() {
+		return compromisedQA;
+	}
+
+	public void setCompromisedQA(String compromisedQA) {
+		this.compromisedQA = compromisedQA;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	private String rationale, benefit;
 
 	public String getRationale() {

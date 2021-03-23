@@ -218,6 +218,53 @@ app.controller('RebelController', function($http, $scope, $sce, $location){
     };
     
     // ************************************************************
+    // Se usa desde WhyATD_filled.html y desencadena varias invocaciones 
+    // para llenar los combos.
+    // ************************************************************
+    this.listFactsFromCnC_filled = function(){
+        
+    	var ctrler = this;
+    	
+    	var boiName = document.getElementById("boiname").value;
+    	
+    	var projectName = document.getElementById("projname").value;
+    	
+    	this.ruta = 'http://localhost:8080/rebelapi/rest/rebel/listcncfacts/p='+projectName+'&b='+boiName;
+    	
+		$http.get(ctrler.ruta).then(function(response) {
+	    	ctrler.facts = response.data;
+	    });
+		
+		// ---------------------------------------------- 
+		// Se extraen los valores de la url para generar 
+		// la consulta y traer el resto de datos
+		// ----------------------------------------------
+		
+		var boiNameFU = getUrlParameter('b');
+		var projectNameFU = getUrlParameter('p');
+		var factIdFU = getUrlParameter('i');
+		
+		this.ruta = 'http://localhost:8080/rebelapi/rest/rebel/getATDItemData/'+projectNameFU+'&'+boiNameFU+'&'+factIdFU;
+    	
+		$http.get(ctrler.ruta).then(function(response) {
+			document.getElementById('compromisedqatext').value = response.data.compromisedQA;
+			document.getElementById('atdcausetypetext').value = response.data.type;
+			document.getElementById('justify').value = response.data.rationale;
+			document.getElementById('benefits').value = response.data.benefit;
+			
+			
+			console.log(response.data.type);
+	    });
+		
+		// ----------------------------------------------
+		// Se realizan las demas consultas encadenadas
+		// ----------------------------------------------
+		this.listQAs();
+		
+    	
+    };
+    
+    // ************************************************************
     // Se usa desde WhyATD.html y desencadena varias invocaciones 
     // para llenar los combos.
     // ************************************************************
@@ -235,6 +282,9 @@ app.controller('RebelController', function($http, $scope, $sce, $location){
 	    	ctrler.facts = response.data;
 	    });
 		
+		// ----------------------------------------------
+		// Se realizan las demas consultas encadenadas
+		// ----------------------------------------------
 		this.listQAs();
 		
     	
@@ -563,7 +613,7 @@ app.controller('RebelController', function($http, $scope, $sce, $location){
     	
     	this.ruta = 'http://localhost:8080/rebelapi/rest/rebel/getdriverandgoal/'+proj+'&'+boi;
     	$http.get(ctrler.ruta).then(function(response) {
-    		console.log(response.data)
+//    		console.log(response.data)
 			var resultado = response.data.toString();
 			var res = resultado.split("|");
 			document.getElementById('driver').value = res[0];
@@ -619,7 +669,7 @@ app.controller('RebelController', function($http, $scope, $sce, $location){
 				window.alert('An error occurred: '+response.data);
 			else{
 				window.alert('Searching for ATD candidates');
-				$window.location.reload();
+//				$window.location.reload();
 			}
 	    });
     }
