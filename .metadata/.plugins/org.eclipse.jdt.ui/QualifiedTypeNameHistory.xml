@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="rebel_core.ArchimateView"/>
-<fullyQualifiedTypeName name="java.io.FileInputStream"/>
-<fullyQualifiedTypeName name="org.apache.poi.xssf.usermodel.XSSFWorkbook"/>
 <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Workbook"/>
 <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Sheet"/>
 <fullyQualifiedTypeName name="excel.ProcesarAgregados"/>
 <fullyQualifiedTypeName name="uniandes.rebelapi.mediator.ModelMediator"/>
-<fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="uniandes.rebelapi.bo.APIFact"/>
 <fullyQualifiedTypeName name="rebel_core.Port"/>
 <fullyQualifiedTypeName name="rebel_core.PortType"/>
@@ -17,9 +13,6 @@
 <fullyQualifiedTypeName name="rebel_componentandconnector.Rebel_componentandconnectorFactory"/>
 <fullyQualifiedTypeName name="rebel_componentandconnector.Rebel_componentandconnectorPackage"/>
 <fullyQualifiedTypeName name="uniandes.rebelapi.service.RebelAPIService"/>
-<fullyQualifiedTypeName name="rebel_core.Fact"/>
-<fullyQualifiedTypeName name="rebel_core.ATDItem"/>
-<fullyQualifiedTypeName name="uniandes.rebelapi.bo.ATDItemBO"/>
 <fullyQualifiedTypeName name="uniandes.rebelapi.mediator.RebelMediator"/>
 <fullyQualifiedTypeName name="rebel_core.ATDCause"/>
 <fullyQualifiedTypeName name="rebel_core.ATDEffect"/>
@@ -39,7 +32,6 @@
 <fullyQualifiedTypeName name="rebel_core.NotificationModel"/>
 <fullyQualifiedTypeName name="rebel_core.Buffering"/>
 <fullyQualifiedTypeName name="rebel_core.Throughput"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="rebel_chatlogs.MessageLogType"/>
 <fullyQualifiedTypeName name="rebel_chatlogs.Message"/>
 <fullyQualifiedTypeName name="rebel_chatlogs.MessageLog"/>
@@ -54,10 +46,18 @@
 <fullyQualifiedTypeName name="uniandes.rebelapi.util.AsynchronousSearch"/>
 <fullyQualifiedTypeName name="rebel_core.MessageLogType"/>
 <fullyQualifiedTypeName name="rebel_core.Project"/>
-<fullyQualifiedTypeName name="rebel_core.BlockOfInterest"/>
 <fullyQualifiedTypeName name="rebel_core.CommitMessage"/>
 <fullyQualifiedTypeName name="rebel_core.Decision"/>
 <fullyQualifiedTypeName name="rebel_core.MessageLog"/>
 <fullyQualifiedTypeName name="rebel_core.ChatEmailMessage"/>
+<fullyQualifiedTypeName name="rebel_core.ArchimateView"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="uniandes.rebelapi.mediator.IdentificationMediator"/>
+<fullyQualifiedTypeName name="java.util.regex.Pattern"/>
+<fullyQualifiedTypeName name="rebel_core.BlockOfInterest"/>
+<fullyQualifiedTypeName name="rebel_core.Fact"/>
+<fullyQualifiedTypeName name="rebel_core.ATDItem"/>
 <fullyQualifiedTypeName name="java.util.Calendar"/>
+<fullyQualifiedTypeName name="uniandes.rebelapi.bo.ATDItemBO"/>
 </qualifiedTypeNameHistroy>

@@ -386,7 +386,7 @@ public class TrainingMediator {
 		// La ruta esta en la variable DATAFILESFOLDER
 		if(writeInputFile(fileName, finalFileContent) ) {
 			
-			resp = "OK";
+			resp = "The training dataset was generated and sent for model training.";
 		}
 		
 

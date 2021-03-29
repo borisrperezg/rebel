@@ -2314,13 +2314,22 @@ public interface Rebel_corePackage extends EPackage {
 	int ELEMENT__THROUGHPUT = 13;
 
 	/**
+	 * The feature id for the '<em><b>Application Service Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT__APPLICATION_SERVICE_TYPE = 14;
+
+	/**
 	 * The number of structural features of the '<em>Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_FEATURE_COUNT = 14;
+	int ELEMENT_FEATURE_COUNT = 15;
 
 	/**
 	 * The number of operations of the '<em>Element</em>' class.
@@ -2929,6 +2938,16 @@ public interface Rebel_corePackage extends EPackage {
 	 * @generated
 	 */
 	int MESSAGE_LOG_TYPE = 46;
+
+	/**
+	 * The meta object id for the '{@link rebel_core.APPLICATIONSERVICETYPE <em>APPLICATIONSERVICETYPE</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rebel_core.APPLICATIONSERVICETYPE
+	 * @see rebel_core.impl.Rebel_corePackageImpl#getAPPLICATIONSERVICETYPE()
+	 * @generated
+	 */
+	int APPLICATIONSERVICETYPE = 47;
 
 	/**
 	 * Returns the meta object for class '{@link rebel_core.Fact <em>Fact</em>}'.
@@ -4337,6 +4356,17 @@ public interface Rebel_corePackage extends EPackage {
 	EAttribute getElement_Throughput();
 
 	/**
+	 * Returns the meta object for the attribute '{@link rebel_core.Element#getApplicationServiceType <em>Application Service Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Application Service Type</em>'.
+	 * @see rebel_core.Element#getApplicationServiceType()
+	 * @see #getElement()
+	 * @generated
+	 */
+	EAttribute getElement_ApplicationServiceType();
+
+	/**
 	 * Returns the meta object for class '{@link rebel_core.ArchimateView <em>Archimate View</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4862,6 +4892,16 @@ public interface Rebel_corePackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getMessageLogType();
+
+	/**
+	 * Returns the meta object for enum '{@link rebel_core.APPLICATIONSERVICETYPE <em>APPLICATIONSERVICETYPE</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>APPLICATIONSERVICETYPE</em>'.
+	 * @see rebel_core.APPLICATIONSERVICETYPE
+	 * @generated
+	 */
+	EEnum getAPPLICATIONSERVICETYPE();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -5975,6 +6015,14 @@ public interface Rebel_corePackage extends EPackage {
 		EAttribute ELEMENT__THROUGHPUT = eINSTANCE.getElement_Throughput();
 
 		/**
+		 * The meta object literal for the '<em><b>Application Service Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ELEMENT__APPLICATION_SERVICE_TYPE = eINSTANCE.getElement_ApplicationServiceType();
+
+		/**
 		 * The meta object literal for the '{@link rebel_core.impl.ArchimateViewImpl <em>Archimate View</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6419,6 +6467,16 @@ public interface Rebel_corePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum MESSAGE_LOG_TYPE = eINSTANCE.getMessageLogType();
+
+		/**
+		 * The meta object literal for the '{@link rebel_core.APPLICATIONSERVICETYPE <em>APPLICATIONSERVICETYPE</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rebel_core.APPLICATIONSERVICETYPE
+		 * @see rebel_core.impl.Rebel_corePackageImpl#getAPPLICATIONSERVICETYPE()
+		 * @generated
+		 */
+		EEnum APPLICATIONSERVICETYPE = eINSTANCE.getAPPLICATIONSERVICETYPE();
 
 	}
 

@@ -119,6 +119,11 @@
       <genEnumLiterals ecoreEnumLiteral="rebel_core.ecore#//MessageLogType/EMAIL"/>
       <genEnumLiterals ecoreEnumLiteral="rebel_core.ecore#//MessageLogType/CHATLOG"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rebel_core.ecore#//APPLICATIONSERVICETYPE">
+      <genEnumLiterals ecoreEnumLiteral="rebel_core.ecore#//APPLICATIONSERVICETYPE/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="rebel_core.ecore#//APPLICATIONSERVICETYPE/EVENT"/>
+      <genEnumLiterals ecoreEnumLiteral="rebel_core.ecore#//APPLICATIONSERVICETYPE/PROCEDURE_CALL"/>
+    </genEnums>
     <genClasses ecoreClass="rebel_core.ecore#//Fact">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Fact/date"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Fact/action"/>
@@ -266,6 +271,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Element/notification"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Element/buffering"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Element/throughput"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_core.ecore#//Element/applicationServiceType"/>
     </genClasses>
     <genClasses ecoreClass="rebel_core.ecore#//ArchimateView">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rebel_core.ecore#//ArchimateView/relation"/>

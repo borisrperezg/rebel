@@ -393,6 +393,13 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	private EEnum messageLogTypeEEnum = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum applicationservicetypeEEnum = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -1762,6 +1769,16 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
+	public EAttribute getElement_ApplicationServiceType() {
+		return (EAttribute) elementEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getArchimateView() {
 		return archimateViewEClass;
 	}
@@ -2262,6 +2279,16 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 	 * @generated
 	 */
 	@Override
+	public EEnum getAPPLICATIONSERVICETYPE() {
+		return applicationservicetypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Rebel_coreFactory getRebel_coreFactory() {
 		return (Rebel_coreFactory) getEFactoryInstance();
 	}
@@ -2439,6 +2466,7 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 		createEAttribute(elementEClass, ELEMENT__NOTIFICATION);
 		createEAttribute(elementEClass, ELEMENT__BUFFERING);
 		createEAttribute(elementEClass, ELEMENT__THROUGHPUT);
+		createEAttribute(elementEClass, ELEMENT__APPLICATION_SERVICE_TYPE);
 
 		archimateViewEClass = createEClass(ARCHIMATE_VIEW);
 		createEReference(archimateViewEClass, ARCHIMATE_VIEW__RELATION);
@@ -2498,6 +2526,7 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 		relationtypeEEnum = createEEnum(RELATIONTYPE);
 		elementtypeEEnum = createEEnum(ELEMENTTYPE);
 		messageLogTypeEEnum = createEEnum(MESSAGE_LOG_TYPE);
+		applicationservicetypeEEnum = createEEnum(APPLICATIONSERVICETYPE);
 	}
 
 	/**
@@ -2851,6 +2880,9 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getElement_Throughput(), this.getThroughput(), "throughput", null, 0, 1, Element.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getElement_ApplicationServiceType(), this.getAPPLICATIONSERVICETYPE(), "applicationServiceType",
+				null, 0, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(archimateViewEClass, ArchimateView.class, "ArchimateView", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -3052,6 +3084,11 @@ public class Rebel_corePackageImpl extends EPackageImpl implements Rebel_corePac
 		addEEnumLiteral(messageLogTypeEEnum, MessageLogType.NONE);
 		addEEnumLiteral(messageLogTypeEEnum, MessageLogType.EMAIL);
 		addEEnumLiteral(messageLogTypeEEnum, MessageLogType.CHATLOG);
+
+		initEEnum(applicationservicetypeEEnum, rebel_core.APPLICATIONSERVICETYPE.class, "APPLICATIONSERVICETYPE");
+		addEEnumLiteral(applicationservicetypeEEnum, rebel_core.APPLICATIONSERVICETYPE.NONE);
+		addEEnumLiteral(applicationservicetypeEEnum, rebel_core.APPLICATIONSERVICETYPE.EVENT);
+		addEEnumLiteral(applicationservicetypeEEnum, rebel_core.APPLICATIONSERVICETYPE.PROCEDURE_CALL);
 
 		// Create resource
 		createResource(eNS_URI);

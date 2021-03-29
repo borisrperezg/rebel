@@ -164,6 +164,8 @@ public class Rebel_coreFactoryImpl extends EFactoryImpl implements Rebel_coreFac
 			return createELEMENTTYPEFromString(eDataType, initialValue);
 		case Rebel_corePackage.MESSAGE_LOG_TYPE:
 			return createMessageLogTypeFromString(eDataType, initialValue);
+		case Rebel_corePackage.APPLICATIONSERVICETYPE:
+			return createAPPLICATIONSERVICETYPEFromString(eDataType, initialValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -209,6 +211,8 @@ public class Rebel_coreFactoryImpl extends EFactoryImpl implements Rebel_coreFac
 			return convertELEMENTTYPEToString(eDataType, instanceValue);
 		case Rebel_corePackage.MESSAGE_LOG_TYPE:
 			return convertMessageLogTypeToString(eDataType, instanceValue);
+		case Rebel_corePackage.APPLICATIONSERVICETYPE:
+			return convertAPPLICATIONSERVICETYPEToString(eDataType, instanceValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -904,6 +908,28 @@ public class Rebel_coreFactoryImpl extends EFactoryImpl implements Rebel_coreFac
 	 * @generated
 	 */
 	public String convertMessageLogTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public APPLICATIONSERVICETYPE createAPPLICATIONSERVICETYPEFromString(EDataType eDataType, String initialValue) {
+		APPLICATIONSERVICETYPE result = APPLICATIONSERVICETYPE.get(initialValue);
+		if (result == null)
+			throw new IllegalArgumentException(
+					"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertAPPLICATIONSERVICETYPEToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

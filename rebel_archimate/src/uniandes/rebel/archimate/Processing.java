@@ -13,6 +13,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import rebel_archimate.APPLICATIONSERVICETYPE;
 import rebel_archimate.Buffering;
 import rebel_archimate.DeliveryModel;
 import rebel_archimate.ELEMENTTYPE;
@@ -322,6 +323,7 @@ public class Processing {
 		
 		int posX = 0, posY = 0;
 		int width = 0, height = 0;
+		String type = "";
 		
 		// Se obtiene el Bounds para sacar las dimensiones y posición
 		NodeList boundNodes = childrenElement.getElementsByTagName("bounds");
@@ -329,11 +331,12 @@ public class Processing {
 		if(boundNodes!=null) {
 			Node boundNode = boundNodes.item(0);
 			
-//			System.out.println("boundNode = "+boundNode);
 			
 			Element boundElement = (Element) boundNode;
-			
-//			System.out.println("boundElement = "+boundElement);
+
+			// Propiedad type en elemento de archimate correspondera en realidad al tipo 
+			// de application_service. Por ejemplo, para establecer si un service es Procedure Call o Event.
+			type = boundElement.getAttribute("type")!=null?boundElement.getAttribute("type").toLowerCase():"";
 			
 			posX = boundElement.getAttribute("x")!=null?Integer.parseInt(boundElement.getAttribute("x")):0;
 			posY = boundElement.getAttribute("y")!=null?Integer.parseInt(boundElement.getAttribute("y")):0;
@@ -353,6 +356,12 @@ public class Processing {
 		
 		archiRebelElement.setId(amElement.getId());
 		archiRebelElement.setType(getElementType(amElement.getType()));
+		
+		if(type.contentEquals("event"))
+			archiRebelElement.setApplicationServiceType(APPLICATIONSERVICETYPE.EVENT);
+		else if(type.contentEquals("procedure call"))
+			archiRebelElement.setApplicationServiceType(APPLICATIONSERVICETYPE.PROCEDURE_CALL);
+		
 		if(xPadre>0) {
 			archiRebelElement.setPosX(posX+xPadre);
 			archiRebelElement.setPosY(posY+yPadre);
@@ -365,6 +374,8 @@ public class Processing {
 		
 		return archiRebelElement;
 	}
+	
+	
 	
 	/**
 	 * Este metodo se encarga de procesar las propiedades de los elementos tipo Service.

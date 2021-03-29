@@ -67,6 +67,11 @@
       <genEnumLiterals ecoreEnumLiteral="rebel_archimate.ecore#//NotificationModel/CENTRAL"/>
       <genEnumLiterals ecoreEnumLiteral="rebel_archimate.ecore#//NotificationModel/POLLED"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rebel_archimate.ecore#//APPLICATIONSERVICETYPE">
+      <genEnumLiterals ecoreEnumLiteral="rebel_archimate.ecore#//APPLICATIONSERVICETYPE/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="rebel_archimate.ecore#//APPLICATIONSERVICETYPE/EVENT"/>
+      <genEnumLiterals ecoreEnumLiteral="rebel_archimate.ecore#//APPLICATIONSERVICETYPE/PROCEDURE_CALL"/>
+    </genEnums>
     <genClasses ecoreClass="rebel_archimate.ecore#//Project">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rebel_archimate.ecore#//Project/view"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_archimate.ecore#//Project/name"/>
@@ -93,6 +98,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_archimate.ecore#//Element/notification"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_archimate.ecore#//Element/buffering"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_archimate.ecore#//Element/throughput"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rebel_archimate.ecore#//Element/applicationServiceType"/>
     </genClasses>
     <genClasses ecoreClass="rebel_archimate.ecore#//Relation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rebel_archimate.ecore#//Relation/source"/>

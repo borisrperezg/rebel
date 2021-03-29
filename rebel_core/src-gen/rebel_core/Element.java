@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link rebel_core.Element#getNotification <em>Notification</em>}</li>
  *   <li>{@link rebel_core.Element#getBuffering <em>Buffering</em>}</li>
  *   <li>{@link rebel_core.Element#getThroughput <em>Throughput</em>}</li>
+ *   <li>{@link rebel_core.Element#getApplicationServiceType <em>Application Service Type</em>}</li>
  * </ul>
  *
  * @see rebel_core.Rebel_corePackage#getElement()
@@ -359,5 +360,30 @@ public interface Element extends EObject {
 	 * @generated
 	 */
 	void setThroughput(Throughput value);
+
+	/**
+	 * Returns the value of the '<em><b>Application Service Type</b></em>' attribute.
+	 * The literals are from the enumeration {@link rebel_core.APPLICATIONSERVICETYPE}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Application Service Type</em>' attribute.
+	 * @see rebel_core.APPLICATIONSERVICETYPE
+	 * @see #setApplicationServiceType(APPLICATIONSERVICETYPE)
+	 * @see rebel_core.Rebel_corePackage#getElement_ApplicationServiceType()
+	 * @model
+	 * @generated
+	 */
+	APPLICATIONSERVICETYPE getApplicationServiceType();
+
+	/**
+	 * Sets the value of the '{@link rebel_core.Element#getApplicationServiceType <em>Application Service Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Application Service Type</em>' attribute.
+	 * @see rebel_core.APPLICATIONSERVICETYPE
+	 * @see #getApplicationServiceType()
+	 * @generated
+	 */
+	void setApplicationServiceType(APPLICATIONSERVICETYPE value);
 
 } // Element

@@ -92,6 +92,8 @@ public class Rebel_archimateFactoryImpl extends EFactoryImpl implements Rebel_ar
 			return createThroughputFromString(eDataType, initialValue);
 		case Rebel_archimatePackage.NOTIFICATION_MODEL:
 			return createNotificationModelFromString(eDataType, initialValue);
+		case Rebel_archimatePackage.APPLICATIONSERVICETYPE:
+			return createAPPLICATIONSERVICETYPEFromString(eDataType, initialValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -119,6 +121,8 @@ public class Rebel_archimateFactoryImpl extends EFactoryImpl implements Rebel_ar
 			return convertThroughputToString(eDataType, instanceValue);
 		case Rebel_archimatePackage.NOTIFICATION_MODEL:
 			return convertNotificationModelToString(eDataType, instanceValue);
+		case Rebel_archimatePackage.APPLICATIONSERVICETYPE:
+			return convertAPPLICATIONSERVICETYPEToString(eDataType, instanceValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -315,6 +319,28 @@ public class Rebel_archimateFactoryImpl extends EFactoryImpl implements Rebel_ar
 	 * @generated
 	 */
 	public String convertNotificationModelToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public APPLICATIONSERVICETYPE createAPPLICATIONSERVICETYPEFromString(EDataType eDataType, String initialValue) {
+		APPLICATIONSERVICETYPE result = APPLICATIONSERVICETYPE.get(initialValue);
+		if (result == null)
+			throw new IllegalArgumentException(
+					"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertAPPLICATIONSERVICETYPEToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

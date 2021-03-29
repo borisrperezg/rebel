@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="main"/>
+		<item key="selection" value="uploadPic"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="uploadPic"/>
+			<item value="getUrlParameter"/>
+			<item value="listFactsFromCnC"/>
+			<item value="delete"/>
+			<item value="traini"/>
 			<item value="main"/>
 			<item value="loadhtml"/>
-			<item value="listFactsFromCnC"/>
 			<item value="buildxmi"/>
 			<item value="goTraining"/>
 			<item value="loadBOIViews"/>
@@ -19,16 +23,12 @@
 			<item value="loadModelBOI"/>
 			<item value="loadBOIModelIFrame"/>
 			<item value="createboi"/>
-			<item value="loadIFrameModel"/>
-			<item value="System.out"/>
-			<item value="listelements"/>
-			<item value="showAndListModel"/>
 		</list>
 		<list key="replacehistory">
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="986"/>
+		<item key="DIALOG_X_ORIGIN" value="895"/>
 		<item key="DIALOG_Y_ORIGIN" value="329"/>
 		<item key="DIALOG_WIDTH" value="294"/>
 		<item key="DIALOG_HEIGHT" value="408"/>

@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import rebel_archimate.APPLICATIONSERVICETYPE;
 import rebel_archimate.Buffering;
 import rebel_archimate.DeliveryModel;
 import rebel_archimate.ELEMENTTYPE;
@@ -39,6 +40,7 @@ import rebel_archimate.Throughput;
  *   <li>{@link rebel_archimate.impl.ElementImpl#getNotification <em>Notification</em>}</li>
  *   <li>{@link rebel_archimate.impl.ElementImpl#getBuffering <em>Buffering</em>}</li>
  *   <li>{@link rebel_archimate.impl.ElementImpl#getThroughput <em>Throughput</em>}</li>
+ *   <li>{@link rebel_archimate.impl.ElementImpl#getApplicationServiceType <em>Application Service Type</em>}</li>
  * </ul>
  *
  * @generated
@@ -303,6 +305,26 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	 * @ordered
 	 */
 	protected Throughput throughput = THROUGHPUT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getApplicationServiceType() <em>Application Service Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getApplicationServiceType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final APPLICATIONSERVICETYPE APPLICATION_SERVICE_TYPE_EDEFAULT = APPLICATIONSERVICETYPE.NONE;
+
+	/**
+	 * The cached value of the '{@link #getApplicationServiceType() <em>Application Service Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getApplicationServiceType()
+	 * @generated
+	 * @ordered
+	 */
+	protected APPLICATIONSERVICETYPE applicationServiceType = APPLICATION_SERVICE_TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -610,6 +632,30 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public APPLICATIONSERVICETYPE getApplicationServiceType() {
+		return applicationServiceType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setApplicationServiceType(APPLICATIONSERVICETYPE newApplicationServiceType) {
+		APPLICATIONSERVICETYPE oldApplicationServiceType = applicationServiceType;
+		applicationServiceType = newApplicationServiceType == null ? APPLICATION_SERVICE_TYPE_EDEFAULT
+				: newApplicationServiceType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					Rebel_archimatePackage.ELEMENT__APPLICATION_SERVICE_TYPE, oldApplicationServiceType,
+					applicationServiceType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -639,6 +685,8 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 			return getBuffering();
 		case Rebel_archimatePackage.ELEMENT__THROUGHPUT:
 			return getThroughput();
+		case Rebel_archimatePackage.ELEMENT__APPLICATION_SERVICE_TYPE:
+			return getApplicationServiceType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -689,6 +737,9 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 			return;
 		case Rebel_archimatePackage.ELEMENT__THROUGHPUT:
 			setThroughput((Throughput) newValue);
+			return;
+		case Rebel_archimatePackage.ELEMENT__APPLICATION_SERVICE_TYPE:
+			setApplicationServiceType((APPLICATIONSERVICETYPE) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -741,6 +792,9 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 		case Rebel_archimatePackage.ELEMENT__THROUGHPUT:
 			setThroughput(THROUGHPUT_EDEFAULT);
 			return;
+		case Rebel_archimatePackage.ELEMENT__APPLICATION_SERVICE_TYPE:
+			setApplicationServiceType(APPLICATION_SERVICE_TYPE_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -779,6 +833,8 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 			return buffering != BUFFERING_EDEFAULT;
 		case Rebel_archimatePackage.ELEMENT__THROUGHPUT:
 			return throughput != THROUGHPUT_EDEFAULT;
+		case Rebel_archimatePackage.ELEMENT__APPLICATION_SERVICE_TYPE:
+			return applicationServiceType != APPLICATION_SERVICE_TYPE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -820,6 +876,8 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 		result.append(buffering);
 		result.append(", throughput: ");
 		result.append(throughput);
+		result.append(", applicationServiceType: ");
+		result.append(applicationServiceType);
 		result.append(')');
 		return result.toString();
 	}

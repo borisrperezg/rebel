@@ -107,6 +107,13 @@ public class Rebel_archimatePackageImpl extends EPackageImpl implements Rebel_ar
 	private EEnum notificationModelEEnum = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum applicationservicetypeEEnum = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -391,6 +398,15 @@ public class Rebel_archimatePackageImpl extends EPackageImpl implements Rebel_ar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getElement_ApplicationServiceType() {
+		return (EAttribute) elementEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRelation() {
 		return relationEClass;
 	}
@@ -499,6 +515,15 @@ public class Rebel_archimatePackageImpl extends EPackageImpl implements Rebel_ar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getAPPLICATIONSERVICETYPE() {
+		return applicationservicetypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Rebel_archimateFactory getRebel_archimateFactory() {
 		return (Rebel_archimateFactory) getEFactoryInstance();
 	}
@@ -549,6 +574,7 @@ public class Rebel_archimatePackageImpl extends EPackageImpl implements Rebel_ar
 		createEAttribute(elementEClass, ELEMENT__NOTIFICATION);
 		createEAttribute(elementEClass, ELEMENT__BUFFERING);
 		createEAttribute(elementEClass, ELEMENT__THROUGHPUT);
+		createEAttribute(elementEClass, ELEMENT__APPLICATION_SERVICE_TYPE);
 
 		relationEClass = createEClass(RELATION);
 		createEReference(relationEClass, RELATION__SOURCE);
@@ -564,6 +590,7 @@ public class Rebel_archimatePackageImpl extends EPackageImpl implements Rebel_ar
 		deliveryModelEEnum = createEEnum(DELIVERY_MODEL);
 		throughputEEnum = createEEnum(THROUGHPUT);
 		notificationModelEEnum = createEEnum(NOTIFICATION_MODEL);
+		applicationservicetypeEEnum = createEEnum(APPLICATIONSERVICETYPE);
 	}
 
 	/**
@@ -648,6 +675,9 @@ public class Rebel_archimatePackageImpl extends EPackageImpl implements Rebel_ar
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getElement_Throughput(), this.getThroughput(), "throughput", null, 0, 1, Element.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getElement_ApplicationServiceType(), this.getAPPLICATIONSERVICETYPE(), "applicationServiceType",
+				null, 0, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationEClass, Relation.class, "Relation", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -720,6 +750,11 @@ public class Rebel_archimatePackageImpl extends EPackageImpl implements Rebel_ar
 		addEEnumLiteral(notificationModelEEnum, NotificationModel.QUEUED);
 		addEEnumLiteral(notificationModelEEnum, NotificationModel.CENTRAL);
 		addEEnumLiteral(notificationModelEEnum, NotificationModel.POLLED);
+
+		initEEnum(applicationservicetypeEEnum, rebel_archimate.APPLICATIONSERVICETYPE.class, "APPLICATIONSERVICETYPE");
+		addEEnumLiteral(applicationservicetypeEEnum, rebel_archimate.APPLICATIONSERVICETYPE.NONE);
+		addEEnumLiteral(applicationservicetypeEEnum, rebel_archimate.APPLICATIONSERVICETYPE.EVENT);
+		addEEnumLiteral(applicationservicetypeEEnum, rebel_archimate.APPLICATIONSERVICETYPE.PROCEDURE_CALL);
 
 		// Create resource
 		createResource(eNS_URI);

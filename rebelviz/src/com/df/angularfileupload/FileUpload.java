@@ -98,7 +98,7 @@ public class FileUpload extends HttpServlet {
         	fileName = fileName.replaceAll(" ", "%20");
         	
         	String urlString = "http://localhost:8080/rebelapi/rest/rebel/buildxmi/p="+project+"&a="+artifactType+"&n="+fileName;
-        	System.out.println("FileUpload.callWebService ::: "+urlString);
+//        	System.out.println("FileUpload.callWebService ::: "+urlString);
         	
             //Declare the connection to weather api url
             URL url = new URL(urlString);  
@@ -183,21 +183,23 @@ public class FileUpload extends HttpServlet {
 
         sb.append("]");
         sb.append(", \"requestHeaders\": {");
-        Enumeration<String> headerNames = req.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            String header = headerNames.nextElement();
-            if(!header.equals("cookie")) {
-                sb.append("\"").append(header).append("\":\"").append(req.getHeader(header)).append("\"");
-                if (headerNames.hasMoreElements()) {
-                	sb.append(",");
-                }
-            }else {
-            	sb = new StringBuilder(sb.substring(0, sb.length()-1));
-            }
-        }
+//        Enumeration<String> headerNames = req.getHeaderNames();
+//        while (headerNames.hasMoreElements()) {
+//            String header = headerNames.nextElement();
+//            if(!header.equals("cookie")) {
+//                sb.append("\"").append(header).append("\":\"").append(req.getHeader(header)).append("\"");
+//                if (headerNames.hasMoreElements()) {
+//                	sb.append(",");
+//                }
+//            }else {
+//            	sb = new StringBuilder(sb.substring(0, sb.length()-1));
+//            }
+//        }
         sb.append("}}");
         res.setCharacterEncoding("utf-8");
         res.getWriter().write(sb.toString());
+        
+        System.out.println("****** JSON Upload file: "+sb.toString());
     }
 
     protected String read(InputStream stream) {

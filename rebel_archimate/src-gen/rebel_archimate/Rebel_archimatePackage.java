@@ -313,13 +313,22 @@ public interface Rebel_archimatePackage extends EPackage {
 	int ELEMENT__THROUGHPUT = 12;
 
 	/**
+	 * The feature id for the '<em><b>Application Service Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT__APPLICATION_SERVICE_TYPE = 13;
+
+	/**
 	 * The number of structural features of the '<em>Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_FEATURE_COUNT = 13;
+	int ELEMENT_FEATURE_COUNT = 14;
 
 	/**
 	 * The number of operations of the '<em>Element</em>' class.
@@ -463,6 +472,16 @@ public interface Rebel_archimatePackage extends EPackage {
 	 * @generated
 	 */
 	int NOTIFICATION_MODEL = 10;
+
+	/**
+	 * The meta object id for the '{@link rebel_archimate.APPLICATIONSERVICETYPE <em>APPLICATIONSERVICETYPE</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rebel_archimate.APPLICATIONSERVICETYPE
+	 * @see rebel_archimate.impl.Rebel_archimatePackageImpl#getAPPLICATIONSERVICETYPE()
+	 * @generated
+	 */
+	int APPLICATIONSERVICETYPE = 11;
 
 	/**
 	 * Returns the meta object for class '{@link rebel_archimate.Project <em>Project</em>}'.
@@ -726,6 +745,17 @@ public interface Rebel_archimatePackage extends EPackage {
 	EAttribute getElement_Throughput();
 
 	/**
+	 * Returns the meta object for the attribute '{@link rebel_archimate.Element#getApplicationServiceType <em>Application Service Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Application Service Type</em>'.
+	 * @see rebel_archimate.Element#getApplicationServiceType()
+	 * @see #getElement()
+	 * @generated
+	 */
+	EAttribute getElement_ApplicationServiceType();
+
+	/**
 	 * Returns the meta object for class '{@link rebel_archimate.Relation <em>Relation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -848,6 +878,16 @@ public interface Rebel_archimatePackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getNotificationModel();
+
+	/**
+	 * Returns the meta object for enum '{@link rebel_archimate.APPLICATIONSERVICETYPE <em>APPLICATIONSERVICETYPE</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>APPLICATIONSERVICETYPE</em>'.
+	 * @see rebel_archimate.APPLICATIONSERVICETYPE
+	 * @generated
+	 */
+	EEnum getAPPLICATIONSERVICETYPE();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1071,6 +1111,14 @@ public interface Rebel_archimatePackage extends EPackage {
 		EAttribute ELEMENT__THROUGHPUT = eINSTANCE.getElement_Throughput();
 
 		/**
+		 * The meta object literal for the '<em><b>Application Service Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ELEMENT__APPLICATION_SERVICE_TYPE = eINSTANCE.getElement_ApplicationServiceType();
+
+		/**
 		 * The meta object literal for the '{@link rebel_archimate.impl.RelationImpl <em>Relation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1181,6 +1229,16 @@ public interface Rebel_archimatePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum NOTIFICATION_MODEL = eINSTANCE.getNotificationModel();
+
+		/**
+		 * The meta object literal for the '{@link rebel_archimate.APPLICATIONSERVICETYPE <em>APPLICATIONSERVICETYPE</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rebel_archimate.APPLICATIONSERVICETYPE
+		 * @see rebel_archimate.impl.Rebel_archimatePackageImpl#getAPPLICATIONSERVICETYPE()
+		 * @generated
+		 */
+		EEnum APPLICATIONSERVICETYPE = eINSTANCE.getAPPLICATIONSERVICETYPE();
 
 	}
 

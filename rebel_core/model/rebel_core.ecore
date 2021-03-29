@@ -262,6 +262,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="notification" eType="#//NotificationModel"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="buffering" eType="#//Buffering"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="throughput" eType="#//Throughput"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationServiceType"
+        eType="#//APPLICATIONSERVICETYPE"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArchimateView">
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" upperBound="-1"
@@ -332,5 +334,10 @@
     <eLiterals name="NONE"/>
     <eLiterals name="EMAIL" value="1"/>
     <eLiterals name="CHATLOG" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="APPLICATIONSERVICETYPE">
+    <eLiterals name="NONE" literal="NONE"/>
+    <eLiterals name="EVENT" value="1" literal="EVENT"/>
+    <eLiterals name="PROCEDURE_CALL" value="2" literal="PROCEDURE_CALL"/>
   </eClassifiers>
 </ecore:EPackage>

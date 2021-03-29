@@ -608,11 +608,16 @@ public class RebelCoreJSONGenerator {
 	}
 	
 	public String getSentenceFormat(String text) {
-		String newText = text.toLowerCase();
-		String first = String.valueOf(newText.toCharArray()[0]);
-		String otherText = newText.substring(1);
-		String finalText = first.toUpperCase()+otherText;
-		return finalText;
+		if(text!=null && text.length()>0) {
+		
+			String newText = text.toLowerCase();
+		
+			String first = String.valueOf(newText.toCharArray()[0]);
+			String otherText = newText.substring(1);
+			String finalText = first.toUpperCase()+otherText;
+			return finalText;
+		}else
+			return text;
 	}
 	
 	/**
@@ -669,7 +674,7 @@ public class RebelCoreJSONGenerator {
 						String urlContent = "<a href=\"http://localhost:8080/rebelviz/seeboi.html?p="+project.getName()+"&boi="+boi.getName()+"&mn="+referencedView+"\">"+referencedView+"</a>";
 						
 						String actionAndType = "";
-						String sentenceFormat = getSentenceFormat(f.getElementType()).toLowerCase();
+						String sentenceFormat = getSentenceFormat(f.getElementType()!=null?f.getElementType():"").toLowerCase();
 						
 						if(sentenceFormat.indexOf("_")>=0) {
 							if(!getSentenceFormat(action.getLiteral()).equals("Update"))

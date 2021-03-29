@@ -15,6 +15,7 @@ import rebel_archimate.Element;
 import rebel_archimate.Relation;
 import rebel_archimate.View;
 import rebel_componentandconnector.FunctionalView;
+import rebel_core.APPLICATIONSERVICETYPE;
 import rebel_core.Action;
 import rebel_core.ArchimateView;
 import rebel_core.BlockOfInterest;
@@ -94,6 +95,17 @@ public class RebelCoreCreationArchimate {
     }
 
 	
+    public static void main(String[] args) {
+		RebelCoreCreationArchimate m = new RebelCoreCreationArchimate(new RebelMediator());
+
+		String params = "p=TestingTriggering&bm=LayeredView_20201104&boi=3_BOI&dr=Cost reduction&go=Fast time to deployment&"
+				+ "Guidance&Service Period&Moving to care service point&Waiting BusinessProcess&"
+				+ "Queuing Care&Pre-Service Period&Post-Service Period&Treatment BusinessProcess&Service Period Service&Self-registration Application Component";
+
+		m.boiCreationArchi(params);
+	}
+    
+    
 
 	/**
 	 * Este metodo crea el boi para cuando se trabaja desde un modelo en Archimate
@@ -286,9 +298,7 @@ public class RebelCoreCreationArchimate {
 					// LLAMADA ASINCRONO PARA LA BUSQUEDA EN ARTEFACTOS HETEROGENEOS
 					// **************************************************************
 					
-					// Link heterogeneous artifacts - Asynchronous call
 					new Thread(() -> {
-//						findAndLinkHeterogeneousArtifacts(boi, resource);
 						(new AsynchronousSearch()).findAndLinkHeterogeneousArtifacts(cModel, boi, project);
 					}).start();
 					
@@ -421,6 +431,8 @@ public class RebelCoreCreationArchimate {
 	private void compareViews(ArchimateView m1, ArchimateView m2, BlockOfInterest boi, 
 			HashMap<String, String> elementsName) {
 		
+		System.out.println("----------------------------");
+		System.out.println("COMPARE VIEWS: "+m1.getName()+" vs "+m2.getName());
 		
 		// Aca toca tener presente cuando un elemento aparezca en un segundo modelo
 		
@@ -459,6 +471,9 @@ public class RebelCoreCreationArchimate {
 			String throughputTypeElementM1 = "";
 			String throughputTypeElementM2 = "";
 			
+			String applicationServiceTypeM1 = "";
+			String applicationServiceTypeM2 = "";
+			
 			for(rebel_core.Element coreElement : m1.getElement()) {
 				if(elementName.equals(coreElement.getName())){
 					existsM1 = true;
@@ -477,6 +492,9 @@ public class RebelCoreCreationArchimate {
 					
 					if(coreElement.getThroughput()!=null)
 						throughputTypeElementM1 = coreElement.getThroughput().getLiteral();
+					
+					if(coreElement.getApplicationServiceType()!=null)
+						applicationServiceTypeM1 = coreElement.getApplicationServiceType().getLiteral();
 					
 					break;
 				}
@@ -501,6 +519,9 @@ public class RebelCoreCreationArchimate {
 					
 					if(coreElement.getThroughput()!=null)
 						throughputTypeElementM2 = coreElement.getThroughput().getLiteral();
+					
+					if(coreElement.getApplicationServiceType()!=null)
+						applicationServiceTypeM2 = coreElement.getApplicationServiceType().getLiteral();
 					
 					break;
 				}
@@ -537,6 +558,12 @@ public class RebelCoreCreationArchimate {
 				
 				if(!throughputTypeElementM1.equals(throughputTypeElementM2)) {
 					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Throughput type: " + throughputTypeElementM2 + "(prev. " + throughputTypeElementM1 + ")", "Update");				
+					f.getView().add(m2);				
+					boi.getFact().add(f);
+				}
+				
+				if(!applicationServiceTypeM1.equals(applicationServiceTypeM2)) {
+					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Service Type type: " + throughputTypeElementM2 + "(prev. " + throughputTypeElementM1 + ")", "Update");				
 					f.getView().add(m2);				
 					boi.getFact().add(f);
 				}
@@ -753,8 +780,10 @@ public class RebelCoreCreationArchimate {
 						}						
 					}
 					
-					nameComponentForService = elementProducing.getName() + " -O)- " + elementConsuming.getName();
-					listOfFacts.add(nameComponentForService+"@consume");
+					if(elementProducing!=null && elementConsuming.getName()!=null) {					
+						nameComponentForService = elementProducing.getName() + " -O)- " + elementConsuming.getName();
+						listOfFacts.add(nameComponentForService+"@consume");
+					}
 					
 				}else if(coreRelationSecond.getTarget().getType().getLiteral().equals("APPLICATION_SERVICE")) {
 					
@@ -816,9 +845,10 @@ public class RebelCoreCreationArchimate {
 						}						
 					}
 					
-					nameComponentForService = elementProducing.getName() + " -O)- " + elementConsuming.getName();
-					listOfFacts.add(nameComponentForService+"@consume");
-					
+					if(elementProducing!=null && elementConsuming.getName()!=null) {
+						nameComponentForService = elementProducing.getName() + " -O)- " + elementConsuming.getName();
+						listOfFacts.add(nameComponentForService+"@consume");
+					}
 					
 				}else {
 					nameComponentForService = coreRelationSecond.getSource().getName() + " -> " + coreRelationSecond.getTarget().getName();
@@ -850,16 +880,6 @@ public class RebelCoreCreationArchimate {
 		
 	}
 	
-	
-	public static void main(String[] args) {
-		RebelCoreCreationArchimate m = new RebelCoreCreationArchimate(new RebelMediator());
-
-		String params = "p=NewProject&bm=Layered_20201118&boi=6th&dr=Cost reduction&go=Fast time to deployment&"
-				+ "Asignacion Cita Componente&Asignación Cita&Asignación Service&Asignación de Turno&"
-				+ "Centro de Atención Componente&Localización Centros de Atención&Localización Service";
-
-		m.boiCreationArchi(params);
-	}
 	
 	@SuppressWarnings("deprecation")
 	public Fact createFact(String name, Date date, String type, String obs, String action) {
@@ -1133,6 +1153,17 @@ public class RebelCoreCreationArchimate {
 		coreElement.setHeight(element.getHeight());
 		coreElement.setGrouper(element.isGrouper());
 		coreElement.setBoiElement(isBoiElement);
+		
+		if(element.getApplicationServiceType()!=null) {
+			switch (element.getApplicationServiceType().getLiteral()) {
+			case "EVENT":
+				coreElement.setApplicationServiceType(APPLICATIONSERVICETYPE.EVENT);
+				break;
+			case "PROCEDURE_CALL":
+				coreElement.setApplicationServiceType(APPLICATIONSERVICETYPE.PROCEDURE_CALL);
+				break;
+			}
+		}
 		
 		// --------------------------------------------------
 		// PARA PROCESAR LAS PROPIEDADES DE LOS SERVICIOS
