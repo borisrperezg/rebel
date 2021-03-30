@@ -4,7 +4,15 @@ public class AMElement {
 
 	private String id, name, type;
 	private int posX, posY, width, height;
-	private String sync, delivery, notification, buffering, throughput;
+	private String sync, delivery, notification, buffering, throughput, applicationServiceType;
+
+	public String getApplicationServiceType() {
+		return applicationServiceType;
+	}
+
+	public void setApplicationServiceType(String applicationServiceType) {
+		this.applicationServiceType = applicationServiceType;
+	}
 
 	public int getPosX() {
 		return posX;

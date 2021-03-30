@@ -1,0 +1,150 @@
+package uniandes.rebel.archimate;
+
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+import rebel_archimate.Element;
+import rebel_archimate.Project;
+import rebel_archimate.Rebel_archimateFactory;
+import rebel_archimate.Rebel_archimatePackage;
+import rebel_archimate.Relation;
+import rebel_archimate.View;
+
+public class AMModel {
+
+	private Project project;
+	private Rebel_archimateFactory factory;
+	private Resource resource;
+	private String uriAddress;
+	
+	private String projectName;
+	private String modelName;
+	
+	public AMModel() {
+		factory = Rebel_archimateFactory.eINSTANCE;
+	}
+	
+	/**
+	 * Cada vista de un proyecto se genera como un archivo. Esto se hace para mantener el peso 
+	 * del modelo de forma manejable.
+	 * @param projectName
+	 * @param modelFileName
+	 * @return
+	 * @throws Exception
+	 */
+	public Resource createModel(String projectName, String modelFileName) throws Exception {
+
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m = reg.getExtensionToFactoryMap();
+		m.put("rebel_archimate", new XMIResourceFactoryImpl());
+
+		ResourceSet resourceSet = new ResourceSetImpl();
+		
+		// Validar si existe la carpeta, si no existe, entonces se crea
+		if(ArchimateUtil.checkOrCreateFolder(projectName)) {
+		
+			System.out.println("********************");
+			System.out.println("AMModel.createModel ::: Model name = "+modelFileName);
+			System.out.println("********************");
+			
+			uriAddress = "/Users/borisperezg/rebel/"+projectName+"/archimate/" + modelFileName + ".rebel_archimate";
+	
+			resource = resourceSet.createResource(URI.createURI(uriAddress));
+	
+			// --------------------
+			// ROOT NODE CREATION
+			project = factory.createProject();
+			project.setName(projectName);
+			project.setModelingDate(new Date());
+			resource.getContents().add(project);
+			
+			this.projectName = projectName;
+			this.modelName = modelFileName;
+			
+		}else{
+			throw new Exception("No se pudo crear la carpeta del proyecto para Archimate ::: "+projectName+" - "+modelFileName);
+		}
+		
+		return resource;
+	}
+	
+	public String getModelName() {
+		return this.modelName;
+	}
+	
+	public View createView(String id, String name) {
+		View obj = factory.createView();
+		obj.setId(id);
+		obj.setName(name);
+		return obj;
+	}
+	
+	public View getView(String name) {
+		View obj = null;
+		
+		List<View> views = project.getView();
+		if(views!=null) {
+			for(View v : views) {
+				if(v.getName().equals(name)) {
+					obj = v;
+					break;
+				}
+			}
+		}
+		
+		return obj;
+	}
+	
+	public Element createElement() {
+		Element obj = factory.createElement();
+		return obj;
+	}
+	
+	public Relation createRelation() {
+		Relation obj = factory.createRelation();
+		return obj;
+	}
+	
+	/**
+	 * No se requiere pasar el nombre del proyecto, porque la instancia de la clase 
+	 * manejará un solo proyecto.
+	 * @param view
+	 */
+	public void setViewToProject(View view) {
+		project.getView().add(view);
+	}
+	
+	public void storeModel() throws Exception {
+		resource.save(Collections.EMPTY_MAP);
+		
+		Date viewDate = project.getView().get(0).getDate();
+
+//		(new AMModelDerby()).findProjectAndInsertModel(projectName, modelName, 
+//				"archimate", uriAddress, (viewDate.getYear()+1900)+"-"+(viewDate.getMonth()+1)+"-"+viewDate.getDate());
+		
+	}
+	
+	
+	public Resource loadResource(String xmlRoute) throws Exception {
+
+		Rebel_archimatePackage.eINSTANCE.eClass();
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m = reg.getExtensionToFactoryMap();
+		m.put("rebel_archimate", new XMIResourceFactoryImpl());
+
+		ResourceSet resSet = new ResourceSetImpl();
+		Resource resource = resSet.getResource(URI.createURI(xmlRoute), true);
+//		Project project = (Project) resource.getContents().get(0);
+
+		return resource;
+	}
+	
+}

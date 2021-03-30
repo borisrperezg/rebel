@@ -1,0 +1,17 @@
+package uniandes.rebelapi.bo;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// Create Sync property: SYNC
+		// Create Service Type property: EVENT
+		// Change Sync type: NONE (prev. SYNC)
+		
+		String val = "Create Sync property: SYNC";
+		
+		// Ambas tienen la misma longitud
+		int posCreateChange = 6;
+		int posPropertyWord = val.lastIndexOf("property");
+	}
+	
+}

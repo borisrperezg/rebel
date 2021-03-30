@@ -21,11 +21,11 @@ public class ATDRationaleServlet extends HttpServlet {
 		String boiName = request.getParameter("boiname");
 		String projectName = request.getParameter("projname");
 		String idFact = request.getParameter("factId");
-		String typeFact = request.getParameter("facttype");
-		String description = request.getParameter("description");
+//		String typeFact = request.getParameter("facttype");
+//		String description = request.getParameter("description");
 		String justification = request.getParameter("justify");
 		String benefits = request.getParameter("benefits");
-		String factFromCnC = request.getParameter("factsname");
+//		String factFromCnC = request.getParameter("factsname");
 		
 		String compromisedQA = request.getParameter("compromisedqalist");
 		String atdType = request.getParameter("atdcausetypelist");
@@ -58,7 +58,8 @@ public class ATDRationaleServlet extends HttpServlet {
 		String docType = "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n";
 
 		RebelMediator mediator = new RebelMediator();
-		ResponseBO resp = mediator.storeATDRationale(projectName, boiName, idFact, compromisedQA, atdType, justification, benefits, factFromCnC);
+//		ResponseBO resp = mediator.storeATDRationale(projectName, boiName, idFact, compromisedQA, atdType, justification, benefits, factFromCnC);
+		ResponseBO resp = mediator.storeATDRationale(projectName, boiName, idFact, compromisedQA, atdType, justification, benefits, null);
 		
 		if(resp.getResponse().equals("OK")) {
 			

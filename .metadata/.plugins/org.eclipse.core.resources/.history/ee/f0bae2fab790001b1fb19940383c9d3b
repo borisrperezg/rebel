@@ -1,0 +1,52 @@
+package uniandes.rebelapi.bo;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// Create Sync property: SYNC
+		// Create Service Type property: EVENT
+		// Change Sync property: NONE (prev. SYNC)
+		
+		String val = "Create Sync property: SYNC";
+		
+		// Ambas tienen la misma longitud
+		int posCreateChange = 6;
+		int posPropertyWord = val.lastIndexOf("property");
+		
+		System.out.println("Property name = "+val.substring(posCreateChange, posPropertyWord).trim());
+		
+		String[] splitByValue = val.split(":");
+		String tempValue = splitByValue[1];
+		if(tempValue.indexOf("\\(")>=0) {
+			
+		}else
+			System.out.println("New value = "+tempValue);
+		
+		
+		
+		val = "Create Service Type property: EVENT";
+		posPropertyWord = val.lastIndexOf("property");
+		
+		System.out.println("Property name = "+val.substring(posCreateChange, posPropertyWord).trim());
+		
+		splitByValue = val.split(":");
+		tempValue = splitByValue[1];
+		if(tempValue.indexOf("\\(")>=0) {
+			
+		}else
+			System.out.println("New value = "+tempValue);
+		
+		val = "Change Sync property: NONE (prev. SYNC)";
+		posPropertyWord = val.lastIndexOf("property");
+		
+		System.out.println("Property name = "+val.substring(posCreateChange, posPropertyWord).trim());
+		
+		splitByValue = val.split(":");
+		tempValue = splitByValue[1];
+		if(tempValue.indexOf("\\(")>=0) {
+			
+		}else
+			System.out.println("New value = "+tempValue);
+	}
+	
+}

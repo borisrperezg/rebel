@@ -98,9 +98,8 @@ public class RebelCoreCreationArchimate {
     public static void main(String[] args) {
 		RebelCoreCreationArchimate m = new RebelCoreCreationArchimate(new RebelMediator());
 
-		String params = "p=TestingTriggering&bm=LayeredView_20201104&boi=3_BOI&dr=Cost reduction&go=Fast time to deployment&"
-				+ "Guidance&Service Period&Moving to care service point&Waiting BusinessProcess&"
-				+ "Queuing Care&Pre-Service Period&Post-Service Period&Treatment BusinessProcess&Service Period Service&Self-registration Application Component";
+		String params = "p=TT6&bm=LayeredView_20201108&boi=2_BOI&dr=Cost reduction&go=Fast time to deployment&"
+				+ "Patient Informacion System Component&Guidance";
 
 		m.boiCreationArchi(params);
 	}
@@ -119,7 +118,7 @@ public class RebelCoreCreationArchimate {
 	 * @return
 	 */
 	public String boiCreationArchi(String params) {
-
+     
 		String resp = "NOK";
 
 //		System.out.println("RebelCoreCreation.boiCreationArchi ::: params = "+params);
@@ -360,6 +359,10 @@ public class RebelCoreCreationArchimate {
 	private void createFirstFacts(ArchimateView m1, BlockOfInterest boi, 
 			HashMap<String, String> elementsName) {
 		
+		System.out.println("***********");
+		System.out.println("createFirstFacts");
+		System.out.println("***********");
+		
 		// ---------------------------------------------
 		// CREACION DE FACTS DE TIPO ELEMENTO
 		// Para crear los Facts de creación de elementos
@@ -367,14 +370,92 @@ public class RebelCoreCreationArchimate {
 		for(rebel_core.Element element : m1.getElement()) {
 			
 			if(elementsName.get(element.getName())!=null) {
-				Fact f = createFact(element.getName(), m1.getDate(), element.getType().getLiteral(), "", "Create");
 				
-				f.getView().add(m1);
+				System.out.println(element.getName() + ": " + element.getApplicationServiceType());
 				
+				Fact f = createFact(element.getName(), m1.getDate(), element.getType().getLiteral(), "", "Create");				
+				f.getView().add(m1);				
 				boi.getFact().add(f);
 				
+				
+				if(element.getSync()!=null && !element.getSync().getLiteral().contentEquals("NONE")) {
+					String syncTypeElement = element.getSync().getLiteral();
+					
+					Fact ft = createFact(element.getName(), 
+							m1.getDate(), 
+							element.getType().getLiteral(), 
+							"Create Sync property: " + syncTypeElement, 
+							"Create");				
+					ft.getView().add(m1);				
+					boi.getFact().add(ft);
+				
+				}
+				
+				if(element.getDelivery()!=null && !element.getDelivery().getLiteral().contentEquals("NONE")) {
+					String propertyValue = element.getDelivery().getLiteral();
+					
+					Fact ft = createFact(element.getName(), 
+							m1.getDate(), 
+							element.getType().getLiteral(), 
+							"Create Delivery property: " + propertyValue, 
+							"Create");				
+					ft.getView().add(m1);				
+					boi.getFact().add(ft);
+				
+				}
+				
+				if(element.getNotification()!=null && !element.getNotification().getLiteral().contentEquals("NONE")) {
+					String propertyValue = element.getNotification().getLiteral();
+					
+					Fact ft = createFact(element.getName(), 
+							m1.getDate(), 
+							element.getType().getLiteral(), 
+							"Create Notification property: " + propertyValue, 
+							"Create");				
+					ft.getView().add(m1);				
+					boi.getFact().add(ft);
+				
+				}
+				
+				if(element.getBuffering()!=null && !element.getBuffering().getLiteral().contentEquals("NONE")) {
+					String propertyValue = element.getBuffering().getLiteral();
+					
+					Fact ft = createFact(element.getName(), 
+							m1.getDate(), 
+							element.getType().getLiteral(), 
+							"Create Buffering property: " + propertyValue, 
+							"Create");				
+					ft.getView().add(m1);				
+					boi.getFact().add(ft);
+				
+				}
+				
+				if(element.getThroughput()!=null && !element.getThroughput().getLiteral().contentEquals("NONE")) {
+					String propertyValue = element.getThroughput().getLiteral();
+					
+					Fact ft = createFact(element.getName(), 
+							m1.getDate(), 
+							element.getType().getLiteral(), 
+							"Create Throughput property: " + propertyValue, 
+							"Create");				
+					ft.getView().add(m1);				
+					boi.getFact().add(ft);
+				
+				}
+				
+				if(element.getApplicationServiceType()!=null && !element.getApplicationServiceType().getLiteral().contentEquals("NONE")) {
+					String propertyValue = element.getApplicationServiceType().getLiteral();
+					
+					Fact ft = createFact(element.getName(), 
+							m1.getDate(), 
+							element.getType().getLiteral(), 
+							"Create Service Type property: " + propertyValue, 
+							"Create");				
+					ft.getView().add(m1);				
+					boi.getFact().add(ft);
+				
+				}
 			}
-			
 		}
 		
 		// ---------------------------------------------
@@ -533,37 +614,37 @@ public class RebelCoreCreationArchimate {
 				// Se debe considerar que sea solo para los services o interfaces
 				
 				if(!syncTypeElementM1.equals(syncTypeElementM2)) {
-					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Sync type: " + syncTypeElementM2 + " (prev. " + syncTypeElementM1 + ")", "Update");				
+					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Sync property: " + syncTypeElementM2 + " (prev. " + syncTypeElementM1 + ")", "Update");				
 					f.getView().add(m2);				
 					boi.getFact().add(f);
 				}
 				
 				if(!deliveryTypeElementM1.equals(deliveryTypeElementM2)) {
-					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Delivery type: " + deliveryTypeElementM2 + "(prev. " + deliveryTypeElementM1 + ")", "Update");				
+					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Delivery property: " + deliveryTypeElementM2 + "(prev. " + deliveryTypeElementM1 + ")", "Update");				
 					f.getView().add(m2);				
 					boi.getFact().add(f);
 				}
 				
 				if(!notificationTypeElementM1.equals(notificationTypeElementM2)) {
-					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Notification type: " + notificationTypeElementM2 + "(prev. " + notificationTypeElementM1 + ")", "Update");				
+					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Notification property: " + notificationTypeElementM2 + "(prev. " + notificationTypeElementM1 + ")", "Update");				
 					f.getView().add(m2);				
 					boi.getFact().add(f);
 				}
 				
 				if(!bufferingTypeElementM1.equals(bufferingTypeElementM2)) {
-					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Buffering type: " + bufferingTypeElementM2 + "(prev. " + bufferingTypeElementM1 + ")", "Update");				
+					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Buffering property: " + bufferingTypeElementM2 + "(prev. " + bufferingTypeElementM1 + ")", "Update");				
 					f.getView().add(m2);				
 					boi.getFact().add(f);
 				}
 				
 				if(!throughputTypeElementM1.equals(throughputTypeElementM2)) {
-					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Throughput type: " + throughputTypeElementM2 + "(prev. " + throughputTypeElementM1 + ")", "Update");				
+					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Throughput property: " + throughputTypeElementM2 + "(prev. " + throughputTypeElementM1 + ")", "Update");				
 					f.getView().add(m2);				
 					boi.getFact().add(f);
 				}
 				
 				if(!applicationServiceTypeM1.equals(applicationServiceTypeM2)) {
-					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Service Type type: " + throughputTypeElementM2 + "(prev. " + throughputTypeElementM1 + ")", "Update");				
+					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Service Type property: " + throughputTypeElementM2 + "(prev. " + throughputTypeElementM1 + ")", "Update");				
 					f.getView().add(m2);				
 					boi.getFact().add(f);
 				}
@@ -571,7 +652,7 @@ public class RebelCoreCreationArchimate {
 			}else if(!existsM1 && existsM2) { 
 				// Creacion
 				Fact f = createFact(elementName, m2.getDate(), elementType, "", "Create");				
-				f.getView().add(m2);				
+				f.getView().add(m2);			
 				boi.getFact().add(f);
 			}else if(existsM1 && !existsM2) { 
 				// Creacion
@@ -1153,6 +1234,10 @@ public class RebelCoreCreationArchimate {
 		coreElement.setHeight(element.getHeight());
 		coreElement.setGrouper(element.isGrouper());
 		coreElement.setBoiElement(isBoiElement);
+		
+		if(element.getName().contentEquals("Guidance")) {
+			System.out.println("Guidance app serv type = " + element.getApplicationServiceType());
+		}
 		
 		if(element.getApplicationServiceType()!=null) {
 			switch (element.getApplicationServiceType().getLiteral()) {

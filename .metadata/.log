@@ -11315,3 +11315,32 @@ Binding(ALT+COMMAND+R,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,cocoa,system)
+
+!ENTRY org.eclipse.core.jobs 4 2 2021-03-29 09:28:04.269
+!MESSAGE An internal error occurred during: "Requesting Java AST from selection".
+!STACK 0
+java.lang.ArrayIndexOutOfBoundsException: 18
+	at org.eclipse.jdt.internal.compiler.util.HashtableOfPackage.get(HashtableOfPackage.java:70)
+	at org.eclipse.jdt.internal.compiler.lookup.PackageBinding.getPackage0(PackageBinding.java:176)
+	at org.eclipse.jdt.internal.compiler.lookup.PackageBinding.getTypeOrPackage(PackageBinding.java:267)
+	at org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope.findImport(CompilationUnitScope.java:547)
+	at org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope.findSingleImport(CompilationUnitScope.java:619)
+	at org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope.getImport(CompilationUnitScope.java:701)
+	at org.eclipse.jdt.core.dom.DefaultBindingResolver.resolveName(DefaultBindingResolver.java:1369)
+	at org.eclipse.jdt.core.dom.Name.resolveBinding(Name.java:88)
+	at org.eclipse.jdt.internal.core.manipulation.search.OccurrencesFinder.visit(OccurrencesFinder.java:149)
+	at org.eclipse.jdt.core.dom.QualifiedName.accept0(QualifiedName.java:159)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2927)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChild(ASTNode.java:2975)
+	at org.eclipse.jdt.core.dom.ImportDeclaration.accept0(ImportDeclaration.java:206)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2927)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChildren(ASTNode.java:2998)
+	at org.eclipse.jdt.core.dom.CompilationUnit.accept0(CompilationUnit.java:257)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2927)
+	at org.eclipse.jdt.internal.core.manipulation.search.OccurrencesFinder.performSearch(OccurrencesFinder.java:104)
+	at org.eclipse.jdt.internal.core.manipulation.search.OccurrencesFinder.getOccurrences(OccurrencesFinder.java:110)
+	at org.eclipse.jdt.internal.ui.javaeditor.JavaEditor.updateOccurrenceAnnotations(JavaEditor.java:3372)
+	at org.eclipse.jdt.internal.ui.javaeditor.JavaEditor$6.selectionChanged(JavaEditor.java:3398)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:184)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$3.run(SelectionListenerWithASTManager.java:160)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)

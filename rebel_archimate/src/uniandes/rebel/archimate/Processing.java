@@ -39,7 +39,7 @@ public class Processing {
 	
 	public static void main(String[] args) throws Exception {
 		Processing p = new Processing();
-		p.execute("Paulo", "ABC_20201118.archimate");
+		p.execute("TT4", "CLINIC_20201027.archimate");
 //		String date = "20200820";
 		
 	}
@@ -334,10 +334,6 @@ public class Processing {
 			
 			Element boundElement = (Element) boundNode;
 
-			// Propiedad type en elemento de archimate correspondera en realidad al tipo 
-			// de application_service. Por ejemplo, para establecer si un service es Procedure Call o Event.
-			type = boundElement.getAttribute("type")!=null?boundElement.getAttribute("type").toLowerCase():"";
-			
 			posX = boundElement.getAttribute("x")!=null?Integer.parseInt(boundElement.getAttribute("x")):0;
 			posY = boundElement.getAttribute("y")!=null?Integer.parseInt(boundElement.getAttribute("y")):0;
 			width = boundElement.getAttribute("width")!=null?Integer.parseInt(boundElement.getAttribute("width")):0;
@@ -357,10 +353,23 @@ public class Processing {
 		archiRebelElement.setId(amElement.getId());
 		archiRebelElement.setType(getElementType(amElement.getType()));
 		
+		// --------------------------------------------------------
+		// Propiedad type en elemento de archimate correspondera en realidad al tipo 
+		// de application_service. Por ejemplo, para establecer si un service es Procedure Call o Event.
+		type = amElement.getApplicationServiceType()!=null?amElement.getApplicationServiceType().toLowerCase():"";
+		
 		if(type.contentEquals("event"))
 			archiRebelElement.setApplicationServiceType(APPLICATIONSERVICETYPE.EVENT);
 		else if(type.contentEquals("procedure call"))
 			archiRebelElement.setApplicationServiceType(APPLICATIONSERVICETYPE.PROCEDURE_CALL);
+		
+		// --------------------------------------------------------
+		// Bloque para la asignacion de las propiedades 
+		// de los servicios de aplicacion
+		
+		fixingProperties(amElement, archiRebelElement);
+			
+		// --------------------------------------------------------
 		
 		if(xPadre>0) {
 			archiRebelElement.setPosX(posX+xPadre);
@@ -373,6 +382,52 @@ public class Processing {
 		archiRebelElement.setHeight(height);
 		
 		return archiRebelElement;
+	}
+	
+	public void fixingProperties(AMElement amElement, rebel_archimate.Element archiRebelElement) {
+		
+		if(amElement.getSync()!=null) {
+			if(amElement.getSync().equals("Synchronous"))
+				archiRebelElement.setSync(SyncType.SYNC);
+			else if(amElement.getSync().equals("Asynchronous"))
+				archiRebelElement.setSync(SyncType.ASYNC);
+		}
+		
+		if(amElement.getNotification()!=null) {
+			if(amElement.getNotification().equals("PubSub"))
+				archiRebelElement.setNotification(NotificationModel.PUBSUB);
+			else if(amElement.getNotification().equals("Queue"))
+				archiRebelElement.setNotification(NotificationModel.QUEUED);
+			else if(amElement.getNotification().equals("Central"))
+				archiRebelElement.setNotification(NotificationModel.CENTRAL);
+			else if(amElement.getNotification().equals("Polled"))
+				archiRebelElement.setNotification(NotificationModel.POLLED);
+		}
+		
+		if(amElement.getThroughput()!=null) {
+			if(amElement.getThroughput().equals("High_order"))
+				archiRebelElement.setThroughput(Throughput.HIGH_ORDER);
+			else if(amElement.getThroughput().equals("Atomic"))
+				archiRebelElement.setThroughput(Throughput.ATOMIC);
+		}
+		
+		if(amElement.getBuffering()!=null) {
+			if(amElement.getBuffering().equals("Unbuffered"))
+				archiRebelElement.setBuffering(Buffering.UNBUFFERED);
+			else if(amElement.getBuffering().equals("Buffered"))
+				archiRebelElement.setBuffering(Buffering.BUFFERED);
+		}
+		
+		if(amElement.getDelivery()!=null) {
+			if(amElement.getDelivery().equals("At_least_one"))
+				archiRebelElement.setDelivery(DeliveryModel.AT_LEAST_ONE);
+			else if(amElement.getDelivery().equals("At_most_one"))
+				archiRebelElement.setDelivery(DeliveryModel.AT_MOST_ONE);
+			else if(amElement.getDelivery().equals("Exactly_one"))
+				archiRebelElement.setDelivery(DeliveryModel.EXACTLY_ONE);
+			else if(amElement.getDelivery().equals("Best_effort"))
+				archiRebelElement.setDelivery(DeliveryModel.BEST_EFFORT);
+		}
 	}
 	
 	
@@ -527,6 +582,8 @@ public class Processing {
 					} else if (!objectElement.getAttribute("type").equals("other")
 							&& !objectElement.getAttribute("type").equals("implementation_migration")) {
 
+						System.out.println("objectElement.getAttribute(\"type\") = "+objectElement.getAttribute("type"));
+						
 						NodeList childrenNodes = objectElement.getChildNodes();
 						for (int j = 0; j < childrenNodes.getLength(); j++) {
 							Node childrenNode = childrenNodes.item(j);
@@ -542,7 +599,7 @@ public class Processing {
 								elem.setType(elementType);
 								
 								// Preguntar si en el tipo aparece la palabra Service al final
-								if(elementType.endsWith("Service")) {
+								if(elementType.endsWith("Service") || elementType.endsWith("Component")) {
 								
 									NodeList propertiesNodes = childrenElement.getElementsByTagName("property");
 									if(propertiesNodes!=null) {
@@ -569,6 +626,8 @@ public class Processing {
 												if(key.equals("throughput"))
 													elem.setThroughput(value);
 												
+												if(key.equals("type"))
+													elem.setApplicationServiceType(value);
 											}
 										}
 									}
