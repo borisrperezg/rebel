@@ -644,7 +644,7 @@ public class RebelCoreCreationArchimate {
 				}
 				
 				if(!applicationServiceTypeM1.equals(applicationServiceTypeM2)) {
-					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Service Type property: " + throughputTypeElementM2 + "(prev. " + throughputTypeElementM1 + ")", "Update");				
+					Fact f = createFact(elementName, m2.getDate(), elementType, "Change Service Type property: " + applicationServiceTypeM2 + "(prev. " + applicationServiceTypeM1 + ")", "Update");				
 					f.getView().add(m2);				
 					boi.getFact().add(f);
 				}
@@ -654,6 +654,72 @@ public class RebelCoreCreationArchimate {
 				Fact f = createFact(elementName, m2.getDate(), elementType, "", "Create");				
 				f.getView().add(m2);			
 				boi.getFact().add(f);
+				
+				if(applicationServiceTypeM2!=null && !applicationServiceTypeM2.contentEquals("NONE")) {					
+					Fact ft = createFact(elementName, 
+							m2.getDate(), 
+							elementType, 
+							"Create Service Type property: " + applicationServiceTypeM2, 
+							"Create");				
+					ft.getView().add(m2);				
+					boi.getFact().add(ft);				
+				}
+				
+				if(syncTypeElementM2!=null && !syncTypeElementM2.contentEquals("NONE")) {
+					Fact ft = createFact(elementName, 
+							m2.getDate(), 
+							elementType, 
+							"Create Sync property: " + syncTypeElementM2, 
+							"Create");				
+					ft.getView().add(m2);				
+					boi.getFact().add(ft);
+				
+				}
+				
+				if(deliveryTypeElementM2!=null && !deliveryTypeElementM2.contentEquals("NONE")) {
+					Fact ft = createFact(elementName, 
+							m2.getDate(), 
+							elementType, 
+							"Create Delivery property: " + deliveryTypeElementM2, 
+							"Create");				
+					ft.getView().add(m2);				
+					boi.getFact().add(ft);
+				
+				}
+				
+				if(notificationTypeElementM2!=null && !notificationTypeElementM2.contentEquals("NONE")) {
+					Fact ft = createFact(elementName, 
+							m2.getDate(), 
+							elementType, 
+							"Create Notification property: " + notificationTypeElementM2, 
+							"Create");				
+					ft.getView().add(m2);				
+					boi.getFact().add(ft);
+				
+				}
+				
+				if(bufferingTypeElementM2!=null && !bufferingTypeElementM2.contentEquals("NONE")) {
+					Fact ft = createFact(elementName, 
+							m2.getDate(), 
+							elementType, 
+							"Create Buffering property: " + bufferingTypeElementM2, 
+							"Create");				
+					ft.getView().add(m2);				
+					boi.getFact().add(ft);
+				
+				}
+				
+				if(throughputTypeElementM2!=null && !throughputTypeElementM2.contentEquals("NONE")) {
+					Fact ft = createFact(elementName, 
+							m2.getDate(), 
+							elementType, 
+							"Create Throughput property: " + throughputTypeElementM2, 
+							"Create");				
+					ft.getView().add(m2);				
+					boi.getFact().add(ft);
+				
+				}
+				
 			}else if(existsM1 && !existsM2) { 
 				// Creacion
 				Fact f = createFact(elementName, m2.getDate(), elementType, "", "Delete");				

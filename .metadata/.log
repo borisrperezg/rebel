@@ -11344,3 +11344,13 @@ java.lang.ArrayIndexOutOfBoundsException: 18
 	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:184)
 	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$3.run(SelectionListenerWithASTManager.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.resources 2 2 2021-03-30 16:28:47.712
+!MESSAGE Save operation warnings.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2021-03-30 16:28:47.712
+!MESSAGE The project description file (.project) for 'WekaExample' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+
+!ENTRY org.eclipse.core.resources 2 2 2021-03-31 08:12:33.884
+!MESSAGE Save operation warnings.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2021-03-31 08:12:33.884
+!MESSAGE The project description file (.project) for 'WekaExample' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
