@@ -36,9 +36,9 @@ public class IdentificationMediatorExecutor {
 		// ************************************
 		// VARIABLES DE CONFIGURACION
 		// ************************************
-		String csvFileName = "facts_prediction_dataset_1616537048521" + "_done.csv";
-		String projectName = "NewProject";
-		String boiName = "3rd BOI";
+		String csvFileName = "facts_prediction_dataset_1617483308628" + "_done.csv";
+		String projectName = "Production system";
+		String boiName = "BusAppBOI";
 
 		IdentificationMediatorExecutor me = new IdentificationMediatorExecutor();
 

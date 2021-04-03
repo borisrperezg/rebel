@@ -51,9 +51,9 @@ public class TrainingMediator {
 //		Se descarta la informacion de las conexiones que tenia en la version anterior
 //		String fileContent = "date,prevelementnames,types,relationtypes,sourceelementname,sourceelementtype,targetelementname,isnewelement,targetelementtype,facttype,relatontype,action,atdcause\n";
 		
-		String fileContent = "driver|goal|sourceelementname|sourceelementtype|"
+		String fileContent = "drivertype|goaltype|sourceelementname|sourceelementtype|"
 				+ "layersource|targetelementname|targetelementtype|layertarget|"
-				+ "isnewelement|iscyclic|facttype|relatontype|action|incoming|"
+				+ "isnewelement|iscyclic|facttype|relatontype|actiontype|incoming|"
 				+ "outcoming|ratioLinks|mostlinkedlayer|commitlogs|adrlogs|chatlogs|"
 				+ "property|propertynewvalue|propertyoldvalue|"
 				+ "atdcause|affectedqa\n";
@@ -354,7 +354,8 @@ public class TrainingMediator {
 						String adrMsgsText = "";
 						if(f.getArchitecturaldecision()!=null && f.getArchitecturaldecision().size()>0) {
 							for(Decision adrMsg : f.getArchitecturaldecision()) {
-								adrMsgsText += adrMsg.getDescription();
+								if(adrMsg.getDescription()!=null)
+									adrMsgsText += adrMsg.getDescription().replace("\n", "").replace("\r", "");;
 							}
 						}
 						
@@ -412,15 +413,15 @@ public class TrainingMediator {
 						
 	//					String fileContent = "driver,goal,sourceelementname,sourceelementtype,layersource,targetelementname,targetelementtype,layertarget,isnewelement,facttype,relatontype,action,incoming,outcoming,ratioLinks,mostlinkedlayer,atdcause\n";
 						
-							fileContent += driver + separador + goal + separador + origen + separador + 
-									sourceElementType + separador + layerSource + separador + 
-									destino + separador + targetElementType + separador + layerTarget + separador + 
-									esNuevoString + separador + isCyclicDependency +separador + tipoFact + separador + relationType + separador + 
-									f.getAction() + separador + incomingLinks + separador + outcomingLinks + separador + 
-									ratioLinks + separador + mostLinkedLayer + separador + commitMsgsText + separador + 
-									adrMsgsText + separador + chatEmailMsgsText + separador +
-									propertyName + separador + propertyNewValue + separador + propertyOldValue + separador + 
-									atdTypeCategory + separador + affectedQA + "\n";
+							fileContent += driver + separador + goal + separador + origen 
+									+ separador + sourceElementType + separador + layerSource + separador + destino 
+									+ separador + targetElementType + separador + layerTarget + separador + esNuevoString 
+									+ separador + isCyclicDependency +separador + tipoFact + separador + relationType 
+									+ separador + f.getAction() + separador + incomingLinks + separador + outcomingLinks 
+									+ separador + ratioLinks + separador + mostLinkedLayer 
+									+ separador + commitMsgsText + separador + adrMsgsText + separador + chatEmailMsgsText 
+									+ separador + propertyName + separador + propertyNewValue + separador + propertyOldValue 
+									+ separador + atdTypeCategory + separador + affectedQA + "\n";
 					}
 				}
 			}
@@ -462,7 +463,8 @@ public class TrainingMediator {
 	private String procesarTexto(String body) {
 		String textToLines = "";
 		if(body!=null) {
-			body = body.replaceAll(",", "");
+			body = body.replaceAll(",", " ");
+			
 			String[] linesOfText = body.split("(?s).*[\\n\\r].*");
 			if(linesOfText.length>=0) {
 				for(String line : linesOfText) {

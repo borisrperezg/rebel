@@ -53,7 +53,11 @@ public class IdentificationMediator {
 //		Se descarta la informacion de las conexiones que tenia en la version anterior
 //		String fileContent = "date,prevelementnames,types,relationtypes,sourceelementname,sourceelementtype,targetelementname,isnewelement,targetelementtype,facttype,relatontype,action,atdcause\n";
 
-		String fileContent = "factid|driver|goal|sourceelementname|sourceelementtype|layersource|targetelementname|targetelementtype|layertarget|isnewelement|facttype|relatontype|action|incoming|outcoming|ratioLinks|mostlinkedlayer|commitlogs|adrlogs|chatlogs\n";
+		String fileContent = "factid|drivertype|goaltype|sourceelementname|sourceelementtype|"
+				+ "layersource|targetelementname|targetelementtype|layertarget|"
+				+ "isnewelement|iscyclic|facttype|relatontype|actiontype|incoming|"
+				+ "outcoming|ratioLinks|mostlinkedlayer|commitlogs|adrlogs|chatlogs|"
+				+ "property|propertynewvalue|propertyoldvalue\n";
 
 		// *********************************************
 		// EXTRACCION DEL NOMBRE DEL PROYECTO Y DEL BOI
@@ -260,6 +264,36 @@ public class IdentificationMediator {
 //						String previousRelations = findPreviousRelationships(project, origen, f.getDate());
 
 						// ----------------------------------------------------
+						// IDENTIFICACION DE RELACION CICLICA
+						// ----------------------------------------------------
+						
+						/*
+						 * Como ya se tienen los elementos de origen y destino, lo que se 
+						 * hara es invertirlos y buscar en la lista de Facts.
+						 * Es decir, origen -O)- destino, se cambia por destino -O)- origen
+						 * De esta manera se encuentra si hay relaciones ciclicas.
+						 */
+						
+						boolean isCyclicDependency = false;
+						String cyclicFactName = destino.trim() + " -O)- " + origen.trim();
+						
+						// Se empieza por recorrer los Facts
+						for (BlockOfInterest boiCyclic : project.getBlockofinterest()) {							
+							for (Fact fCyclic : boiCyclic.getFact()) {								
+								if(!fCyclic.getElementType().equals("Component") && 
+										!fCyclic.getElementType().equals("Connector")) {
+									
+									// Se comparan ambos nombres de facts
+									if(fCyclic.getElementName().equals(cyclicFactName)) {
+										isCyclicDependency = true;
+										break;
+									}
+									
+								}
+							}
+						}
+						
+						// ----------------------------------------------------
 						// OBTENCION DE TOTAL DE CONEXIONES DE ENTRADA Y SALIDA
 						// ----------------------------------------------------
 
@@ -337,13 +371,10 @@ public class IdentificationMediator {
 						String adrMsgsText = "";
 						if (f.getArchitecturaldecision() != null && f.getArchitecturaldecision().size() > 0) {
 							for (Decision adrMsg : f.getArchitecturaldecision()) {
-//								System.out.println("ADR Desc: "+adrMsg.getDescription());
-								adrMsgsText += adrMsg.getDescription();
-//								System.out.println("adrMsgsText: "+adrMsgsText);
+								if(adrMsg.getDescription()!=null)
+									adrMsgsText += adrMsg.getDescription().replace("\n", "").replace("\r", "");
 							}
 						}
-
-//						System.out.println("adrMsgsText = "+adrMsgsText);
 
 						// Texto de Chat/Email
 
@@ -356,6 +387,39 @@ public class IdentificationMediator {
 									}
 								}
 							}
+						}
+						
+						// ----------------------------------------
+						// OBTENCION DE CAMBIO EN PROPIEDADES
+						// ----------------------------------------
+						
+						String propertyName = "", propertyNewValue = "", propertyOldValue = "";
+						if(f.getObservations()!=null && f.getObservations().length()>0) {
+							// Create Sync property: SYNC
+							// Create Service Type property: EVENT
+							// Change Sync type: NONE (prev. SYNC)
+							
+							// Ambas tienen la misma longitud
+							int posCreateChange = 6;
+							int posPropertyWord = f.getObservations().lastIndexOf("property");
+							
+							propertyName = f.getObservations().substring(posCreateChange, posPropertyWord).trim();
+							
+							String[] splitByValue = f.getObservations().split(":");
+							String tempValue = splitByValue[1];
+							
+							if(tempValue.contains("prev")) {
+								int posPrev = tempValue.indexOf("prev");
+								int cierreParen = tempValue.indexOf(")");
+								
+								String oldValue = tempValue.substring((posPrev+5),cierreParen).trim();
+								String newValue = tempValue.substring(0, tempValue.indexOf("(")).trim();
+								
+								propertyNewValue = newValue;
+								propertyOldValue = oldValue;
+								
+							}else
+								propertyNewValue = tempValue.trim();
 						}
 
 						// ----------------------------------------
@@ -370,10 +434,11 @@ public class IdentificationMediator {
 						fileContent += f.getId() + separador + driver + separador + goal + separador + origen
 								+ separador + sourceElementType + separador + layerSource + separador + destino
 								+ separador + targetElementType + separador + layerTarget + separador + esNuevoString
-								+ separador + tipoFact + separador + relationType + separador + f.getAction()
-								+ separador + incomingLinks + separador + outcomingLinks + separador + ratioLinks
-								+ separador + mostLinkedLayer + separador + commitMsgsText + separador + adrMsgsText
-								+ separador + chatEmailMsgsText + "\n";
+								+ separador + isCyclicDependency +separador + tipoFact + separador + relationType 
+								+ separador + f.getAction() + separador + incomingLinks + separador + outcomingLinks 
+								+ separador + ratioLinks + separador + mostLinkedLayer 
+								+ separador + commitMsgsText + separador + adrMsgsText + separador + chatEmailMsgsText 
+								+ separador + propertyName + separador + propertyNewValue + separador + propertyOldValue + "\n";
 					}
 				}
 			}
@@ -412,7 +477,7 @@ public class IdentificationMediator {
 	private String procesarTexto(String body) {
 		String textToLines = "";
 		if (body != null) {
-			body = body.replaceAll(",", "");
+			body = body.replaceAll(",", " ");
 			String[] linesOfText = body.split("(?s).*[\\n\\r].*");
 			if (linesOfText.length >= 0) {
 				for (String line : linesOfText) {

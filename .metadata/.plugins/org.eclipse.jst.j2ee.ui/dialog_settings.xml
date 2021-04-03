@@ -3,7 +3,7 @@
 	<item key="J2EE_EXPORT_OVERWRITE" value="true"/>
 	<item key="J2EE_EXPORT_SOURCE" value="false"/>
 	<list key="J2EE_EXPORT_JST_WEB">
-		<item value="/Users/borisperezg/eclipsews/rebelviz/dist/rebelviz.war"/>
 		<item value="/Users/borisperezg/eclipsews/rebelapi/dist/rebelapi.war"/>
+		<item value="/Users/borisperezg/eclipsews/rebelviz/dist/rebelviz.war"/>
 	</list>
 </section>

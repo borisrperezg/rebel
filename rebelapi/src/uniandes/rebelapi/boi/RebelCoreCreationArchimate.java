@@ -471,11 +471,20 @@ public class RebelCoreCreationArchimate {
 				String nameComponentForService = "";
 				
 				if(relation.getTarget().getType().getLiteral().equals("APPLICATION_SERVICE")) {
+					
+					System.out.println("----------------------------------");
+					System.out.println("APPLICATION_SERVICE --> "+relation.getTarget().getName());
+					
+					// ------------------------------------------------
 					for(rebel_core.Relation relationsToIterate : m1.getRelation()) {
+						
+						System.out.println("APPLICATION_COMPONENT --> "+relationsToIterate.getSource().getName());
+						
 						if(relationsToIterate.getSource().getType().getLiteral().equals("APPLICATION_COMPONENT") && 
 								relationsToIterate.getTarget().getName().equals(relation.getTarget().getName()) &&
 								relationsToIterate.getType().getLiteral().equals("REALIZATION") &&
 								!relationsToIterate.getSource().getName().equals(relation.getSource().getName())) {
+							
 							nameComponentForService = relationsToIterate.getSource().getName();
 							break;
 						}

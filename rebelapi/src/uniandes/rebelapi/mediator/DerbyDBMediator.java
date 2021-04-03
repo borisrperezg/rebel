@@ -46,7 +46,9 @@ public class DerbyDBMediator {
 		List<Project> list = null;
 		ProjectDerby pd = new ProjectDerby();
 		pd.insert(name);
-		list = pd.list();
+		
+		list = getListOfProjects();
+		
 		return list;
 	}
 	
