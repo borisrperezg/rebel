@@ -1,0 +1,21 @@
+[3/11/20, 8:45:08 a. m.] Cesar Tovar: Ey Cris, how is it going?
+[3/11/20, 8:46:41 a. m.] Cristian Castellanos: Hi Cesar... very good, as always I guess hehehehe
+[3/11/20, 8:49:08 a. m.] Cesar Tovar: Cris, I was thinking about using that one big component... 
+[3/11/20, 8:49:13 a. m.] Cristian Castellanos: patient information system or self-registration application component?
+[3/11/20, 8:49:31 a. m.] Cesar Tovar: Yes both, I think we should split it
+[3/11/20, 8:49:37 a. m.] Cesar Tovar: I think this component could bring us several maintainability problems in the future
+[3/11/20, 8:49:41 a. m.] Cesar Tovar: I think we could follow a micro-services like architecture and provide one component per business process
+[3/11/20, 8:49:59 a. m.] Cristian Castellanos: we talk about that this morning... so...?
+[3/11/20, 8:50:16 a. m.] Cesar Tovar: Yes, I know... but I start thinking on that
+[3/11/20, 8:54:11 a. m.] Cesar Tovar: mapping a component to a business process will help to reduce problems of having big classes doing a lot of things
+[3/11/20, 8:54:16 a. m.] Cristian Castellanos: Yes, but it also will increase the number of components and eventually this could lead us to governance problem
+[3/11/20, 8:56:45 a. m.] Cesar Tovar: give a second please
+[3/11/20, 11:36:45 a. m.] Cesar Tovar: "governance problem" Yes, you are right, but then we can assign responsible to the components
+[3/11/20, 11:36:56 a. m.] Cesar Tovar: therefore, we could centralize the changes
+[3/11/20, 11:37:01 a. m.] Cesar Tovar: but, we will need anyway a protocol for component governance
+[3/11/20, 11:37:05 a. m.] Cristian Castellanos: ok... we could do that
+[3/11/20, 11:39:31 a. m.] Cristian Castellanos: in the next meeting we could talk and also discussed it with the rest of the team
+[3/11/20, 11:39:35 a. m.] Cesar Tovar: ok... thank you
+[3/11/20, 11:39:41 a. m.] Cristian Castellanos: sure
+
+

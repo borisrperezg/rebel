@@ -33,7 +33,6 @@ INDEX VERSION 1.131+/Users/borisperezg/eclipsews/.metadata/.plugins/org.eclipse.
 3703057446.index
 1871109473.index
 3215401166.index
-3152065465.index
 2032262837.index
 827676684.index
 829377585.index

@@ -54,7 +54,7 @@ public class AsynchronousSearch {
 		}
 
 		boolean somethingToInsert = false;
-		SemanticSimilarityExec simiExec = new SemanticSimilarityExec(0.4);
+		SemanticSimilarityExec simiExec = new SemanticSimilarityExec(0.7);
 
 		/*
 		 * Estos hashs se usan para guardar temporalmente la lista de Facts y Messages.

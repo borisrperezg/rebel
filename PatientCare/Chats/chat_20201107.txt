@@ -1,0 +1,14 @@
+[3/11/20, 8:45:08 a. m.] Cesar Tovar: Cris, what's up?
+[3/11/20, 8:46:41 a. m.] Cristian Castellanos: Hi Cesar... nothing new actually... just making some draws, what about you?
+[3/11/20, 8:49:08 a. m.] Cesar Tovar: I was just reviewing the model, I don't know if it is good idea to have that cyclic dependency
+[3/11/20, 8:49:13 a. m.] Cristian Castellanos: yes I know, it could be really problematic in the future
+[3/11/20, 8:49:31 a. m.] Cesar Tovar: It could be a bottle neck if we decide to scale one of the components and the other no.
+[3/11/20, 8:49:37 a. m.] Cesar Tovar: why you decide to go for that?
+[3/11/20, 11:37:05 a. m.] Cristian Castellanos: sorry, I have to go for a meeting
+[3/11/20, 11:39:05 a. m.] Cristian Castellanos: well, both components have defined their behaviour
+[3/11/20, 11:39:35 a. m.] Cristian Castellanos: and we could defined an orchestrator to talk with both components but it will increase some complexity
+[3/11/20, 11:39:41 a. m.] Cristian Castellanos: so, we decided that each component make a call to the required component
+[9/03/21, 12:00:55 p. m.] Cristian Castellanos: we could make a big component containing both components but I don't know if we could stop right know and think about communication
+[9/03/21, 12:03:26 p. m.] Cesar Tovar: Ok... I got it. In any case, it should be good idea to reduce this kind of situations
+[9/03/21, 12:03:45 p. m.] Cristian Castellanos: you are right, but, as always, we are running out of time and we need to move
+[9/03/21, 12:17:56 p. m.] Cesar Tovar: Ok then

@@ -1,0 +1,31 @@
+commit 7aa32a74edba59f1c295a41e95f5deab0d1753c8
+Author: ccastellanos <cc.castellanos87@gmail.com>
+Date:   Tue Oct 22 19:16:49 2020 -0500
+
+    feat<architecture_model>: First version including business elements
+    
+    The business elements required to accomplish the outcome of increase automation by 50 percent. The outcome was resolved by using a collaboration business element. This collaboration is done by putting together Pre-service period service, service period service and post-service period service. In this first model is not expected to reach any architectural concern. Only focused in represent the business as required to be solved by architectural means.
+
+commit b6e0a1749da95238af5be0081074ce123bf507bd
+Author: ccastellanos <cc.castellanos87@gmail.com>
+Date:   Fri Oct 27 23:40:07 2020 -0500
+
+    feat<architecture_model>: Inclusion of first application services and components
+
+    Inclusion of application services used to give support to business processes. Five app services were included: self registration service, guidance, queuing service, patient record and care practices. Two app components were used: self-registration application component and patient information system component. This is a first aproximation on how to support business processes. Application services were defined as Event type. No other type is allowed.
+
+commit 6d77c0a78b2a4b8386fbaeaaeaf28fcf89ec8b2c
+Author: danielcifuentes <dfuentes@gmail.com>
+Date:   Thu Nov 04 23:02:24 2020 -0500
+
+    feat<architecture_model>: Fixing distribution of components and services
+
+    Patient information system component was splitted to have better cohesion among services. Patient information system component is kept to provide functionality to Patient record service. Two more components were designed: Queue Application component and Caring practices application. They will provide functionality to queuing care service and caring practices application. This distribution is conforming with a micro services or component-based approach. Also, responsability could be assigned to developers. Self-registration application component is kept providing functionality to two services: self registration service and guidance service.
+
+commit 6d77c0a78b2a4b838a41e9aaeaf28fcf89ec8b2c
+Author: danielcifuentes <dfuentes@gmail.com>
+Date:   Thu Nov 08 23:02:24 2020 -0500
+
+    feat<architecture_model>: inclusion of queue-based communication
+
+    Following a choreography model, it was modeled a queue to communicate results from two components: Queue application component and Patient Information System component. A queue topic was used to represent the subject of interes: Assignment topic. It is expected that this queue will support a separation of concerns and also allow flexibility and maintainability. Also, two triggering relations were included. This was done to allow the execution in parallel of several activities. Every time self-registration application component is called, the invocation is also given to Historical Data Valition. This component is triggered to store and process the information. This triggering relation is also used in two components: caring practices application and controls estimator component. This last component in included in this version to support future controls in patient.

@@ -82,27 +82,7 @@ public class TrainingMediator {
 		
 		System.out.println("ModelMediator.trainingModel ::: Instanciacion del Proyecto -> OK");
 
-		// ************************************
-		// RECORRIDO DE FACTS PARA OBTENER LOS TEXTOS A CLASIFICAR
-		// Esto no sería necesario por ahora para las causas, porque se seleccionan desde la GUI.
-		// Sin embargo, eventualmente será necesario para los artefactos heterogéneos
-		// ************************************
-		
-		// Se usa el ID del Fact para mapear la clasificacion con el archivo de facts.
-		// Se debe manejar por separado del bloque IMPRESION DE FACTS, porque se debe 
-		// generar el archivo con todos los textos a clasificar. Esto permite velocidad
-		// en la clasificacion.
-		
-		// Este hashmap se usará para extraer la clasificacion de la justificacion
-		// asociada al Fact que se esté recorriendo.
-//		HashMap<String, String> listOfTags = null;
-//		boolean ex = generacionDatasetClasificacionATDRationale(project); // Generacion del archivo plano para pasarle al clasificador
-//		if(ex) {
-//			TextClassification tx = new TextClassification("causes");
-//			listOfTags = tx.runScriptForUse();
-//		}
-//		
-//		System.out.println("ModelMediator.trainingModel ::: Obtencion de categorias -> OK ");
+
 		
 		
 		// ************************************
