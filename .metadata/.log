@@ -11577,3 +11577,14 @@ Binding(ALT+COMMAND+R,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,cocoa,system)
+
+!ENTRY org.eclipse.ui.ide 4 4 2021-04-24 01:22:18.854
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 2 1 2021-04-24 01:22:18.858
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2021-04-24 01:22:18.858
+!MESSAGE The project description file (.project) for 'WekaExample' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+
+!ENTRY org.eclipse.core.resources 2 10035 2021-04-24 01:22:22.162
+!MESSAGE The workspace will exit with unsaved changes in this session.

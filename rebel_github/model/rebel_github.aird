@@ -5,7 +5,7 @@
     <semanticResources>rebel_github.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_iEIE0E7VEeqf_64kJ8GDKw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_iEzaQE7VEeqf_64kJ8GDKw" name="rebel_github" repPath="#_iEpCME7VEeqf_64kJ8GDKw" changeId="8db1c98d-2c9b-4fb4-8abf-019ef39d8e4b">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_iEzaQE7VEeqf_64kJ8GDKw" name="rebel_github" repPath="#_iEpCME7VEeqf_64kJ8GDKw" changeId="06bcb95e-1669-47b9-8b83-bad73dc1d72b">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="rebel_github.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -33,6 +33,10 @@
             <children xmi:type="notation:Node" xmi:id="_e9nxc07WEeqf_64kJ8GDKw" type="3010" element="_e9fOlk7WEeqf_64kJ8GDKw">
               <styles xmi:type="notation:FontStyle" xmi:id="_e9nxdE7WEeqf_64kJ8GDKw" fontName=".AppleSystemUIFont" fontHeight="8"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_e9nxdU7WEeqf_64kJ8GDKw"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_g7hOQKSyEeuxErSvibBrEA" type="3010" element="_g7YEUaSyEeuxErSvibBrEA">
+              <styles xmi:type="notation:FontStyle" xmi:id="_g7hOQaSyEeuxErSvibBrEA" fontName=".AppleSystemUIFont" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_g7hOQqSyEeuxErSvibBrEA"/>
             </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_e9mjVU7WEeqf_64kJ8GDKw"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_e9mjVk7WEeqf_64kJ8GDKw"/>
@@ -205,6 +209,14 @@
         <target xmi:type="ecore:EAttribute" href="rebel_github.ecore#//Project/name"/>
         <semanticElements xmi:type="ecore:EAttribute" href="rebel_github.ecore#//Project/name"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_e9fOl07WEeqf_64kJ8GDKw" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_g7YEUaSyEeuxErSvibBrEA" name="modelingDate : EDate" tooltipText="">
+        <target xmi:type="ecore:EAttribute" href="rebel_github.ecore#//Project/modelingDate"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="rebel_github.ecore#//Project/modelingDate"/>
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_g7YrYKSyEeuxErSvibBrEA" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
