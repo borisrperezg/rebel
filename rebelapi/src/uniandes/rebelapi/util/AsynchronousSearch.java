@@ -462,7 +462,8 @@ public class AsynchronousSearch {
 	
 	/**
 	 * Este metodo busca un MessageLog por ID, y lo lleva al BOI indicado.
-	 * Especificamente se usa para vincular un MessaLog a un Fact. No pretende recorrer la lista de MessageLogs (emails y chats)
+	 * Especificamente se usa para vincular un MessaLog a un Fact. 
+	 * No pretende recorrer la lista de MessageLogs (emails y chats)
 	 * 
 	 */
 	private void moveMessageLogToCore(String projectName, String chatEmailModelName, 
