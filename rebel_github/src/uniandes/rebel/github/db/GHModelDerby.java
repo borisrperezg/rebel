@@ -31,6 +31,8 @@ public class GHModelDerby {
 		stmt = conn.createStatement();
 		stmt.execute("insert into REB.MODEL (name, type, xmlrute, projectid) values ('" + modelName + "', '"+ modelType +"', '"+xmlRoute+"', "+projectId+")");
 		stmt.close();
+		
+		System.out.println("GHModelDerby ::: insert = ok");
 	}
 	
 	public String find(String projectName, String modelName) {

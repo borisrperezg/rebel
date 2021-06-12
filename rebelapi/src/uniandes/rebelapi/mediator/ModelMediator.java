@@ -56,6 +56,8 @@ public class ModelMediator {
 
 		try {
 
+			System.out.println("artifactType = "+artifactType);
+			
 			// Separar por el tipo de artefacto
 			if (artifactType.equals("ccm")) {
 				PopulationDraw pd = new PopulationDraw();
@@ -66,9 +68,11 @@ public class ModelMediator {
 				pd.execute(project, fileName);
 				resp = "OK";
 			} else if (artifactType.equals("commitlogs")) {
+				System.out.println("Commit logs - entering");
 				GHPopulation pd = new GHPopulation();
 				pd.execute(project, fileName);
 				resp = "OK";
+				System.out.println("Commit logs - entering - OK");
 			} else if (artifactType.equals("archi")) {
 
 				// Procesarlo para cargarlo (llamar a Processing.execute)

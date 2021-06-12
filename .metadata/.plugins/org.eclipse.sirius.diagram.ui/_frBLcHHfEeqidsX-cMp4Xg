@@ -1,6 +1,6 @@
-#Sat May 22 18:47:47 COT 2021
+#Sat Jun 05 17:43:26 COT 2021
 rulergrid.snaptogeometry=true
-viewport.x=695
+viewport.x=370
 zoom=1.0
 print.margin.right=0.5
 rulergrid.rulerunit=1
@@ -17,4 +17,4 @@ rulergrid.gridlevel=true
 print.margin.top=0.5
 print.useMillim=true
 print.usePortrait=true
-viewport.y=634
+viewport.y=-350

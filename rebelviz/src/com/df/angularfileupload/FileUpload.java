@@ -97,6 +97,8 @@ public class FileUpload extends HttpServlet {
         	project = project.replaceAll(" ", "%20");
         	fileName = fileName.replaceAll(" ", "%20");
         	
+        	
+        	
         	String urlString = "http://localhost:8080/rebelapi/rest/rebel/buildxmi/p="+project+"&a="+artifactType+"&n="+fileName;
 //        	System.out.println("FileUpload.callWebService ::: "+urlString);
         	

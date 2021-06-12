@@ -10,6 +10,8 @@ public class GHDerbyDBMediator {
 		GHProjectDerby pd = new GHProjectDerby();
 		String projectId = pd.find(projectName);
 		
+		System.out.println("GHDerbyDBMediator ::: projectId = "+projectId);
+		
 		if(projectId!=null && projectId.length()>0) {		
 			GHModelDerby md = new GHModelDerby();
 			md.insert(projectId, modelName, modelType, xmlcontent);

@@ -24,7 +24,6 @@
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1615307914242_5" label="Tesis" name="Tesis">
 <item elementID="=rebel_architecturaldecisions" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=rebel_chatlogs" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=rebel_componentandconnector" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=rebelapi" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=rebel_github" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=rebelviz" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>

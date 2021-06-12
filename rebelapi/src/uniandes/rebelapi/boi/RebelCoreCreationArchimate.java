@@ -1001,7 +1001,7 @@ public class RebelCoreCreationArchimate {
 						}						
 					}
 					
-					if(elementProducing!=null && elementConsuming.getName()!=null) {
+					if(elementProducing!=null && elementConsuming!=null) {
 						nameComponentForService = elementProducing.getName() + " -O)- " + elementConsuming.getName();
 						listOfFacts.add(nameComponentForService+"@consume");
 					}

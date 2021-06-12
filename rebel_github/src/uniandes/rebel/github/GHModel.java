@@ -77,10 +77,17 @@ public class GHModel {
 	}
 	
 	public void storeModel(String projectName, String modelName, String modelType) throws Exception {
+		
+		System.out.println("Storing model - save");
+		
 		resource.save(Collections.EMPTY_MAP);
+		
+		System.out.println("Storing model - BD");
 		
 		GHDerbyDBMediator d = new GHDerbyDBMediator();
 		d.insertModel(projectName, modelName, modelType, uriAddress);
+		
+		System.out.println("Storing model - OK");
 	}
 	
 	public Message createMessage() {

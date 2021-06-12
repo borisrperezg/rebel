@@ -39,7 +39,7 @@ public class Processing {
 	
 	public static void main(String[] args) throws Exception {
 		Processing p = new Processing();
-		p.execute("TT4", "CLINIC_20201027.archimate");
+		p.execute("Grades Grouper", "modernizationproject_20210325.archimate");
 //		String date = "20200820";
 		
 	}
@@ -252,7 +252,7 @@ public class Processing {
 	 * @param element
 	 * @return
 	 */
-	private List<rebel_archimate.Element> buildElementsIntoView(Element element) {
+	private List<rebel_archimate.Element> buildElementsIntoView(Element element) throws Exception {
 		
 		List<rebel_archimate.Element> listElements = new ArrayList<rebel_archimate.Element>();
 		
@@ -319,7 +319,7 @@ public class Processing {
 	 * @param yPadre
 	 * @return
 	 */
-	private rebel_archimate.Element procesarChild(Element childrenElement, int xPadre, int yPadre) {
+	private rebel_archimate.Element procesarChild(Element childrenElement, int xPadre, int yPadre) throws Exception {
 		
 		int posX = 0, posY = 0;
 		int width = 0, height = 0;
@@ -334,10 +334,15 @@ public class Processing {
 			
 			Element boundElement = (Element) boundNode;
 
-			posX = boundElement.getAttribute("x")!=null?Integer.parseInt(boundElement.getAttribute("x")):0;
-			posY = boundElement.getAttribute("y")!=null?Integer.parseInt(boundElement.getAttribute("y")):0;
-			width = boundElement.getAttribute("width")!=null?Integer.parseInt(boundElement.getAttribute("width")):0;
-			height = boundElement.getAttribute("height")!=null?Integer.parseInt(boundElement.getAttribute("height")):0;
+			try {
+				posX = boundElement.getAttribute("x")!=null?Integer.parseInt(boundElement.getAttribute("x")):0;
+				posY = boundElement.getAttribute("y")!=null?Integer.parseInt(boundElement.getAttribute("y")):0;
+				width = boundElement.getAttribute("width")!=null?Integer.parseInt(boundElement.getAttribute("width")):0;
+				height = boundElement.getAttribute("height")!=null?Integer.parseInt(boundElement.getAttribute("height")):0;
+			}catch(NumberFormatException ne) {
+				System.out.println(childrenElement.getAttribute("id"));
+				throw new Exception(ne);
+			}
 		}
 		
 		// Se obtiene el objeto AMElement que contiene la información obtenida del element de Archimate
